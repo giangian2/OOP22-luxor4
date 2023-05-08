@@ -1,8 +1,18 @@
 package it.unibo.core.impl;
 
-import it.unibo.core.api.GameEngine;
+import java.util.LinkedList;
 
-public class GameEngineImpl implements GameEngine {
+import it.unibo.core.api.GameEngine;
+import it.unibo.events.api.*;
+
+public class GameEngineImpl implements GameEngine, WorldEventListener {
+
+    private static int period = 20;
+    private LinkedList<WorldEvent> eventQueue;
+
+    public GameEngineImpl(String levelName) {
+        eventQueue = new LinkedList<WorldEvent>();
+    }
 
     @Override
     public void mainLoop() {
@@ -12,6 +22,12 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void initGame() {
         System.out.println("Game Init");
+    }
+
+    @Override
+    public void notifyEvent(WorldEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'notifyEvent'");
     }
 
 }
