@@ -76,9 +76,7 @@ public class SceneImpl implements Scene {
             g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 
             g2.setColor(Color.BLACK);
-            g2.drawString("GAME OVER ", 30, 50);
-            g2.setColor(Color.GREEN);
-            g2.drawString("Final score " + 3000, 180, 50);
+            g2.drawString("LUXOR 4 ", 250, 250);
 
         }
 
