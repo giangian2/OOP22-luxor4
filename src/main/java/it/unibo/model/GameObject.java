@@ -5,20 +5,19 @@ import main.java.it.unibo.input.*;
 import main.java.it.unibo.graphics.*;
  
 
-public class GameObjects{
+public class GameObject{
 
     private P2d pos; 
     private string color;
     private V2d vel; 
     private InputComponent input;
-    private GraphicsComponent graph; 
 
-    protected GameObjects(P2d pos, string color, V2d vel, InputComponent input, GraphicsComponent graph){
-        this.posball= posball;
+
+    protected GameObject(P2d pos, string color, V2d vel, InputComponent input){
+        this.pos= posb;
         this.color= color;
         this.vel= vel;
         this.input = input;
-        this.graph = graph;
     }
 
     public void setPos(P2d pos){
@@ -44,11 +43,6 @@ public class GameObjects{
     public void updateInput(InputController c){
 		input.update(this, c);
 	}
-
-    public void updateGraphics(Graphics g){
-		graph.update(this, g);
-	}
-
 
 }
 
