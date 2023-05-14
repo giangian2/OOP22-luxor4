@@ -1,20 +1,19 @@
 package it.unibo.model;
 
-import main.java.it.unibo.common.*;
-import main.java.it.unibo.input.*;
-import main.java.it.unibo.graphics.*;
+import it.unibo.input.*;
+import it.unibo.utils.*;
  
 
 public class GameObject{
 
     private P2d pos; 
-    private string color;
+    private String color;
     private V2d vel; 
     private InputComponent input;
 
 
-    protected GameObject(P2d pos, string color, V2d vel, InputComponent input){
-        this.pos= posb;
+    protected GameObject(P2d pos, String color, V2d vel, InputComponent input){
+        this.pos= pos;
         this.color= color;
         this.vel= vel;
         this.input = input;
@@ -24,7 +23,7 @@ public class GameObject{
 		this.pos = pos;
 	}
 
-    public void setColor(string color){
+    public void setColor(String color){
         this.color= color;
     }
 
