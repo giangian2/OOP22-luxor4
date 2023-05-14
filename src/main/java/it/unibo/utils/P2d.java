@@ -24,9 +24,6 @@ public class P2d implements java.io.Serializable {
         return true;
     }
 
-
-
-
     public P2d sum(V2d v) {
         return new P2d(x + v.x, y + v.y);
     }
@@ -49,7 +46,7 @@ public class P2d implements java.io.Serializable {
 
         //se sono sulla stessa ordinata
         if(this.y==p1.y && this.y==p2.y){
-            if((this.x>p1.x && this.x<p2.x)){
+            if((this.x>p1.x && this.x<p2.x)||(this.x<p1.x && this.x>p2.x)){
                 return true;
             }
         }
