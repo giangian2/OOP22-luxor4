@@ -31,22 +31,34 @@ public class Path {
         this.points = builder.points;
     }
 
-    public Optional<Direction> getMove(P2d position) throws IllegalStateException {
-        for (int i = 0; i < this.points.length; i++) {
-            if (this.points[i].y == this.points[i + 1].y && this.points[i].x < this.points[i + 1].x) {
-                // RIGHT
-            }
-            if (this.points[i].y == this.points[i + 1].y && this.points[i].x > this.points[i + 1].x) {
-                // LEFT
-            }
-            if (this.points[i].x == this.points[i + 1].x && this.points[i].y < this.points[i + 1].y) {
-                // UP
-            }
-            if (this.points[i].x == this.points[i + 1].x && this.points[i].y > this.points[i + 1].y) {
-                // DOWN
+    public Direction getMove(P2d position) {
+        P2d nextCorner = null;
+
+        if (points.contains(position)) {
+            nextCorner = points.get(points.indexOf(position) + 1);
+        } else {
+
+            for (int i = 0; i < points.size() - 2; i++) {
+                if (position.isBetween(points.get(i), points.get(i + 1))) {
+                    nextCorner = points.get(i + 1);
+                }
             }
         }
-        return Optional.empty();
+
+        if (position.x == nextCorner.x && position.y > nextCorner.y) {
+            return Direction.UP;
+        }
+        if (position.x == nextCorner.x && position.y < nextCorner.y) {
+            return Direction.DOWN;
+        }
+        if (position.y == nextCorner.y && position.x > nextCorner.x) {
+            return Direction.LEFT;
+        }
+        if (position.y == nextCorner.y && position.x < nextCorner.x) {
+            return Direction.RIGHT;
+        }
+
+        return Direction.DOWN;
     }
 
     public static class PathBuilder {
