@@ -38,16 +38,18 @@ public class Path {
 
     public Direction getMove(P2d position) {
         P2d nextCorner = null;
-
         if (points.contains(position)) {
             nextCorner = points.get(points.indexOf(position) + 1);
         } else {
-
             for (int i = 0; i < points.size() - 2; i++) {
                 if (position.isBetween(points.get(i), points.get(i + 1))) {
                     nextCorner = points.get(i + 1);
                 }
             }
+        }
+
+        if(nextCorner == null){
+            System.out.println("!!!NULL!!!");
         }
 
         if (position.x == nextCorner.x && position.y > nextCorner.y) {

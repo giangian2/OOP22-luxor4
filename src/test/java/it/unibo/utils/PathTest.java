@@ -15,9 +15,11 @@ public class PathTest {
     @Test
     void testPathBuilder() {
         try {
+            boolean loop = true;
             var path = new Path.PathBuilder().build();
             var first = path.getFirst();
-            while (true) {
+            //var first = new P2d(300.0, 190.0);
+            while (loop==true) {
                 var dir = path.getMove(first);
 
                 switch (dir) {
@@ -38,6 +40,9 @@ public class PathTest {
                         break;
                 }
                 System.out.println(first.toString());
+                if(first==new P2d(300.0, 200.0)){
+                    loop=false;
+                }
             }
         } catch (ParserConfigurationException e) {
             // TODO Auto-generated catch block

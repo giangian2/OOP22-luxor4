@@ -9,6 +9,23 @@ public class P2d implements java.io.Serializable {
         this.y = y;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        P2d other = (P2d) obj;
+        if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
+            return false;
+        if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
+            return false;
+        return true;
+    }
+
+
     public P2d sum(V2d v) {
         return new P2d(x + v.x, y + v.y);
     }
@@ -30,8 +47,8 @@ public class P2d implements java.io.Serializable {
         }
 
         //se sono sulla stessa ordinata
-        if(this.y==p1.x && this.y==p2.x){
-            if((this.x>p1.x && this.x<p2.x)||(this.x<p1.x && this.x>p2.x)){
+        if(this.y==p1.y && this.y==p2.y){
+            if((this.x>p1.x && this.x<p2.x)){
                 return true;
             }
         }
