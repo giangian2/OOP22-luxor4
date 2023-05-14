@@ -9,7 +9,7 @@ import it.unibo.graphics.impl.SceneImpl;
 
 public class GameEngineImpl implements GameEngine, WorldEventListener {
 
-    private static int period = 20;
+    private static int period = 40;
     private LinkedList<WorldEvent> eventQueue;
     private Scene view;
 
@@ -26,8 +26,9 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
             long elapsed = currentCycleStartTime - previousCycleStartTime;
             // processInput();
             // updateGame(elapsed);
+            System.out.println("Renering...");
             render();
-            // waitForNextFrame(currentCycleStartTime);
+            waitForNextFrame(currentCycleStartTime);
             previousCycleStartTime = currentCycleStartTime;
         }
     }
@@ -45,6 +46,16 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
     protected void render() {
         view.render();
+    }
+
+    protected void waitForNextFrame(long cycleStartTime) {
+        long dt = System.currentTimeMillis() - cycleStartTime;
+        if (dt < period) {
+            try {
+                Thread.sleep(period - dt);
+            } catch (Exception ex) {
+            }
+        }
     }
 
 }
