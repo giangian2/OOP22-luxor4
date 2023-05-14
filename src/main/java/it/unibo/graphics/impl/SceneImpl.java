@@ -16,19 +16,23 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import it.unibo.graphics.api.Scene;
+import it.unibo.utils.P2d;
+import it.unibo.utils.Path;
 
 public class SceneImpl implements Scene {
 
     private JFrame frame;
     private JPanel panel;
+    private Path path;
 
-    public SceneImpl() {
+    public SceneImpl(Path path) {
+        this.path = path;
         this.frame = new JFrame("Roll A Ball");
         frame.setSize(500, 500);
         frame.setMinimumSize(new Dimension(500, 500));
         frame.setResizable(false);
         // frame.setUndecorated(true); // Remove title bar
-        this.panel = new ScenePanel();
+        this.panel = new ScenePanel(this.path);
         frame.getContentPane().add(panel);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
@@ -66,6 +70,12 @@ public class SceneImpl implements Scene {
 
     public class ScenePanel extends JPanel implements KeyListener {
 
+        private Path path;
+
+        public ScenePanel(Path path) {
+            this.path = path;
+        }
+
         public void paint(Graphics g) {
             Graphics2D g2 = (Graphics2D) g;
 
@@ -76,7 +86,34 @@ public class SceneImpl implements Scene {
             g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 
             g2.setColor(Color.BLACK);
-            g2.drawString("LUXOR 4 ", 250, 250);
+            /*
+             * var first = this.path.getFirst();
+             * 
+             * while (true) {
+             * var dir = this.path.getMove(first);
+             * 
+             * switch (dir) {
+             * case UP:
+             * first = new P2d(first.x, first.y - 1);
+             * break;
+             * 
+             * case DOWN:
+             * first = new P2d(first.x, first.y + 1);
+             * break;
+             * 
+             * case LEFT:
+             * first = new P2d(first.x - 1, first.y);
+             * break;
+             * 
+             * case RIGHT:
+             * first = new P2d(first.x + 1, first.y);
+             * break;
+             * }
+             * System.out.println(first.toString());
+             * g2.drawString("*", (int) first.x, (int) first.y);
+             * 
+             * }
+             */
 
         }
 

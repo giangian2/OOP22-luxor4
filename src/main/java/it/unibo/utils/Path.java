@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -22,13 +23,17 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 public class Path {
-    private P2d[] points;
+    private List<P2d> points;
 
     /**
      * Proprs + methods
      */
     private Path(PathBuilder builder) {
         this.points = builder.points;
+    }
+
+    public P2d getFirst() {
+        return this.points.get(0);
     }
 
     public Direction getMove(P2d position) {
@@ -63,7 +68,7 @@ public class Path {
 
     public static class PathBuilder {
         private static final String ROOT = "levels/1/";
-        private P2d[] points;
+        private List<P2d> points;
 
         public PathBuilder() throws ParserConfigurationException, SAXException, IOException {
 
@@ -76,7 +81,7 @@ public class Path {
             Document doc = dBuilder.parse(in);
             NodeList nList = doc.getElementsByTagName("P2d");
 
-            this.points = new P2d[nList.getLength()];
+            this.points = new ArrayList<P2d>();
 
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
@@ -92,7 +97,7 @@ public class Path {
                             .getElementsByTagName("y")
                             .item(0)
                             .getTextContent());
-                    this.points[temp] = new P2d(x, y);
+                    this.points.add(new P2d(x, y));
                 }
             }
         }
