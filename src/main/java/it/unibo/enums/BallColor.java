@@ -19,7 +19,7 @@ public enum BallColor {
         return this.color;
     }
 
-    public BallColor getRandomColor(){
+    public static BallColor getRandomColor(){
         BallColor[] colors = BallColor.values();
         Random rand= new Random();
         return colors[rand.nextInt(colors.length)];
