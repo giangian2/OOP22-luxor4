@@ -1,6 +1,7 @@
 package it.unibo.enums;
 
 import java.awt.Color;
+import java.util.Random;
 
 public enum BallColor {
     RED(Color.RED),
@@ -18,4 +19,9 @@ public enum BallColor {
         return this.color;
     }
 
+    public BallColor getRandomColor(){
+        BallColor[] colors = BallColor.values();
+        Random rand= new Random();
+        return colors[rand.nextInt(colors.length)];
+    }
 }
