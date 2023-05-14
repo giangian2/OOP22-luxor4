@@ -2,14 +2,13 @@ package it.unibo.utils;
 
 public class P2d implements java.io.Serializable {
 
-    public double x, y;
+    public int x, y;
 
-    public P2d(double x, double y) {
+    public P2d(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
@@ -18,12 +17,14 @@ public class P2d implements java.io.Serializable {
         if (getClass() != obj.getClass())
             return false;
         P2d other = (P2d) obj;
-        if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
+        if (x != other.x)
             return false;
-        if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
+        if (y != other.y)
             return false;
         return true;
     }
+
+
 
 
     public P2d sum(V2d v) {
