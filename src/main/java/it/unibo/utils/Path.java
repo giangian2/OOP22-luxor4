@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -21,7 +22,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 public class Path {
-    private List<P2d> points;
+    private P2d[] points;
 
     /**
      * Proprs + methods
@@ -30,16 +31,29 @@ public class Path {
         this.points = builder.points;
     }
 
-    public Direction getMove(P2d position) {
-        return Direction.DOWN;
+    public Optional<Direction> getMove(P2d position) throws IllegalStateException {
+        for (int i = 0; i < this.points.length; i++) {
+            if (this.points[i].y == this.points[i + 1].y && this.points[i].x < this.points[i + 1].x) {
+                // RIGHT
+            }
+            if (this.points[i].y == this.points[i + 1].y && this.points[i].x > this.points[i + 1].x) {
+                // LEFT
+            }
+            if (this.points[i].x == this.points[i + 1].x && this.points[i].y < this.points[i + 1].y) {
+                // UP
+            }
+            if (this.points[i].x == this.points[i + 1].x && this.points[i].y > this.points[i + 1].y) {
+                // DOWN
+            }
+        }
+        return Optional.empty();
     }
 
     public static class PathBuilder {
         private static final String ROOT = "levels/1/";
-        private List<P2d> points;
+        private P2d[] points;
 
         public PathBuilder() throws ParserConfigurationException, SAXException, IOException {
-            this.points = new LinkedList<P2d>();
 
             final InputStream in = Objects.requireNonNull(
                     ClassLoader.getSystemResourceAsStream(ROOT + "Path.xml"));
@@ -49,6 +63,8 @@ public class Path {
 
             Document doc = dBuilder.parse(in);
             NodeList nList = doc.getElementsByTagName("P2d");
+
+            this.points = new P2d[nList.getLength()];
 
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
@@ -64,7 +80,7 @@ public class Path {
                             .getElementsByTagName("y")
                             .item(0)
                             .getTextContent());
-                    this.points.add(new P2d(x, y));
+                    this.points[temp] = new P2d(x, y);
                 }
             }
         }

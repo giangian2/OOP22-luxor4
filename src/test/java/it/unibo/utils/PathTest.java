@@ -16,6 +16,7 @@ public class PathTest {
     void testPathBuilder() {
         try {
             var test = new Path.PathBuilder();
+            assertNotNull(test);
         } catch (ParserConfigurationException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
