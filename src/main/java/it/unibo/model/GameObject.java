@@ -1,5 +1,6 @@
 package it.unibo.model;
 
+import it.unibo.enums.BallColor;
 import it.unibo.input.*;
 import it.unibo.utils.*;
  
@@ -7,12 +8,12 @@ import it.unibo.utils.*;
 public class GameObject{
 
     private P2d pos; 
-    private String color;
+    private BallColor color;
     private V2d vel; 
     private InputComponent input;
 
 
-    protected GameObject(P2d pos, String color, V2d vel, InputComponent input){
+    protected GameObject(P2d pos, BallColor color, V2d vel, InputComponent input){
         this.pos= pos;
         this.color= color;
         this.vel= vel;
@@ -23,7 +24,7 @@ public class GameObject{
 		this.pos = pos;
 	}
 
-    public void setColor(String color){
+    public void setColor(BallColor color){
         this.color= color;
     }
 
@@ -39,9 +40,9 @@ public class GameObject{
 		return vel;
 	}
 
-    public void updateInput(InputController c){
-		input.update(this, c);
-	}
+  //   public void updateInput(InputController c){
+	// 	input.update(this, c);
+	// }
 
 }
 
