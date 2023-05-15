@@ -40,18 +40,24 @@ public class Path {
         return this.points.get(0);
     }
 
+    public P2d getLast() {
+        return this.points.get(points.size()-1);
+    }
+
     public Direction getMove(P2d position) {
         P2d nextCorner = null;
-
         if (points.contains(position)) {
             nextCorner = points.get(points.indexOf(position) + 1);
         } else {
-
-            for (int i = 0; i < points.size() - 2; i++) {
+            for (int i = 0; i < points.size() - 1; i++) {
                 if (position.isBetween(points.get(i), points.get(i + 1))) {
                     nextCorner = points.get(i + 1);
                 }
             }
+        }
+
+        if(nextCorner == null){
+            System.out.println("!!!NULL!!!");
         }
 
         if (position.x == nextCorner.x && position.y > nextCorner.y) {
@@ -61,6 +67,7 @@ public class Path {
             return Direction.DOWN;
         }
         if (position.y == nextCorner.y && position.x > nextCorner.x) {
+            
             return Direction.LEFT;
         }
         if (position.y == nextCorner.y && position.x < nextCorner.x) {

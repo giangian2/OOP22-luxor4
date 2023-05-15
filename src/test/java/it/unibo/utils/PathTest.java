@@ -20,7 +20,10 @@ public class PathTest {
             System.out.println(ietrable);
 
             var first = path.getFirst();
-            while (true) {
+            var end = path.getLast();
+
+            while (!first.equals(end)) {
+                
                 var dir = path.getMove(first);
 
                 switch (dir) {
