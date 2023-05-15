@@ -32,6 +32,10 @@ public class Path {
         this.points = builder.points;
     }
 
+    public Iterable<P2d> getPositions() {
+        return this.points;
+    }
+
     public P2d getFirst() {
         return this.points.get(0);
     }

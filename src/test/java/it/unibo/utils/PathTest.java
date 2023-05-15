@@ -16,6 +16,9 @@ public class PathTest {
     void testPathBuilder() {
         try {
             var path = new Path.PathBuilder().build();
+            var ietrable = path.getPositions();
+            System.out.println(ietrable);
+
             var first = path.getFirst();
             while (true) {
                 var dir = path.getMove(first);
