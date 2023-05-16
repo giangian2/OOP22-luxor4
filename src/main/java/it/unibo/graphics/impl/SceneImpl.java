@@ -32,7 +32,7 @@ public class SceneImpl implements Scene {
         frame.setMinimumSize(new Dimension(500, 500));
         frame.setResizable(false);
         // frame.setUndecorated(true); // Remove title bar
-        this.panel = new ScenePanel(this.path);
+        this.panel = new ScenePanel();
         frame.getContentPane().add(panel);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
@@ -70,12 +70,6 @@ public class SceneImpl implements Scene {
 
     public class ScenePanel extends JPanel implements KeyListener {
 
-        private Path path;
-
-        public ScenePanel(Path path) {
-            this.path = path;
-        }
-
         public void paint(Graphics g) {
             Graphics2D g2 = (Graphics2D) g;
 
@@ -87,10 +81,10 @@ public class SceneImpl implements Scene {
 
             g2.setColor(Color.BLACK);
 
-            var first = this.path.getFirst();
+            var first = path.getFirst();
 
-            while (!first.equals(this.path.getLast())) {
-                var dir = this.path.getMove(first);
+            while (!first.equals(path.getLast())) {
+                var dir = path.getMove(first);
 
                 switch (dir) {
                     case UP:

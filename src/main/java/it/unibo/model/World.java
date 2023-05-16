@@ -3,12 +3,14 @@ package it.unibo.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.swing.text.html.Option;
+
 import it.unibo.events.api.WorldEventListener;
 import it.unibo.events.api.WorldEvent;
 import it.unibo.model.api.BoundingBox;
 import it.unibo.model.impl.CircleBoundingBox;
 import it.unibo.model.impl.RectBoundingBox;
-
 import it.unibo.utils.*;
 
 public class World {
@@ -57,5 +59,27 @@ public class World {
         entities.add(this.cannonBall);
         entities.add(this.cannon);
         return entities;
+    }
+
+    /**
+     * 
+     * @TODO
+     * 
+     * 
+     */
+
+    public Optional<GameObject> checkCollisionWithBalls(P2d pos, CircleBoundingBox box) {
+        return Optional.empty();
+    }
+
+    /**
+     * 
+     * @TODO
+     * 
+     * 
+     */
+
+    public Optional<GameObject> checkCollisionWithBalls(P2d pos, CircleBoundingBox box) {
+        return Optional.empty();
     }
 }
