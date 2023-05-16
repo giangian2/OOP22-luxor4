@@ -1,5 +1,7 @@
 package it.unibo.utils;
 
+import java.util.Comparator;
+
 public class P2d implements java.io.Serializable {
 
     public int x, y;
@@ -37,21 +39,21 @@ public class P2d implements java.io.Serializable {
     }
 
     public boolean isBetween(P2d p1, P2d p2) {
-        //se sono sulla stessa ascissa
-        if(this.x==p1.x && this.x==p2.x){
-            if((this.y>p1.y && this.y<p2.y)||(this.y<p1.y && this.y>p2.y)){
+        // se sono sulla stessa ascissa
+        if (this.x == p1.x && this.x == p2.x) {
+            if ((this.y > p1.y && this.y < p2.y) || (this.y < p1.y && this.y > p2.y)) {
                 return true;
             }
         }
 
-        //se sono sulla stessa ordinata
-        if(this.y==p1.y && this.y==p2.y){
-            if((this.x>p1.x && this.x<p2.x)||(this.x<p1.x && this.x>p2.x)){
+        // se sono sulla stessa ordinata
+        if (this.y == p1.y && this.y == p2.y) {
+            if ((this.x > p1.x && this.x < p2.x) || (this.x < p1.x && this.x > p2.x)) {
                 return true;
             }
         }
 
-        //sennò
+        // sennò
         return false;
     }
 

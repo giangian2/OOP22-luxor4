@@ -32,7 +32,7 @@ public class Path {
         this.points = builder.points;
     }
 
-    public Iterable<P2d> getPositions() {
+    public List<P2d> getPositions() {
         return this.points;
     }
 
@@ -41,7 +41,7 @@ public class Path {
     }
 
     public P2d getLast() {
-        return this.points.get(points.size()-1);
+        return this.points.get(points.size() - 1);
     }
 
     public Direction getMove(P2d position) {
@@ -56,8 +56,8 @@ public class Path {
             }
         }
 
-        if(nextCorner == null){
-            System.out.println("!!!NULL!!!");
+        if (nextCorner == null) {
+            throw new IllegalStateException();
         }
 
         if (position.x == nextCorner.x && position.y > nextCorner.y) {
@@ -67,7 +67,7 @@ public class Path {
             return Direction.DOWN;
         }
         if (position.y == nextCorner.y && position.x > nextCorner.x) {
-            
+
             return Direction.LEFT;
         }
         if (position.y == nextCorner.y && position.x < nextCorner.x) {

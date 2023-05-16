@@ -86,34 +86,34 @@ public class SceneImpl implements Scene {
             g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 
             g2.setColor(Color.BLACK);
-            /*
-             * var first = this.path.getFirst();
-             * 
-             * while (true) {
-             * var dir = this.path.getMove(first);
-             * 
-             * switch (dir) {
-             * case UP:
-             * first = new P2d(first.x, first.y - 1);
-             * break;
-             * 
-             * case DOWN:
-             * first = new P2d(first.x, first.y + 1);
-             * break;
-             * 
-             * case LEFT:
-             * first = new P2d(first.x - 1, first.y);
-             * break;
-             * 
-             * case RIGHT:
-             * first = new P2d(first.x + 1, first.y);
-             * break;
-             * }
-             * System.out.println(first.toString());
-             * g2.drawString("*", (int) first.x, (int) first.y);
-             * 
-             * }
-             */
+
+            var first = this.path.getFirst();
+
+            while (!first.equals(this.path.getLast())) {
+                var dir = this.path.getMove(first);
+
+                switch (dir) {
+                    case UP:
+                        first = new P2d(first.x, first.y - 1);
+                        break;
+
+                    case DOWN:
+                        first = new P2d(first.x, first.y + 1);
+                        break;
+
+                    case LEFT:
+                        first = new P2d(first.x - 1, first.y);
+                        break;
+
+                    case RIGHT:
+                        first = new P2d(first.x + 1, first.y);
+                        break;
+
+                }
+                System.out.println(first.toString());
+                g2.drawString("P", (int) first.x, (int) first.y);
+
+            }
 
         }
 
