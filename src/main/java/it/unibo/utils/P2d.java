@@ -4,9 +4,9 @@ import java.util.Comparator;
 
 public class P2d implements java.io.Serializable {
 
-    public int x, y;
+    public double x, y;
 
-    public P2d(int x, int y) {
+    public P2d(double x, double y) {
         this.x = x;
         this.y = y;
     }

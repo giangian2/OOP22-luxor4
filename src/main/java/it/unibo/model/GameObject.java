@@ -2,6 +2,7 @@ package it.unibo.model;
 
 import it.unibo.input.*;
 import it.unibo.model.api.BoundingBox;
+import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.utils.*;
 
 public class GameObject {
@@ -14,14 +15,17 @@ public class GameObject {
     private P2d pos;
     private V2d vel;
     private InputComponent input;
+    private PhysicsComponent physics;
     private BoundingBox bbox;
 
-    protected GameObject(Type type, P2d pos, V2d vel, InputComponent input, BoundingBox bbox) {
+    protected GameObject(Type type, P2d pos, V2d vel, InputComponent input, BoundingBox bbox,
+            PhysicsComponent physics) {
         this.pos = pos;
         this.vel = vel;
         this.input = input;
         this.bbox = bbox;
         this.type = type;
+        this.physics = physics;
     }
 
     public Type getType() {
@@ -41,7 +45,11 @@ public class GameObject {
     }
 
     public P2d getCurrentPos() {
-        return pos;
+        return this.pos;
+    }
+
+    public V2d getCurrentVel() {
+        return this.vel;
     }
 
     public void flipVelOnY() {
@@ -55,6 +63,11 @@ public class GameObject {
     public BoundingBox getBBox() {
         return bbox;
     }
+
+    public void updatePhysics(long dt, World w) {
+        physics.update(dt, this, w);
+    }
+
     // public void updateInput(InputController c){
     // input.update(this, c);
     // }

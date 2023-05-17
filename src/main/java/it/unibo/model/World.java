@@ -72,14 +72,5 @@ public class World {
         return Optional.empty();
     }
 
-    /**
-     * 
-     * @TODO
-     * 
-     * 
-     */
-
-    public Optional<GameObject> checkCollisionWithBalls(P2d pos, CircleBoundingBox box) {
-        return Optional.empty();
-    }
+  
 }

@@ -8,9 +8,9 @@ package it.unibo.utils;
  */
 public class V2d implements java.io.Serializable {
 
-    public int x, y;
+    public double x, y;
 
-    public V2d(int x, int y) {
+    public V2d(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -28,7 +28,7 @@ public class V2d implements java.io.Serializable {
         return (double) Math.sqrt(x * x + y * y);
     }
 
-    public V2d mul(int fact) {
+    public V2d mul(double fact) {
         return new V2d(x * fact, y * fact);
     }
 
