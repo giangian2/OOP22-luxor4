@@ -52,15 +52,15 @@ public class GameObject {
         return this.vel;
     }
 
-    public void flipVelOnY() {
+    public void flipVelOnY() { //set vel in Y
         this.vel = new V2d(vel.x, -vel.y);
     }
 
-    public void flipVelOnX() {
+    public void flipVelOnX() {//set vel in X
         this.vel = new V2d(-vel.x, vel.y);
     }
 
-    public BoundingBox getBBox() {
+    public BoundingBox getBBox() { //bounding
         return bbox;
     }
 
