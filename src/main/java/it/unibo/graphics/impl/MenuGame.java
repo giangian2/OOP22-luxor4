@@ -58,9 +58,10 @@ public class MenuGame extends JFrame {
         JButton help = new JButton("Help");
         help.setFont(new Font("Arial", Font.PLAIN, 16));
         help.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO:apri nuova finestra con istruzioni + bottone backToTheMenu
+                setVisible(false); // Nasconde la finestra del menu
+                MenuHelp MenuHelp = new MenuHelp(MenuGame.this); // Passa il riferimento alla finestra del menu alla finestra di help
+                MenuHelp.setVisible(true); // Mostra la finestra di help
             }
         });
 
