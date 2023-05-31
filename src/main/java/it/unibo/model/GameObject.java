@@ -18,7 +18,7 @@ public class GameObject {
     private PhysicsComponent physics;
     private BoundingBox bbox;
 
-    protected GameObject(Type type, P2d pos, V2d vel, InputComponent input, BoundingBox bbox,
+    public GameObject(Type type, P2d pos, V2d vel, InputComponent input, BoundingBox bbox,
             PhysicsComponent physics) {
         this.pos = pos;
         this.vel = vel;
@@ -52,15 +52,15 @@ public class GameObject {
         return this.vel;
     }
 
-    public void flipVelOnY() { //set vel in Y
+    public void flipVelOnY() { // set vel in Y
         this.vel = new V2d(vel.x, -vel.y);
     }
 
-    public void flipVelOnX() {//set vel in X
+    public void flipVelOnX() {// set vel in X
         this.vel = new V2d(-vel.x, vel.y);
     }
 
-    public BoundingBox getBBox() { //bounding
+    public BoundingBox getBBox() { // bounding
         return bbox;
     }
 

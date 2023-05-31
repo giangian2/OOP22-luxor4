@@ -1,11 +1,11 @@
-package main.java.it.unibo.input;
+package it.unibo.input;
 
 import it.unibo.model.*;
 
 public class NullInputComponent implements InputComponent {
 
-	public void update(GameObject obj, InputController ctrl){
-		
+	public void update(GameObject obj, InputController ctrl) {
+
 	}
 
 }
