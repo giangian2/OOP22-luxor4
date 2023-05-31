@@ -1,7 +1,6 @@
 package it.unibo.graphics.impl;
 import it.unibo.core.impl.GameEngineImpl;
 
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,7 +12,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagConstraints;
 import java.awt.Component;
-
 import java.awt.event.ActionListener;
 
 public class MenuGame extends JFrame {
