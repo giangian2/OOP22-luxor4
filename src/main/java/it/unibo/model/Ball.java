@@ -22,7 +22,7 @@ public class Ball extends GameObject {
         this.color = color;
     }
 
-    public BallColor getColor(BallColor color) {
+    public BallColor getColor() {
         return this.color;
     }
 }
