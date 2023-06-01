@@ -35,7 +35,7 @@ public class QueueManager {
     }
 
 
-    public List<Ball> getCloseByThree(List<Ball> ballList){
+    public static List<Ball> getCloseByThree(List<Ball> ballList){
         List<Ball> returnList = new ArrayList<Ball>();
 
         for(int i = 0; i < ballList.size() - 2;){
@@ -51,7 +51,7 @@ public class QueueManager {
             }
             i+=count;
         }
-        
+
         return returnList;
     }
 }
