@@ -1,6 +1,7 @@
 package it.unibo.graphics.impl;
 
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import java.awt.BasicStroke;
@@ -9,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.RenderingHints;
@@ -32,7 +34,7 @@ public class SceneImpl implements Scene {
         frame.setMinimumSize(new Dimension(500, 500));
         frame.setResizable(false);
         // frame.setUndecorated(true); // Remove title bar
-        this.panel = new ScenePanel();
+        this.panel = new ScenePanel(new ImageIcon("images/background.jpg").getImage());
         frame.getContentPane().add(panel);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
@@ -70,7 +72,20 @@ public class SceneImpl implements Scene {
 
     public class ScenePanel extends JPanel implements KeyListener {
 
+        private Image img;
+
+        public ScenePanel(Image img) {
+            this.img = img;
+            Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+            setPreferredSize(size);
+            setMinimumSize(size);
+            setMaximumSize(size);
+            setSize(size);
+            setLayout(null);
+        }
+
         public void paint(Graphics g) {
+            g.drawImage(img, 0, 0, null);
             Graphics2D g2 = (Graphics2D) g;
 
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
