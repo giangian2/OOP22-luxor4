@@ -47,7 +47,6 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
             long elapsed = currentCycleStartTime - previousCycleStartTime;
             // processInput();
             // updateGame(elapsed);
-            System.out.println("Rendering...");
             render();
             waitForNextFrame(currentCycleStartTime);
             previousCycleStartTime = currentCycleStartTime;

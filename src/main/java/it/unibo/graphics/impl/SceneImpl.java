@@ -1,6 +1,7 @@
 package it.unibo.graphics.impl;
 
 import javax.swing.JPanel;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -16,6 +17,7 @@ import java.awt.event.KeyListener;
 import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 import it.unibo.graphics.api.Scene;
 import it.unibo.utils.P2d;
@@ -30,11 +32,18 @@ public class SceneImpl implements Scene {
     public SceneImpl(Path path) {
         this.path = path;
         this.frame = new JFrame("Roll A Ball");
-        frame.setSize(500, 500);
+
         frame.setMinimumSize(new Dimension(500, 500));
         frame.setResizable(false);
         // frame.setUndecorated(true); // Remove title bar
-        this.panel = new ScenePanel(new ImageIcon("images/background.jpg").getImage());
+        Image image = null;
+        try {
+            image = ImageIO.read(ClassLoader.getSystemResource("images/background.jpg"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        this.panel = new ScenePanel(image);
         frame.getContentPane().add(panel);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
@@ -77,6 +86,7 @@ public class SceneImpl implements Scene {
         public ScenePanel(Image img) {
             this.img = img;
             Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+            System.out.println(size.toString());
             setPreferredSize(size);
             setMinimumSize(size);
             setMaximumSize(size);
@@ -85,7 +95,7 @@ public class SceneImpl implements Scene {
         }
 
         public void paint(Graphics g) {
-            g.drawImage(img, 0, 0, null);
+
             Graphics2D g2 = (Graphics2D) g;
 
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -94,8 +104,8 @@ public class SceneImpl implements Scene {
                     RenderingHints.VALUE_RENDER_QUALITY);
             g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 
-            g2.setColor(Color.BLACK);
-
+            g2.setColor(Color.WHITE);
+            g2.drawImage(img, 0, 0, null);
             var first = path.getFirst();
 
             while (!first.equals(path.getLast())) {
@@ -119,8 +129,8 @@ public class SceneImpl implements Scene {
                         break;
 
                 }
-                System.out.println(first.toString());
-                g2.drawString("P", (int) first.x, (int) first.y);
+
+                g2.drawString("°", (int) first.x, (int) first.y);
 
             }
 
