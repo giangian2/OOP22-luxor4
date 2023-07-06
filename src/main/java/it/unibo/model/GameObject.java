@@ -8,12 +8,12 @@ import it.unibo.utils.*;
 public class GameObject {
 
     public static enum Type {
-        BALL, CANNON_BALL
+        BALL, CANNON
     }
 
     private Type type;
     private P2d pos;
-    private V2d vel;
+    protected V2d vel;
     private InputComponent input;
     private PhysicsComponent physics;
     private BoundingBox bbox;

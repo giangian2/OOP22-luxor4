@@ -1,8 +1,8 @@
 package it.unibo.input;
 
 public class KeyboardInputController implements InputController {
-private boolean isMoveLeft;
-private boolean isMoveRight;
+    boolean isMoveLeft;
+    boolean isMoveRight;
 
 
     @Override
