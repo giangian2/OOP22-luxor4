@@ -7,49 +7,81 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
+import it.unibo.core.impl.GameObjectsFactory;
+import it.unibo.enums.BallColor;
 import it.unibo.enums.Direction;
 import it.unibo.model.Ball;
 
 public class QueueManager {
 
-    private Path path;
+    public Path path;
+    public List<Ball> balls;
 
-    public QueueManager() {
-        try{
-            path = new Path.PathBuilder().build();
+    public QueueManager(int nBalls) {
+        path = new Path.PathBuilder().build();
+        this.balls = new ArrayList<>();
+        this.instatiate(nBalls);
+    }
 
-        }catch (ParserConfigurationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SAXException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+    private void instatiate(int n) {
+        var factory = GameObjectsFactory.getInstance();
+        var pos = path.getFirst();
+
+        for (int i = 0; i < n; i++) {
+            if (this.path.getMove(pos) == Direction.LEFT) {
+                this.balls.add(factory.createBall(pos, null, BallColor.GREEN));
+                pos = new P2d(pos.x - Ball.IMAGE_DIAMETER, pos.y);
+            }
         }
     }
 
-    public Direction getMove(Ball ball){
+    public Direction getMove(Ball ball) {
         return path.getMove(ball.getCurrentPos());
     }
 
+    public void shiftBalls() {
+        for (int i = 1; i < this.balls.size(); i++) {
+            if (Math.abs(this.balls.get(i).getCurrentPos().x - this.balls.get(i - 1).getCurrentPos().x) == 0 ||
+                    Math.abs(this.balls.get(i).getCurrentPos().y - this.balls.get(i - 1).getCurrentPos().y) == 0) {
 
-    public static List<Ball> getCloseByThree(List<Ball> ballList){
-        List<Ball> returnList = new ArrayList<Ball>();
+                var nextMove = this.getMove(this.balls.get(i));
+                var currentPos = this.balls.get(i).getCurrentPos();
+                switch (nextMove) {
+                    case UP:
+                        this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y - 1));
+                        break;
 
-        for(int i = 0; i < ballList.size() - 2;){
-            var currentColor = ballList.get(i).getColor();
-            int count = 1;
-            for(int j = 1;(i+j < ballList.size())&&(ballList.get(i+j).getColor()==currentColor); j++){
-                    count++;
-            }
-            if(count>2){
-                for(int j=0;j<count;j++){
-                    returnList.add(ballList.get(i+j));
+                    case DOWN:
+                        this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y + 1));
+                        break;
+
+                    case LEFT:
+                        this.balls.get(i).setPos(new P2d(currentPos.x - 1, currentPos.y));
+                        break;
+
+                    case RIGHT:
+                        this.balls.get(i).setPos(new P2d(currentPos.x + 1, currentPos.y));
+                        break;
                 }
             }
-            i+=count;
+        }
+    }
+
+    public static List<Ball> getCloseByThree(List<Ball> ballList) {
+        List<Ball> returnList = new ArrayList<Ball>();
+
+        for (int i = 0; i < ballList.size() - 2;) {
+            var currentColor = ballList.get(i).getColor();
+            int count = 1;
+            for (int j = 1; (i + j < ballList.size()) && (ballList.get(i + j).getColor() == currentColor); j++) {
+                count++;
+            }
+            if (count > 2) {
+                for (int j = 0; j < count; j++) {
+                    returnList.add(ballList.get(i + j));
+                }
+            }
+            i += count;
         }
 
         return returnList;

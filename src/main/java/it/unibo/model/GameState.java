@@ -15,7 +15,7 @@ public class GameState {
         GameObjectsFactory f = GameObjectsFactory.getInstance();
 
         score = 0;
-        world = new World(new RectBoundingBox(new P2d(-9, 8), new P2d(9, -8)));
+        world = new World(new RectBoundingBox(new P2d(-9, 8), new P2d(9, -8)), 10);
         /**
          * @TODO
          */

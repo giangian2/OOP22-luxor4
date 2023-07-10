@@ -10,6 +10,7 @@ import it.unibo.utils.*;
 public class Ball extends GameObject {
 
     private BallColor color;
+    public static final int IMAGE_DIAMETER = 25;
 
     public Ball(P2d pos, BallColor color, V2d vel, InputComponent input, BoundingBox bbox,
             PhysicsComponent physics) {

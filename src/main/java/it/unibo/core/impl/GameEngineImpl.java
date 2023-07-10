@@ -11,32 +11,21 @@ import it.unibo.core.api.GameEngine;
 import it.unibo.events.api.*;
 import it.unibo.graphics.api.Scene;
 import it.unibo.graphics.impl.SceneImpl;
+import it.unibo.model.GameState;
 import it.unibo.utils.Path;
 import it.unibo.utils.Path.PathBuilder;
 
 public class GameEngineImpl implements GameEngine, WorldEventListener {
 
     private static int period = 40;
+    private GameState gameState;
     private LinkedList<WorldEvent> eventQueue;
     private Scene view;
-    private Path path;
 
     public GameEngineImpl() {
-
-        try {
-            this.path = new Path.PathBuilder().build();
-        } catch (ParserConfigurationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SAXException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        this.gameState = new GameState(this);
         this.eventQueue = new LinkedList<WorldEvent>();
-        this.view = new SceneImpl(this.path);
+        this.view = new SceneImpl(this.gameState.getWorld());
     }
 
     @Override
@@ -47,6 +36,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
             long elapsed = currentCycleStartTime - previousCycleStartTime;
             // processInput();
             // updateGame(elapsed);
+            this.gameState.getWorld().shiftBalls();
             render();
             waitForNextFrame(currentCycleStartTime);
             previousCycleStartTime = currentCycleStartTime;

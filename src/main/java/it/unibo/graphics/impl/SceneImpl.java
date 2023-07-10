@@ -3,6 +3,7 @@ package it.unibo.graphics.impl;
 import javax.swing.JPanel;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import java.awt.BasicStroke;
@@ -20,6 +21,8 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import it.unibo.graphics.api.Scene;
+import it.unibo.model.Ball;
+import it.unibo.model.World;
 import it.unibo.utils.P2d;
 import it.unibo.utils.Path;
 
@@ -27,10 +30,10 @@ public class SceneImpl implements Scene {
 
     private JFrame frame;
     private JPanel panel;
-    private Path path;
+    private World w;
 
-    public SceneImpl(Path path) {
-        this.path = path;
+    public SceneImpl(World w) {
+        this.w = w;
         this.frame = new JFrame("Roll A Ball");
 
         frame.setMinimumSize(new Dimension(500, 500));
@@ -95,7 +98,7 @@ public class SceneImpl implements Scene {
         }
 
         public void paint(Graphics g) {
-
+            System.out.println("rendering");
             Graphics2D g2 = (Graphics2D) g;
 
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -106,32 +109,17 @@ public class SceneImpl implements Scene {
 
             g2.setColor(Color.WHITE);
             g2.drawImage(img, 0, 0, null);
-            var first = path.getFirst();
 
-            while (!first.equals(path.getLast())) {
-                var dir = path.getMove(first);
+            try {
+                final var image = ImageIO.read(ClassLoader.getSystemResource("images/blue_ball2.png"));
+                var entities = w.getQueue();
 
-                switch (dir) {
-                    case UP:
-                        first = new P2d(first.x, first.y - 1);
-                        break;
-
-                    case DOWN:
-                        first = new P2d(first.x, first.y + 1);
-                        break;
-
-                    case LEFT:
-                        first = new P2d(first.x - 1, first.y);
-                        break;
-
-                    case RIGHT:
-                        first = new P2d(first.x + 1, first.y);
-                        break;
-
-                }
-
-                g2.drawString("°", (int) first.x, (int) first.y);
-
+                entities.forEach(ball -> {
+                    g2.drawImage(image, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
+                });
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
 
         }
@@ -152,6 +140,31 @@ public class SceneImpl implements Scene {
         public void keyReleased(KeyEvent e) {
             // TODO Auto-generated method stub
             throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
+        }
+
+    }
+
+    public class BallComponent extends JComponent {
+
+        private P2d pos;
+
+        public BallComponent(P2d pos) {
+            super();
+            this.pos = pos;
+        }
+
+        public void paint(Graphics g) {
+            Image image = null;
+            try {
+                image = ImageIO.read(ClassLoader.getSystemResource("images/blue_ball.png"));
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            ImageIcon icon = new ImageIcon(image);
+            int x = (int) pos.x;
+            int y = (int) pos.y;
+            icon.paintIcon(this, g, x, y);
         }
 
     }
