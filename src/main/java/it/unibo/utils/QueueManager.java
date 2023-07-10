@@ -41,29 +41,27 @@ public class QueueManager {
 
     public void shiftBalls() {
         for (int i = 1; i < this.balls.size(); i++) {
-            if (Math.abs(this.balls.get(i).getCurrentPos().x - this.balls.get(i - 1).getCurrentPos().x) == 0 ||
-                    Math.abs(this.balls.get(i).getCurrentPos().y - this.balls.get(i - 1).getCurrentPos().y) == 0) {
 
-                var nextMove = this.getMove(this.balls.get(i));
-                var currentPos = this.balls.get(i).getCurrentPos();
-                switch (nextMove) {
-                    case UP:
-                        this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y - 1));
-                        break;
+            var nextMove = this.getMove(this.balls.get(i));
+            var currentPos = this.balls.get(i).getCurrentPos();
+            switch (nextMove) {
+                case UP:
+                    this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y - 1));
+                    break;
 
-                    case DOWN:
-                        this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y + 1));
-                        break;
+                case DOWN:
+                    this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y + 1));
+                    break;
 
-                    case LEFT:
-                        this.balls.get(i).setPos(new P2d(currentPos.x - 1, currentPos.y));
-                        break;
+                case LEFT:
+                    this.balls.get(i).setPos(new P2d(currentPos.x - 1, currentPos.y));
+                    break;
 
-                    case RIGHT:
-                        this.balls.get(i).setPos(new P2d(currentPos.x + 1, currentPos.y));
-                        break;
-                }
+                case RIGHT:
+                    this.balls.get(i).setPos(new P2d(currentPos.x + 1, currentPos.y));
+                    break;
             }
+
         }
     }
 

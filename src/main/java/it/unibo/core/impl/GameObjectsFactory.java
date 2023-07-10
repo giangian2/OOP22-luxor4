@@ -8,6 +8,7 @@ import it.unibo.input.InputComponent;
 import it.unibo.input.PlayerInputComponent;
 import it.unibo.model.Ball;
 import it.unibo.model.GameObject;
+import it.unibo.model.GameObject.Type;
 import it.unibo.model.api.BoundingBox;
 import it.unibo.model.impl.CircleBoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
@@ -30,7 +31,7 @@ public class GameObjectsFactory {
     // metodi del cannon
 
     public Ball createBall(P2d pos, V2d vel, BallColor color) {
-        return new Ball(pos, color, null,
+        return new Ball(Type.BALL, pos, color, new V2d(pos, pos),
                 new PlayerInputComponent(),
                 new CircleBoundingBox(), // in input //mi serve l'input della palla? per
                 new BallPhysicsComponent()); // in physics
