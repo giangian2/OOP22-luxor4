@@ -7,11 +7,15 @@ import it.unibo.model.World;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
 
+<<<<<<< HEAD
 public class CannonPhysicsComponent extends PhysicsComponent {
 
     private double cannonPosX;
     private double cannonPosY;
     private double cannonVelX;
+=======
+/*public class CannonPhysicsComponent extends PhysicsComponent{
+>>>>>>> 19d01f0726f2e72c4be1c725070f53c32a28c110
 
     @Override
     public void update(long dt, GameObject obj, World w) {
@@ -26,4 +30,14 @@ public class CannonPhysicsComponent extends PhysicsComponent {
             cannonVelX = cannonVel.x; 
         }
     }
+}*/
+
+public class CannonPhysicsComponent extends PhysicsComponent {
+
+    @Override
+    public void update(long dt, GameObject obj, World w) {
+       
+
+    }
+
 }
