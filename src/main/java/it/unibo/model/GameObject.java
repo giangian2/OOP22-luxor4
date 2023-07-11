@@ -68,8 +68,8 @@ public class GameObject {
         physics.update(dt, this, w);
     }
 
-    // public void updateInput(InputController c){
-    // input.update(this, c);
-    // }
+    public void updateInput(InputController c){
+        input.update(this, c);
+    }
 
 }

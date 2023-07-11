@@ -4,6 +4,7 @@ import it.unibo.enums.BallColor;
 //guarda anche se nel game object hanno aggiunto qualcosa
 import it.unibo.events.api.*;
 import it.unibo.events.impl.*;
+import it.unibo.graphics.impl.CannonGraphicsComponent;
 import it.unibo.input.InputComponent;
 import it.unibo.input.PlayerInputComponent;
 import it.unibo.model.Ball;
@@ -36,14 +37,15 @@ public class GameObjectsFactory {
                 new CircleBoundingBox(), // in input //mi serve l'input della palla? per
                 new BallPhysicsComponent()); // in physics
 
-    }/**
-      * 
-      * public GameObject createCannon(P2d pos){
-      * return new GameObject(GameObject.Type.CANNON, pos,
-      * new PlayerInputComponent(), // in input
-      * new CannonGraphicsComponent(), //in graphics
-      * new CannonPhysicsComponent()); //in physics
-      * }
-      */
+    }
+     
+     
+    //public GameObject createCannon(P2d pos){
+        //return new GameObject(GameObject.Type.CANNON, pos,
+        //new PlayerInputComponent(), // in input
+        //new CannonGraphicsComponent(), //in graphics
+       // new CannonPhysicsComponent()); //in physics
+    //}
+      
 
 }

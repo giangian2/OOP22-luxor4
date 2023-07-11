@@ -4,6 +4,7 @@ import it.unibo.model.*;
 
 //nota per la FEDE dalla FEDE:  guarda PlayerInputComponent() in GameObjectsFactory
 public interface InputComponent {
-    void update(GameObject ball, InputController c);
+    public void update(GameObject ball, InputController c);
 
+    
 }
