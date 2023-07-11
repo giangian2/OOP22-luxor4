@@ -20,17 +20,26 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+import java.net.URL;
+
 import it.unibo.graphics.api.Scene;
+import it.unibo.input.InputComponent;
 import it.unibo.model.Ball;
+import it.unibo.model.Cannon;
 import it.unibo.model.World;
+import it.unibo.model.api.BoundingBox;
+import it.unibo.physics.impl.CannonPhysicsComponent;
+import it.unibo.input.PlayerInputComponent;
 import it.unibo.utils.P2d;
 import it.unibo.utils.Path;
+import it.unibo.utils.V2d;
 
 public class SceneImpl implements Scene {
 
     private JFrame frame;
     private JPanel panel;
     private World w;
+    private Cannon cannon;
 
     public SceneImpl(World w) {
         this.w = w;
@@ -59,6 +68,18 @@ public class SceneImpl implements Scene {
         });
         frame.pack();
         frame.setVisible(true);
+
+        P2d cannonPosition = new P2d(10, 10);
+        V2d cannonVelocity = new V2d(5, 0);
+        InputComponent cannonInput = new PlayerInputComponent();
+        CannonPhysicsComponent cannonPhysics = new CannonPhysicsComponent();
+
+        Cannon cannon = new Cannon(cannonPosition, cannonVelocity, cannonInput, null, cannonPhysics);
+        setCannon(cannon);
+    }  
+
+    public void setCannon(Cannon cannon) {
+        this.cannon = cannon;
     }
 
     @Override
@@ -85,16 +106,25 @@ public class SceneImpl implements Scene {
     public class ScenePanel extends JPanel implements KeyListener {
 
         private Image img;
+        private Cannon cannon;
+
 
         public ScenePanel(Image img) {
             this.img = img;
-            Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-            System.out.println(size.toString());
-            setPreferredSize(size);
-            setMinimumSize(size);
-            setMaximumSize(size);
-            setSize(size);
-            setLayout(null);
+            if (img != null) {
+                Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+                setPreferredSize(size);
+                setMinimumSize(size);
+                setMaximumSize(size);
+                setSize(size);
+                setLayout(null);
+            } else {
+                throw new IllegalArgumentException("Invalid image provided");
+            }
+        }
+
+        public void setCannon(Cannon cannon) {
+            this.cannon = cannon;
         }
 
         public void paint(Graphics g) {
@@ -110,6 +140,25 @@ public class SceneImpl implements Scene {
             g2.setColor(Color.WHITE);
             g2.drawImage(img, 0, 0, null);
 
+            if (cannon != null) {
+    Image image = null;
+    try {
+        URL imageUrl = getClass().getResource("/images/cannone.png");
+        if (imageUrl != null) {
+            image = ImageIO.read(imageUrl);
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    if (image != null) {
+        g2.drawImage(image, (int) cannon.getCurrentPos().x, (int) cannon.getCurrentPos().y, null);
+    }
+}
+
+
+            
+
             try {
                 final var image = ImageIO.read(ClassLoader.getSystemResource("images/blue_ball2.png"));
                 var entities = w.getQueue();
@@ -121,7 +170,6 @@ public class SceneImpl implements Scene {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-
         }
 
         @Override

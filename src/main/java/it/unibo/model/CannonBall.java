@@ -15,6 +15,6 @@ public class CannonBall extends Ball{
     }
 
     public void fireProjectile(){
-         vel = new V2d(0, -1);
+        setVel(new V2d(0, -1));
     }
 }

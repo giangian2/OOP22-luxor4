@@ -10,6 +10,6 @@ public class Cannon extends GameObject{
      public Cannon(P2d pos, V2d vel, InputComponent input, BoundingBox bbox,
             PhysicsComponent physics) {
 
-        super(Type.CANNON, pos, vel, input, bbox, physics);
+        super(Type.CANNON, pos, vel, input, null, physics);
     }
 }

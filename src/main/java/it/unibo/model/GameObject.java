@@ -13,7 +13,7 @@ public class GameObject {
 
     private Type type;
     private P2d pos;
-    protected V2d vel;
+    private V2d vel;
     private InputComponent input;
     private PhysicsComponent physics;
     private BoundingBox bbox;
