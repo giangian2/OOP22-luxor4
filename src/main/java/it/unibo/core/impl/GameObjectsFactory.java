@@ -31,6 +31,15 @@ public class GameObjectsFactory {
     // GameObject.Type.BALL??
     // metodi del cannon
 
+    //qui dovrebbe essere questo metodo qui quello giusto
+   /*  public GameObject createBall(P2d pos, V2d vel, BallColor color) {
+        return new GameObject(GameObject.Type.BALL, pos, vel, 
+                new PlayerInputComponent(), // in input
+                new CircleBoundingBox(), // in input
+                new BallPhysicsComponent() )// in physics 
+            ; // in graphics
+    }  */
+
     public Ball createBall(P2d pos, V2d vel, BallColor color) {
         return new Ball(Type.BALL, pos, color, new V2d(pos, pos),
                 new PlayerInputComponent(),
@@ -38,14 +47,22 @@ public class GameObjectsFactory {
                 new BallPhysicsComponent()); // in physics
 
     }
-     
-     
-    //public GameObject createCannon(P2d pos){
-        //return new GameObject(GameObject.Type.CANNON, pos,
-        //new PlayerInputComponent(), // in input
-        //new CannonGraphicsComponent(), //in graphics
-       // new CannonPhysicsComponent()); //in physics
-    //}
+
+    
+    /* */
+    public GameObject createCannon(P2d pos) {
+        return new GameObject(GameObject.Type.CANNON, pos, new V2d(pos, pos),
+                new PlayerInputComponent(), // in input
+                new CircleBoundingBox(), // in input
+                new BallPhysicsComponent()); // in physics
+    }
+     /* 
+    public GameObject createCannon(P2d pos){
+       return new GameObject(GameObject.Type.CANNON, pos,
+       new PlayerInputComponent(), // in input
+       new CannonGraphicsComponent(), //in graphics
+       new BallPhysicsComponent()); //in physics}
+    */    
       
 
 }
