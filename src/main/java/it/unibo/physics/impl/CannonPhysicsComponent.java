@@ -25,6 +25,8 @@ public class CannonPhysicsComponent extends PhysicsComponent {
 
             V2d cannonVel = cannon.getCurrentVel();
             cannonVelX = cannonVel.x;
+
+            cannon.fireProjectile(cannonPosX, cannonPosY);
         }
     }
 }

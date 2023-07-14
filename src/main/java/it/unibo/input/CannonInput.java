@@ -1,4 +1,4 @@
-package it.unibo.input;
+/*package it.unibo.input;
 
 import it.unibo.model.CannonBall;
 
@@ -28,3 +28,4 @@ public class CannonInput extends KeyboardInputController{
         }
     }
 }
+*/
