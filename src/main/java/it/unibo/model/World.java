@@ -35,6 +35,10 @@ public class World {
         evListener = l;
     }
 
+    public Cannon createCannon(P2d pos) {
+        return GameObjectsFactory.getInstance().createCannon(pos);
+    }
+
     public void setCannon(Cannon cannon) {
         this.cannon = cannon;
     }
@@ -58,7 +62,7 @@ public class World {
     public List<GameObject> getSceneEntities() {
         List<GameObject> entities = new ArrayList<GameObject>();
         entities.addAll(this.qm.balls);
-        // entities.addAll(this.cannon.getFiredBalls());
+        entities.addAll(this.cannon.getFiredBalls());
         entities.add(this.cannon);
         return entities;
     }

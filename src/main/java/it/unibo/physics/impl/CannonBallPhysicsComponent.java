@@ -4,8 +4,6 @@ import java.util.Optional;
 
 import it.unibo.events.impl.HitBallEvent;
 import it.unibo.model.GameObject;
-import it.unibo.physics.api.PhysicsComponent;
-import it.unibo.physics.impl.BoundaryCollision;
 import it.unibo.utils.P2d;
 import it.unibo.model.World;
 import it.unibo.model.impl.CircleBoundingBox;

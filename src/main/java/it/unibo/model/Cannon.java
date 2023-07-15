@@ -32,22 +32,6 @@ public class Cannon extends GameObject{
         return this.cannonBalls;
     }
 
-    public void removeOutOfBoundsBalls() {
-        Iterator<GameObject> iterator = cannonBalls.iterator();
-        BoundingBox fieldBBox = new RectBoundingBox(new P2d(0, 0), new P2d(1000, 600));
-        while (iterator.hasNext()) {
-            GameObject ball = iterator.next();
-            P2d ballPos = ball.getCurrentPos();
-            if (!isWithinField(fieldBBox, ballPos)) {
-                iterator.remove();
-            }
-        }
-    }
-
-    private boolean isWithinField(BoundingBox fieldBBox, P2d ballPos) {
-        return fieldBBox.isCollidingWith(ballPos, 0);
-    }
-
     public void fireProjectile(double cannonPosx, double cannonPosY){
         P2d ballPos = new P2d(cannonPosx, cannonPosY);
 

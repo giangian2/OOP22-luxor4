@@ -22,6 +22,7 @@ import java.io.IOException;
 
 import java.net.URL;
 
+import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.graphics.api.Scene;
 import it.unibo.input.InputComponent;
 import it.unibo.model.Ball;
@@ -39,7 +40,6 @@ public class SceneImpl implements Scene {
     private JFrame frame;
     private JPanel panel;
     private World w;
-    private Cannon cannon;
 
     public SceneImpl(World w) {
         this.w = w;
@@ -67,20 +67,8 @@ public class SceneImpl implements Scene {
             }
         });
         frame.pack();
-        frame.setVisible(true);
-
-        P2d cannonPosition = new P2d(10, 10);
-        V2d cannonVelocity = new V2d(5, 0);
-        InputComponent cannonInput = new PlayerInputComponent();
-        CannonPhysicsComponent cannonPhysics = new CannonPhysicsComponent();
-
-        Cannon cannon = new Cannon(cannonPosition, cannonVelocity, cannonInput, null, cannonPhysics);
-        setCannon(cannon);
+        frame.setVisible(true); 
     }  
-
-    public void setCannon(Cannon cannon) {
-        this.cannon = cannon;
-    }
 
     @Override
     public void render() {
@@ -106,8 +94,7 @@ public class SceneImpl implements Scene {
     public class ScenePanel extends JPanel implements KeyListener {
 
         private Image img;
-        private Cannon cannon;
-
+        private P2d cannonPosition;
 
         public ScenePanel(Image img) {
             this.img = img;
@@ -121,11 +108,14 @@ public class SceneImpl implements Scene {
             } else {
                 throw new IllegalArgumentException("Invalid image provided");
             }
+            
+            Cannon cannon = w.getCannon();
+            if (cannon != null) {
+                cannonPosition = cannon.getCurrentPos();
+            }
         }
 
-        public void setCannon(Cannon cannon) {
-            this.cannon = cannon;
-        }
+        
 
         public void paint(Graphics g) {
             System.out.println("rendering");
@@ -140,25 +130,6 @@ public class SceneImpl implements Scene {
             g2.setColor(Color.WHITE);
             g2.drawImage(img, 0, 0, null);
 
-            if (cannon != null) {
-    Image image = null;
-    try {
-        URL imageUrl = getClass().getResource("/images/cannone.png");
-        if (imageUrl != null) {
-            image = ImageIO.read(imageUrl);
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-
-    if (image != null) {
-        g2.drawImage(image, (int) cannon.getCurrentPos().x, (int) cannon.getCurrentPos().y, null);
-    }
-}
-
-
-            
-
             try {
                 final var image = ImageIO.read(ClassLoader.getSystemResource("images/blue_ball2.png"));
                 var entities = w.getQueue();
@@ -169,6 +140,17 @@ public class SceneImpl implements Scene {
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+            }
+
+            if (cannonPosition != null) {
+                try {
+                    Image cannonImage = ImageIO.read(ClassLoader.getSystemResource("images/cannone.png"));
+                    Cannon cannon = w.getCannon();
+                    g2.drawImage(cannonImage, (int) cannon.getCurrentPos().x, (int) cannon.getCurrentPos().y, null);
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         }
 
