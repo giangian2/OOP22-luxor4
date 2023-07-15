@@ -16,11 +16,11 @@ import it.unibo.model.impl.RectBoundingBox;
 import it.unibo.utils.*;
 
 public class World {
-    private GameObject cannonBall;
-    private GameObject cannon;
+    private Cannon cannon;
     private QueueManager qm;
     private RectBoundingBox mainBBox;
     private WorldEventListener evListener;
+
 
     public World(RectBoundingBox bbox, int nBalls) {
         qm = new QueueManager(10);
@@ -28,15 +28,14 @@ public class World {
 
     }
 
+    /**
+     * @param l
+     */
     public void setEventListener(WorldEventListener l) {
         evListener = l;
     }
 
-    public void setCannonBall(GameObject ball) {
-        this.cannonBall = ball;
-    }
-
-    public void setCannon(GameObject cannon) {
+    public void setCannon(Cannon cannon) {
         this.cannon = cannon;
     }
 
@@ -55,7 +54,7 @@ public class World {
     public List<GameObject> getSceneEntities() {
         List<GameObject> entities = new ArrayList<GameObject>();
         entities.addAll(this.qm.balls);
-        entities.add(this.cannonBall);
+        //entities.addAll(this.cannon.getFiredBalls());
         entities.add(this.cannon);
         return entities;
     }
@@ -75,4 +74,15 @@ public class World {
         return Optional.empty();
     }
 
+    /**
+     * 
+     * @TODO
+     * 
+     * 
+     */
+   // public Optional<BoundaryCollision> checkCollisionWithBoundaries(P2d pos, CircleBoundingBox box) {
+     //   return Optional.empty();
+   // }
+
 }
+

@@ -21,10 +21,12 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     private GameState gameState;
     private LinkedList<WorldEvent> eventQueue;
     private Scene view;
+   // private KeyboardInputController controller;
 
     public GameEngineImpl() {
         this.gameState = new GameState(this);
         this.eventQueue = new LinkedList<WorldEvent>();
+       // controller = new KeyboardInputController();
         this.view = new SceneImpl(this.gameState.getWorld());
     }
 
@@ -34,9 +36,9 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
         while (true) {
             long currentCycleStartTime = System.currentTimeMillis();
             long elapsed = currentCycleStartTime - previousCycleStartTime;
-            // processInput();
+            processInput();
             // updateGame(elapsed);
-            this.gameState.getWorld().shiftBalls();
+            //this.gameState.getWorld().shiftBalls();
             render();
             waitForNextFrame(currentCycleStartTime);
             previousCycleStartTime = currentCycleStartTime;
@@ -66,6 +68,10 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
             } catch (Exception ex) {
             }
         }
+    }
+
+    protected void processInput() {
+        gameState.getWorld().shiftBalls();
     }
 
 }
