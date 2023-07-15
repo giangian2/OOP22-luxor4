@@ -57,4 +57,8 @@ public class P2d implements java.io.Serializable {
         return false;
     }
 
+    public double module() {
+        return (double) Math.sqrt(x * x + y * y);
+    }
+
 }
