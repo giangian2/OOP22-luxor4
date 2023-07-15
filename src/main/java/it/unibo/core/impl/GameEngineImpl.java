@@ -9,6 +9,7 @@ import org.xml.sax.SAXException;
 
 import it.unibo.core.api.GameEngine;
 import it.unibo.events.api.*;
+import it.unibo.events.impl.*;
 import it.unibo.graphics.api.Scene;
 import it.unibo.graphics.impl.SceneImpl;
 import it.unibo.input.KeyboardInputController;
@@ -51,12 +52,6 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
         System.out.println("Game Init");
     }
 
-    @Override
-    public void notifyEvent(WorldEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'notifyEvent'");
-    }
-
     protected void render() {
         view.render();
     }
@@ -74,5 +69,19 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     protected void processInput() {
         gameState.getWorld().shiftBalls();
     }
+    
+    @Override
+    public void notifyEvent(WorldEvent e) {
+        eventQueue.add(e);
+    }
+
+    private void chechEvents(){
+        eventQueue.stream().forEach(event->{
+            if(event instanceof PauseGameEvent || event instanceof RestartGameEvent) {
+                gameState.changePauseState();
+            }
+        });
+    }
+
 
 }

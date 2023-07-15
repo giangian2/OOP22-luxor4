@@ -10,11 +10,13 @@ public class GameState {
 
     private int score;
     private World world;
+    private boolean pause;
 
     public GameState(WorldEventListener l) {
         GameObjectsFactory f = GameObjectsFactory.getInstance();
 
         score = 0;
+        pause = false;
         world = new World(new RectBoundingBox(new P2d(-9, 8), new P2d(9, -8)), 10);
         /**
          * @TODO
@@ -45,7 +47,20 @@ public class GameState {
         return false;
     }
 
-    public void update(int dt) {
+    public void changePauseState(){
+        if(pause){
+            pause=false;
+        }else {
+            pause=true;
+        }
+    }
 
+    public void update(int dt) {
+        if(!pause){
+
+            //NORMALE UPDATE
+            //TO DO
+
+        }
     }
 }
