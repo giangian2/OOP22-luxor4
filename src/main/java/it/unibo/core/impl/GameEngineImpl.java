@@ -11,6 +11,7 @@ import it.unibo.core.api.GameEngine;
 import it.unibo.events.api.*;
 import it.unibo.graphics.api.Scene;
 import it.unibo.graphics.impl.SceneImpl;
+import it.unibo.input.KeyboardInputController;
 import it.unibo.model.GameState;
 import it.unibo.utils.Path;
 import it.unibo.utils.Path.PathBuilder;
@@ -21,12 +22,12 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     private GameState gameState;
     private LinkedList<WorldEvent> eventQueue;
     private Scene view;
-   // private KeyboardInputController controller;
+    private KeyboardInputController controller;
 
     public GameEngineImpl() {
         this.gameState = new GameState(this);
         this.eventQueue = new LinkedList<WorldEvent>();
-       // controller = new KeyboardInputController();
+        controller = new KeyboardInputController();
         this.view = new SceneImpl(this.gameState.getWorld());
     }
 
@@ -38,7 +39,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
             long elapsed = currentCycleStartTime - previousCycleStartTime;
             processInput();
             // updateGame(elapsed);
-            //this.gameState.getWorld().shiftBalls();
+            // this.gameState.getWorld().shiftBalls();
             render();
             waitForNextFrame(currentCycleStartTime);
             previousCycleStartTime = currentCycleStartTime;

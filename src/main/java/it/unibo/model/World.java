@@ -22,7 +22,6 @@ public class World {
     private RectBoundingBox mainBBox;
     private WorldEventListener evListener;
 
-
     public World(RectBoundingBox bbox, int nBalls) {
         qm = new QueueManager(10);
         mainBBox = bbox;
@@ -40,6 +39,10 @@ public class World {
         this.cannon = cannon;
     }
 
+    public Cannon getCannon() {
+        return this.cannon;
+    }
+
     public void notifyWorldEvent(WorldEvent ev) {
         this.evListener.notifyEvent(ev);
     }
@@ -55,7 +58,7 @@ public class World {
     public List<GameObject> getSceneEntities() {
         List<GameObject> entities = new ArrayList<GameObject>();
         entities.addAll(this.qm.balls);
-        //entities.addAll(this.cannon.getFiredBalls());
+        // entities.addAll(this.cannon.getFiredBalls());
         entities.add(this.cannon);
         return entities;
     }
@@ -82,8 +85,7 @@ public class World {
      * 
      */
     public Optional<BoundaryCollision> checkCollisionWithBoundaries(P2d pos, CircleBoundingBox box) {
-       return Optional.empty();
+        return Optional.empty();
     }
 
 }
-

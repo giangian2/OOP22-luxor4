@@ -3,7 +3,6 @@ package it.unibo.physics.impl;
 import java.util.Optional;
 
 import it.unibo.events.impl.HitBallEvent;
-import it.unibo.events.impl.HitBorderEvent;
 import it.unibo.model.GameObject;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.physics.impl.BoundaryCollision;
