@@ -8,6 +8,7 @@ import javax.swing.text.html.Option;
 
 import it.unibo.events.api.WorldEventListener;
 import it.unibo.core.impl.GameObjectsFactory;
+import it.unibo.physics.impl.BoundaryCollision;
 import it.unibo.enums.BallColor;
 import it.unibo.events.api.WorldEvent;
 import it.unibo.model.api.BoundingBox;
@@ -80,9 +81,9 @@ public class World {
      * 
      * 
      */
-   // public Optional<BoundaryCollision> checkCollisionWithBoundaries(P2d pos, CircleBoundingBox box) {
-     //   return Optional.empty();
-   // }
+    public Optional<BoundaryCollision> checkCollisionWithBoundaries(P2d pos, CircleBoundingBox box) {
+       return Optional.empty();
+    }
 
 }
 

@@ -15,10 +15,10 @@ public class BallPhysicsComponent extends PhysicsComponent {
 
         super.update(dt, obj, w);
 
-        CircleBoundingBox cbbox = (CircleBoundingBox) obj.getBBox();
+        /*CircleBoundingBox cbbox = (CircleBoundingBox) obj.getBBox();
         Optional<GameObject> ball = w.checkCollisionWithBalls(obj.getCurrentPos(), cbbox);
         if (ball.isPresent()) {
             w.notifyWorldEvent(new HitBallEvent(ball.get()));
-        }
+        }*/
     }
 }
