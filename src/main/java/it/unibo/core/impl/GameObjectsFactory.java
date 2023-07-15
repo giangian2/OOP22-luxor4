@@ -1,19 +1,22 @@
 package it.unibo.core.impl;
 
 import it.unibo.enums.BallColor;
-//guarda anche se nel game object hanno aggiunto qualcosa
 import it.unibo.events.api.*;
 import it.unibo.events.impl.*;
 import it.unibo.graphics.impl.CannonGraphicsComponent;
 import it.unibo.input.InputComponent;
+import it.unibo.input.NullInputComponent;
 import it.unibo.input.PlayerInputComponent;
 import it.unibo.model.Ball;
+import it.unibo.model.Cannon;
 import it.unibo.model.GameObject;
 import it.unibo.model.GameObject.Type;
 import it.unibo.model.api.BoundingBox;
 import it.unibo.model.impl.CircleBoundingBox;
+import it.unibo.model.impl.RectBoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.physics.impl.BallPhysicsComponent;
+import it.unibo.physics.impl.CannonPhysicsComponent;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
 
@@ -27,42 +30,22 @@ public class GameObjectsFactory {
         }
         return instance;
     }
-    // note della fede
-    // GameObject.Type.BALL??
-    // metodi del cannon
-
-    //qui dovrebbe essere questo metodo qui quello giusto
-   /*  public GameObject createBall(P2d pos, V2d vel, BallColor color) {
-        return new GameObject(GameObject.Type.BALL, pos, vel, 
-                new PlayerInputComponent(), // in input
-                new CircleBoundingBox(), // in input
-                new BallPhysicsComponent() )// in physics 
-            ; // in graphics
-    }  */
-
+    
     public Ball createBall(P2d pos, V2d vel, BallColor color) {
         return new Ball(Type.BALL, pos, color, new V2d(pos, pos),
-                new PlayerInputComponent(),
-                new CircleBoundingBox(), // in input //mi serve l'input della palla? per
-                new BallPhysicsComponent()); // in physics
-
-    }
-
-    
-    /* */
-    public GameObject createCannon(P2d pos) {
-        return new GameObject(GameObject.Type.CANNON, pos, new V2d(pos, pos),
-                new PlayerInputComponent(), // in input
+                new NullInputComponent(),
                 new CircleBoundingBox(), // in input
                 new BallPhysicsComponent()); // in physics
+
     }
-     /* 
-    public GameObject createCannon(P2d pos){
-       return new GameObject(GameObject.Type.CANNON, pos,
-       new PlayerInputComponent(), // in input
-       new CannonGraphicsComponent(), //in graphics
-       new BallPhysicsComponent()); //in physics}
-    */    
-      
+
+
+    public Cannon createCannon(P2d pos) {
+        return new Cannon(pos, new V2d(pos, pos),
+                new PlayerInputComponent(), // in input
+                new RectBoundingBox(pos, pos), // in input
+                new CannonPhysicsComponent()); // in physics
+    }
+ 
 
 }
