@@ -74,9 +74,10 @@ public class SceneImpl implements Scene {
             }
             
         });
+        this.panel = new ScenePanel(image);
         pauseButton.setBounds(100, 100, 100, 25);
         panel.add(pauseButton);
-        this.panel = new ScenePanel(image);
+        
 
         frame.getContentPane().add(panel);
         frame.addWindowListener(new WindowAdapter() {
