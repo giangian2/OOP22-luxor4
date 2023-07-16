@@ -55,12 +55,9 @@ public class GameState {
         }
     }
 
-    public void update(int dt) {
+    public void update(long dt) {
         if(!pause){
-
-            //NORMALE UPDATE
-            //TO DO
-
+            world.updateState(dt);
         }
     }
 }

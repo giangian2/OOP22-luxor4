@@ -71,6 +71,13 @@ public class World {
         return this.qm.balls;
     }
 
+    public void updateState(long dt){
+        //aggiungere gli update dei gameobject
+
+        //checkCollisionWithBalls(null, null)
+        //checkCollisionWithBoundaries(null, null)
+    }
+
     /**
      * 
      * @TODO
