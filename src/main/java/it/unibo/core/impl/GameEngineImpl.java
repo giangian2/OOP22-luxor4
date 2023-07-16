@@ -9,7 +9,10 @@ import org.xml.sax.SAXException;
 
 import it.unibo.core.api.GameEngine;
 import it.unibo.events.api.*;
-import it.unibo.events.impl.*;
+import it.unibo.events.impl.HitBallEvent;
+
+import it.unibo.events.impl.PauseGameEvent;
+import it.unibo.events.impl.RestartGameEvent;
 import it.unibo.graphics.api.Scene;
 import it.unibo.graphics.impl.SceneImpl;
 import it.unibo.input.KeyboardInputController;
@@ -42,6 +45,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
             // updateGame(elapsed);
             // this.gameState.getWorld().shiftBalls();
             render();
+            chechEvents();
             waitForNextFrame(currentCycleStartTime);
             previousCycleStartTime = currentCycleStartTime;
         }
@@ -69,19 +73,18 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     protected void processInput() {
         gameState.getWorld().shiftBalls();
     }
-    
+
     @Override
     public void notifyEvent(WorldEvent e) {
         eventQueue.add(e);
     }
 
-    private void chechEvents(){
-        eventQueue.stream().forEach(event->{
-            if(event instanceof PauseGameEvent || event instanceof RestartGameEvent) {
+    private void chechEvents() {
+        eventQueue.stream().forEach(event -> {
+            if (event instanceof PauseGameEvent || event instanceof RestartGameEvent) {
                 gameState.changePauseState();
             }
         });
     }
-
 
 }
