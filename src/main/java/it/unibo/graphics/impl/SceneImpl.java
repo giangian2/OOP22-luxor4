@@ -22,11 +22,12 @@ import java.io.IOException;
 
 import java.net.URL;
 
-import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.graphics.api.Scene;
 import it.unibo.input.InputComponent;
+import it.unibo.input.KeyboardInputController;
 import it.unibo.model.Ball;
 import it.unibo.model.Cannon;
+import it.unibo.model.GameState;
 import it.unibo.model.World;
 import it.unibo.model.api.BoundingBox;
 import it.unibo.physics.impl.CannonPhysicsComponent;
@@ -39,10 +40,12 @@ public class SceneImpl implements Scene {
 
     private JFrame frame;
     private JPanel panel;
-    private World w;
+    private GameState gameState;
+    private KeyboardInputController controller;
 
-    public SceneImpl(World w) {
-        this.w = w;
+    public SceneImpl(GameState gameState, KeyboardInputController controller) {
+        this.gameState = gameState;
+        this.controller = controller;
         this.frame = new JFrame("Roll A Ball");
 
         frame.setMinimumSize(new Dimension(500, 500));
@@ -67,8 +70,8 @@ public class SceneImpl implements Scene {
             }
         });
         frame.pack();
-        frame.setVisible(true); 
-    }  
+        frame.setVisible(true);
+    }
 
     @Override
     public void render() {
@@ -94,7 +97,6 @@ public class SceneImpl implements Scene {
     public class ScenePanel extends JPanel implements KeyListener {
 
         private Image img;
-        private P2d cannonPosition;
 
         public ScenePanel(Image img) {
             this.img = img;
@@ -108,14 +110,7 @@ public class SceneImpl implements Scene {
             } else {
                 throw new IllegalArgumentException("Invalid image provided");
             }
-            
-            Cannon cannon = w.getCannon();
-            if (cannon != null) {
-                cannonPosition = cannon.getCurrentPos();
-            }
         }
-
-        
 
         public void paint(Graphics g) {
             System.out.println("rendering");
@@ -130,9 +125,27 @@ public class SceneImpl implements Scene {
             g2.setColor(Color.WHITE);
             g2.drawImage(img, 0, 0, null);
 
+            var cannon = gameState.getWorld().getCannon();
+
+            if (cannon != null) {
+                Image image = null;
+                try {
+                    URL imageUrl = getClass().getResource("/images/cannone.png");
+                    if (imageUrl != null) {
+                        image = ImageIO.read(imageUrl);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if (image != null) {
+                    g2.drawImage(image, (int) cannon.getCurrentPos().x, (int) cannon.getCurrentPos().y, null);
+                }
+            }
+
             try {
                 final var image = ImageIO.read(ClassLoader.getSystemResource("images/blue_ball2.png"));
-                var entities = w.getQueue();
+                var entities = gameState.getWorld().getQueue();
 
                 entities.forEach(ball -> {
                     g2.drawImage(image, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
@@ -141,35 +154,28 @@ public class SceneImpl implements Scene {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+        }
 
-            if (cannonPosition != null) {
-                try {
-                    Image cannonImage = ImageIO.read(ClassLoader.getSystemResource("images/cannone.png"));
-                    Cannon cannon = w.getCannon();
-                    g2.drawImage(cannonImage, (int) cannon.getCurrentPos().x, (int) cannon.getCurrentPos().y, null);
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == 39) {
+                controller.notifyMoveRight();
+            } else if (e.getKeyCode() == 37) {
+                controller.notifyMoveLeft();
             }
         }
 
         @Override
         public void keyTyped(KeyEvent e) {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
+            if (e.getKeyCode() == 39) {
+                controller.notifyNoMoreMoveRight();
+            } else if (e.getKeyCode() == 37) {
+                controller.notifyNoMoreMoveLeft();
+            }
         }
 
     }

@@ -9,7 +9,10 @@ import org.xml.sax.SAXException;
 
 import it.unibo.core.api.GameEngine;
 import it.unibo.events.api.*;
-import it.unibo.events.impl.*;
+import it.unibo.events.impl.HitBallEvent;
+
+import it.unibo.events.impl.PauseGameEvent;
+import it.unibo.events.impl.RestartGameEvent;
 import it.unibo.graphics.api.Scene;
 import it.unibo.graphics.impl.SceneImpl;
 import it.unibo.input.KeyboardInputController;
@@ -29,7 +32,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
         this.gameState = new GameState(this);
         this.eventQueue = new LinkedList<WorldEvent>();
         controller = new KeyboardInputController();
-        this.view = new SceneImpl(this.gameState.getWorld());
+        this.view = new SceneImpl(this.gameState, this.controller);
     }
 
     @Override
@@ -42,6 +45,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
             // updateGame(elapsed);
             // this.gameState.getWorld().shiftBalls();
             render();
+
             waitForNextFrame(currentCycleStartTime);
             previousCycleStartTime = currentCycleStartTime;
         }
@@ -52,7 +56,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
         System.out.println("Game Init");
     }
 
-    public void updateGame(long elapsed){
+    public void updateGame(long elapsed) {
         gameState.update(elapsed);
         checkEvents();
     }
@@ -74,20 +78,25 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     protected void processInput() {
         gameState.getWorld().shiftBalls();
     }
-    
+
     @Override
     public void notifyEvent(WorldEvent e) {
         eventQueue.add(e);
     }
 
+<<<<<<< HEAD
     private void checkEvents(){
         eventQueue.stream().forEach(event->{
             if(event instanceof PauseGameEvent) {
+=======
+    private void checkEvents() {
+        eventQueue.stream().forEach(event -> {
+            if (event instanceof PauseGameEvent || event instanceof RestartGameEvent) {
+>>>>>>> 8b0c8d9ca3620f4b85839060127ab2854479f258
                 gameState.changePauseState();
             }
         });
         eventQueue.clear();
     }
-
 
 }
