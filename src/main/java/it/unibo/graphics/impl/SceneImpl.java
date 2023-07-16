@@ -3,6 +3,7 @@ package it.unibo.graphics.impl;
 import javax.swing.JPanel;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
@@ -13,6 +14,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.RenderingHints;
@@ -22,6 +25,7 @@ import java.io.IOException;
 
 import java.net.URL;
 
+import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
 import it.unibo.input.InputComponent;
 import it.unibo.input.KeyboardInputController;
@@ -58,7 +62,19 @@ public class SceneImpl implements Scene {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
+
+        JButton pauseButton = new JButton("Pause");
+        pauseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                gameState.getWorld().notifyWorldEvent(new PauseGameEvent());
+            }
+            
+        });
+        pauseButton.setBounds(100, 100, 100, 25);
+        panel.add(pauseButton);
         this.panel = new ScenePanel(image);
+
         frame.getContentPane().add(panel);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
