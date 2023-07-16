@@ -82,7 +82,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
     private void checkEvents(){
         eventQueue.stream().forEach(event->{
-            if(event instanceof PauseGameEvent || event instanceof RestartGameEvent) {
+            if(event instanceof PauseGameEvent) {
                 gameState.changePauseState();
             }
         });
