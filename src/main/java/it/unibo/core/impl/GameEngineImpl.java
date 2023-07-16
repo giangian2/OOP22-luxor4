@@ -52,6 +52,11 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
         System.out.println("Game Init");
     }
 
+    public void updateGame(long elapsed){
+        gameState.update(elapsed);
+        checkEvents();
+    }
+
     protected void render() {
         view.render();
     }
@@ -75,12 +80,13 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
         eventQueue.add(e);
     }
 
-    private void chechEvents(){
+    private void checkEvents(){
         eventQueue.stream().forEach(event->{
             if(event instanceof PauseGameEvent || event instanceof RestartGameEvent) {
                 gameState.changePauseState();
             }
         });
+        eventQueue.clear();
     }
 
 
