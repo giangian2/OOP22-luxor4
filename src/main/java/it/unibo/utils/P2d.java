@@ -1,6 +1,5 @@
 package it.unibo.utils;
 
-
 import java.util.Comparator;
 
 import it.unibo.model.GameObject;
@@ -64,16 +63,4 @@ public class P2d implements java.io.Serializable {
         return (double) Math.sqrt(x * x + y * y);
     }
 
-    public P2d setCorP2dDx() {
-       
-        return new P2d(x-1, y);
-        
-        //return new P2d(x-getX(), y);
-    }
-
-      public P2d setCorP2dSx() {
-        //return new P2d(x-module(), y);
-        return new P2d(x-1, y);
-    }
-    
 }

@@ -41,10 +41,8 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
             long currentCycleStartTime = System.currentTimeMillis();
             long elapsed = currentCycleStartTime - previousCycleStartTime;
             processInput();
-            // updateGame(elapsed);
-            // this.gameState.getWorld().shiftBalls();
+            updateGame(elapsed);
             render();
-
             waitForNextFrame(currentCycleStartTime);
             previousCycleStartTime = currentCycleStartTime;
         }
@@ -75,7 +73,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     }
 
     protected void processInput() {
-        gameState.getWorld().shiftBalls();
+        gameState.getWorld().getCannon().updateInput(controller);
     }
 
     @Override
@@ -83,9 +81,9 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
         eventQueue.add(e);
     }
 
-    private void checkEvents(){
-        eventQueue.stream().forEach(event->{
-            if(event instanceof PauseGameEvent) {
+    private void checkEvents() {
+        eventQueue.stream().forEach(event -> {
+            if (event instanceof PauseGameEvent) {
                 gameState.changePauseState();
             }
         });

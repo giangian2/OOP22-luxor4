@@ -1,9 +1,9 @@
 package it.unibo.input;
 
 public class KeyboardInputController implements InputController {
+
     boolean isMoveLeft;
     boolean isMoveRight;
-
 
     @Override
     public boolean isMoveLeft() {
@@ -19,7 +19,7 @@ public class KeyboardInputController implements InputController {
         isMoveLeft = true;
     }
 
-    //i metodi no more
+    // i metodi no more
     public void notifyNoMoreMoveLeft() {
         isMoveLeft = false;
     }
