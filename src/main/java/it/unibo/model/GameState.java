@@ -13,17 +13,10 @@ public class GameState {
     private boolean pause;
 
     public GameState(WorldEventListener l) {
-        GameObjectsFactory f = GameObjectsFactory.getInstance();
-
         score = 0;
         pause = false;
         world = new World(new RectBoundingBox(new P2d(-9, 8), new P2d(9, -8)), 10);
-        /**
-         * @TODO
-         */
-        // world.setCannon
-        // word.setQueue
-        // world.setListener
+        world.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(250, 250)));
         world.setEventListener(l);
     }
 
@@ -47,16 +40,16 @@ public class GameState {
         return false;
     }
 
-    public void changePauseState(){
-        if(pause){
-            pause=false;
-        }else {
-            pause=true;
+    public void changePauseState() {
+        if (pause) {
+            pause = false;
+        } else {
+            pause = true;
         }
     }
 
     public void update(long dt) {
-        if(!pause){
+        if (!pause) {
             world.updateState(dt);
         }
     }

@@ -3,16 +3,22 @@ package it.unibo.graphics.impl;
 import javax.swing.JPanel;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.RenderingHints;
@@ -22,6 +28,7 @@ import java.io.IOException;
 
 import java.net.URL;
 
+import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
 import it.unibo.input.InputComponent;
 import it.unibo.input.KeyboardInputController;
@@ -59,6 +66,7 @@ public class SceneImpl implements Scene {
             e.printStackTrace();
         }
         this.panel = new ScenePanel(image);
+
         frame.getContentPane().add(panel);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
@@ -100,20 +108,23 @@ public class SceneImpl implements Scene {
 
         public ScenePanel(Image img) {
             this.img = img;
+            this.addKeyListener(this);
+            setFocusable(true);
+            setFocusTraversalKeysEnabled(false);
+            requestFocusInWindow();
             if (img != null) {
                 Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
                 setPreferredSize(size);
                 setMinimumSize(size);
                 setMaximumSize(size);
                 setSize(size);
-                setLayout(null);
+                setLayout(new GridLayout());
             } else {
                 throw new IllegalArgumentException("Invalid image provided");
             }
         }
 
         public void paint(Graphics g) {
-            System.out.println("rendering");
             Graphics2D g2 = (Graphics2D) g;
 
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -123,6 +134,7 @@ public class SceneImpl implements Scene {
             g2.clearRect(0, 0, this.getWidth(), this.getHeight());
 
             g2.setColor(Color.WHITE);
+
             g2.drawImage(img, 0, 0, null);
 
             var cannon = gameState.getWorld().getCannon();
@@ -162,6 +174,8 @@ public class SceneImpl implements Scene {
                 controller.notifyMoveRight();
             } else if (e.getKeyCode() == 37) {
                 controller.notifyMoveLeft();
+            } else if (e.getKeyCode() == 80) {
+                gameState.getWorld().notifyWorldEvent(new PauseGameEvent());
             }
         }
 
