@@ -12,7 +12,6 @@ import it.unibo.events.api.*;
 import it.unibo.events.impl.HitBallEvent;
 
 import it.unibo.events.impl.PauseGameEvent;
-import it.unibo.events.impl.RestartGameEvent;
 import it.unibo.graphics.api.Scene;
 import it.unibo.graphics.impl.SceneImpl;
 import it.unibo.input.KeyboardInputController;
@@ -84,15 +83,9 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
         eventQueue.add(e);
     }
 
-<<<<<<< HEAD
     private void checkEvents(){
         eventQueue.stream().forEach(event->{
             if(event instanceof PauseGameEvent) {
-=======
-    private void checkEvents() {
-        eventQueue.stream().forEach(event -> {
-            if (event instanceof PauseGameEvent || event instanceof RestartGameEvent) {
->>>>>>> 8b0c8d9ca3620f4b85839060127ab2854479f258
                 gameState.changePauseState();
             }
         });
