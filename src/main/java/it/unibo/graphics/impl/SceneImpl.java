@@ -65,19 +65,7 @@ public class SceneImpl implements Scene {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
-
-        JButton pauseButton = new JButton("Pause");
-        pauseButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                gameState.getWorld().notifyWorldEvent(new PauseGameEvent());
-            }
-            
-        });
         this.panel = new ScenePanel(image);
-        pauseButton.setBounds(100, 100, 100, 25);
-        panel.add(pauseButton);
-        
 
         frame.getContentPane().add(panel);
         frame.addWindowListener(new WindowAdapter() {
