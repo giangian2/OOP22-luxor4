@@ -2,9 +2,9 @@ package it.unibo.model;
 
 import it.unibo.model.impl.RectBoundingBox;
 import it.unibo.utils.P2d;
-import it.unibo.utils.V2d;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.events.api.WorldEventListener;
+import it.unibo.input.KeyboardInputController;
 
 public class GameState {
 
@@ -16,11 +16,11 @@ public class GameState {
         score = 0;
         pause = false;
         world = new World(new RectBoundingBox(new P2d(-9, 8), new P2d(9, -8)), 10);
-        world.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(250, 250)));
+        world.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
         world.setEventListener(l);
     }
 
-    public World getWorld() {
+    public World getWorld() {    
         return world;
     }
 
@@ -51,6 +51,12 @@ public class GameState {
     public void update(long dt) {
         if (!pause) {
             world.updateState(dt);
+        }
+    }
+
+    public void processInput(KeyboardInputController controller){
+        if (!pause) {
+            world.getCannon().updateInput(controller);
         }
     }
 }

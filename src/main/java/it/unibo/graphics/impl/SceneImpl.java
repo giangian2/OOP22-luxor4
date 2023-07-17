@@ -53,7 +53,7 @@ public class SceneImpl implements Scene {
     public SceneImpl(GameState gameState, KeyboardInputController controller) {
         this.gameState = gameState;
         this.controller = controller;
-        this.frame = new JFrame("Roll A Ball");
+        this.frame = new JFrame("Luxor");
 
         frame.setMinimumSize(new Dimension(500, 500));
         frame.setResizable(false);

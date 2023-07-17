@@ -73,7 +73,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     }
 
     protected void processInput() {
-        gameState.getWorld().getCannon().updateInput(controller);
+        gameState.processInput(controller);
     }
 
     @Override
