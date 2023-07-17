@@ -44,8 +44,8 @@ public class Cannon extends GameObject{
         return this.cannonBalls;
     }
 
-    public void fireProjectile(double cannonPosx, double cannonPosY){
-        P2d ballPos = new P2d(cannonPosx, cannonPosY);
+    public void fireProjectile(){
+        P2d ballPos = new P2d(getCurrentPos().x, getCurrentPos().y);
 
         BallColor projectileColor = stationaryBall.getColor();
         Ball ball = GameObjectsFactory.getInstance().createBall(ballPos, new V2d(0, -10), projectileColor);
