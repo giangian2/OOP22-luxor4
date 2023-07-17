@@ -81,7 +81,7 @@ public class MenuGame extends JFrame {
                 final Thread thread = new Thread() {
                     @Override
                     public void run() {
-                        new GameEngineImpl().mainLoop();
+                        new GameEngineImpl().initGame();
                     }
                 };
                 thread.start();

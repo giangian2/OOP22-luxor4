@@ -50,7 +50,9 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
     @Override
     public void initGame() {
-        System.out.println("Game Init");
+        //System.out.println("Game Init");
+        gameState.getWorld().playBackgroundMusic();
+        mainLoop();
     }
 
     public void updateGame(long elapsed) {

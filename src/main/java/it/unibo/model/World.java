@@ -21,6 +21,7 @@ public class World {
     private QueueManager qm;
     private RectBoundingBox mainBBox;
     private WorldEventListener evListener;
+    private SoundPlayer soundPlayer= new SoundPlayer();
 
     public World(RectBoundingBox bbox, int nBalls) {
         qm = new QueueManager(10);
@@ -99,4 +100,20 @@ public class World {
         return Optional.empty();
     }
 
+    public void playBackgroundMusic(){
+        soundPlayer.setFile(SoundPlayer.BACKGROUND_MUSIC);
+        soundPlayer.play();
+        soundPlayer.loop();
+    }
+
+    public void playShootingSound(){
+        soundPlayer.setFile(SoundPlayer.CANNON_SHOOT);
+        soundPlayer.play();
+    }
+
+    public void stopMusic(){
+        soundPlayer.stopAll();
+    }
+
+    
 }
