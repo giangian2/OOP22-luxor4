@@ -8,13 +8,13 @@ public class PlayerInputComponent implements InputComponent {
 
 	public final static int SPEED = 10;
 
-	public void update(GameObject ball, InputController ctrl) {
+	public void update(GameObject cannon, InputController ctrl) {
 
 		if (ctrl.isMoveLeft()) {
-			P2d pos = ball.getCurrentPos().sum(new V2d(-PlayerInputComponent.SPEED, 0));
+			P2d pos = cannon.getCurrentPos().sum(new V2d(-PlayerInputComponent.SPEED, 0));
 
 			// double pos = ball.getCurrentPos().module();
-			ball.setPos(pos);
+			cannon.setPos(pos);
 
 			// double speed = ball.getCurrentVel().module();
 			// ball.setVel(new V2d(-1, 0).mul(speed));
@@ -22,8 +22,8 @@ public class PlayerInputComponent implements InputComponent {
 			// double pos = ball.getCurrentPos().module();
 			// ball.setPos(new P2d(1, 0).mul(pos));
 
-			P2d pos = ball.getCurrentPos().sum(new V2d(PlayerInputComponent.SPEED, 0));
-			ball.setPos(pos);
+			P2d pos = cannon.getCurrentPos().sum(new V2d(PlayerInputComponent.SPEED, 0));
+			cannon.setPos(pos);
 
 			// double speed = ball.getCurrentVel().module();
 			// ball.setVel(new V2d(1, 0).mul(speed));
