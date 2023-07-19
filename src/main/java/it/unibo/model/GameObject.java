@@ -1,5 +1,8 @@
 package it.unibo.model;
 
+import java.util.Random;
+
+import it.unibo.enums.BallColor;
 import it.unibo.input.*;
 import it.unibo.model.api.BoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
@@ -71,6 +74,9 @@ public class GameObject {
     public void updateInput(InputController c){
         input.update(this, c);
     }
+  
+
+    
 
 
 }

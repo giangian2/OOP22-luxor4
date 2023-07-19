@@ -40,4 +40,9 @@ public class KeyboardInputController implements InputController {
        return isShoot;
     }
 
+    public void notifyShoot() {
+        isShoot = true;
+    }
+
+
 }
