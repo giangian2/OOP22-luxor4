@@ -1,16 +1,17 @@
 package it.unibo.events.impl;
 
 import it.unibo.events.api.WorldEvent;
+import it.unibo.model.GameObject;
 import it.unibo.utils.P2d;
 
 public class HitBorderEvent implements WorldEvent {
-    private P2d where;
+    private GameObject obj;
 
-    public HitBorderEvent(P2d where) {
-        this.where = where;
+    public HitBorderEvent(GameObject obj) {
+        this.obj = obj;
     }
 
-    public P2d getWhere() {
-        return where;
+    public GameObject getCollisionObj() {
+        return obj;
     }
 }

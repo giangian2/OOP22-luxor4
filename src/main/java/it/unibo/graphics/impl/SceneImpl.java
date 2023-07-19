@@ -127,7 +127,7 @@ public class SceneImpl implements Scene {
             }
         }
 
-        public void paint(Graphics g) { //qui dove disegna le cose 
+        public void paint(Graphics g) { // qui dove disegna le cose
             Graphics2D g2 = (Graphics2D) g;
 
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -158,54 +158,70 @@ public class SceneImpl implements Scene {
                 }
             }
 
-            try { //qui vengono disegnate le palline //devo caricare gli altri colori
-                /*final var ballBlue = ImageIO.read(ClassLoader.getSystemResource("images/blue_ball2.png"));
+            try { // qui vengono disegnate le palline //devo caricare gli altri colori
+                /*
+                 * final var ballBlue =
+                 * ImageIO.read(ClassLoader.getSystemResource("images/blue_ball2.png"));
+                 * final var ballRed =
+                 * ImageIO.read(ClassLoader.getSystemResource("images/red_ball2.png"));
+                 * final var ballGreen =
+                 * ImageIO.read(ClassLoader.getSystemResource("images/green_ball2.png"));
+                 * final var ballYellow =
+                 * ImageIO.read(ClassLoader.getSystemResource("images/yellow_ball2.png"));
+                 * 
+                 * var entities = gameState.getWorld().getQueue();//enitites sono le palline
+                 * dlela coda //devono essere presenti le palline spara la lista (in cnanon sono
+                 * iplementate come la lista), poi va aggiunta la classe stazionaria
+                 * 
+                 * 
+                 * 
+                 * g2.drawImage(ballBlue, (int) ball.getCurrentPos().x, (int)
+                 * ball.getCurrentPos().y, null); //per ogni pallina la disegna
+                 * g2.drawImage(ballRed, (int) ball.getCurrentPos().x, (int)
+                 * ball.getCurrentPos().y, null);
+                 * g2.drawImage(ballGreen, (int) ball.getCurrentPos().x, (int)
+                 * ball.getCurrentPos().y, null);
+                 * 
+                 * 
+                 * 
+                 * 
+                 * //qui devo mettere un controllo che in base al colore me la disegna con
+                 * l'immagine giusta del colore
+                 */
+
+                final var ballBlue = ImageIO.read(ClassLoader.getSystemResource("images/blue_ball2.png"));
                 final var ballRed = ImageIO.read(ClassLoader.getSystemResource("images/red_ball2.png"));
                 final var ballGreen = ImageIO.read(ClassLoader.getSystemResource("images/green_ball2.png"));
                 final var ballYellow = ImageIO.read(ClassLoader.getSystemResource("images/yellow_ball2.png"));
 
-                var entities = gameState.getWorld().getQueue();//enitites sono le palline dlela coda //devono essere presenti le palline spara la lista (in cnanon sono iplementate come la lista), poi va aggiunta la classe stazionaria
+                var entities = gameState.getWorld().getQueue(); // entities sono le palline della coda
+                // Ottieni il colore della pallina (supponendo che il modello 'ball' abbia un
+                // metodo getColor())
 
-                
-
-                    g2.drawImage(ballBlue, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null); //per ogni pallina la disegna
-                    g2.drawImage(ballRed, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                    g2.drawImage(ballGreen, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                    
-                    
-                    
-                    
-                    //qui devo mettere un controllo che in base al colore me la disegna con l'immagine giusta del colore
-                    */
-                
-                    
-                    final var ballBlue = ImageIO.read(ClassLoader.getSystemResource("images/blue_ball2.png"));
-                    final var ballRed = ImageIO.read(ClassLoader.getSystemResource("images/red_ball2.png"));
-                    final var ballGreen = ImageIO.read(ClassLoader.getSystemResource("images/green_ball2.png"));
-                    final var ballYellow = ImageIO.read(ClassLoader.getSystemResource("images/yellow_ball2.png"));
-                
-                    var entities = gameState.getWorld().getQueue(); //entities sono le palline della coda
-                    // Ottieni il colore della pallina (supponendo che il modello 'ball' abbia un metodo getColor())
-
-                    
-                    
-                       
-                        
-                       
-                    
-                    for (var ball : entities) {
-                        if (ball.getColor() ==  BallColor.BLUE) {
-                            g2.drawImage(ballBlue, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                        } else if (ball.getColor() == BallColor.RED) {
-                            g2.drawImage(ballRed, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                        } else if (ball.getColor() == BallColor.GREEN) {
-                            g2.drawImage(ballGreen, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                        } else if (ball.getColor() == BallColor.YELLOW) {
-                            g2.drawImage(ballYellow, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                        }
+                for (var ball : entities) {
+                    if (ball.getColor() == BallColor.BLUE) {
+                        g2.drawImage(ballBlue, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
+                    } else if (ball.getColor() == BallColor.RED) {
+                        g2.drawImage(ballRed, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
+                    } else if (ball.getColor() == BallColor.GREEN) {
+                        g2.drawImage(ballGreen, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
+                    } else if (ball.getColor() == BallColor.YELLOW) {
+                        g2.drawImage(ballYellow, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
                     }
+                }
 
-                 
+                var cannonBalls = gameState.getWorld().getCannon().getFiredBalls();
+                for (var ball : cannonBalls) {
+                    if (ball.getColor() == BallColor.BLUE) {
+                        g2.drawImage(ballBlue, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
+                    } else if (ball.getColor() == BallColor.RED) {
+                        g2.drawImage(ballRed, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
+                    } else if (ball.getColor() == BallColor.GREEN) {
+                        g2.drawImage(ballGreen, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
+                    } else if (ball.getColor() == BallColor.YELLOW) {
+                        g2.drawImage(ballYellow, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
+                    }
+                }
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block
@@ -223,6 +239,7 @@ public class SceneImpl implements Scene {
                 gameState.getWorld().notifyWorldEvent(new PauseGameEvent());
             } else if (e.getKeyCode() == 32) {
                 controller.notifyShoot();
+                System.out.println("Shooting");
             }
         }
 
