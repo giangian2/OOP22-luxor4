@@ -4,6 +4,7 @@ public class KeyboardInputController implements InputController {
 
     boolean isMoveLeft;
     boolean isMoveRight;
+    boolean isShoot;
 
     @Override
     public boolean isMoveLeft() {
@@ -30,6 +31,13 @@ public class KeyboardInputController implements InputController {
 
     public void notifyNoMoreMoveRight() {
         isMoveRight = false;
+    }
+
+    @Override
+    public boolean isShoot() {
+        // TODO Auto-generated method stub
+       // throw new UnsupportedOperationException("Unimplemented method 'isShoot'");
+       return isShoot;
     }
 
 }

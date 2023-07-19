@@ -4,7 +4,7 @@ import it.unibo.model.*;
 
 
 public interface InputComponent {
-    public void update(GameObject ball, InputController c);
+    public void update(GameObject gameObject, InputController c);
 
     
 }
