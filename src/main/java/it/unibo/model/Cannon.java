@@ -21,6 +21,7 @@ public class Cannon extends GameObject {
 
     private List<Ball> cannonBalls;
     private Ball stationaryBall;
+    final private int ADJUST_FIRED_BALL_POS=40;
 
     public Cannon(P2d pos, V2d vel, InputComponent input, BoundingBox bbox,
             PhysicsComponent physics) {
@@ -49,7 +50,7 @@ public class Cannon extends GameObject {
     }
 
     public void fireProjectile() {
-        P2d ballPos = new P2d(getCurrentPos().x, getCurrentPos().y);
+        P2d ballPos = new P2d(getCurrentPos().x+ADJUST_FIRED_BALL_POS, getCurrentPos().y);
 
         BallColor projectileColor = stationaryBall.getColor();
         Ball ball = GameObjectsFactory.getInstance().createCannonBall(ballPos, new V2d(0, -10), projectileColor);
