@@ -1,9 +1,12 @@
 package it.unibo.graphics.impl;
+
 import it.unibo.core.impl.GameEngineImpl;
+import it.unibo.enums.Levels;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Font;
@@ -15,6 +18,8 @@ import java.awt.Component;
 import java.awt.event.ActionListener;
 
 public class MenuGame extends JFrame {
+
+    private Levels selectedLevel;
 
     /**
      * The initial menu of the game.
@@ -81,7 +86,7 @@ public class MenuGame extends JFrame {
                 final Thread thread = new Thread() {
                     @Override
                     public void run() {
-                        new GameEngineImpl().initGame();
+                        new GameEngineImpl(selectedLevel).initGame();
                     }
                 };
                 thread.start();
@@ -92,6 +97,34 @@ public class MenuGame extends JFrame {
         });
 
         buttonPanel.add(startGame);
+
+         // Button Livelli.
+         JButton levelsButton = new JButton("Livelli");
+         levelsButton.setFont(new Font("Arial", Font.PLAIN, 16));
+         levelsButton.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+
+                Object[] options = Levels.values();
+
+                Levels selected = (Levels) JOptionPane.showInputDialog(
+                    MenuGame.this, // Frame genitore
+                    "Seleziona un livello", // Testo del messaggio
+                    "Selezione Livello", // Titolo del dialogo
+                    JOptionPane.PLAIN_MESSAGE, // Tipo di messaggio
+                    null, // Icona personalizzata (null per l'icona di default)
+                    options, // Opzioni da mostrare nell'elenco
+                    options[0] // Opzione preselezionata (in questo caso, la prima costante dell'enum)
+                );
+
+                if (selected != null) {
+                    selectedLevel = selected;
+                    System.out.println("Livello selezionato: " + selectedLevel.getLevelName());
+                    // Ora puoi utilizzare la variabile selectedLevel per richiamare il livello selezionato
+                    // e fare le azioni necessarie.
+                }
+             }
+         });
+         buttonPanel.add(levelsButton);
 
         help.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);

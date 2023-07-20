@@ -8,11 +8,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import it.unibo.core.api.GameEngine;
+import it.unibo.enums.Levels;
 import it.unibo.events.api.*;
 import it.unibo.events.impl.HitBallEvent;
 import it.unibo.events.impl.HitBorderEvent;
 import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
+import it.unibo.graphics.impl.MenuGame;
 import it.unibo.graphics.impl.SceneImpl;
 import it.unibo.input.KeyboardInputController;
 import it.unibo.model.Ball;
@@ -27,12 +29,14 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     private LinkedList<WorldEvent> eventQueue;
     private Scene view;
     private KeyboardInputController controller;
+    private Levels currentLevel;  
 
-    public GameEngineImpl() {
+    public GameEngineImpl(Levels currentLevel) {
         this.gameState = new GameState(this);
         this.eventQueue = new LinkedList<WorldEvent>();
         controller = new KeyboardInputController();
         this.view = new SceneImpl(this.gameState, this.controller);
+        this.currentLevel = currentLevel;
     }
 
     @Override
