@@ -11,7 +11,7 @@ import it.unibo.utils.*;
 public class GameObject {
 
     public static enum Type {
-        BALL, CANNON
+        BALL, CANNON, CANNON_BALL
     }
 
     private Type type;
@@ -71,12 +71,8 @@ public class GameObject {
         physics.update(dt, this, w);
     }
 
-    public void updateInput(InputController c){
+    public void updateInput(InputController c) {
         input.update(this, c);
     }
-  
-
-    
-
 
 }

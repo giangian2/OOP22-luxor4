@@ -15,12 +15,12 @@ public class GameState {
     public GameState(WorldEventListener l) {
         score = 0;
         pause = false;
-        world = new World(new RectBoundingBox(new P2d(-9, 8), new P2d(9, -8)), 10);
+        world = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 10);
         world.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
         world.setEventListener(l);
     }
 
-    public World getWorld() {    
+    public World getWorld() {
         return world;
     }
 
@@ -54,7 +54,7 @@ public class GameState {
         }
     }
 
-    public void processInput(KeyboardInputController controller){
+    public void processInput(KeyboardInputController controller) {
         if (!pause) {
             world.getCannon().updateInput(controller);
         }

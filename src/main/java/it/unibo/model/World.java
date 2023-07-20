@@ -21,7 +21,7 @@ public class World {
     private QueueManager qm;
     private RectBoundingBox mainBBox;
     private WorldEventListener evListener;
-    private SoundPlayer soundPlayer= new SoundPlayer();
+    private SoundPlayer soundPlayer = new SoundPlayer();
 
     public World(RectBoundingBox bbox, int nBalls) {
         qm = new QueueManager(10);
@@ -87,6 +87,12 @@ public class World {
      */
 
     public Optional<GameObject> checkCollisionWithBalls(P2d pos, CircleBoundingBox box) {
+        double radius = box.getRadius();
+        for (GameObject obj : this.qm.balls) {
+            if (obj.getCurrentPos().y == pos.y) {
+                return Optional.of(obj);
+            }
+        }
         return Optional.empty();
     }
 
@@ -97,23 +103,35 @@ public class World {
      * 
      */
     public Optional<BoundaryCollision> checkCollisionWithBoundaries(P2d pos, CircleBoundingBox box) {
-        return Optional.empty();
+        P2d ul = mainBBox.getULCorner();
+        P2d br = mainBBox.getBRCorner();
+        double r = box.getRadius();
+        if (pos.y + r > ul.y) {
+            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.TOP, new P2d(pos.x, ul.y)));
+        } else if (pos.y - r < br.y) {
+            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.BOTTOM, new P2d(pos.x, br.y)));
+        } else if (pos.x + r > br.x) {
+            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.RIGHT, new P2d(br.x, pos.y)));
+        } else if (pos.x - r < ul.x) {
+            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.LEFT, new P2d(ul.x, pos.y)));
+        } else {
+            return Optional.empty();
+        }
     }
 
-    public void playBackgroundMusic(){
+    public void playBackgroundMusic() {
         soundPlayer.setFile(SoundPlayer.BACKGROUND_MUSIC);
         soundPlayer.play();
         soundPlayer.loop();
     }
 
-    public void playShootingSound(){
+    public void playShootingSound() {
         soundPlayer.setFile(SoundPlayer.CANNON_SHOOT);
         soundPlayer.play();
     }
 
-    public void stopMusic(){
+    public void stopMusic() {
         soundPlayer.stopAll();
     }
 
-    
 }

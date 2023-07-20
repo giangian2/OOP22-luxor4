@@ -59,7 +59,7 @@ public class Path {
 
         if (nextCorner == null) {
             System.out.println(position.toString());
-            throw new IllegalStateException();
+
         }
 
         if (position.x == nextCorner.x && position.y > nextCorner.y) {

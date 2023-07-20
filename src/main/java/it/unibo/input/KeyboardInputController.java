@@ -36,13 +36,17 @@ public class KeyboardInputController implements InputController {
     @Override
     public boolean isShoot() {
         // TODO Auto-generated method stub
-       // throw new UnsupportedOperationException("Unimplemented method 'isShoot'");
-       return isShoot;
+        // throw new UnsupportedOperationException("Unimplemented method 'isShoot'");
+        return isShoot;
     }
 
     public void notifyShoot() {
         isShoot = true;
     }
 
+    @Override
+    public void stopShooting() {
+        isShoot = false;
+    }
 
 }

@@ -17,12 +17,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class Cannon extends GameObject{
+public class Cannon extends GameObject {
 
-    private List<GameObject> cannonBalls;
+    private List<Ball> cannonBalls;
     private Ball stationaryBall;
 
-     public Cannon(P2d pos, V2d vel, InputComponent input, BoundingBox bbox,
+    public Cannon(P2d pos, V2d vel, InputComponent input, BoundingBox bbox,
             PhysicsComponent physics) {
 
         super(Type.CANNON, pos, vel, input, null, physics);
@@ -40,18 +40,22 @@ public class Cannon extends GameObject{
         return this.stationaryBall;
     }
 
-    public List<GameObject> getFiredBalls() {
+    public List<Ball> getFiredBalls() {
         return this.cannonBalls;
     }
 
-    public void fireProjectile(){
+    public void removeFiredBall(Ball b) {
+        this.cannonBalls.remove(b);
+    }
+
+    public void fireProjectile() {
         P2d ballPos = new P2d(getCurrentPos().x, getCurrentPos().y);
 
         BallColor projectileColor = stationaryBall.getColor();
-        Ball ball = GameObjectsFactory.getInstance().createBall(ballPos, new V2d(0, -10), projectileColor);
+        Ball ball = GameObjectsFactory.getInstance().createCannonBall(ballPos, new V2d(0, -10), projectileColor);
 
-        cannonBalls.add(ball);
+        this.cannonBalls.add(ball);
 
-        stationaryBall.setColor(BallColor.getRandomColor());    
+        stationaryBall.setColor(BallColor.getRandomColor());
     }
 }

@@ -12,6 +12,14 @@ public class RectBoundingBox implements BoundingBox {
         this.p1 = p1;
     }
 
+    public P2d getULCorner() {
+        return p0;
+    }
+
+    public P2d getBRCorner() {
+        return p1;
+    }
+
     @Override
     public boolean isCollidingWith(P2d p, double radius) {
         // TODO Auto-generated method stub

@@ -16,6 +16,7 @@ import it.unibo.model.impl.CircleBoundingBox;
 import it.unibo.model.impl.RectBoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.physics.impl.BallPhysicsComponent;
+import it.unibo.physics.impl.CannonBallPhysicsComponent;
 import it.unibo.physics.impl.CannonPhysicsComponent;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
@@ -30,15 +31,14 @@ public class GameObjectsFactory {
         }
         return instance;
     }
-    
+
     public Ball createBall(P2d pos, V2d vel, BallColor color) {
         return new Ball(Type.BALL, pos, color, new V2d(pos, pos),
                 new NullInputComponent(),
-                new CircleBoundingBox(), // in input
+                new CircleBoundingBox(new P2d(pos.x, pos.y), 1), // in input
                 new BallPhysicsComponent()); // in physics
 
     }
-
 
     public Cannon createCannon(P2d pos) {
         return new Cannon(pos, new V2d(pos, pos),
@@ -46,6 +46,12 @@ public class GameObjectsFactory {
                 new RectBoundingBox(pos, pos), // in input
                 new CannonPhysicsComponent()); // in physics
     }
- 
 
+    public Ball createCannonBall(P2d pos, V2d vel, BallColor color) {
+        return new Ball(Type.CANNON_BALL, pos, color, new V2d(pos, pos),
+                new NullInputComponent(),
+                new CircleBoundingBox(new P2d(pos.x, pos.y), 1), // in input
+                new CannonBallPhysicsComponent()); // in physics
+
+    }
 }

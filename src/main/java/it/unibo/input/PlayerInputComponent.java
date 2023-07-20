@@ -4,7 +4,6 @@ import it.unibo.utils.V2d;
 import it.unibo.utils.P2d;
 import it.unibo.model.*;
 
-
 public class PlayerInputComponent implements InputComponent {
 
 	public final static int SPEED = 10;
@@ -30,9 +29,9 @@ public class PlayerInputComponent implements InputComponent {
 			// double speed = ball.getCurrentVel().module();
 			// ball.setVel(new V2d(1, 0).mul(speed));
 		} else if (ctrl.isShoot()) {
-			
+			ctrl.stopShooting();
 			cannon.fireProjectile();
-		} 
+		}
 
 	}
 }
