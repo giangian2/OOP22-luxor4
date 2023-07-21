@@ -26,7 +26,7 @@ import it.unibo.utils.Path.PathBuilder;
 
 public class GameEngineImpl implements GameEngine, WorldEventListener {
 
-    private static int period = 40;
+    private static int period = 60;
     private GameState gameState;
     private LinkedList<WorldEvent> eventQueue;
     private Scene view;
@@ -101,6 +101,8 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
                 var ev = (HitBallEvent) event;
                 System.out.println("collision detected : " + ev.getQueueBall().getCurrentPos().toString());
+                gameState.getWorld().getCannon().removeFiredBall((Ball) ev.getCannnonBall());
+                gameState.getWorld().insertCollisionBall((Ball) ev.getCannnonBall(), (Ball) ev.getQueueBall());
 
             } else if (event instanceof HitBorderEvent) {
                 System.out.println("Border collision");

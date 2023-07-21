@@ -39,30 +39,33 @@ public class QueueManager {
         return path.getMove(ball.getCurrentPos());
     }
 
-    public void shiftBalls() {
-        for (int i = 1; i < this.balls.size(); i++) {
+    public void shiftBalls(int startIndex, int spacing) {
+        if (startIndex < this.balls.size()) {
+            for (int i = startIndex; i < this.balls.size(); i++) {
 
-            var nextMove = this.getMove(this.balls.get(i));
-            var currentPos = this.balls.get(i).getCurrentPos();
-            switch (nextMove) {
-                case UP:
-                    this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y - 1));
-                    break;
+                var nextMove = this.getMove(this.balls.get(i));
+                var currentPos = this.balls.get(i).getCurrentPos();
+                switch (nextMove) {
+                    case UP:
+                        this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y - spacing));
+                        break;
 
-                case DOWN:
-                    this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y + 1));
-                    break;
+                    case DOWN:
+                        this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y + spacing));
+                        break;
 
-                case LEFT:
-                    this.balls.get(i).setPos(new P2d(currentPos.x - 1, currentPos.y));
-                    break;
+                    case LEFT:
+                        this.balls.get(i).setPos(new P2d(currentPos.x - spacing, currentPos.y));
+                        break;
 
-                case RIGHT:
-                    this.balls.get(i).setPos(new P2d(currentPos.x + 1, currentPos.y));
-                    break;
+                    case RIGHT:
+                        this.balls.get(i).setPos(new P2d(currentPos.x + spacing, currentPos.y));
+                        break;
+                }
+
             }
-
         }
+
     }
 
     public static List<Ball> getCloseByThree(List<Ball> ballList) {
