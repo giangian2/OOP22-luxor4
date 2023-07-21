@@ -20,18 +20,22 @@ import java.awt.event.ActionListener;
 public class MenuGame extends JFrame {
 
     private Levels selectedLevel;
+    private JPanel mainPanel;
+    private JFrame mainFrame;
 
     /**
      * The initial menu of the game.
      * */
     public MenuGame() {
 
+        this.mainPanel = mainPanel;
+        this.mainFrame = this;
         setTitle("Luxor");
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-
+        
         /**
         * Principal panel.
         * */
@@ -82,14 +86,15 @@ public class MenuGame extends JFrame {
         startGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                // il threa per creare una schermata non ha senso 
                 final Thread thread = new Thread() {
-                    @Override
-                    public void run() {
-                        new GameEngineImpl(selectedLevel).initGame();
-                    }
-                };
-                thread.start();
+                  @Override
+                 public void run() {
+                        //non ha senso che non venga salvata lìistanza di gameeingineImpl
+                        new GameEngineImpl(selectedLevel, mainFrame).initGame();
+                   }
+              };
+              thread.start();
 
                 System.out.println("Game started!");
                 dispose();
@@ -129,4 +134,9 @@ public class MenuGame extends JFrame {
         help.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
 }

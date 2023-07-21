@@ -1,8 +1,10 @@
 package it.unibo.core.impl;
 
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import javax.swing.JFrame;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -30,13 +32,16 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     private Scene view;
     private KeyboardInputController controller;
     private Levels currentLevel;
+    JFrame mainFrame;
 
-    public GameEngineImpl(Levels currentLevel) {
+    public GameEngineImpl(Levels currentLevel, JFrame mainFrame) {
         this.gameState = new GameState(this);
         this.eventQueue = new LinkedList<WorldEvent>();
         controller = new KeyboardInputController();
-        this.view = new SceneImpl(this.gameState, this.controller);
+        this.mainFrame = mainFrame;
+        this.view = new SceneImpl(this.gameState, this.controller, this.mainFrame);
         this.currentLevel = currentLevel;
+
     }
 
     @Override
