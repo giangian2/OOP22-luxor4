@@ -30,7 +30,7 @@ public class CannonBallPhysicsComponent extends BallPhysicsComponent {
         CircleBoundingBox cbbox = (CircleBoundingBox) obj.getBBox();
         Optional<GameObject> ball = w.checkCollisionWithBalls(obj.getCurrentPos(), cbbox);
         if (ball.isPresent()) {
-            w.notifyWorldEvent(new HitBallEvent(ball.get()));
+            w.notifyWorldEvent(new HitBallEvent(ball.get(), (Ball) obj));
         }
     }
 }

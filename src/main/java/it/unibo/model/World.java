@@ -60,6 +60,16 @@ public class World {
         qm.shiftBalls();
     }
 
+    public void insertCollisionBall(Ball cannonBall, Ball queueBall) {
+        int index = this.qm.balls.indexOf(queueBall);
+        if (index == -1)
+            throw new IllegalStateException("Error", null);
+
+        var ballSx = this.qm.balls.get(index - 1);
+        var ballDx = this.qm.balls.get(index + 1);
+
+    }
+
     public List<GameObject> getSceneEntities() {
         List<GameObject> entities = new ArrayList<GameObject>();
         entities.addAll(this.qm.balls);
@@ -74,9 +84,7 @@ public class World {
 
     public void updateState(long dt) {
         this.shiftBalls();
-        this.cannon.getFiredBalls().forEach((b) -> {
-            b.updatePhysics(dt, this);
-        });
+        this.cannon.getFiredBalls().forEach((b) -> b.updatePhysics(dt, this));
     }
 
     /**
@@ -88,8 +96,8 @@ public class World {
 
     public Optional<GameObject> checkCollisionWithBalls(P2d pos, CircleBoundingBox box) {
         double radius = box.getRadius();
-        for (GameObject obj : this.qm.balls) {
-            if (obj.getCurrentPos().y == pos.y) {
+        for (Ball obj : this.getQueue()) {
+            if (new V2d(obj.getCurrentPos(), pos).module() <= 2 * radius) {
                 return Optional.of(obj);
             }
         }

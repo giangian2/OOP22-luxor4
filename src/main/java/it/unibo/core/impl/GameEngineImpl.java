@@ -29,7 +29,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     private LinkedList<WorldEvent> eventQueue;
     private Scene view;
     private KeyboardInputController controller;
-    private Levels currentLevel;  
+    private Levels currentLevel;
 
     public GameEngineImpl(Levels currentLevel) {
         this.gameState = new GameState(this);
@@ -93,8 +93,9 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
             if (event instanceof PauseGameEvent) {
                 gameState.changePauseState();
             } else if (event instanceof HitBallEvent) {
-                System.out.println("collision detected");
+
                 var ev = (HitBallEvent) event;
+                System.out.println("collision detected : " + ev.getQueueBall().getCurrentPos().toString());
 
             } else if (event instanceof HitBorderEvent) {
                 System.out.println("Border collision");

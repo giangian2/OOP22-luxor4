@@ -35,7 +35,7 @@ public class GameObjectsFactory {
     public Ball createBall(P2d pos, V2d vel, BallColor color) {
         return new Ball(Type.BALL, pos, color, new V2d(pos, pos),
                 new NullInputComponent(),
-                new CircleBoundingBox(new P2d(pos.x, pos.y), 1), // in input
+                new CircleBoundingBox(new P2d(pos.x, pos.y), 10), // in input
                 new BallPhysicsComponent()); // in physics
 
     }
@@ -50,7 +50,7 @@ public class GameObjectsFactory {
     public Ball createCannonBall(P2d pos, V2d vel, BallColor color) {
         return new Ball(Type.CANNON_BALL, pos, color, new V2d(pos, pos),
                 new NullInputComponent(),
-                new CircleBoundingBox(new P2d(pos.x, pos.y), 1), // in input
+                new CircleBoundingBox(new P2d(pos.x, pos.y), 10), // in input
                 new CannonBallPhysicsComponent()); // in physics
 
     }
