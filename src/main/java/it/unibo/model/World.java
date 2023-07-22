@@ -10,6 +10,7 @@ import it.unibo.events.api.WorldEventListener;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.physics.impl.BoundaryCollision;
 import it.unibo.enums.BallColor;
+import it.unibo.enums.Direction;
 import it.unibo.events.api.WorldEvent;
 import it.unibo.model.api.BoundingBox;
 import it.unibo.model.impl.CircleBoundingBox;
@@ -69,25 +70,80 @@ public class World {
         var queueBallPos = queueBall.getCurrentPos();
 
         if (cannonBallPos.x <= queueBallPos.x && cannonBallPos.y >= queueBallPos.y) {
-            if (qm.balls.size() > index + 1) {
-                cannonBall.setPos(qm.balls.get(index + 1).getCurrentPos());
-                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
-                    qm.shiftBalls(index + 1);
-                this.qm.balls.add(index + 1,
-                        GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
-                                cannonBall.getColor()));
-            } else {
-                cannonBall.setPos(qm.balls.get(index).getCurrentPos());
-                this.qm.balls.add(index + 1,
-                        GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
-                                cannonBall.getColor()));
-                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
-                    qm.shiftBalls(index + 1);
+            if (qm.getMove(queueBall) == Direction.LEFT) {
+                if (qm.balls.size() > index + 1) {
+                    cannonBall.setPos(qm.balls.get(index + 1).getCurrentPos());
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                        qm.shiftBalls(index + 1);
+                    this.qm.balls.add(index + 1,
+                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                    cannonBall.getColor()));
+                } else {
+                    cannonBall.setPos(qm.balls.get(index).getCurrentPos());
+                    this.qm.balls.add(index + 1,
+                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                    cannonBall.getColor()));
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                        qm.shiftBalls(index + 1);
 
+                }
+            } else if (qm.getMove(queueBall) == Direction.RIGHT) {
+                if (index - 1 > 0) {
+                    cannonBall.setPos(qm.balls.get(index).getCurrentPos());
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                        qm.shiftBalls(index);
+                    this.qm.balls.add(index,
+                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                    cannonBall.getColor()));
+                } else {
+                    cannonBall.setPos(qm.balls.get(index).getCurrentPos());
+                    this.qm.balls.add(0,
+                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                    cannonBall.getColor()));
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                        qm.shiftBalls(1);
+
+                }
             }
 
-        } else {
-            System.out.println("!!!!!!");
+        } else if (cannonBallPos.x >= queueBallPos.x && cannonBallPos.y >= queueBallPos.y) {
+
+            System.out.println("Code reached!!!!");
+            if (qm.getMove(queueBall) == Direction.LEFT) {
+                if (index - 1 > 0) {
+                    cannonBall.setPos(qm.balls.get(index - 1).getCurrentPos());
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                        qm.shiftBalls(index - 1);
+                    this.qm.balls.add(index - 1,
+                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                    cannonBall.getColor()));
+                } else {
+                    cannonBall.setPos(qm.balls.get(index).getCurrentPos());
+                    this.qm.balls.add(0,
+                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                    cannonBall.getColor()));
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                        qm.shiftBalls(1);
+
+                }
+            } else if (qm.getMove(queueBall) == Direction.RIGHT) {
+                if (qm.balls.size() > index + 1) {
+                    cannonBall.setPos(qm.balls.get(index + 1).getCurrentPos());
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                        qm.shiftBalls(index + 1);
+                    this.qm.balls.add(index + 1,
+                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                    cannonBall.getColor()));
+                } else {
+                    cannonBall.setPos(qm.balls.get(index).getCurrentPos());
+                    this.qm.balls.add(index + 1,
+                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                    cannonBall.getColor()));
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                        qm.shiftBalls(index + 1);
+
+                }
+            }
         }
 
     }

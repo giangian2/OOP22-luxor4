@@ -54,4 +54,11 @@ public class GameObjectsFactory {
                 new CannonBallPhysicsComponent()); // in physics
 
     }
+
+    public Ball createStationaryBall(P2d cannonPos, V2d vel, BallColor color) {
+        return new Ball(Type.STATIONARY_BALL, cannonPos, color, new V2d(cannonPos, cannonPos),
+                new NullInputComponent(),
+                new CircleBoundingBox(new P2d(cannonPos.x, cannonPos.y), 10), // in input
+                new BallPhysicsComponent()); // in physics
+    }
 }

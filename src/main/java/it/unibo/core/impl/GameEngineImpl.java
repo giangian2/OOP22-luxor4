@@ -26,7 +26,7 @@ import it.unibo.utils.Path.PathBuilder;
 
 public class GameEngineImpl implements GameEngine, WorldEventListener {
 
-    private static int period = 60;
+    private static int period = 20;
     private GameState gameState;
     private LinkedList<WorldEvent> eventQueue;
     private Scene view;

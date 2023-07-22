@@ -11,7 +11,7 @@ import it.unibo.utils.*;
 public class GameObject {
 
     public static enum Type {
-        BALL, CANNON, CANNON_BALL
+        BALL, CANNON, CANNON_BALL, STATIONARY_BALL
     }
 
     private Type type;
