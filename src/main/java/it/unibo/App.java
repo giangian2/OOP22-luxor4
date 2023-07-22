@@ -4,12 +4,9 @@ import it.unibo.core.impl.GameEngineImpl;
 import it.unibo.core.api.GameEngine;
 
 import it.unibo.graphics.impl.MenuGame;
-import it.unibo.graphics.impl.SceneImpl;
-import it.unibo.input.KeyboardInputController;
-import it.unibo.model.GameState;
 
 public class App {
-    public static void main(String[] args) {
+  public static void main(String[] args) {
         //GameEngine engine = new GameEngineImpl(null);
         //engine.initGame();
         //engine.mainLoop();

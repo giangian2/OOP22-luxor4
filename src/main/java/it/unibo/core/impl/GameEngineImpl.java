@@ -32,14 +32,13 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     private Scene view;
     private KeyboardInputController controller;
     private Levels currentLevel;
-    JFrame mainFrame;
+    
 
-    public GameEngineImpl(Levels currentLevel, JFrame mainFrame) {
+    public GameEngineImpl(Levels currentLevel) {
         this.gameState = new GameState(this);
         this.eventQueue = new LinkedList<WorldEvent>();
         controller = new KeyboardInputController();
-        this.mainFrame = mainFrame;
-        this.view = new SceneImpl(this.gameState, this.controller, this.mainFrame);
+        this.view = new SceneImpl(this.gameState, this.controller);
         this.currentLevel = currentLevel;
 
     }

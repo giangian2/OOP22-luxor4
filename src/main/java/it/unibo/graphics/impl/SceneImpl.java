@@ -53,11 +53,11 @@ public class SceneImpl implements Scene {
     private GameState gameState;
     private KeyboardInputController controller;
 
-    public SceneImpl(GameState gameState, KeyboardInputController controller,JFrame mainFrame) {
+    public SceneImpl(GameState gameState, KeyboardInputController controller) {
         this.gameState = gameState;
         this.controller = controller;
-        //this.frame = new JFrame("Luxor");// da non craere prendere il vecchio in App.java
-        this.frame  = mainFrame; //mainframe
+        this.frame = new JFrame("Luxor");
+       
         frame.setMinimumSize(new Dimension(500, 500));
         frame.setResizable(false);
         // frame.setUndecorated(true); // Remove title bar
@@ -71,10 +71,9 @@ public class SceneImpl implements Scene {
 
         //questo
         this.panel = new ScenePanel(image);
-        //mette il nuovo panel (lo fa aprire)
-        this.frame.getContentPane().removeAll();
-       // this.frame.getContentPane().sub;
-        this.frame.getContentPane().add(panel);
+        
+        frame.getContentPane().add(panel);
+               
 
         this.frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
