@@ -57,7 +57,7 @@ public class World {
     }
 
     public void shiftBalls() {
-        qm.shiftBalls(0, 1);
+        qm.shiftBalls(0);
     }
 
     public void insertCollisionBall(Ball cannonBall, Ball queueBall) {
@@ -71,15 +71,18 @@ public class World {
         if (cannonBallPos.x <= queueBallPos.x && cannonBallPos.y >= queueBallPos.y) {
             if (qm.balls.size() > index + 1) {
                 cannonBall.setPos(qm.balls.get(index + 1).getCurrentPos());
-                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++) {
-                    qm.shiftBalls(index + 1, 1);
-                }
-
-                this.qm.balls.add(index, cannonBall);
+                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                    qm.shiftBalls(index + 1);
+                this.qm.balls.add(index + 1,
+                        GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                cannonBall.getColor()));
             } else {
                 cannonBall.setPos(qm.balls.get(index).getCurrentPos());
-                this.qm.balls.add(cannonBall);
-                qm.shiftBalls(index + 1, Ball.IMAGE_DIAMETER);
+                this.qm.balls.add(index + 1,
+                        GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                cannonBall.getColor()));
+                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                    qm.shiftBalls(index + 1);
 
             }
 

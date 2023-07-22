@@ -30,7 +30,7 @@ public class QueueManager {
         for (int i = 0; i < n; i++) {
             if (this.path.getMove(pos) == Direction.LEFT) {
                 this.balls.add(factory.createBall(pos, null, BallColor.GREEN));
-                pos = new P2d(pos.x - Ball.IMAGE_DIAMETER, pos.y);
+                pos = new P2d(pos.x - Ball.IMAGE_DIAMETER - 10, pos.y);
             }
         }
     }
@@ -39,30 +39,43 @@ public class QueueManager {
         return path.getMove(ball.getCurrentPos());
     }
 
-    public void shiftBalls(int startIndex, int spacing) {
+    public void shiftBalls(int startIndex) {
+        boolean firstShifting = true;
+
         if (startIndex < this.balls.size()) {
+
             for (int i = startIndex; i < this.balls.size(); i++) {
 
                 var nextMove = this.getMove(this.balls.get(i));
                 var currentPos = this.balls.get(i).getCurrentPos();
+
+                if (i > 0 && !firstShifting) {
+                    if (Math.abs(this.balls.get(i - 1).getCurrentPos().x - currentPos.x) > Ball.IMAGE_DIAMETER
+                            || Math.abs(this.balls.get(i - 1).getCurrentPos().y - currentPos.y) > Ball.IMAGE_DIAMETER) {
+                        this.balls.forEach((b) -> System.out.println(b.getCurrentPos().toString()));
+                        break;
+                    }
+
+                }
+
                 switch (nextMove) {
                     case UP:
-                        this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y - spacing));
+                        this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y - 1));
                         break;
 
                     case DOWN:
-                        this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y + spacing));
+                        this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y + 1));
                         break;
 
                     case LEFT:
-                        this.balls.get(i).setPos(new P2d(currentPos.x - spacing, currentPos.y));
+                        this.balls.get(i).setPos(new P2d(currentPos.x - 1, currentPos.y));
                         break;
 
                     case RIGHT:
-                        this.balls.get(i).setPos(new P2d(currentPos.x + spacing, currentPos.y));
+                        this.balls.get(i).setPos(new P2d(currentPos.x + 1, currentPos.y));
                         break;
                 }
-
+                firstShifting = false;
             }
         }
 
