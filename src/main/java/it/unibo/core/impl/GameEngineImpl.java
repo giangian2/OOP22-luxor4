@@ -26,13 +26,12 @@ import it.unibo.utils.Path.PathBuilder;
 
 public class GameEngineImpl implements GameEngine, WorldEventListener {
 
-    private static int period = 20;
+    private static int period = 30;
     private GameState gameState;
     private LinkedList<WorldEvent> eventQueue;
     private Scene view;
     private KeyboardInputController controller;
     private Levels currentLevel;
-    
 
     public GameEngineImpl(Levels currentLevel) {
         this.gameState = new GameState(this);

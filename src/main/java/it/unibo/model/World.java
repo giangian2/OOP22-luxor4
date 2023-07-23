@@ -104,6 +104,23 @@ public class World {
                         qm.shiftBalls(1);
 
                 }
+            } else {
+                if (qm.balls.size() > index + 1) {
+                    cannonBall.setPos(qm.balls.get(index + 1).getCurrentPos());
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                        qm.shiftBalls(index + 1);
+                    this.qm.balls.add(index + 1,
+                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                    cannonBall.getColor()));
+                } else {
+                    cannonBall.setPos(qm.balls.get(index).getCurrentPos());
+                    this.qm.balls.add(index + 1,
+                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                    cannonBall.getColor()));
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                        qm.shiftBalls(index + 1);
+
+                }
             }
 
         } else if (cannonBallPos.x >= queueBallPos.x && cannonBallPos.y >= queueBallPos.y) {
@@ -127,6 +144,23 @@ public class World {
 
                 }
             } else if (qm.getMove(queueBall) == Direction.RIGHT) {
+                if (qm.balls.size() > index + 1) {
+                    cannonBall.setPos(qm.balls.get(index + 1).getCurrentPos());
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                        qm.shiftBalls(index + 1);
+                    this.qm.balls.add(index + 1,
+                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                    cannonBall.getColor()));
+                } else {
+                    cannonBall.setPos(qm.balls.get(index).getCurrentPos());
+                    this.qm.balls.add(index + 1,
+                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                                    cannonBall.getColor()));
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                        qm.shiftBalls(index + 1);
+
+                }
+            } else {
                 if (qm.balls.size() > index + 1) {
                     cannonBall.setPos(qm.balls.get(index + 1).getCurrentPos());
                     for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)

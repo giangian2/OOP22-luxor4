@@ -57,22 +57,18 @@ public class Path {
             }
         }
 
-        try {
-            if (position.x == nextCorner.x && position.y > nextCorner.y) {
-                return Direction.UP;
-            }
-            if (position.x == nextCorner.x && position.y < nextCorner.y) {
-                return Direction.DOWN;
-            }
-            if (position.y == nextCorner.y && position.x > nextCorner.x) {
+        if (position.x == nextCorner.x && position.y > nextCorner.y) {
+            return Direction.UP;
+        }
+        if (position.x == nextCorner.x && position.y < nextCorner.y) {
+            return Direction.DOWN;
+        }
+        if (position.y == nextCorner.y && position.x > nextCorner.x) {
 
-                return Direction.LEFT;
-            }
-            if (position.y == nextCorner.y && position.x < nextCorner.x) {
-                return Direction.RIGHT;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            return Direction.LEFT;
+        }
+        if (position.y == nextCorner.y && position.x < nextCorner.x) {
+            return Direction.RIGHT;
         }
 
         return Direction.DOWN;
