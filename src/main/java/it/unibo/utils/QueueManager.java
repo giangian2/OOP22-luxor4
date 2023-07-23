@@ -52,7 +52,7 @@ public class QueueManager {
                 if (i > 0 && !firstShifting) {
                     if (Math.abs(this.balls.get(i - 1).getCurrentPos().x - currentPos.x) > Ball.IMAGE_DIAMETER
                             || Math.abs(this.balls.get(i - 1).getCurrentPos().y - currentPos.y) > Ball.IMAGE_DIAMETER) {
-                        this.balls.forEach((b) -> System.out.println(b.getCurrentPos().toString()));
+
                         break;
                     }
 
@@ -81,7 +81,8 @@ public class QueueManager {
 
     }
 
-    public static List<Ball> getCloseByThree(List<Ball> ballList) {
+    public List<Ball> getCloseByThree() {
+        var ballList = this.balls;
         List<Ball> returnList = new ArrayList<Ball>();
 
         for (int i = 0; i < ballList.size() - 2;) {
