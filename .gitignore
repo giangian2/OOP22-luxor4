@@ -5,7 +5,7 @@
 .
 
 build/
-.bin/
+bin/
 
 # Ignore Idea customizations
 .idea
