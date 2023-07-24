@@ -26,7 +26,7 @@ public class Cannon extends GameObject {
     public Cannon(P2d pos, V2d vel, InputComponent input, BoundingBox bbox,
             PhysicsComponent physics) {
 
-        super(Type.CANNON, pos, vel, input, null, physics);
+        super(Type.CANNON, pos, vel, input, null, graph, physics);
         this.cannonBalls = new ArrayList<>();
         this.stationaryBall = createStationaryBall();
     }

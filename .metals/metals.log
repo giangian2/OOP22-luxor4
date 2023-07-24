@@ -9882,3 +9882,15 @@ AVVERTENZA: Unmatched cancel notification for request id 480
 	at java.lang.Thread.run(Thread.java:833)
 
 2023.07.21 11:45:20 INFO  time: code lens generation in 1.16s
+2023.07.24 10:34:09 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at c:\Users\federica.guiducci3\Desktop\erd\OOP22-luxor4\.metals\lsp.trace.json or C:\Users\federica.guiducci3\AppData\Local\scalameta\metals\cache\lsp.trace.json
+2023.07.24 10:34:10 INFO  logging to file C:\Users\federica.guiducci3\Desktop\erd\OOP22-luxor4\.metals\metals.log
+2023.07.24 10:34:10 INFO  Started: Metals version 0.11.10 in workspace 'C:\Users\federica.guiducci3\Desktop\erd\OOP22-luxor4' for client Visual Studio Code 1.74.3.
+SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+SLF4J: Class path contains SLF4J bindings targeting slf4j-api versions 1.7.x or earlier.
+SLF4J: Ignoring binding found at [jar:file:/C:/Users/federica.guiducci3/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/com/outr/scribe-slf4j_2.13/3.10.5/scribe-slf4j_2.13-3.10.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See https://www.slf4j.org/codes.html#ignoredBindings for an explanation.
+2023.07.24 10:34:14 INFO  time: initialize in 4.52s
+2023.07.24 10:34:16 WARN  Build server is not auto-connectable.
+2023.07.24 10:34:16 WARN  no build target for: C:\Users\federica.guiducci3\Desktop\erd\OOP22-luxor4\src\test\java\it\unibo\utils\QueueManagerTest.java

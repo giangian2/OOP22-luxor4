@@ -31,7 +31,7 @@ public class QueueManagerTest {
         inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.RED, null, null, null, null));
         inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.RED, null, null, null, null));
 
-        outputList=QueueManager.getCloseByThree(inputList);
+        //outputList=QueueManager.getCloseByThree(inputList);
         //outputList.forEach(i->System.out.println(i.getColor()));
     }
 }

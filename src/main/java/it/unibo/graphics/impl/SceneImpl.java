@@ -99,13 +99,20 @@ public class SceneImpl implements Scene {
 
     @Override
     public void renderGameOver() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'renderGameOver'");
+        try{
+        frame.repaint();
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+
     }
 
     @Override
     public void renderMenu() {
         // TODO Auto-generated method stub
+
+        //viene chiamato quando il metodo isGameOver ritorna true
         throw new UnsupportedOperationException("Unimplemented method 'renderMenu'");
     }
 
@@ -145,7 +152,8 @@ public class SceneImpl implements Scene {
             g2.drawImage(img, 0, 0, null);
 
             var cannon = gameState.getWorld().getCannon();
-
+           
+            //caricai l cannone
             if (cannon != null) {
                 Image image = null;
                 try {
@@ -162,36 +170,7 @@ public class SceneImpl implements Scene {
                 }
             }
 
-            try { // qui vengono disegnate le palline //devo caricare gli altri colori
-                /*
-                 * final var ballBlue =
-                 * ImageIO.read(ClassLoader.getSystemResource("images/blue_ball2.png"));
-                 * final var ballRed =
-                 * ImageIO.read(ClassLoader.getSystemResource("images/red_ball2.png"));
-                 * final var ballGreen =
-                 * ImageIO.read(ClassLoader.getSystemResource("images/green_ball2.png"));
-                 * final var ballYellow =
-                 * ImageIO.read(ClassLoader.getSystemResource("images/yellow_ball2.png"));
-                 * 
-                 * var entities = gameState.getWorld().getQueue();//enitites sono le palline
-                 * dlela coda //devono essere presenti le palline spara la lista (in cnanon sono
-                 * iplementate come la lista), poi va aggiunta la classe stazionaria
-                 * 
-                 * 
-                 * 
-                 * g2.drawImage(ballBlue, (int) ball.getCurrentPos().x, (int)
-                 * ball.getCurrentPos().y, null); //per ogni pallina la disegna
-                 * g2.drawImage(ballRed, (int) ball.getCurrentPos().x, (int)
-                 * ball.getCurrentPos().y, null);
-                 * g2.drawImage(ballGreen, (int) ball.getCurrentPos().x, (int)
-                 * ball.getCurrentPos().y, null);
-                 * 
-                 * 
-                 * 
-                 * 
-                 * //qui devo mettere un controllo che in base al colore me la disegna con
-                 * l'immagine giusta del colore
-                 */
+            try { // carica le palline
 
                 final var ballBlue = ImageIO.read(ClassLoader.getSystemResource("images/blue_ball2.png"));
                 final var ballRed = ImageIO.read(ClassLoader.getSystemResource("images/red_ball2.png"));

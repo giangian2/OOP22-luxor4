@@ -12,12 +12,13 @@ public class Ball extends GameObject {
     
     private BallColor color;
     public static final int IMAGE_DIAMETER = 25;
+    public static final int RADIUS = 0;
     
 
     public Ball(Type type, P2d pos, BallColor color, V2d vel, InputComponent input, BoundingBox bbox,
             PhysicsComponent physics) {
 
-        super(Type.BALL, pos, vel, input, bbox, physics);
+        super(Type.BALL, pos, vel, input, bbox, graph, physics);
         this.color = color;
     }
 

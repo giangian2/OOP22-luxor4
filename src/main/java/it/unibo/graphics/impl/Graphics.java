@@ -1,13 +1,18 @@
 package it.unibo.graphics.impl;
 
+import java.awt.Color;
 import java.awt.Image;
 
 import it.unibo.model.*;
 
 public interface Graphics {
     
-    //nota della fede, non so se questo è giusto
+    public void drawImage(Image image, int x, int y, int width, int height);
     public void update(GameObject obj, Graphics c);
+
+    public void setColor(Color colorForBall);
+
+    public void fillOval(int i, int j, int k, int l);
 
 
 
