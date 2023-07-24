@@ -20,9 +20,14 @@ public class V2d implements java.io.Serializable {
         this.y = to.y - from.y;
     }
 
-    public double getX(double x){
+    public double getX(){
         return this.x;
     }
+
+    public double getY(){
+        return this.y;
+    }
+
     public V2d sum(V2d v) {
         return new V2d(x + v.x, y + v.y);
     }

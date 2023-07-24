@@ -26,13 +26,34 @@ public class QueueManager {
     private void instatiate(int n) {
         var factory = GameObjectsFactory.getInstance();
         var pos = path.getFirst();
+        boolean queueNotCorrect = true;
+        List<Ball> notCorrectBalls = new ArrayList<Ball>();
+        Direction direction;
 
-        for (int i = 0; i < n; i++) {
-            if (this.path.getMove(pos) == Direction.LEFT) {
-                this.balls.add(factory.createBall(pos, null, BallColor.GREEN));
-                pos = new P2d(pos.x - Ball.IMAGE_DIAMETER - 10, pos.y);
+        //crea una lista di palline che vada bene
+        while(queueNotCorrect){
+            for (int i = balls.size(); i < n; i++) {
+                this.balls.add(factory.createBall(new P2d(0,0), new V2d(0,0), BallColor.getRandomColor()));
             }
+            notCorrectBalls=getCloseByThree();
+            if(notCorrectBalls.isEmpty()){
+                queueNotCorrect=false;
+            }else{
+                notCorrectBalls.forEach((el) -> {
+                balls.remove(el);});
+            }
+
         }
+
+        //assegna le posizioni
+        for(int i=0; i<balls.size();i++){
+            System.out.println("ball n° "+i);
+            balls.get(i).setPos(pos);
+            direction=path.getMove(pos);
+            pos=new P2d(pos.x+direction.getVelocity().getX()*Ball.IMAGE_DIAMETER, pos.y+direction.getVelocity().getY()*Ball.IMAGE_DIAMETER);
+        }
+
+        
     }
 
     public Direction getMove(Ball ball) {

@@ -25,7 +25,7 @@ public class World {
     private SoundPlayer soundPlayer = new SoundPlayer();
 
     public World(RectBoundingBox bbox, int nBalls) {
-        qm = new QueueManager(10);
+        qm = new QueueManager(30);
         mainBBox = bbox;
 
     }
