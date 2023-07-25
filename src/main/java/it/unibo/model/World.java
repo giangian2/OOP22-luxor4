@@ -71,7 +71,7 @@ public class World {
 
         if (cannonBallPos.x <= queueBallPos.x && cannonBallPos.y >= queueBallPos.y) {
             if (qm.getMove(queueBall) == Direction.LEFT
-                    || qm.getMove(queueBall) == Direction.UP) {
+                    || qm.getMove(queueBall) == Direction.DOWN) {
                 if (qm.balls.size() > index + 1) {
                     cannonBall.setPos(qm.balls.get(index + 1).getCurrentPos());
                     for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
