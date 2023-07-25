@@ -33,19 +33,16 @@ public class QueueManager {
         Direction direction;
 
         // crea una lista di palline che vada bene
-        while (queueNotCorrect) {
-            for (int i = balls.size(); i < n; i++) {
-                this.balls.add(factory.createBall(new P2d(0, 0), new V2d(0, 0), BallColor.getRandomColor()));
-            }
-            notCorrectBalls = getCloseByThree();
-            if (notCorrectBalls.isEmpty()) {
-                queueNotCorrect = false;
-            } else {
-                notCorrectBalls.forEach((el) -> {
-                    balls.remove(el);
-                });
-            }
 
+        for (int i = 0; i < n; i++) {
+            this.balls.add(factory.createBall(new P2d(0, 0), new V2d(0, 0), BallColor.getRandomColor()));
+            if (i > 2) {
+                if (balls.get(balls.size() - 1).getColor() == balls.get(balls.size() - 2).getColor()
+                        && balls.get(balls.size() - 2).getColor() == balls.get(balls.size() - 3).getColor()) {
+                    balls.remove(balls.size() - 1);
+                    i--;
+                }
+            }
         }
 
         // assegna le posizioni
