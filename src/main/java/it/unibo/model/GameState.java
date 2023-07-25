@@ -4,6 +4,8 @@ import it.unibo.model.impl.RectBoundingBox;
 import it.unibo.utils.P2d;
 import it.unibo.utils.Path;
 import it.unibo.utils.QueueManager;
+import it.unibo.utils.V2d;
+import it.unibo.core.api.Level;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.events.api.WorldEventListener;
 import it.unibo.input.KeyboardInputController;
@@ -13,15 +15,16 @@ public class GameState {
     private int score;
     private World world;
     private boolean pause;
+    private Level l;
 
-    public GameState(WorldEventListener l) {
+    public GameState(WorldEventListener l, Level level) {
         score = 0;
         pause = false;
-        world = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 10);
-        world.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
+        this.l = level;
+        this.loadLevel();
         world.setEventListener(l);
     }
-    
+
     public World getWorld() {
         return world;
     }
@@ -38,20 +41,24 @@ public class GameState {
         return score;
     }
 
+    private void loadLevel() {
+        this.world = this.l.loadLevel();
+    }
+
     public boolean isGameOver(QueueManager queueManager) {
-        if(queueManager.balls.isEmpty()) {
-            return true; //empty queue
+        if (queueManager.balls.isEmpty()) {
+            return true; // empty queue
         }
 
-        //if one or more balls in the queue have no path to follow
+        // if one or more balls in the queue have no path to follow
         Path path = queueManager.path;
         for (Ball ball : queueManager.balls) {
             if (path.getMove(ball.getCurrentPos()) == null) {
-                return true; 
+                return true;
             }
         }
 
-        return false; //game not over
+        return false; // game not over
 
     }
 

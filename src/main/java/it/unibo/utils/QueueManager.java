@@ -2,6 +2,7 @@ package it.unibo.utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,6 +21,7 @@ public class QueueManager {
     public QueueManager(int nBalls) {
         path = new Path.PathBuilder().build();
         this.balls = new ArrayList<>();
+        this.balls = Collections.synchronizedList(this.balls);
         this.instatiate(nBalls);
     }
 
@@ -30,30 +32,31 @@ public class QueueManager {
         List<Ball> notCorrectBalls = new ArrayList<Ball>();
         Direction direction;
 
-        //crea una lista di palline che vada bene
-        while(queueNotCorrect){
+        // crea una lista di palline che vada bene
+        while (queueNotCorrect) {
             for (int i = balls.size(); i < n; i++) {
-                this.balls.add(factory.createBall(new P2d(0,0), new V2d(0,0), BallColor.getRandomColor()));
+                this.balls.add(factory.createBall(new P2d(0, 0), new V2d(0, 0), BallColor.getRandomColor()));
             }
-            notCorrectBalls=getCloseByThree();
-            if(notCorrectBalls.isEmpty()){
-                queueNotCorrect=false;
-            }else{
+            notCorrectBalls = getCloseByThree();
+            if (notCorrectBalls.isEmpty()) {
+                queueNotCorrect = false;
+            } else {
                 notCorrectBalls.forEach((el) -> {
-                balls.remove(el);});
+                    balls.remove(el);
+                });
             }
 
         }
 
-        //assegna le posizioni
-        for(int i=0; i<balls.size();i++){
-            System.out.println("ball n° "+i);
+        // assegna le posizioni
+        for (int i = 0; i < balls.size(); i++) {
+            System.out.println("ball n° " + i);
             balls.get(i).setPos(pos);
-            direction=path.getMove(pos);
-            pos=new P2d(pos.x+direction.getVelocity().getX()*Ball.IMAGE_DIAMETER, pos.y+direction.getVelocity().getY()*Ball.IMAGE_DIAMETER);
+            direction = path.getMove(pos);
+            pos = new P2d(pos.x + direction.getVelocity().getX() * Ball.IMAGE_DIAMETER,
+                    pos.y + direction.getVelocity().getY() * Ball.IMAGE_DIAMETER);
         }
 
-        
     }
 
     public Direction getMove(Ball ball) {

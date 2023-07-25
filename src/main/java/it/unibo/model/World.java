@@ -25,7 +25,7 @@ public class World {
     private SoundPlayer soundPlayer = new SoundPlayer();
 
     public World(RectBoundingBox bbox, int nBalls) {
-        qm = new QueueManager(30);
+        qm = new QueueManager(nBalls);
         mainBBox = bbox;
 
     }
@@ -64,7 +64,7 @@ public class World {
     public void insertCollisionBall(Ball cannonBall, Ball queueBall) {
         int index = this.qm.balls.indexOf(queueBall);
         if (index == -1)
-            throw new IllegalStateException("Error", null);
+            throw new IllegalStateException("Queue Ball Not Found!", null);
 
         var cannonBallPos = cannonBall.getCurrentPos();
         var queueBallPos = queueBall.getCurrentPos();

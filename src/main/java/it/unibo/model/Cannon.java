@@ -13,6 +13,7 @@ import it.unibo.enums.BallColor;
 import it.unibo.utils.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -30,12 +31,14 @@ public class Cannon extends GameObject {
 
         super(Type.CANNON, pos, vel, input, null, graph, physics);
         this.cannonBalls = new ArrayList<>();
+        this.cannonBalls = Collections.synchronizedList(this.cannonBalls);
         this.stationaryBall = createStationaryBall();
     }
 
     private Ball createStationaryBall() {
         BallColor randomColor = BallColor.getRandomColor();
-        Ball stationaryBall = GameObjectsFactory.getInstance().createStationaryBall(getStationaryBallPos(), new V2d(0, 0),
+        Ball stationaryBall = GameObjectsFactory.getInstance().createStationaryBall(getStationaryBallPos(),
+                new V2d(0, 0),
                 randomColor);
         return stationaryBall;
     }
@@ -63,7 +66,7 @@ public class Cannon extends GameObject {
         stationaryBall.setColor(BallColor.getRandomColor());
     }
 
-    public P2d getStationaryBallPos(){
+    public P2d getStationaryBallPos() {
         return new P2d(getCurrentPos().x + ADJUST_STATIONARY_X_POS, getCurrentPos().y + ADJUST_STATIONARY_Y_POS);
     }
 }

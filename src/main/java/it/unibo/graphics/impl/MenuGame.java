@@ -20,10 +20,10 @@ import java.awt.event.ActionListener;
 public class MenuGame extends JFrame {
 
     private Levels selectedLevel;
-    
+
     /**
      * The initial menu of the game.
-     * */
+     */
     public MenuGame() {
 
         setTitle("Luxor");
@@ -31,17 +31,15 @@ public class MenuGame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        
         /**
-        * Principal panel.
-        * */
+         * Principal panel.
+         */
         JPanel mainPanel = new JPanel(new GridLayout(2, 1));
         add(mainPanel);
 
-
         /**
-        * Label.
-        * */
+         * Label.
+         */
         JPanel labelPanel = new JPanel(new GridBagLayout());
         mainPanel.add(labelPanel);
 
@@ -52,11 +50,10 @@ public class MenuGame extends JFrame {
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.CENTER;
         labelPanel.add(label, constraints);
-        
 
         /**
-        * Button Help.
-        * */
+         * Button Help.
+         */
         JPanel buttonPanel = new JPanel();
         mainPanel.add(buttonPanel);
 
@@ -65,32 +62,32 @@ public class MenuGame extends JFrame {
         help.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false); // Nasconde la finestra del menu
-                MenuHelp MenuHelp = new MenuHelp(MenuGame.this); // Passa il riferimento alla finestra del menu alla finestra di help
+                MenuHelp MenuHelp = new MenuHelp(MenuGame.this); // Passa il riferimento alla finestra del menu alla
+                                                                 // finestra di help
                 MenuHelp.setVisible(true); // Mostra la finestra di help
             }
         });
 
         buttonPanel.add(help);
 
-
         /**
-        * Button start.
-        * */
+         * Button start.
+         */
         JButton startGame = new JButton("Start Game");
         startGame.setFont(new Font("Arial", Font.PLAIN, 16));
 
         startGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 final Thread thread = new Thread() {
-                  @Override
-                 public void run() {
-                        
+                    @Override
+                    public void run() {
+
                         new GameEngineImpl(selectedLevel).initGame();
-                   }
-              };
-              thread.start();
+                    }
+                };
+                thread.start();
 
                 System.out.println("Game started!");
                 dispose();
@@ -99,38 +96,37 @@ public class MenuGame extends JFrame {
 
         buttonPanel.add(startGame);
 
-         // Button Livelli.
-         JButton levelsButton = new JButton("Livelli");
-         levelsButton.setFont(new Font("Arial", Font.PLAIN, 16));
-         levelsButton.addActionListener(new ActionListener() {
-             public void actionPerformed(ActionEvent e) {
+        // Button Livelli.
+        JButton levelsButton = new JButton("Livelli");
+        levelsButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        levelsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
                 Object[] options = Levels.values();
 
                 Levels selected = (Levels) JOptionPane.showInputDialog(
-                    MenuGame.this, // Frame genitore
-                    "Seleziona un livello", // Testo del messaggio
-                    "Selezione Livello", // Titolo del dialogo
-                    JOptionPane.PLAIN_MESSAGE, // Tipo di messaggio
-                    null, // Icona personalizzata (null per l'icona di default)
-                    options, // Opzioni da mostrare nell'elenco
-                    options[0] // Opzione preselezionata (in questo caso, la prima costante dell'enum)
+                        MenuGame.this, // Frame genitore
+                        "Seleziona un livello", // Testo del messaggio
+                        "Selezione Livello", // Titolo del dialogo
+                        JOptionPane.PLAIN_MESSAGE, // Tipo di messaggio
+                        null, // Icona personalizzata (null per l'icona di default)
+                        options, // Opzioni da mostrare nell'elenco
+                        options[0] // Opzione preselezionata (in questo caso, la prima costante dell'enum)
                 );
 
                 if (selected != null) {
                     selectedLevel = selected;
                     System.out.println("Livello selezionato: " + selectedLevel.getLevelName());
-                    // Ora puoi utilizzare la variabile selectedLevel per richiamare il livello selezionato
+                    // Ora puoi utilizzare la variabile selectedLevel per richiamare il livello
+                    // selezionato
                     // e fare le azioni necessarie.
                 }
-             }
-         });
-         buttonPanel.add(levelsButton);
+            }
+        });
+        buttonPanel.add(levelsButton);
 
         help.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
-
-    
 
 }

@@ -10,6 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import it.unibo.core.api.GameEngine;
+import it.unibo.core.api.Level;
 import it.unibo.enums.Levels;
 import it.unibo.events.api.*;
 import it.unibo.events.impl.HitBallEvent;
@@ -21,6 +22,9 @@ import it.unibo.graphics.impl.SceneImpl;
 import it.unibo.input.KeyboardInputController;
 import it.unibo.model.Ball;
 import it.unibo.model.GameState;
+import it.unibo.model.World;
+import it.unibo.model.impl.RectBoundingBox;
+import it.unibo.utils.P2d;
 import it.unibo.utils.Path;
 import it.unibo.utils.Path.PathBuilder;
 
@@ -34,12 +38,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     private Levels currentLevel;
 
     public GameEngineImpl(Levels currentLevel) {
-        this.gameState = new GameState(this);
-        this.eventQueue = new LinkedList<WorldEvent>();
-        controller = new KeyboardInputController();
-        this.view = new SceneImpl(this.gameState, this.controller);
         this.currentLevel = currentLevel;
-
     }
 
     @Override
@@ -58,6 +57,27 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
     @Override
     public void initGame() {
+        switch (this.currentLevel) {
+            case L1:
+                this.gameState = new GameState(this, () -> {
+                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 10);
+                    w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
+                    return w;
+                });
+                break;
+
+            case L2:
+                this.gameState = new GameState(this, () -> {
+                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 30);
+                    w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
+                    return w;
+                });
+                break;
+        }
+
+        this.eventQueue = new LinkedList<WorldEvent>();
+        controller = new KeyboardInputController();
+        this.view = new SceneImpl(this.gameState, this.controller);
         // System.out.println("Game Init");
         gameState.getWorld().playBackgroundMusic();
         mainLoop();
