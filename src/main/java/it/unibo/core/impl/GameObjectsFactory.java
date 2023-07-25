@@ -18,6 +18,7 @@ import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.physics.impl.BallPhysicsComponent;
 import it.unibo.physics.impl.CannonBallPhysicsComponent;
 import it.unibo.physics.impl.CannonPhysicsComponent;
+import it.unibo.physics.impl.StationaryBallPhysicsComponent;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
 
@@ -33,7 +34,7 @@ public class GameObjectsFactory {
     }
 
     public Ball createBall(P2d pos, V2d vel, BallColor color) {
-        return new Ball(Type.BALL, pos, color, new V2d(pos, pos),
+        return new Ball(Type.BALL, pos, color, new V2d(10, 10),
                 new NullInputComponent(),
                 new CircleBoundingBox(new P2d(pos.x, pos.y), 10), // in input
                 new BallPhysicsComponent()); // in physics
@@ -56,9 +57,9 @@ public class GameObjectsFactory {
     }
 
     public Ball createStationaryBall(P2d cannonPos, V2d vel, BallColor color) {
-        return new Ball(Type.STATIONARY_BALL, cannonPos, color, new V2d(cannonPos, cannonPos),
+        return new Ball(Type.STATIONARY_BALL, cannonPos, color, new V2d(10,10),
                 new NullInputComponent(),
                 new CircleBoundingBox(new P2d(cannonPos.x, cannonPos.y), 10), // in input
-                new BallPhysicsComponent()); // in physics
+                new StationaryBallPhysicsComponent()); // in physics
     }
 }

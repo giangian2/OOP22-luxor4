@@ -21,7 +21,9 @@ public class Cannon extends GameObject {
 
     private List<Ball> cannonBalls;
     private Ball stationaryBall;
-    final private int ADJUST_FIRED_BALL_POS = 40;
+    final private int ADJUST_FIRED_BALL_POS = 37;
+    final private int ADJUST_STATIONARY_X_POS = 37;
+    final private int ADJUST_STATIONARY_Y_POS = 50;
 
     public Cannon(P2d pos, V2d vel, InputComponent input, BoundingBox bbox,
             PhysicsComponent physics) {
@@ -33,7 +35,7 @@ public class Cannon extends GameObject {
 
     private Ball createStationaryBall() {
         BallColor randomColor = BallColor.getRandomColor();
-        Ball stationaryBall = GameObjectsFactory.getInstance().createStationaryBall(getCurrentPos(), new V2d(0, 0),
+        Ball stationaryBall = GameObjectsFactory.getInstance().createStationaryBall(getStationaryBallPos(), new V2d(0, 0),
                 randomColor);
         return stationaryBall;
     }
@@ -59,5 +61,9 @@ public class Cannon extends GameObject {
         this.cannonBalls.add(ball);
 
         stationaryBall.setColor(BallColor.getRandomColor());
+    }
+
+    public P2d getStationaryBallPos(){
+        return new P2d(getCurrentPos().x + ADJUST_STATIONARY_X_POS, getCurrentPos().y + ADJUST_STATIONARY_Y_POS);
     }
 }

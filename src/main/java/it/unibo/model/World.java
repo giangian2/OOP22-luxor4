@@ -166,6 +166,7 @@ public class World {
     public void updateState(long dt) {
         this.shiftBalls();
         this.cannon.getFiredBalls().forEach((b) -> b.updatePhysics(dt, this));
+        this.cannon.getStationaryBall().updatePhysics(dt, this);
     }
 
     /**

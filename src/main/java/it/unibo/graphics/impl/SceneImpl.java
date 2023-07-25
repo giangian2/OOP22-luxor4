@@ -177,7 +177,8 @@ public class SceneImpl implements Scene {
                 final var ballGreen = ImageIO.read(ClassLoader.getSystemResource("images/green_ball2.png"));
                 final var ballYellow = ImageIO.read(ClassLoader.getSystemResource("images/yellow_ball2.png"));
 
-                var entities = gameState.getWorld().getQueue(); // entities sono le palline della coda
+                var entities = gameState.getWorld().getQueue(); 
+                // entities sono le palline della coda e la stazionaria
                 // Ottieni il colore della pallina (supponendo che il modello 'ball' abbia un
                 // metodo getColor())
 
@@ -194,6 +195,7 @@ public class SceneImpl implements Scene {
                 }
 
                 var cannonBalls = gameState.getWorld().getCannon().getFiredBalls();
+                cannonBalls.add(gameState.getWorld().getCannon().getStationaryBall());
                 for (var ball : cannonBalls) {
                     if (ball.getColor() == BallColor.BLUE) {
                         g2.drawImage(ballBlue, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
