@@ -31,8 +31,7 @@ public class Ball extends GameObject {
     }
 
     public boolean isNear(Ball ball){
-        return Math.abs(this.getCurrentPos().sumOfAxis()-ball.getCurrentPos().sumOfAxis())<(IMAGE_DIAMETER+2) &&
-               Math.abs(this.getCurrentPos().sumOfAxis()-ball.getCurrentPos().sumOfAxis())>(IMAGE_DIAMETER-2);
+        return Math.abs(this.getCurrentPos().sumOfAxis()-ball.getCurrentPos().sumOfAxis())<(IMAGE_DIAMETER+2);
     }
 
     
