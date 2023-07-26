@@ -29,32 +29,17 @@ public class CannonGraphicsComponent implements MyGraphicsComponent {
         // Disegna la pallina stazionaria del cannone
         Ball stationaryBall = cannon.getStationaryBall();
         BallColor ballColor = stationaryBall.getColor();
-        g.setColor(getColorForBall(ballColor));
-        //g.drawImage(null, (int) pos.x + CANNON_WIDTH, (int) pos.y - CANNON_HEIGHT / 2, Ball.RADIUS * 2, Ball.RADIUS * 2);
+        g.setColor(ballColor.getBallColor());
+        
 
         // Disegna le palline sparate dal cannone
         for (Ball ball : cannon.getFiredBalls()) {
             P2d ballPos = ball.getCurrentPos();
-            g.setColor(getColorForBall(ball.getColor()));
-           // g.drawImage(null, (int) ballPos.x, (int) ballPos.y, Ball.RADIUS * 2, Ball.RADIUS * 2);
+            g.setColor(ballColor.getBallColor());
+           
         }
     }
 
-    //ottiene il colore corrispondente a un colore della pallina
-    private Color getColorForBall(BallColor ballColor) {
-        switch (ballColor) {
-            case RED:
-                return Color.RED;
-            case GREEN:
-                return Color.GREEN;
-            case BLUE:
-                return Color.BLUE;
-            case YELLOW:
-                return Color.YELLOW;
-            default:
-                throw new IllegalArgumentException("Invalid ball color");
-        }
-    }
 
    
 }

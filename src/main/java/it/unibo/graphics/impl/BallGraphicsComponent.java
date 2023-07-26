@@ -20,25 +20,8 @@ public class BallGraphicsComponent implements MyGraphicsComponent {
         // Disegna la pallina
         P2d pos = ball.getCurrentPos();
         BallColor ballColor = ball.getColor();
-        g.setColor(getColorForBall(ballColor));
+        g.setColor(ballColor.getBallColor());
         g.fillOval((int) pos.x, (int) pos.y, Ball.IMAGE_DIAMETER, Ball.IMAGE_DIAMETER);
     }
-
-    //ottine il colore corrispondente a un colore della pallina
-    private Color getColorForBall(BallColor ballColor) {
-        switch (ballColor) {
-            case RED:
-                return Color.RED;
-            case GREEN:
-                return Color.GREEN;
-            case BLUE:
-                return Color.BLUE;
-            case YELLOW:
-                return Color.YELLOW;
-            default:
-                throw new IllegalArgumentException("Invalid ball color");
-        }
-    }
-
    
 }

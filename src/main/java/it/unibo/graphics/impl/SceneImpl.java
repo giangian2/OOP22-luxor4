@@ -96,6 +96,13 @@ public class SceneImpl implements Scene {
     public void render() {
         try {
             frame.repaint();
+            var cannon = gameState.getWorld().getCannon();
+            if(cannon != null){
+                CannonGraphicsComponent cannonGraphicsComponent = new CannonGraphicsComponent();
+                cannonGraphicsComponent.update(cannon, (java.awt.Graphics2D) panel.getGraphics());
+            }
+
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
