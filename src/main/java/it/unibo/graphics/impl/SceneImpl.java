@@ -182,7 +182,8 @@ public class SceneImpl implements Scene {
                 // Ottieni il colore della pallina (supponendo che il modello 'ball' abbia un
                 // metodo getColor())
 
-                for (var ball : entities) {
+                for (int i=0;i<entities.size();i++) {
+                    Ball ball = entities.get(i);
                     if (ball.getColor() == BallColor.BLUE) {
                         g2.drawImage(ballBlue, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
                     } else if (ball.getColor() == BallColor.RED) {
@@ -196,7 +197,8 @@ public class SceneImpl implements Scene {
 
                 var cannonBalls = gameState.getWorld().getCannon().getFiredBalls();
                 cannonBalls.add(gameState.getWorld().getCannon().getStationaryBall());
-                for (var ball : cannonBalls) {
+                for (int i=0;i<cannonBalls.size();i++) {
+                    Ball ball = cannonBalls.get(i);
                     if (ball.getColor() == BallColor.BLUE) {
                         g2.drawImage(ballBlue, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
                     } else if (ball.getColor() == BallColor.RED) {
