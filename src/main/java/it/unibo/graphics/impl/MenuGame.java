@@ -42,6 +42,7 @@ public class MenuGame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        selectedLevel = Levels.L1;
 
         /**
         * Principal panel.
