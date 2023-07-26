@@ -49,4 +49,7 @@ public class KeyboardInputController implements InputController {
         isShoot = false;
     }
 
+    public void setInputComponent(PlayerInputComponent playerInputComponent) {
+    }
+
 }
