@@ -9,6 +9,6 @@ public abstract class PhysicsComponent {
     public void update(long dt, GameObject obj, World w) {
         var pos = obj.getCurrentPos();
         var vel = obj.getCurrentVel();
-        obj.setPos(pos.sum(new V2d(0, -10)));
+        obj.setPos(pos.sum(vel));
     }
 }
