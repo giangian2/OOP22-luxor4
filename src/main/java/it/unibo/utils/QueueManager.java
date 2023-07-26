@@ -28,8 +28,6 @@ public class QueueManager {
     private void instatiate(int n) {
         var factory = GameObjectsFactory.getInstance();
         var pos = path.getFirst();
-        boolean queueNotCorrect = true;
-        List<Ball> notCorrectBalls = new ArrayList<Ball>();
         Direction direction;
 
         // crea una lista di palline che vada bene
@@ -109,7 +107,9 @@ public class QueueManager {
         for (int i = 0; i < ballList.size() - 2;) {
             var currentColor = ballList.get(i).getColor();
             int count = 1;
-            for (int j = 1; (i + j < ballList.size()) && (ballList.get(i + j).getColor() == currentColor); j++) {
+            for (int j = 1; (i + j < ballList.size()) &&
+                            (ballList.get(i + j).getColor() == currentColor) && 
+                            (ballList.get(i+j).isNear(ballList.get(i+j-1))); j++) {
                 count++;
             }
             if (count > 2) {

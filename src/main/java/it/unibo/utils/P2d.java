@@ -40,6 +40,10 @@ public class P2d implements java.io.Serializable {
         return "P2d(" + x + "," + y + ")";
     }
 
+    public double module() {
+        return (double) Math.sqrt(x * x + y * y);
+    }
+
     public boolean isBetween(P2d p1, P2d p2) {
         // se sono sulla stessa ascissa
         if (this.x == p1.x && this.x == p2.x) {
@@ -59,8 +63,10 @@ public class P2d implements java.io.Serializable {
         return false;
     }
 
-    public double module() {
-        return (double) Math.sqrt(x * x + y * y);
+    public double sumOfAxis(){
+        return x+y;
     }
+
+    
 
 }
