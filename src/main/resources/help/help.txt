@@ -1,7 +1,7 @@
 This is Luxor Game Guide!
 
-You start with level 1 and go on wiht other levels until you lose.
-Once this will occur, you have to start again on level 1.
+You can choose on which level you want to start by clicking on the button "levels".
+Then you can start the game.
 
 The goal of the game is to eliminate all the balls before
 they enter in the final hole. 
