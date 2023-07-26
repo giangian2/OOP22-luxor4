@@ -4,7 +4,7 @@ import java.util.Random;
 
 import it.unibo.enums.BallColor;
 import it.unibo.graphics.impl.Graphics;
-import it.unibo.graphics.impl.GraphicsComponent;
+import it.unibo.graphics.impl.MyGraphicsComponent;
 import it.unibo.input.*;
 import it.unibo.model.api.BoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
@@ -21,10 +21,10 @@ public class GameObject {
     private V2d vel;
     private InputComponent input;
     private PhysicsComponent physics;
-    protected static GraphicsComponent graph;
+    protected static MyGraphicsComponent graph;
     private BoundingBox bbox;
 
-    public GameObject(Type type, P2d pos, V2d vel, InputComponent input, BoundingBox bbox, GraphicsComponent graph,
+    public GameObject(Type type, P2d pos, V2d vel, InputComponent input, BoundingBox bbox, MyGraphicsComponent graph,
             PhysicsComponent physics) {
         this.pos = pos;
         this.vel = vel;
@@ -79,7 +79,7 @@ public class GameObject {
         input.update(this, c);
     }
 
-    public void updateGraphics(Graphics c) {
+    public void updateGraphics(java.awt.Graphics2D c) {
         graph.update(this, c);
     }
 

@@ -8,10 +8,10 @@ import it.unibo.utils.P2d;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class BallGraphicsComponent implements GraphicsComponent {
+public class BallGraphicsComponent implements MyGraphicsComponent {
 
     @Override
-    public void update(GameObject obj, it.unibo.graphics.impl.Graphics g) {
+    public void update(GameObject obj, java.awt.Graphics2D g) {
         if (!(obj instanceof Ball)) {
             throw new IllegalArgumentException("GameObject is not a Ball");
         }

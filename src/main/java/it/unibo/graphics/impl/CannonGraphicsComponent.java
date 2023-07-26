@@ -6,17 +6,18 @@ import it.unibo.model.Cannon;
 import it.unibo.model.GameObject;
 import it.unibo.utils.P2d;
 
+
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class CannonGraphicsComponent implements GraphicsComponent {
+public class CannonGraphicsComponent implements MyGraphicsComponent {
 
     
     private static final int CANNON_WIDTH = 40;
     private static final int CANNON_HEIGHT = 20;
 
     @Override
-    public void update(GameObject obj, it.unibo.graphics.impl.Graphics g){
+    public void update(GameObject obj, java.awt.Graphics2D g){
         if (!(obj instanceof Cannon)) {
             throw new IllegalArgumentException("GameObject is not a Cannon");
         }
@@ -29,13 +30,13 @@ public class CannonGraphicsComponent implements GraphicsComponent {
         Ball stationaryBall = cannon.getStationaryBall();
         BallColor ballColor = stationaryBall.getColor();
         g.setColor(getColorForBall(ballColor));
-        g.drawImage(null, (int) pos.x + CANNON_WIDTH, (int) pos.y - CANNON_HEIGHT / 2, Ball.RADIUS * 2, Ball.RADIUS * 2);
+        //g.drawImage(null, (int) pos.x + CANNON_WIDTH, (int) pos.y - CANNON_HEIGHT / 2, Ball.RADIUS * 2, Ball.RADIUS * 2);
 
         // Disegna le palline sparate dal cannone
         for (Ball ball : cannon.getFiredBalls()) {
             P2d ballPos = ball.getCurrentPos();
             g.setColor(getColorForBall(ball.getColor()));
-            g.drawImage(null, (int) ballPos.x, (int) ballPos.y, Ball.RADIUS * 2, Ball.RADIUS * 2);
+           // g.drawImage(null, (int) ballPos.x, (int) ballPos.y, Ball.RADIUS * 2, Ball.RADIUS * 2);
         }
     }
 

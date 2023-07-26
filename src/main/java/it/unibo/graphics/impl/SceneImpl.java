@@ -45,6 +45,8 @@ import it.unibo.utils.P2d;
 import it.unibo.utils.Path;
 import it.unibo.utils.V2d;
 import it.unibo.enums.*;
+import it.unibo.graphics.impl.BallGraphicsComponent;
+import it.unibo.graphics.impl.CannonGraphicsComponent;
 
 public class SceneImpl implements Scene {
 
@@ -52,11 +54,13 @@ public class SceneImpl implements Scene {
     private JPanel panel;
     private GameState gameState;
     private KeyboardInputController controller;
+    private BallGraphicsComponent ballGraphicsComponent;
 
     public SceneImpl(GameState gameState, KeyboardInputController controller) {
         this.gameState = gameState;
         this.controller = controller;
         this.frame = new JFrame("Luxor");
+        this.ballGraphicsComponent = new BallGraphicsComponent();
        
         frame.setMinimumSize(new Dimension(500, 500));
         frame.setResizable(false);
@@ -153,7 +157,7 @@ public class SceneImpl implements Scene {
 
             var cannon = gameState.getWorld().getCannon();
            
-            //caricai l cannone
+            //caricai il cannone
             if (cannon != null) {
                 Image image = null;
                 try {
@@ -170,50 +174,20 @@ public class SceneImpl implements Scene {
                 }
             }
 
-            try { // carica le palline
-
-                final var ballBlue = ImageIO.read(ClassLoader.getSystemResource("images/blue_ball2.png"));
-                final var ballRed = ImageIO.read(ClassLoader.getSystemResource("images/red_ball2.png"));
-                final var ballGreen = ImageIO.read(ClassLoader.getSystemResource("images/green_ball2.png"));
-                final var ballYellow = ImageIO.read(ClassLoader.getSystemResource("images/yellow_ball2.png"));
-
-                var entities = gameState.getWorld().getQueue(); 
-                // entities sono le palline della coda e la stazionaria
-                // Ottieni il colore della pallina (supponendo che il modello 'ball' abbia un
-                // metodo getColor())
-
-                for (int i=0;i<entities.size();i++) {
-                    Ball ball = entities.get(i);
-                    if (ball.getColor() == BallColor.BLUE) {
-                        g2.drawImage(ballBlue, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                    } else if (ball.getColor() == BallColor.RED) {
-                        g2.drawImage(ballRed, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                    } else if (ball.getColor() == BallColor.GREEN) {
-                        g2.drawImage(ballGreen, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                    } else if (ball.getColor() == BallColor.YELLOW) {
-                        g2.drawImage(ballYellow, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                    }
+                final var entities = gameState.getWorld().getQueue(); 
+                //carico le palline
+                for(var ball : entities){
+                   
+                    ballGraphicsComponent.update(ball, g2);
                 }
-
                 var cannonBalls = gameState.getWorld().getCannon().getFiredBalls();
                 cannonBalls.add(gameState.getWorld().getCannon().getStationaryBall());
-                for (int i=0;i<cannonBalls.size();i++) {
-                    Ball ball = cannonBalls.get(i);
-                    if (ball.getColor() == BallColor.BLUE) {
-                        g2.drawImage(ballBlue, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                    } else if (ball.getColor() == BallColor.RED) {
-                        g2.drawImage(ballRed, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                    } else if (ball.getColor() == BallColor.GREEN) {
-                        g2.drawImage(ballGreen, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                    } else if (ball.getColor() == BallColor.YELLOW) {
-                        g2.drawImage(ballYellow, (int) ball.getCurrentPos().x, (int) ball.getCurrentPos().y, null);
-                    }
-                }
 
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+                for(var ball : cannonBalls){
+                   
+                    ballGraphicsComponent.update(ball, g2);
+                }
+                
         }
 
         @Override
