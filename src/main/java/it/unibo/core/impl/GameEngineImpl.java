@@ -60,7 +60,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
         switch (this.currentLevel) {
             case L1:
                 this.gameState = new GameState(this, () -> {
-                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 10);
+                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 10,2);
                     w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
                     return w;
                 });
@@ -68,7 +68,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
             case L2:
                 this.gameState = new GameState(this, () -> {
-                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 30);
+                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 30,1);
                     w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
                     return w;
                 });

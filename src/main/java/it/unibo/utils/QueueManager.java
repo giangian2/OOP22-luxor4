@@ -17,12 +17,14 @@ public class QueueManager {
 
     public Path path;
     public List<Ball> balls;
+    private int steps;
 
-    public QueueManager(int nBalls) {
+    public QueueManager(int nBalls, int steps) {
         path = new Path.PathBuilder().build();
         this.balls = new ArrayList<>();
         this.balls = Collections.synchronizedList(this.balls);
         this.instatiate(nBalls);
+        this.steps = steps;
     }
 
     private void instatiate(int n) {
@@ -98,6 +100,12 @@ public class QueueManager {
             }
         }
 
+    }
+
+    public void shiftBallsStepsTime(){
+        for(int i=0;i<steps;i++){
+            shiftBalls(0);
+        }
     }
 
     public List<Ball> getCloseByThree() {

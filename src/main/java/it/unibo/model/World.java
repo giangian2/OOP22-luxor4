@@ -24,8 +24,8 @@ public class World {
     private WorldEventListener evListener;
     private SoundPlayer soundPlayer = new SoundPlayer();
 
-    public World(RectBoundingBox bbox, int nBalls) {
-        qm = new QueueManager(nBalls);
+    public World(RectBoundingBox bbox, int nBalls, int steps) {
+        qm = new QueueManager(nBalls,steps);
         mainBBox = bbox;
 
     }
@@ -164,7 +164,8 @@ public class World {
     }
 
     public void updateState(long dt) {
-        this.shiftBalls();
+
+        qm.shiftBallsStepsTime();
         this.cannon.getFiredBalls().forEach((b) -> b.updatePhysics(dt, this));
         this.cannon.getStationaryBall().updatePhysics(dt, this);
     }
