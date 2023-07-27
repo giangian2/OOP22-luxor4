@@ -25,7 +25,7 @@ public class World {
     private SoundPlayer soundPlayer = new SoundPlayer();
 
     public World(RectBoundingBox bbox, int nBalls, int steps) {
-        qm = new QueueManager(nBalls,steps);
+        qm = new QueueManager(nBalls, steps);
         mainBBox = bbox;
 
     }
@@ -72,76 +72,49 @@ public class World {
         if (cannonBallPos.x <= queueBallPos.x && cannonBallPos.y >= queueBallPos.y) {
             if (qm.getMove(queueBall) == Direction.LEFT
                     || qm.getMove(queueBall) == Direction.DOWN) {
-                if (qm.balls.size() > index + 1) {
-                    cannonBall.setPos(qm.balls.get(index + 1).getCurrentPos());
-                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
-                        qm.shiftBalls(index + 1);
-                    this.qm.balls.add(index + 1,
-                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
-                                    cannonBall.getColor()));
-                } else {
-                    cannonBall.setPos(qm.balls.get(index).getCurrentPos());
-                    this.qm.balls.add(index + 1,
-                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
-                                    cannonBall.getColor()));
-                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
-                        qm.shiftBalls(index + 1);
 
-                }
+                this.qm.balls.add(index + 1,
+                        GameObjectsFactory.getInstance().createBall(queueBallPos, null,
+                                cannonBall.getColor()));
+                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                    qm.shiftBalls(index + 1);
+
             } else {
-                if (index - 1 > 0) {
-                    cannonBall.setPos(qm.balls.get(index).getCurrentPos());
-                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
-                        qm.shiftBalls(index);
-                    this.qm.balls.add(index,
-                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
-                                    cannonBall.getColor()));
-                } else {
-                    cannonBall.setPos(qm.balls.get(index).getCurrentPos());
-                    this.qm.balls.add(0,
-                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
-                                    cannonBall.getColor()));
-                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
-                        qm.shiftBalls(1);
 
-                }
+                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                    qm.shiftBalls(index);
+                this.qm.balls.add(index,
+                        GameObjectsFactory.getInstance().createBall(queueBallPos, null,
+                                cannonBall.getColor()));
             }
         } else if (cannonBallPos.x >= queueBallPos.x && cannonBallPos.y >= queueBallPos.y) {
+
             if (qm.getMove(queueBall) == Direction.LEFT
                     || qm.getMove(queueBall) == Direction.UP) {
                 if (index - 1 > 0) {
-                    cannonBall.setPos(qm.balls.get(index - 1).getCurrentPos());
+                    System.out.println("!!!!!!!!!");
                     for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
-                        qm.shiftBalls(index - 1);
-                    this.qm.balls.add(index - 1,
-                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                        qm.shiftBalls(index);
+                    this.qm.balls.add(index,
+                            GameObjectsFactory.getInstance().createBall(queueBallPos, null,
                                     cannonBall.getColor()));
+
                 } else {
-                    cannonBall.setPos(qm.balls.get(index).getCurrentPos());
                     this.qm.balls.add(0,
-                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
+                            GameObjectsFactory.getInstance().createBall(queueBallPos, null,
                                     cannonBall.getColor()));
                     for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
                         qm.shiftBalls(1);
 
                 }
             } else {
-                if (qm.balls.size() > index + 1) {
-                    cannonBall.setPos(qm.balls.get(index + 1).getCurrentPos());
-                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
-                        qm.shiftBalls(index + 1);
-                    this.qm.balls.add(index + 1,
-                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
-                                    cannonBall.getColor()));
-                } else {
-                    cannonBall.setPos(qm.balls.get(index).getCurrentPos());
-                    this.qm.balls.add(index + 1,
-                            GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
-                                    cannonBall.getColor()));
-                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
-                        qm.shiftBalls(index + 1);
 
-                }
+                this.qm.balls.add(index + 1,
+                        GameObjectsFactory.getInstance().createBall(queueBallPos, null,
+                                cannonBall.getColor()));
+                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                    qm.shiftBalls(index + 1);
+
             }
         }
 
