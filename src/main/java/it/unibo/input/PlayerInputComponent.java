@@ -19,9 +19,6 @@ public class PlayerInputComponent implements InputComponent {
 			pos = pos.sum(new V2d(PlayerInputComponent.SPEED, 0));
 			if(pos.x > 700) pos = new P2d(700, pos.y);
 		}
-	
-		
-	
 		cannon.setPos(pos);
 	
 		if (ctrl.isShoot()) {

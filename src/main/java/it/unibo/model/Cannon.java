@@ -26,7 +26,7 @@ public class Cannon extends GameObject {
     final private int ADJUST_STATIONARY_X_POS = 37;
     final private int ADJUST_STATIONARY_Y_POS = 50;
 
-    public Cannon(P2d pos, V2d vel, InputComponent input, BoundingBox bbox,
+    public Cannon(P2d pos, V2d vel, PlayerInputComponent input, BoundingBox bbox,
             PhysicsComponent physics) {
 
         super(Type.CANNON, pos, vel, input, null, graph, physics);
@@ -69,4 +69,9 @@ public class Cannon extends GameObject {
     public P2d getStationaryBallPos() {
         return new P2d(getCurrentPos().x + ADJUST_STATIONARY_X_POS, getCurrentPos().y + ADJUST_STATIONARY_Y_POS);
     }
+
+   /* @Override
+    public void updateInput(PlayerInputComponent c){
+        input.update(RectBoundingBox)
+    } */
 }

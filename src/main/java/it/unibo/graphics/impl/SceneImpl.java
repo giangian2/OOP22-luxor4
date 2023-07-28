@@ -64,8 +64,10 @@ public class SceneImpl implements Scene {
         this.frame = new JFrame("Luxor");
         this.ballGraphicsComponent = new BallGraphicsComponent();
        
-        frame.setMinimumSize(new Dimension(500, 500));
+        frame.setMinimumSize(new Dimension(800, 600));
         frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        
         // frame.setUndecorated(true); // Remove title bar
         Image image = null;
         try {
