@@ -15,12 +15,12 @@ public class GameState {
     private int score;
     private World world;
     private boolean pause;
-    private Level l;
+    private Level level;
 
     public GameState(WorldEventListener l, Level level) {
         score = 0;
         pause = false;
-        this.l = level;
+        this.level = level;
         this.loadLevel();
         world.setEventListener(l);
     }
@@ -42,7 +42,7 @@ public class GameState {
     }
 
     private void loadLevel() {
-        this.world = this.l.loadLevel();
+        this.world = this.level.loadLevel();
     }
 
     public boolean isGameOver(QueueManager queueManager) {

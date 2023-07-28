@@ -19,8 +19,8 @@ public class QueueManager {
     public List<Ball> balls;
     private int steps;
 
-    public QueueManager(int nBalls, int steps) {
-        path = new Path.PathBuilder().build();
+    public QueueManager(int nBalls, int steps, String xmlPathSrc) {
+        path = new Path.PathBuilder(xmlPathSrc).build();
         this.balls = new ArrayList<>();
         this.balls = Collections.synchronizedList(this.balls);
         this.instatiate(nBalls);
@@ -102,8 +102,8 @@ public class QueueManager {
 
     }
 
-    public void shiftBallsStepsTime(){
-        for(int i=0;i<steps;i++){
+    public void shiftBallsStepsTime() {
+        for (int i = 0; i < steps; i++) {
             shiftBalls(0);
         }
     }
@@ -116,8 +116,8 @@ public class QueueManager {
             var currentColor = ballList.get(i).getColor();
             int count = 1;
             for (int j = 1; (i + j < ballList.size()) &&
-                            (ballList.get(i + j).getColor() == currentColor) && 
-                            (ballList.get(i+j).isNear(ballList.get(i+j-1))); j++) {
+                    (ballList.get(i + j).getColor() == currentColor) &&
+                    (ballList.get(i + j).isNear(ballList.get(i + j - 1))); j++) {
                 count++;
             }
             if (count > 2) {

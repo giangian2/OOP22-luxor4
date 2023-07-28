@@ -20,12 +20,12 @@ import it.unibo.utils.*;
 public class World {
     private Cannon cannon;
     private QueueManager qm;
-    private RectBoundingBox mainBBox;
+    public static RectBoundingBox mainBBox;
     private WorldEventListener evListener;
     private SoundPlayer soundPlayer = new SoundPlayer();
 
-    public World(RectBoundingBox bbox, int nBalls, int steps) {
-        qm = new QueueManager(nBalls, steps);
+    public World(RectBoundingBox bbox, int nBalls, int steps, String xmlSrc) {
+        qm = new QueueManager(nBalls, steps, xmlSrc);
         mainBBox = bbox;
 
     }
@@ -92,7 +92,7 @@ public class World {
             if (qm.getMove(queueBall) == Direction.LEFT
                     || qm.getMove(queueBall) == Direction.UP) {
                 if (index - 1 > 0) {
-                    System.out.println("!!!!!!!!!");
+
                     for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
                         qm.shiftBalls(index);
                     this.qm.balls.add(index,
@@ -196,16 +196,6 @@ public class World {
 
     public void stopMusic() {
         soundPlayer.stopAll();
-    }
-
-    private void shiftAndInsertCannonBall(int queueBallIndex, int shiftStartIndex, int insertQueueIndex,
-            Ball cannonBall) {
-        cannonBall.setPos(qm.balls.get(queueBallIndex).getCurrentPos());
-        for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
-            qm.shiftBalls(shiftStartIndex);
-        this.qm.balls.add(insertQueueIndex,
-                GameObjectsFactory.getInstance().createBall(cannonBall.getCurrentPos(), null,
-                        cannonBall.getColor()));
     }
 
 }

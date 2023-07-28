@@ -57,41 +57,39 @@ public class SceneImpl implements Scene {
     private JLayeredPane layeredPane;
     private KeyboardInputController controller;
     private BallGraphicsComponent ballGraphicsComponent;
+    private BoardGraphicComponent boardGraphics;
 
-    public SceneImpl(GameState gameState, KeyboardInputController controller) {
+    public SceneImpl(GameState gameState, KeyboardInputController controller, String backgroundSrc) {
         this.gameState = gameState;
         this.controller = controller;
         this.frame = new JFrame("Luxor");
         this.ballGraphicsComponent = new BallGraphicsComponent();
-       
-        frame.setMinimumSize(new Dimension(500, 500));
+        this.boardGraphics = new BoardGraphicComponent(backgroundSrc);
+        frame.setMinimumSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
+                boardGraphics.getBackgorundImg().getHeight(null)));
         frame.setResizable(false);
-        // frame.setUndecorated(true); // Remove title bar
-        Image image = null;
-        try {
-            image = ImageIO.read(ClassLoader.getSystemResource("images/background.jpg"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
 
-        //questo
-        this.panel = new ScenePanel(image);
-        this.panel.setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
-        
-         // Use JLayeredPane to layer the components
-         this.layeredPane = new JLayeredPane();
-         this.layeredPane.setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
-         this.layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
-         this.layeredPane.setLayer(panel, JLayeredPane.DEFAULT_LAYER);
+        // questo
+        this.panel = new ScenePanel();
+        this.panel.setPreferredSize(new Dimension(this.boardGraphics.getBackgorundImg().getWidth(null),
+                this.boardGraphics.getBackgorundImg().getHeight(null)));
+        // Use JLayeredPane to layer the components
+        // Use JLayeredPane to layer the components
+        this.layeredPane = new JLayeredPane();
+        this.layeredPane.setPreferredSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
+                boardGraphics.getBackgorundImg().getHeight(null)));
+
+        this.layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
+        this.layeredPane.setLayer(panel, JLayeredPane.DEFAULT_LAYER);
 
         // Add the button to the layered pane and set its position
         JButton menuButton = new JButton("Menu");
         menuButton.setPreferredSize(new Dimension(80, 30));
         this.layeredPane.add(menuButton, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(menuButton, JLayeredPane.PALETTE_LAYER);
-        menuButton.setBounds(image.getWidth(null) - 100, image.getHeight(null) - 30, 80, 30);
-        
+        menuButton.setBounds(boardGraphics.getBackgorundImg().getWidth(null) - 100,
+                this.boardGraphics.getBackgorundImg().getHeight(null) - 30, 80, 30);
+
         // Set the action listener for the button
         menuButton.addActionListener(new ActionListener() {
             @Override
@@ -106,11 +104,11 @@ public class SceneImpl implements Scene {
 
         this.frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
-                //System.exit(-1);
+                // System.exit(-1);
             }
 
             public void windowClosed(WindowEvent ev) {
-               // System.exit(-1);
+                // System.exit(-1);
             }
         });
         frame.pack();
@@ -138,10 +136,9 @@ public class SceneImpl implements Scene {
 
     @Override
     public void renderGameOver() {
-        try{
-        frame.repaint();
-        }
-        catch(Exception ex){
+        try {
+            frame.repaint();
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -151,30 +148,26 @@ public class SceneImpl implements Scene {
     public void renderMenu() {
         // TODO Auto-generated method stub
 
-        //viene chiamato quando il metodo isGameOver ritorna true
+        // viene chiamato quando il metodo isGameOver ritorna true
         throw new UnsupportedOperationException("Unimplemented method 'renderMenu'");
     }
 
     public class ScenePanel extends JPanel implements KeyListener {
 
-        private Image img;
-
-        public ScenePanel(Image img) {
-            this.img = img;
+        public ScenePanel() {
             this.addKeyListener(this);
             setFocusable(true);
             setFocusTraversalKeysEnabled(false);
             requestFocusInWindow();
-            if (img != null) {
-                Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-                setPreferredSize(size);
-                setMinimumSize(size);
-                setMaximumSize(size);
-                setSize(size);
-                setLayout(new GridLayout());
-            } else {
-                throw new IllegalArgumentException("Invalid image provided");
-            }
+
+            Dimension size = new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
+                    boardGraphics.getBackgorundImg().getHeight(null));
+            setPreferredSize(size);
+            setMinimumSize(size);
+            setMaximumSize(size);
+            setSize(size);
+            setLayout(new GridLayout());
+
         }
 
         public void paint(Graphics g) { // qui dove disegna le cose
@@ -191,11 +184,11 @@ public class SceneImpl implements Scene {
 
             g2.setColor(Color.WHITE);
 
-            g2.drawImage(img, 0, 0, null);
+            boardGraphics.update(null, g2);
 
             var cannon = gameState.getWorld().getCannon();
-           
-            //caricai il cannone
+
+            // caricai il cannone
             if (cannon != null) {
                 Image image = null;
                 try {
@@ -212,20 +205,20 @@ public class SceneImpl implements Scene {
                 }
             }
 
-                final var entities = gameState.getWorld().getQueue(); 
-                //carico le palline
-                for(var ball : entities){
-                   
-                    ballGraphicsComponent.update(ball, g2);
-                }
-                var cannonBalls = gameState.getWorld().getCannon().getFiredBalls();
-                cannonBalls.add(gameState.getWorld().getCannon().getStationaryBall());
+            final var entities = gameState.getWorld().getQueue();
+            // carico le palline
+            for (var ball : entities) {
 
-                for(var ball : cannonBalls){
-                   
-                    ballGraphicsComponent.update(ball, g2);
-                }
-                        }
+                ballGraphicsComponent.update(ball, g2);
+            }
+            var cannonBalls = gameState.getWorld().getCannon().getFiredBalls();
+            cannonBalls.add(gameState.getWorld().getCannon().getStationaryBall());
+
+            for (var ball : cannonBalls) {
+
+                ballGraphicsComponent.update(ball, g2);
+            }
+        }
 
         @Override
         public void keyPressed(KeyEvent e) {
@@ -252,31 +245,6 @@ public class SceneImpl implements Scene {
             } else if (e.getKeyCode() == 37) {
                 controller.notifyNoMoreMoveLeft();
             }
-        }
-
-    }
-
-    public class BallComponent extends JComponent {
-
-        private P2d pos;
-
-        public BallComponent(P2d pos) {
-            super();
-            this.pos = pos;
-        }
-
-        public void paint(Graphics g) {
-            Image image = null;
-            try {
-                image = ImageIO.read(ClassLoader.getSystemResource("images/blue_ball.png"));
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            ImageIcon icon = new ImageIcon(image);
-            int x = (int) pos.x;
-            int y = (int) pos.y;
-            icon.paintIcon(this, g, x, y);
         }
 
     }

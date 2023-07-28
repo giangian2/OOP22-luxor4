@@ -57,27 +57,32 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
     @Override
     public void initGame() {
+
+        this.eventQueue = new LinkedList<WorldEvent>();
+        controller = new KeyboardInputController();
+
         switch (this.currentLevel) {
             case L1:
                 this.gameState = new GameState(this, () -> {
-                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 10,2);
+                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 10, 2,
+                            "levels/1/Path.xml");
                     w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
                     return w;
                 });
+                this.view = new SceneImpl(this.gameState, this.controller, "images/background.jpg");
                 break;
 
             case L2:
                 this.gameState = new GameState(this, () -> {
-                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 30,1);
+                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 30, 1,
+                            "levels/2/Path.xml");
                     w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
                     return w;
                 });
+                this.view = new SceneImpl(this.gameState, this.controller, "images/background2.jpg");
                 break;
         }
 
-        this.eventQueue = new LinkedList<WorldEvent>();
-        controller = new KeyboardInputController();
-        this.view = new SceneImpl(this.gameState, this.controller);
         // System.out.println("Game Init");
         gameState.getWorld().playBackgroundMusic();
         mainLoop();

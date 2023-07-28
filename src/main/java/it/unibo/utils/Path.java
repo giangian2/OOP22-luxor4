@@ -18,6 +18,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import it.unibo.enums.Direction;
+import it.unibo.enums.Levels;
 import it.unibo.utils.P2d;
 
 import org.w3c.dom.Node;
@@ -75,13 +76,12 @@ public class Path {
     }
 
     public static class PathBuilder {
-        private static final String ROOT = "levels/1/";
         private List<P2d> points;
 
-        public PathBuilder() {
+        public PathBuilder(String xmlPathSrc) {
             try {
                 final InputStream in = Objects.requireNonNull(
-                        ClassLoader.getSystemResourceAsStream(ROOT + "Path.xml"));
+                        ClassLoader.getSystemResourceAsStream(xmlPathSrc));
 
                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
