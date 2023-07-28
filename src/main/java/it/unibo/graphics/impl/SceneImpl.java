@@ -216,15 +216,15 @@ public class SceneImpl implements Scene {
 
                 final var entities = gameState.getWorld().getQueue(); 
                 //carico le palline
-                for(var ball : entities){
-                   
+                for(int i = 0; i < entities.size(); i++){
+                    Ball ball = entities.get(i);
                     ballGraphicsComponent.update(ball, g2);
                 }
                 var cannonBalls = gameState.getWorld().getCannon().getFiredBalls();
                 cannonBalls.add(gameState.getWorld().getCannon().getStationaryBall());
 
-                for(var ball : cannonBalls){
-                   
+                for(int i = 0; i < cannonBalls.size(); i++){
+                   Ball ball = cannonBalls.get(i);
                     ballGraphicsComponent.update(ball, g2);
                 }
                         }
