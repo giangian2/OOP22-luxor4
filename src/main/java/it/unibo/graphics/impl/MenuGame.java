@@ -24,6 +24,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -94,10 +95,14 @@ public class MenuGame extends JFrame {
             }
             reader.close();
             textArea.setText(content.toString());
+        } catch (FileNotFoundException e) {
+            // Eccezione lanciata quando il file non è trovato
+            e.printStackTrace();
         } catch (IOException e) {
+            // Eccezione generale di I/O
             e.printStackTrace();
         }
-
+        
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 16));
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
