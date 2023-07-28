@@ -20,7 +20,7 @@ import it.unibo.utils.*;
 public class World {
     private Cannon cannon;
     private QueueManager qm;
-    private RectBoundingBox mainBBox;
+    public static RectBoundingBox mainBBox;
     private WorldEventListener evListener;
     private SoundPlayer soundPlayer = new SoundPlayer();
 

@@ -70,8 +70,4 @@ public class Cannon extends GameObject {
         return new P2d(getCurrentPos().x + ADJUST_STATIONARY_X_POS, getCurrentPos().y + ADJUST_STATIONARY_Y_POS);
     }
 
-   /* @Override
-    public void updateInput(PlayerInputComponent c){
-        input.update(RectBoundingBox)
-    } */
 }
