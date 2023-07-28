@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
@@ -53,6 +54,7 @@ public class SceneImpl implements Scene {
     private JFrame frame;
     private JPanel panel;
     private GameState gameState;
+    private JLayeredPane layeredPane;
     private KeyboardInputController controller;
     private BallGraphicsComponent ballGraphicsComponent;
 
@@ -75,17 +77,40 @@ public class SceneImpl implements Scene {
 
         //questo
         this.panel = new ScenePanel(image);
+        this.panel.setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
         
-        frame.getContentPane().add(panel);
-               
+         // Use JLayeredPane to layer the components
+         this.layeredPane = new JLayeredPane();
+         this.layeredPane.setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
+         this.layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
+         this.layeredPane.setLayer(panel, JLayeredPane.DEFAULT_LAYER);
+
+        // Add the button to the layered pane and set its position
+        JButton menuButton = new JButton("Menu");
+        menuButton.setPreferredSize(new Dimension(80, 30));
+        this.layeredPane.add(menuButton, JLayeredPane.PALETTE_LAYER);
+        this.layeredPane.setLayer(menuButton, JLayeredPane.PALETTE_LAYER);
+        menuButton.setBounds(image.getWidth(null) - 100, image.getHeight(null) - 30, 80, 30);
+        
+        // Set the action listener for the button
+        menuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MenuGame menuGame = new MenuGame();
+                menuGame.setVisible(true); // Make the MenuGame frame visible
+                frame.dispose();
+            }
+        });
+
+        frame.getContentPane().add(layeredPane); // Add the layered pane to the frame
 
         this.frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
-                System.exit(-1);
+                //System.exit(-1);
             }
 
             public void windowClosed(WindowEvent ev) {
-                System.exit(-1);
+               // System.exit(-1);
             }
         });
         frame.pack();
@@ -94,17 +119,20 @@ public class SceneImpl implements Scene {
 
     @Override
     public void render() {
-        try {
-            frame.repaint();
-            var cannon = gameState.getWorld().getCannon();
-            if(cannon != null){
-                CannonGraphicsComponent cannonGraphicsComponent = new CannonGraphicsComponent();
-                cannonGraphicsComponent.update(cannon, (java.awt.Graphics2D) panel.getGraphics());
+        if (panel.isVisible()) {
+            Graphics g = panel.getGraphics();
+            if (g != null) {
+                try {
+                    frame.repaint();
+                    var cannon = gameState.getWorld().getCannon();
+                    if (cannon != null) {
+                        CannonGraphicsComponent cannonGraphicsComponent = new CannonGraphicsComponent();
+                        cannonGraphicsComponent.update(cannon, (java.awt.Graphics2D) g);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
-
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 
@@ -150,6 +178,9 @@ public class SceneImpl implements Scene {
         }
 
         public void paint(Graphics g) { // qui dove disegna le cose
+            if (g == null) {
+                return;
+            }
             Graphics2D g2 = (Graphics2D) g;
 
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -194,8 +225,7 @@ public class SceneImpl implements Scene {
                    
                     ballGraphicsComponent.update(ball, g2);
                 }
-                
-        }
+                        }
 
         @Override
         public void keyPressed(KeyEvent e) {
