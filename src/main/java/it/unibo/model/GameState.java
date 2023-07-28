@@ -73,6 +73,12 @@ public class GameState {
     public void update(long dt) {
         if (!pause) {
             world.updateState(dt);
+            
+            this.getWorld().getCLoseByThree().forEach((el) -> {
+                System.out.println(this.getScore());
+                this.incScore();
+                this.getWorld().getQueue().remove(el);
+            });
         }
     }
 

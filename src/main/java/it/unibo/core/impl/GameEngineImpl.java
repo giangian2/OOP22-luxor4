@@ -126,11 +126,6 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                 System.out.println("collision detected : " + ev.getQueueBall().getCurrentPos().toString());
                 gameState.getWorld().getCannon().removeFiredBall((Ball) ev.getCannnonBall());
                 gameState.getWorld().insertCollisionBall((Ball) ev.getCannnonBall(), (Ball) ev.getQueueBall());
-                gameState.getWorld().getCLoseByThree().forEach((el) -> {
-                    System.out.println(gameState.getScore());
-                    gameState.incScore();
-                    gameState.getWorld().getQueue().remove(el);
-                });
 
             } else if (event instanceof HitBorderEvent) {
                 System.out.println("Border collision");
