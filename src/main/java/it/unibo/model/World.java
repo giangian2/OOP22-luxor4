@@ -154,6 +154,7 @@ public class World {
         double radius = box.getRadius();
         for (Ball obj : this.getQueue()) {
             if (new V2d(obj.getCurrentPos(), pos).module() <= 2 * radius) {
+                playCollisionSound();
                 return Optional.of(obj);
             }
         }
@@ -184,14 +185,12 @@ public class World {
     }
 
     public void playBackgroundMusic() {
-        soundPlayer.setFile(SoundPlayer.BACKGROUND_MUSIC);
-        soundPlayer.play();
-        soundPlayer.loop();
+        soundPlayer.play(SoundPlayer.BACKGROUND_MUSIC);
+        soundPlayer.loop(SoundPlayer.BACKGROUND_MUSIC);
     }
 
-    public void playShootingSound() {
-        soundPlayer.setFile(SoundPlayer.CANNON_SHOOT);
-        soundPlayer.play();
+    public void playCollisionSound() {
+        soundPlayer.play(SoundPlayer.BALL_COLLISION);
     }
 
     public void stopMusic() {
