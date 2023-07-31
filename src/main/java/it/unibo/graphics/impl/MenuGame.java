@@ -162,6 +162,7 @@ public class MenuGame extends JFrame {
                 showHelpMenu();
             }
         });
+        
         buttonPanel.add(help);
 
         JButton startGame = createButton("Start Game", new ActionListener() {
@@ -199,7 +200,13 @@ public class MenuGame extends JFrame {
                 }
             }
         });
+
+
         buttonPanel.add(levelsButton);
+
+
+        GameOverPanel gameOverPanel = new GameOverPanel(this);
+        mainPanel.add(gameOverPanel);
 
         help.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
