@@ -24,19 +24,20 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Represents the menu of the Luxor game, allowing players to start the game, select levels, and access help information.
+ */
 public class MenuGame extends JFrame {
 
     private Levels selectedLevel;
     private JPanel mainPanel;
 
     /**
-     * The initial menu of the game.
+     * Constructs the initial menu of the game.
      */
     public MenuGame() {
 
@@ -48,7 +49,7 @@ public class MenuGame extends JFrame {
         selectedLevel = Levels.L1;
 
         /**
-         * Principal panel.
+         * Main panel that contains the components of the menu.
          */
         mainPanel = new JPanel(new GridLayout(2, 1));
         add(mainPanel);
@@ -56,6 +57,13 @@ public class MenuGame extends JFrame {
         showMainMenu();
     }
 
+    /**
+     * Creates a button with the given text and an associated action listener.
+     *
+     * @param text           The text to be displayed on the button.
+     * @param actionListener The action listener to be triggered when the button is pressed.
+     * @return The created JButton.
+     */
     private JButton createButton(String text, ActionListener actionListener) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -63,6 +71,9 @@ public class MenuGame extends JFrame {
         return button;
     }
 
+    /**
+     * Displays the help menu, showing information about the game.
+     */
     private void showHelpMenu() {
         mainPanel.removeAll();
         mainPanel.revalidate();
@@ -81,12 +92,11 @@ public class MenuGame extends JFrame {
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
-        mainPanel.add(scrollPane, BorderLayout.CENTER); // Add the scrollPane to the mainPanel
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Adding some vertical space between the textArea and the "Back" button
-        helpPanel.add(Box.createVerticalStrut(10));
-
-        // Load text from file
+        /**
+         * Load text from file.
+         */
         try {
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(
@@ -100,10 +110,14 @@ public class MenuGame extends JFrame {
             reader.close();
             textArea.setText(content.toString());
         } catch (FileNotFoundException e) {
-            // Eccezione lanciata quando il file non è trovato
+            /**
+             * Exception thrown when the file is not found.
+             */
             e.printStackTrace();
         } catch (IOException e) {
-            // Eccezione generale di I/O
+            /**
+             * General I/O exception.
+             */
             e.printStackTrace();
         }
 
@@ -121,6 +135,9 @@ public class MenuGame extends JFrame {
         mainPanel.add(helpPanel);
     }
 
+    /**
+     * Displays the main menu of the game, allowing the player to start the game, select levels, and access help information.
+     */
     public void showMainMenu() {
         mainPanel.removeAll();
         mainPanel.revalidate();
@@ -163,22 +180,22 @@ public class MenuGame extends JFrame {
         });
         buttonPanel.add(startGame);
 
-        JButton levelsButton = createButton("Livelli", new ActionListener() {
+        JButton levelsButton = createButton("Levels", new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Object[] options = Levels.values();
                 Levels selected = (Levels) JOptionPane.showInputDialog(
-                        MenuGame.this, // Frame genitore
-                        "Seleziona un livello", // Testo del messaggio
-                        "Selezione Livello", // Titolo del dialogo
-                        JOptionPane.PLAIN_MESSAGE, // Tipo di messaggio
-                        null, // Icona personalizzata (null per l'icona di default)
-                        options, // Opzioni da mostrare nell'elenco
-                        options[0] // Opzione preselezionata (in questo caso, la prima costante dell'enum)
+                        MenuGame.this, // Parent frame
+                        "Select a level", // Message text
+                        "Level Selection", // Dialog title
+                        JOptionPane.PLAIN_MESSAGE, // Message type
+                        null, // Custom icon (null for default icon)
+                        options, // Options to show in the list
+                        options[0] // Pre-selected option (in this case, the first enum constant)
                 );
 
                 if (selected != null) {
                     selectedLevel = selected;
-                    System.out.println("Livello selezionato: " + selectedLevel.getLevelName());
+                    System.out.println("Selected level: " + selectedLevel.getLevelName());
                 }
             }
         });
@@ -188,6 +205,11 @@ public class MenuGame extends JFrame {
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
 
+    /**
+     * Gets the currently selected level of the game.
+     *
+     * @return The currently selected level.
+     */
     public Levels getSelectedLevel() {
         return selectedLevel;
     }
