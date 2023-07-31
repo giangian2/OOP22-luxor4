@@ -43,11 +43,9 @@ public class Path {
         if (points.contains(position)) {
             nextCorner = points.get(points.indexOf(position) + 1);
         } else {
-            boolean exit = false;
-            for (int i = 0; (i < points.size() - 1)&&!exit; i++) {
+            for (int i = 0; (i < points.size() - 1); i++) {
                 if (position.isBetween(points.get(i), points.get(i + 1))) {
                     nextCorner = points.get(i + 1);
-                    exit=true;
                 }
             }
         }

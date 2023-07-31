@@ -43,7 +43,6 @@ public class QueueManager {
 
         // assegna le posizioni
         for (int i = 0; i < balls.size(); i++) {
-            System.out.println("ball n° " + i);
             balls.get(i).setPos(pos);
             direction = path.getMove(pos);
             pos = new P2d(pos.x + direction.getVelocity().getX() * Ball.IMAGE_DIAMETER,
