@@ -9,6 +9,10 @@ import it.unibo.model.GameObject;
 import it.unibo.model.World;
 import it.unibo.model.impl.CircleBoundingBox;
 
+/**
+ * 
+ */
+
 public class CannonBallPhysicsComponent extends BallPhysicsComponent {
 
     @Override

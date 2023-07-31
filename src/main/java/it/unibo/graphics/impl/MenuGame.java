@@ -88,7 +88,6 @@ public class MenuGame extends JFrame {
 
         // Load text from file
         try {
-
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(
                             ClassLoader.getSystemResourceAsStream(
