@@ -16,9 +16,9 @@ public class GameObject {
     private P2d pos;
     private V2d vel;
     protected InputComponent input;
-    private PhysicsComponent physics;
-    protected static MyGraphicsComponent graph;
-    private BoundingBox bbox;
+    protected PhysicsComponent physics;
+    protected MyGraphicsComponent graph;
+    protected BoundingBox bbox;
 
     public GameObject(Type type, P2d pos, V2d vel, InputComponent input, BoundingBox bbox, MyGraphicsComponent graph,
             PhysicsComponent physics) {

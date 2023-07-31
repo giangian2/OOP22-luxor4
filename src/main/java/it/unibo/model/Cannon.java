@@ -5,6 +5,7 @@ import it.unibo.model.api.BoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.enums.BallColor;
+import it.unibo.graphics.impl.CannonGraphicsComponent;
 import it.unibo.utils.*;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class Cannon extends GameObject {
     final private int ADJUST_STATIONARY_Y_POS = 50;
 
     public Cannon(P2d pos, V2d vel, PlayerInputComponent input, BoundingBox bbox,
-            PhysicsComponent physics) {
+            PhysicsComponent physics, CannonGraphicsComponent graph) {
 
         super(Type.CANNON, pos, vel, input, null, graph, physics);
         this.cannonBalls = new ArrayList<>();

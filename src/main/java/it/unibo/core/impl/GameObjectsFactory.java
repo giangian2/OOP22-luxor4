@@ -1,6 +1,8 @@
 package it.unibo.core.impl;
 
 import it.unibo.enums.BallColor;
+import it.unibo.graphics.impl.BallGraphicsComponent;
+import it.unibo.graphics.impl.CannonGraphicsComponent;
 import it.unibo.input.NullInputComponent;
 import it.unibo.input.PlayerInputComponent;
 import it.unibo.model.Ball;
@@ -30,7 +32,8 @@ public class GameObjectsFactory {
         return new Ball(Type.BALL, pos, color, new V2d(10, 10),
                 new NullInputComponent(),
                 new CircleBoundingBox(new P2d(pos.x, pos.y), 10), // in input
-                new BallPhysicsComponent()); // in physics
+                new BallPhysicsComponent(),
+                new BallGraphicsComponent()); // in physics
 
     }
 
@@ -38,21 +41,24 @@ public class GameObjectsFactory {
         return new Cannon(pos, new V2d(pos, pos),
                 new PlayerInputComponent(), // in input
                 new RectBoundingBox(pos, pos), // in input
-                new CannonPhysicsComponent()); // in physics
+                new CannonPhysicsComponent(),
+                new CannonGraphicsComponent()); // in physics
     }
 
     public Ball createCannonBall(P2d pos, V2d vel, BallColor color) {
-        return new Ball(Type.CANNON_BALL, pos, color, new V2d(0,-10),
+        return new Ball(Type.CANNON_BALL, pos, color, new V2d(0, -10),
                 new NullInputComponent(),
                 new CircleBoundingBox(new P2d(pos.x, pos.y), 10), // in input
-                new CannonBallPhysicsComponent()); // in physics
+                new CannonBallPhysicsComponent(),
+                new BallGraphicsComponent()); // in physics
 
     }
 
     public Ball createStationaryBall(P2d cannonPos, V2d vel, BallColor color) {
-        return new Ball(Type.STATIONARY_BALL, cannonPos, color, new V2d(0,0),
+        return new Ball(Type.STATIONARY_BALL, cannonPos, color, new V2d(0, 0),
                 new NullInputComponent(),
                 new CircleBoundingBox(new P2d(cannonPos.x, cannonPos.y), 10), // in input
-                new StationaryBallPhysicsComponent()); // in physics
+                new StationaryBallPhysicsComponent(),
+                new BallGraphicsComponent()); // in physics
     }
 }

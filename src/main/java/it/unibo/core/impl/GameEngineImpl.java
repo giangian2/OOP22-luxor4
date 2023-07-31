@@ -33,7 +33,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     @Override
     public void mainLoop() {
         long previousCycleStartTime = System.currentTimeMillis();
-        while (true) {
+        while (!gameState.isGameOver()) {
             long currentCycleStartTime = System.currentTimeMillis();
             long elapsed = currentCycleStartTime - previousCycleStartTime;
             processInput();
@@ -42,6 +42,12 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
             waitForNextFrame(currentCycleStartTime);
             previousCycleStartTime = currentCycleStartTime;
         }
+        renderGameOver();
+
+    }
+
+    private void renderGameOver() {
+        System.out.println("Game Over");
     }
 
     @Override

@@ -40,7 +40,7 @@ public class Path {
 
     public Direction getMove(P2d position) {
         P2d nextCorner = null;
-        if (points.contains(position)) {
+        if (points.contains(position) && (points.size() > (points.indexOf(position) + 1))) {
             nextCorner = points.get(points.indexOf(position) + 1);
         } else {
             for (int i = 0; (i < points.size() - 1); i++) {
@@ -49,22 +49,24 @@ public class Path {
                 }
             }
         }
+        if (nextCorner != null) {
 
-        if (position.x == nextCorner.x && position.y > nextCorner.y) {
-            return Direction.UP;
-        }
-        if (position.x == nextCorner.x && position.y < nextCorner.y) {
-            return Direction.DOWN;
-        }
-        if (position.y == nextCorner.y && position.x > nextCorner.x) {
+            if (position.x == nextCorner.x && position.y > nextCorner.y) {
+                return Direction.UP;
+            }
+            if (position.x == nextCorner.x && position.y < nextCorner.y) {
+                return Direction.DOWN;
+            }
+            if (position.y == nextCorner.y && position.x > nextCorner.x) {
 
-            return Direction.LEFT;
-        }
-        if (position.y == nextCorner.y && position.x < nextCorner.x) {
-            return Direction.RIGHT;
+                return Direction.LEFT;
+            }
+            if (position.y == nextCorner.y && position.x < nextCorner.x) {
+                return Direction.RIGHT;
+            }
         }
 
-        return Direction.DOWN;
+        return Direction.NONE;
     }
 
     public static class PathBuilder {

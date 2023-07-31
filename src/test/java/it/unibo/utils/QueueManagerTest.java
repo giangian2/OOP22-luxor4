@@ -31,20 +31,20 @@ public class QueueManagerTest {
         var qm = new QueueManager(0, 1, "levels/1/Path.xml");
 
         List<Ball> outputList = new ArrayList<>();
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.GREEN, null, null, null, null));
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(125, 10), BallColor.RED, null, null, null, null));
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(150, 10), BallColor.RED, null, null, null, null));
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(190, 10), BallColor.RED, null, null, null, null));
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.BLUE, null, null, null, null));
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.GREEN, null, null, null, null));
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(125, 10), BallColor.GREEN, null, null, null, null));
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(150, 10), BallColor.GREEN, null, null, null, null));
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.GREEN, null, null, null, null));
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.YELLOW, null, null, null, null));
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.YELLOW, null, null, null, null));
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.RED, null, null, null, null));
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(110, 10), BallColor.RED, null, null, null, null));
-        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(120, 10), BallColor.RED, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.GREEN, null, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(125, 10), BallColor.RED, null, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(150, 10), BallColor.RED, null, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(190, 10), BallColor.RED, null, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.BLUE, null, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.GREEN, null, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(125, 10), BallColor.GREEN, null, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(150, 10), BallColor.GREEN, null, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.GREEN, null, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.YELLOW, null, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.YELLOW, null, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.RED, null, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(110, 10), BallColor.RED, null, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(120, 10), BallColor.RED, null, null, null, null, null));
 
         outputList = qm.getCloseByThree();
         assertTrue(outputList.size() == 6);

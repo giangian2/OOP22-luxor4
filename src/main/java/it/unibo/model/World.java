@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 import it.unibo.events.api.WorldEventListener;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.physics.impl.BoundaryCollision;
@@ -52,6 +51,10 @@ public class World {
 
     public RectBoundingBox getBBox() {
         return this.mainBBox;
+    }
+
+    public Direction moveSingleBall(Ball queueBall) {
+        return qm.getMove(queueBall);
     }
 
     public void shiftBalls() {
