@@ -24,9 +24,11 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MenuGame extends JFrame {
 
@@ -35,7 +37,7 @@ public class MenuGame extends JFrame {
 
     /**
      * The initial menu of the game.
-     * */
+     */
     public MenuGame() {
 
         setTitle("Luxor");
@@ -46,8 +48,8 @@ public class MenuGame extends JFrame {
         selectedLevel = Levels.L1;
 
         /**
-        * Principal panel.
-        * */
+         * Principal panel.
+         */
         mainPanel = new JPanel(new GridLayout(2, 1));
         add(mainPanel);
 
@@ -60,7 +62,7 @@ public class MenuGame extends JFrame {
         button.addActionListener(actionListener);
         return button;
     }
-        
+
     private void showHelpMenu() {
         mainPanel.removeAll();
         mainPanel.revalidate();
@@ -80,14 +82,17 @@ public class MenuGame extends JFrame {
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         mainPanel.add(scrollPane, BorderLayout.CENTER); // Add the scrollPane to the mainPanel
-            
+
         // Adding some vertical space between the textArea and the "Back" button
         helpPanel.add(Box.createVerticalStrut(10));
 
         // Load text from file
         try {
-            String filePath = "src/main/resources/help/help.txt";
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(
+                            ClassLoader.getSystemResourceAsStream(
+                                    "help" + System.getProperty("file.separator") + "help.txt")));
             String line;
             StringBuilder content = new StringBuilder();
             while ((line = reader.readLine()) != null) {
@@ -102,7 +107,7 @@ public class MenuGame extends JFrame {
             // Eccezione generale di I/O
             e.printStackTrace();
         }
-        
+
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 16));
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -163,13 +168,13 @@ public class MenuGame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Object[] options = Levels.values();
                 Levels selected = (Levels) JOptionPane.showInputDialog(
-                    MenuGame.this, // Frame genitore
-                    "Seleziona un livello", // Testo del messaggio
-                    "Selezione Livello", // Titolo del dialogo
-                    JOptionPane.PLAIN_MESSAGE, // Tipo di messaggio
-                    null, // Icona personalizzata (null per l'icona di default)
-                    options, // Opzioni da mostrare nell'elenco
-                    options[0] // Opzione preselezionata (in questo caso, la prima costante dell'enum)
+                        MenuGame.this, // Frame genitore
+                        "Seleziona un livello", // Testo del messaggio
+                        "Selezione Livello", // Titolo del dialogo
+                        JOptionPane.PLAIN_MESSAGE, // Tipo di messaggio
+                        null, // Icona personalizzata (null per l'icona di default)
+                        options, // Opzioni da mostrare nell'elenco
+                        options[0] // Opzione preselezionata (in questo caso, la prima costante dell'enum)
                 );
 
                 if (selected != null) {
@@ -187,6 +192,5 @@ public class MenuGame extends JFrame {
     public Levels getSelectedLevel() {
         return selectedLevel;
     }
-    
-    
+
 }

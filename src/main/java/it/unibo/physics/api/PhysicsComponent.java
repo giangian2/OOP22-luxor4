@@ -2,7 +2,6 @@ package it.unibo.physics.api;
 
 import it.unibo.model.GameObject;
 import it.unibo.model.World;
-import it.unibo.utils.*;
 
 public abstract class PhysicsComponent {
 

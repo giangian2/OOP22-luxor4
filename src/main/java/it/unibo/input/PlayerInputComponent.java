@@ -3,7 +3,6 @@ package it.unibo.input;
 import it.unibo.utils.V2d;
 import it.unibo.utils.P2d;
 import it.unibo.model.*;
-import it.unibo.model.impl.RectBoundingBox;
 
 public class PlayerInputComponent implements InputComponent {
 

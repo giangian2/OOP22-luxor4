@@ -1,12 +1,8 @@
 package it.unibo.model;
 
-import it.unibo.model.impl.RectBoundingBox;
-import it.unibo.utils.P2d;
 import it.unibo.utils.Path;
 import it.unibo.utils.QueueManager;
-import it.unibo.utils.V2d;
 import it.unibo.core.api.Level;
-import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.events.api.WorldEventListener;
 import it.unibo.input.KeyboardInputController;
 

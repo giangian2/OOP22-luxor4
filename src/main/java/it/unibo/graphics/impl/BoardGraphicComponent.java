@@ -1,13 +1,10 @@
 package it.unibo.graphics.impl;
 
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import it.unibo.enums.BallColor;
-import it.unibo.model.Ball;
 import it.unibo.model.GameObject;
 
 public class BoardGraphicComponent implements MyGraphicsComponent {
@@ -34,8 +31,6 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
 
     @Override
     public void update(GameObject obj, java.awt.Graphics2D g) {
-        // frame.setUndecorated(true); // Remove title bar
-
         g.drawImage(img, 0, 0, null);
     }
 

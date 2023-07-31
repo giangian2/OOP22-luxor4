@@ -8,7 +8,6 @@ import java.util.List;
 import it.unibo.enums.BallColor;
 import it.unibo.model.Ball;
 import it.unibo.model.GameObject;
-import it.unibo.utils.QueueManager;
 
 import org.junit.jupiter.api.Test;
 

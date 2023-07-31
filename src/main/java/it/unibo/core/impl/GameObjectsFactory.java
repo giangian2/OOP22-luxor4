@@ -1,20 +1,13 @@
 package it.unibo.core.impl;
 
 import it.unibo.enums.BallColor;
-import it.unibo.events.api.*;
-import it.unibo.events.impl.*;
-import it.unibo.graphics.impl.CannonGraphicsComponent;
-import it.unibo.input.InputComponent;
 import it.unibo.input.NullInputComponent;
 import it.unibo.input.PlayerInputComponent;
 import it.unibo.model.Ball;
 import it.unibo.model.Cannon;
-import it.unibo.model.GameObject;
 import it.unibo.model.GameObject.Type;
-import it.unibo.model.api.BoundingBox;
 import it.unibo.model.impl.CircleBoundingBox;
 import it.unibo.model.impl.RectBoundingBox;
-import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.physics.impl.BallPhysicsComponent;
 import it.unibo.physics.impl.CannonBallPhysicsComponent;
 import it.unibo.physics.impl.CannonPhysicsComponent;

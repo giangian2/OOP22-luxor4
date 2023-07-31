@@ -1,12 +1,8 @@
 package it.unibo.utils;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.xml.parsers.ParserConfigurationException;
-import org.xml.sax.SAXException;
 
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.enums.BallColor;

@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.text.html.Option;
 
 import it.unibo.events.api.WorldEventListener;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.physics.impl.BoundaryCollision;
-import it.unibo.enums.BallColor;
 import it.unibo.enums.Direction;
 import it.unibo.events.api.WorldEvent;
-import it.unibo.model.api.BoundingBox;
 import it.unibo.model.impl.CircleBoundingBox;
 import it.unibo.model.impl.RectBoundingBox;
 import it.unibo.utils.*;
@@ -154,6 +151,7 @@ public class World {
         double radius = box.getRadius();
         for (Ball obj : this.getQueue()) {
             if (new V2d(obj.getCurrentPos(), pos).module() <= 2 * radius) {
+                playCollisionSound();
                 return Optional.of(obj);
             }
         }
@@ -184,14 +182,12 @@ public class World {
     }
 
     public void playBackgroundMusic() {
-        soundPlayer.setFile(SoundPlayer.BACKGROUND_MUSIC);
-        soundPlayer.play();
-        soundPlayer.loop();
+        soundPlayer.play(SoundPlayer.BACKGROUND_MUSIC);
+        soundPlayer.loop(SoundPlayer.BACKGROUND_MUSIC);
     }
 
-    public void playShootingSound() {
-        soundPlayer.setFile(SoundPlayer.CANNON_SHOOT);
-        soundPlayer.play();
+    public void playCollisionSound() {
+        soundPlayer.play(SoundPlayer.BALL_COLLISION);
     }
 
     public void stopMusic() {
