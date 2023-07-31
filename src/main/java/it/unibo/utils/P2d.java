@@ -1,8 +1,5 @@
 package it.unibo.utils;
 
-import java.util.Comparator;
-
-import it.unibo.model.GameObject;
 
 public class P2d implements java.io.Serializable {
 

@@ -2,21 +2,14 @@ package it.unibo.model;
 
 import it.unibo.input.*;
 import it.unibo.model.api.BoundingBox;
-import it.unibo.model.impl.CircleBoundingBox;
-import it.unibo.model.impl.RectBoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
-import it.unibo.physics.impl.BallPhysicsComponent;
-import it.unibo.physics.impl.CannonPhysicsComponent;
-import it.unibo.model.Ball;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.enums.BallColor;
 import it.unibo.utils.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 public class Cannon extends GameObject {
 

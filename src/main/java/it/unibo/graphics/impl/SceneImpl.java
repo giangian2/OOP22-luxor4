@@ -2,20 +2,14 @@ package it.unibo.graphics.impl;
 
 import javax.swing.JPanel;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
-import java.awt.BasicStroke;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -25,29 +19,15 @@ import java.awt.event.KeyListener;
 import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import java.net.URL;
-import java.util.Random;
 
 import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
-import it.unibo.input.InputComponent;
 import it.unibo.input.KeyboardInputController;
 import it.unibo.model.Ball;
-import it.unibo.model.Cannon;
 import it.unibo.model.GameState;
-import it.unibo.model.World;
-import it.unibo.model.api.BoundingBox;
-import it.unibo.physics.impl.CannonPhysicsComponent;
-import it.unibo.input.PlayerInputComponent;
-import it.unibo.utils.P2d;
-import it.unibo.utils.Path;
-import it.unibo.utils.V2d;
-import it.unibo.enums.*;
-import it.unibo.graphics.impl.BallGraphicsComponent;
-import it.unibo.graphics.impl.CannonGraphicsComponent;
 
 public class SceneImpl implements Scene {
 

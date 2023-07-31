@@ -4,7 +4,6 @@ import it.unibo.enums.BallColor;
 import it.unibo.input.*;
 import it.unibo.model.api.BoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
-import it.unibo.physics.impl.BallPhysicsComponent;
 import it.unibo.utils.*;
 
 public class Ball extends GameObject {

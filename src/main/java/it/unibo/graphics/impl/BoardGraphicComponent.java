@@ -1,13 +1,10 @@
 package it.unibo.graphics.impl;
 
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import it.unibo.enums.BallColor;
-import it.unibo.model.Ball;
 import it.unibo.model.GameObject;
 
 public class BoardGraphicComponent implements MyGraphicsComponent {

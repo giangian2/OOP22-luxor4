@@ -1,23 +1,14 @@
 package it.unibo.core.impl;
 
-import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.LinkedList;
 
-import javax.swing.JFrame;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
 import it.unibo.core.api.GameEngine;
-import it.unibo.core.api.Level;
 import it.unibo.enums.Levels;
 import it.unibo.events.api.*;
 import it.unibo.events.impl.HitBallEvent;
 import it.unibo.events.impl.HitBorderEvent;
 import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
-import it.unibo.graphics.impl.MenuGame;
 import it.unibo.graphics.impl.SceneImpl;
 import it.unibo.input.KeyboardInputController;
 import it.unibo.model.Ball;
@@ -25,8 +16,6 @@ import it.unibo.model.GameState;
 import it.unibo.model.World;
 import it.unibo.model.impl.RectBoundingBox;
 import it.unibo.utils.P2d;
-import it.unibo.utils.Path;
-import it.unibo.utils.Path.PathBuilder;
 
 public class GameEngineImpl implements GameEngine, WorldEventListener {
 

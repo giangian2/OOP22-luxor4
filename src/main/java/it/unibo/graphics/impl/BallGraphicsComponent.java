@@ -5,9 +5,6 @@ import it.unibo.model.Ball;
 import it.unibo.model.GameObject;
 import it.unibo.utils.P2d;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 public class BallGraphicsComponent implements MyGraphicsComponent {
 
     @Override

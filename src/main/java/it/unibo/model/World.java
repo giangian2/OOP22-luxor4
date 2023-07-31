@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.text.html.Option;
 
 import it.unibo.events.api.WorldEventListener;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.physics.impl.BoundaryCollision;
-import it.unibo.enums.BallColor;
 import it.unibo.enums.Direction;
 import it.unibo.events.api.WorldEvent;
-import it.unibo.model.api.BoundingBox;
 import it.unibo.model.impl.CircleBoundingBox;
 import it.unibo.model.impl.RectBoundingBox;
 import it.unibo.utils.*;

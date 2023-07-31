@@ -6,7 +6,6 @@ import it.unibo.events.impl.HitBallEvent;
 import it.unibo.events.impl.HitBorderEvent;
 import it.unibo.model.Ball;
 import it.unibo.model.GameObject;
-import it.unibo.utils.P2d;
 import it.unibo.model.World;
 import it.unibo.model.impl.CircleBoundingBox;
 

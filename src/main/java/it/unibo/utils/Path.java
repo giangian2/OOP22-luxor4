@@ -1,25 +1,17 @@
 package it.unibo.utils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import org.w3c.dom.*;
 import javax.xml.parsers.*;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import it.unibo.enums.Direction;
-import it.unibo.enums.Levels;
-import it.unibo.utils.P2d;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
