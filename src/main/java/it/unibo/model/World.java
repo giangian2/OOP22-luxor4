@@ -34,7 +34,7 @@ public class World {
     }
 
     public Cannon createCannon(P2d pos) {
-        return GameObjectsFactory.getInstance().createCannon(pos);
+        return GameObjectsFactory.getInstance().createCannon(pos, null);
     }
 
     public void setCannon(Cannon cannon) {
