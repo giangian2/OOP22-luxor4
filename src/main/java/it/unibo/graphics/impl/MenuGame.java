@@ -27,6 +27,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MenuGame extends JFrame {
 
@@ -86,8 +87,10 @@ public class MenuGame extends JFrame {
 
         // Load text from file
         try {
-            String filePath = "src/main/resources/help/help.txt";
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(
+                        ClassLoader.getSystemResourceAsStream(
+                            "help" + System.getProperty("file.separator") + "help.txt")));
             String line;
             StringBuilder content = new StringBuilder();
             while ((line = reader.readLine()) != null) {
