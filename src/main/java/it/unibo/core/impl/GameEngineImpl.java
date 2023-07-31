@@ -61,20 +61,20 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                 this.gameState = new GameState(this, () -> {
                     var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 10, 2,
                             "levels/1/Path.xml");
-                    w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
+                    w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470), "images/cannone.png"));
                     return w;
                 });
-                this.view = new SceneImpl(this.gameState, this.controller, "images/background.jpg");
+                this.view = new SceneImpl(this.gameState, this.controller, "images/background.jpg", "images/cannone.png");
                 break;
 
             case L2:
                 this.gameState = new GameState(this, () -> {
                     var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 5, 1,
                             "levels/2/Path.xml");
-                    w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
+                    w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470), "images/cannone.png"));
                     return w;
                 });
-                this.view = new SceneImpl(this.gameState, this.controller, "images/background2.jpg");
+                this.view = new SceneImpl(this.gameState, this.controller, "images/background2.jpg", "images/cannone.png");
                 break;
         }
 

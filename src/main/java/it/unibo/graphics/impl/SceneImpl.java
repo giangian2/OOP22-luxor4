@@ -38,8 +38,9 @@ public class SceneImpl implements Scene {
     private KeyboardInputController controller;
     private BallGraphicsComponent ballGraphicsComponent;
     private BoardGraphicComponent boardGraphics;
+    private CannonGraphicsComponent cannonGraphicsComponent;
 
-    public SceneImpl(GameState gameState, KeyboardInputController controller, String backgroundSrc) {
+    public SceneImpl(GameState gameState, KeyboardInputController controller, String backgroundSrc, String cannonSrc) {
         this.gameState = gameState;
         this.controller = controller;
         this.frame = new JFrame("Luxor");
@@ -48,6 +49,8 @@ public class SceneImpl implements Scene {
         frame.setMinimumSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
                 boardGraphics.getBackgorundImg().getHeight(null)));
         frame.setResizable(false);
+        this.cannonGraphicsComponent = new CannonGraphicsComponent(cannonSrc);
+
 
         // questo
         this.panel = new ScenePanel();
@@ -105,7 +108,7 @@ public class SceneImpl implements Scene {
                     frame.repaint();
                     var cannon = gameState.getWorld().getCannon();
                     if (cannon != null) {
-                        CannonGraphicsComponent cannonGraphicsComponent = new CannonGraphicsComponent();
+                        //CannonGraphicsComponent cannonGraphicsComponent = new CannonGraphicsComponent(cannonGraphicsComponent.getCannonPath());
                         cannonGraphicsComponent.update(cannon, (java.awt.Graphics2D) g);
                     }
                 } catch (Exception ex) {

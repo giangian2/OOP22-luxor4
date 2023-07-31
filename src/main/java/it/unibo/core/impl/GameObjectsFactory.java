@@ -37,12 +37,12 @@ public class GameObjectsFactory {
 
     }
 
-    public Cannon createCannon(P2d pos) {
+    public Cannon createCannon(P2d pos, String path) {
         return new Cannon(pos, new V2d(pos, pos),
                 new PlayerInputComponent(), // in input
                 new RectBoundingBox(pos, pos), // in input
                 new CannonPhysicsComponent(),
-                new CannonGraphicsComponent()); // in physics
+                new CannonGraphicsComponent(path)); // in physics
     }
 
     public Ball createCannonBall(P2d pos, V2d vel, BallColor color) {
