@@ -1,5 +1,7 @@
 package it.unibo.utils;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,26 +14,40 @@ import org.junit.jupiter.api.Test;
 
 public class QueueManagerTest {
     @Test
+    void testInitializationWithLevel1() {
+        assertDoesNotThrow(() -> {
+            new QueueManager(10, 1, "levels/1/Path.xml");
+        });
+    }
 
-    void testCloseByThree(){
-        List<Ball> inputList = new ArrayList<>();
+    @Test
+    void testInitializationWithLevel2() {
+        assertDoesNotThrow(() -> {
+            new QueueManager(20, 1, "levels/2/Path.xml");
+        });
+    }
+
+    @Test
+    void testCloseByThree() {
+        var qm = new QueueManager(0, 1, "levels/1/Path.xml");
+
         List<Ball> outputList = new ArrayList<>();
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.GREEN, null, null, null, null));
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.RED, null, null, null, null));
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.RED, null, null, null, null));
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.RED, null, null, null, null));
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.BLUE, null, null, null, null));
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.GREEN, null, null, null, null));
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.GREEN, null, null, null, null));
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.GREEN, null, null, null, null));
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.GREEN, null, null, null, null));
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.YELLOW, null, null, null, null));
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.YELLOW, null, null, null, null));
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.RED, null, null, null, null));
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.RED, null, null, null, null));
-        inputList.add(new Ball(GameObject.Type.BALL,null, BallColor.RED, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.GREEN, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(125, 10), BallColor.RED, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(150, 10), BallColor.RED, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(190, 10), BallColor.RED, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.BLUE, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.GREEN, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(125, 10), BallColor.GREEN, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(150, 10), BallColor.GREEN, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.GREEN, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.YELLOW, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.YELLOW, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(100, 10), BallColor.RED, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(110, 10), BallColor.RED, null, null, null, null));
+        qm.balls.add(new Ball(GameObject.Type.BALL, new P2d(120, 10), BallColor.RED, null, null, null, null));
 
-        //outputList=QueueManager.getCloseByThree(inputList);
-        //outputList.forEach(i->System.out.println(i.getColor()));
+        outputList = qm.getCloseByThree();
+        assertTrue(outputList.size() == 6);
     }
 }

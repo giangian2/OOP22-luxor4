@@ -1,5 +1,6 @@
 package it.unibo.utils;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -15,36 +16,38 @@ public class PathTest {
     @Test
     void testPathBuilder() {
 
-        var path = new Path.PathBuilder().build();
-        var ietrable = path.getPositions();
-        System.out.println(ietrable);
+        assertDoesNotThrow(() -> {
+            var path = new Path.PathBuilder("levels/1/Path.xml").build();
+            var ietrable = path.getPositions();
+            System.out.println(ietrable);
 
-        var first = path.getFirst();
-        var end = path.getLast();
+            var first = path.getFirst();
+            var end = path.getLast();
 
-        while (!first.equals(end)) {
+            while (!first.equals(end)) {
 
-            var dir = path.getMove(first);
+                var dir = path.getMove(first);
 
-            switch (dir) {
-                case UP:
-                    first = new P2d(first.x, first.y - 1);
-                    break;
+                switch (dir) {
+                    case UP:
+                        first = new P2d(first.x, first.y - 1);
+                        break;
 
-                case DOWN:
-                    first = new P2d(first.x, first.y + 1);
-                    break;
+                    case DOWN:
+                        first = new P2d(first.x, first.y + 1);
+                        break;
 
-                case LEFT:
-                    first = new P2d(first.x - 1, first.y);
-                    break;
+                    case LEFT:
+                        first = new P2d(first.x - 1, first.y);
+                        break;
 
-                case RIGHT:
-                    first = new P2d(first.x + 1, first.y);
-                    break;
+                    case RIGHT:
+                        first = new P2d(first.x + 1, first.y);
+                        break;
+                }
+
             }
-            System.out.println(first.toString());
-        }
+        });
 
     }
 

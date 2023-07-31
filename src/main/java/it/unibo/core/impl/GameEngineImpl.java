@@ -74,7 +74,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
             case L2:
                 this.gameState = new GameState(this, () -> {
-                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 30, 1,
+                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 5, 1,
                             "levels/2/Path.xml");
                     w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
                     return w;
@@ -123,12 +123,10 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
             } else if (event instanceof HitBallEvent) {
                 var ev = (HitBallEvent) event;
-                System.out.println("collision detected : " + ev.getQueueBall().getCurrentPos().toString());
                 gameState.getWorld().getCannon().removeFiredBall((Ball) ev.getCannnonBall());
                 gameState.getWorld().insertCollisionBall((Ball) ev.getCannnonBall(), (Ball) ev.getQueueBall());
 
             } else if (event instanceof HitBorderEvent) {
-                System.out.println("Border collision");
                 var ev = (HitBorderEvent) event;
                 gameState.getWorld().getCannon().removeFiredBall((Ball) ev.getCollisionObj());
             }

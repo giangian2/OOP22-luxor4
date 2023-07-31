@@ -94,6 +94,7 @@ public class SceneImpl implements Scene {
         menuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                gameState.getWorld().stopMusic();
                 MenuGame menuGame = new MenuGame();
                 menuGame.setVisible(true); // Make the MenuGame frame visible
                 frame.dispose();
