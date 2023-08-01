@@ -7,10 +7,20 @@ import javax.imageio.ImageIO;
 
 import it.unibo.model.GameObject;
 
+/**
+ * A graphics component responsible for rendering the background image of the game board.
+ */
+
 public class BoardGraphicComponent implements MyGraphicsComponent {
 
     private String backgroundPath;
     private Image img;
+
+    /**
+     * Constructs a BoardGraphicComponent with the specified background image path.
+     *
+     * @param backgroundPath The path to the background image.
+     */
 
     public BoardGraphicComponent(String backgorundPath) {
         super();
@@ -18,6 +28,10 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
         this.loadImage();
     }
 
+    /**
+     * Loads the background image from the specified path and stores it in the 'img' variable.
+     * If the image loading fails, an IOException is caught and printed.
+     */
     private void loadImage() {
         Image image = null;
         try {
@@ -29,11 +43,22 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
         }
     }
 
+    /**
+     * Renders the background image on the game board using the Graphics2D object provided.
+     *
+     * @param obj The GameObject to be updated (not used in this context).
+     * @param g   The Graphics2D object used for drawing the background image.
+     */
     @Override
     public void update(GameObject obj, java.awt.Graphics2D g) {
         g.drawImage(img, 0, 0, null);
     }
 
+    /**
+     * Gets the background image used by this BoardGraphicComponent.
+     *
+     * @return The background image.
+     */
     public Image getBackgorundImg() {
         return this.img;
     }
