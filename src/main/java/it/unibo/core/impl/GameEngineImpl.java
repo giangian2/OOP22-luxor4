@@ -47,6 +47,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     }
 
     private void renderGameOver() {
+        gameState.getWorld().stopMusic();
         System.out.println("Game Over");
     }
 

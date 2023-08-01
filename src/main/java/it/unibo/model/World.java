@@ -185,12 +185,20 @@ public class World {
     }
 
     public void playBackgroundMusic() {
-        soundPlayer.play(SoundPlayer.BACKGROUND_MUSIC);
+        soundPlayer.playFromStart(SoundPlayer.BACKGROUND_MUSIC);
         soundPlayer.loop(SoundPlayer.BACKGROUND_MUSIC);
     }
 
     public void playCollisionSound() {
         soundPlayer.play(SoundPlayer.BALL_COLLISION);
+    }
+
+    public void pauseBackgroundSound(){
+        soundPlayer.pause(SoundPlayer.BACKGROUND_MUSIC);
+    }
+
+    public void unpauseBackgroundSound() {
+        soundPlayer.play(SoundPlayer.BACKGROUND_MUSIC);
     }
 
     public void stopMusic() {
