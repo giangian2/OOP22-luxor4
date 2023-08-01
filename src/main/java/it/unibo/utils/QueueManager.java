@@ -13,9 +13,8 @@ import it.unibo.model.Ball;
  * The QueueManager manages a list of Ball objects associated with a Path.
  */
 public class QueueManager {
-
-    public Path path;
-    public List<Ball> balls;
+    private Path path;
+    private List<Ball> balls;
     private int steps;
 
     /**
@@ -25,7 +24,7 @@ public class QueueManager {
      * @param steps The number of times the balls will be moved forward.
      * @param xmlPathSrc The path of the xml file containing the Path.
      */
-    public QueueManager(int nBalls, int steps, String xmlPathSrc) {
+    public QueueManager(final int nBalls, final int steps, final String xmlPathSrc) {
         path = new Path.PathBuilder(xmlPathSrc).build();
         this.balls = new ArrayList<>();
         this.balls = Collections.synchronizedList(this.balls);
@@ -34,14 +33,23 @@ public class QueueManager {
     }
 
     /**
-     * Instatiate a list of n Ball with the following properties:
+     * Returns the list of balls present in the current instance of this class.
+     *
+     * @return A list containing the balls present in the current instance.
+     */
+    public List<Ball> getBalls() {
+        return this.balls;
+    }
+
+    /**
+     * Instatiate a list of n Ball with the following properties.
      * <ul>
      *     <li>The list does not contain more than two adjacent balls of the same color</li>
      *     <li>The positions of the balls will follow the Path vertex</li>
      * </ul>
      * @param n The number of balls in the list.
     */
-    private void instatiate(int n) {
+    private void instatiate(final int n) {
         var factory = GameObjectsFactory.getInstance();
         var pos = path.getFirst();
         Direction direction;
@@ -78,7 +86,7 @@ public class QueueManager {
      * @return The direction of the ball next movement
      * @see Path
      */
-    public Direction getMove(Ball ball) {
+    public Direction getMove(final Ball ball) {
         return path.getMove(ball.getCurrentPos());
     }
 
@@ -86,7 +94,7 @@ public class QueueManager {
      * Move balls contained in the list by one pixel starting from a specified index.
      * @param startIndex The index from which the shift must start.
      */
-    public void shiftBalls(int startIndex) {
+    public void shiftBalls(final int startIndex) {
         boolean firstShifting = true;
 
         if (startIndex < this.balls.size()) {
@@ -131,7 +139,7 @@ public class QueueManager {
     }
 
     /**
-     * Call steps-time the method {@link #shiftBalls()}
+     * Call steps-time the method {@link #shiftBalls()}.
      */
     public void shiftBallsStepsTime() {
         for (int i = 0; i < steps; i++) {
@@ -140,8 +148,8 @@ public class QueueManager {
     }
 
     /**
-     * Search if there are sub-lists of at least three adjacent balls with the same color in the ball list
-     * @return The sum of the sub-lists founded
+     * Search if there are sub-lists of at least three adjacent balls with the same color in the ball list.
+     * @return The sum of the sub-lists founded.
      */
     public List<Ball> getCloseByThree() {
         var ballList = this.balls;
@@ -150,9 +158,9 @@ public class QueueManager {
         for (int i = 0; i < ballList.size() - 2;) {
             var currentColor = ballList.get(i).getColor();
             int count = 1;
-            for (int j = 1; (i + j < ballList.size()) &&
-                    (ballList.get(i + j).getColor() == currentColor) &&
-                    (ballList.get(i + j).isNear(ballList.get(i + j - 1))); j++) {
+            for (int j = 1; (i + j < ballList.size())
+                    && (ballList.get(i + j).getColor() == currentColor)
+                    && (ballList.get(i + j).isNear(ballList.get(i + j - 1))); j++) {
                 count++;
             }
             if (count > 2) {
