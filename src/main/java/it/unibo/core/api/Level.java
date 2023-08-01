@@ -14,5 +14,5 @@ public interface Level {
      *
      * @return The World object representing the loaded game level.
      */
-    public World loadLevel();
+    World loadLevel();
 }
