@@ -39,6 +39,7 @@ public class SoundPlayer {
 
 	public void play(int soundIndex){
 		if (soundIndex >= 0 && soundIndex < clips.length) {
+			setFile(soundIndex);
             clips[soundIndex].start();
         }
 	}
