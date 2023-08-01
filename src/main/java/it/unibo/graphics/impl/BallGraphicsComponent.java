@@ -5,20 +5,40 @@ import it.unibo.model.Ball;
 import it.unibo.model.GameObject;
 import it.unibo.utils.P2d;
 
+/**
+ * A graphics component responsible for rendering a Ball GameObject on the screen.
+ */
 public class BallGraphicsComponent implements MyGraphicsComponent {
 
+    /**
+     * Updates the graphical representation of a Ball GameObject on the screen.
+     *
+     * @param obj The GameObject to be updated. Must be an instance of Ball.
+     * @param g   The Graphics2D object used for drawing the Ball.
+     * @throws IllegalArgumentException If the given GameObject is not a Ball.
+     */
     @Override
     public void update(GameObject obj, java.awt.Graphics2D g) {
+        // Check if the GameObject is a Ball instance.
         if (!(obj instanceof Ball)) {
             throw new IllegalArgumentException("GameObject is not a Ball");
         }
         Ball ball = (Ball) obj;
-
-        // Disegna la pallina
+        // Cast the GameObject to a Ball object.
+        
         P2d pos = ball.getCurrentPos();
+        // Get the current position of the ball.
+
         BallColor ballColor = ball.getColor();
+        // Get the color of the ball.
+
         g.setColor(ballColor.getBallColor());
+        // Set the color of the Graphics2D object for drawing the ball.
+
         g.fillOval((int) pos.x, (int) pos.y, Ball.IMAGE_DIAMETER, Ball.IMAGE_DIAMETER);
+         // Draw a filled oval (representing the ball) using the ball's color and dimensions.
+        // The x and y position of the oval are based on the x and y coordinates of the ball from pos.
+        // Ball.IMAGE_DIAMETER is likely a constant representing the diameter of the ball.
     }
    
 }

@@ -12,13 +12,27 @@ import it.unibo.model.GameState;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A custom JPanel representing the game over screen with game statistics.
+ */
+
 public class GameOverPanel extends JPanel {
     private GameState gameState;
+
+    /**
+     * Constructs a GameOverPanel with the given game state to display game statistics.
+     *
+     * @param gameState The current GameState containing game information.
+     */
 
     public GameOverPanel(GameState gameState) {
         this.gameState = gameState;
         initComponents();
     }
+
+     /**
+     * Initializes the components of the GameOverPanel, including labels to display game over message and points earned.
+     */
 
     private void initComponents() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
