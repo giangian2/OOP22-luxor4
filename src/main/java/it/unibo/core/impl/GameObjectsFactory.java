@@ -37,7 +37,7 @@ public class GameObjectsFactory {
 
     }
 
-    public Cannon createCannon(P2d pos, String path) {
+    public Cannon createCannon(P2d pos) {
         return new Cannon(pos, new V2d(pos, pos),
                 new PlayerInputComponent(), // in input
                 new RectBoundingBox(pos, pos), // in input

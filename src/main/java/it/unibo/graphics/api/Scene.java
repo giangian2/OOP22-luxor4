@@ -7,4 +7,6 @@ public interface Scene {
     void renderGameOver();
 
     void renderMenu();
+
+    void renderWin();
 }

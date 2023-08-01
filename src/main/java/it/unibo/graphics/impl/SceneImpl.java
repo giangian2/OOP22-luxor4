@@ -1,7 +1,6 @@
 package it.unibo.graphics.impl;
 
 import javax.swing.JPanel;
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,7 +11,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -20,9 +18,6 @@ import java.awt.event.KeyListener;
 import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
-
-import java.net.URL;
 
 import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
@@ -37,16 +32,14 @@ public class SceneImpl implements Scene {
     private GameState gameState;
     private JLayeredPane layeredPane;
     private KeyboardInputController controller;
-    private BallGraphicsComponent ballGraphicsComponent;
     private BoardGraphicComponent boardGraphics;
     private CannonGraphicsComponent cannonGraphicsComponent;
     private JLabel pointsLabel;
 
-    public SceneImpl(GameState gameState, KeyboardInputController controller, String backgroundSrc, String cannonSrc) {
+    public SceneImpl(GameState gameState, KeyboardInputController controller, String backgroundSrc) {
         this.gameState = gameState;
         this.controller = controller;
         this.frame = new JFrame("Luxor");
-        this.ballGraphicsComponent = new BallGraphicsComponent();
         this.boardGraphics = new BoardGraphicComponent(backgroundSrc);
         frame.setMinimumSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
                 boardGraphics.getBackgorundImg().getHeight(null)));
@@ -72,22 +65,21 @@ public class SceneImpl implements Scene {
         this.layeredPane.add(menuButton, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(menuButton, JLayeredPane.PALETTE_LAYER);
         menuButton.setBounds(boardGraphics.getBackgorundImg().getWidth(null) - 100,
-        this.boardGraphics.getBackgorundImg().getHeight(null) - 30, 80, 30);
-        
-        //label dei punti        
-                
-                pointsLabel = new JLabel("Punti: " + gameState.getScore());
-                this.layeredPane.add(pointsLabel, JLayeredPane.PALETTE_LAYER);
-                this.layeredPane.setLayer(pointsLabel, JLayeredPane.PALETTE_LAYER);
-                
-                // Imposta la posizione dell'etichetta in basso a sinistra
-                int labelX = 10; // La coordinata X dell'angolo sinistro
-                int labelY = this.boardGraphics.getBackgorundImg().getHeight(null) - 30; // La coordinata Y dell'angolo in basso
-                int labelWidth = 100; // Larghezza dell'etichetta
-                int labelHeight = 20; // Altezza dell'etichetta
-                pointsLabel.setBounds(labelX, labelY, labelWidth, labelHeight);
-                pointsLabel.setForeground(Color.WHITE); // Imposta il colore del testo a bianco
+                this.boardGraphics.getBackgorundImg().getHeight(null) - 30, 80, 30);
 
+        // label dei punti
+
+        pointsLabel = new JLabel("Punti: " + gameState.getScore());
+        this.layeredPane.add(pointsLabel, JLayeredPane.PALETTE_LAYER);
+        this.layeredPane.setLayer(pointsLabel, JLayeredPane.PALETTE_LAYER);
+
+        // Imposta la posizione dell'etichetta in basso a sinistra
+        int labelX = 10; // La coordinata X dell'angolo sinistro
+        int labelY = this.boardGraphics.getBackgorundImg().getHeight(null) - 30; // La coordinata Y dell'angolo in basso
+        int labelWidth = 100; // Larghezza dell'etichetta
+        int labelHeight = 20; // Altezza dell'etichetta
+        pointsLabel.setBounds(labelX, labelY, labelWidth, labelHeight);
+        pointsLabel.setForeground(Color.WHITE); // Imposta il colore del testo a bianco
 
         // Set the action listener for the button
         menuButton.addActionListener(new ActionListener() {
@@ -123,13 +115,7 @@ public class SceneImpl implements Scene {
                 try {
                     frame.repaint();
                     // Aggiorniamo il testo della label dei punti con il punteggio corrente
-                    pointsLabel.setText("Punti: " + gameState.getScore());
-                    var cannon = gameState.getWorld().getCannon();
-                    if (cannon != null) {
-                        // CannonGraphicsComponent cannonGraphicsComponent = new
-                        // CannonGraphicsComponent(cannonGraphicsComponent.getCannonPath());
-                        cannonGraphicsComponent.update(cannon, (java.awt.Graphics2D) g);
-                    }
+                    pointsLabel.setText("Points: " + gameState.getScore());
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -150,6 +136,20 @@ public class SceneImpl implements Scene {
             ex.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void renderWin() {
+        try {
+            gameState.getWorld().stopMusic();
+            MenuGame menuGame = new MenuGame();
+            menuGame.showWin(gameState);
+            menuGame.setVisible(true); // Make the MenuGame frame visible
+
+            frame.dispose();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override

@@ -154,53 +154,7 @@ public class MenuGame extends JFrame {
         constraints.anchor = GridBagConstraints.CENTER;
         labelPanel.add(label, constraints);
 
-        JPanel buttonPanel = new JPanel();
-        mainPanel.add(buttonPanel);
-
-        JButton help = createButton("Help", (ev) -> showHelpMenu());
-
-        buttonPanel.add(help);
-
-        JButton startGame = createButton("Start Game", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                final Thread thread = new Thread() {
-                    @Override
-                    public void run() {
-                        new GameEngineImpl(selectedLevel).initGame();
-                    }
-                };
-                thread.start();
-                System.out.println("Game started!");
-                dispose();
-            }
-        });
-        buttonPanel.add(startGame);
-
-        JButton levelsButton = createButton("Levels", new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Object[] options = Levels.values();
-                Levels selected = (Levels) JOptionPane.showInputDialog(
-                        MenuGame.this, // Parent frame
-                        "Select a level", // Message text
-                        "Level Selection", // Dialog title
-                        JOptionPane.PLAIN_MESSAGE, // Message type
-                        null, // Custom icon (null for default icon)
-                        options, // Options to show in the list
-                        options[0] // Pre-selected option (in this case, the first enum constant)
-                );
-
-                if (selected != null) {
-                    selectedLevel = selected;
-                    System.out.println("Selected level: " + selectedLevel.getLevelName());
-                }
-            }
-        });
-
-        buttonPanel.add(levelsButton);
-
-        help.setAlignmentX(Component.CENTER_ALIGNMENT);
-        startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.renderButtonPanel();
     }
 
     public void showGameOver(GameState gameState) {
@@ -212,7 +166,32 @@ public class MenuGame extends JFrame {
         mainPanel.repaint();
 
         mainPanel.add(new GameOverPanel(gameState));
+        this.renderButtonPanel();
+    }
 
+    public void showWin(GameState gameState) {
+        mainPanel.removeAll();
+        mainPanel.revalidate();
+
+        mainPanel.removeAll();
+        mainPanel.revalidate();
+        mainPanel.repaint();
+
+        // QUI DOVRAI PASSARGLI IL WINPANEL
+        mainPanel.add(new GameOverPanel(gameState));
+        this.renderButtonPanel();
+    }
+
+    /**
+     * Gets the currently selected level of the game.
+     *
+     * @return The currently selected level.
+     */
+    public Levels getSelectedLevel() {
+        return selectedLevel;
+    }
+
+    private void renderButtonPanel() {
         JPanel buttonPanel = new JPanel();
         mainPanel.add(buttonPanel);
 
@@ -264,16 +243,6 @@ public class MenuGame extends JFrame {
 
         help.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-    }
-
-    /**
-     * Gets the currently selected level of the game.
-     *
-     * @return The currently selected level.
-     */
-    public Levels getSelectedLevel() {
-        return selectedLevel;
     }
 
 }

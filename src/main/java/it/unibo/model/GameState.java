@@ -44,10 +44,20 @@ public class GameState {
 
     public boolean isGameOver() {
         var res = this.getWorld().moveSingleBall(this.getWorld().getQueue().get(this.getWorld().getQueue().size() - 1));
-        if (res == Direction.NONE)
+        if (res == Direction.NONE) {
             return true;
-        else
+        } else {
             return false;
+        }
+
+    }
+
+    public boolean isWin() {
+        if (this.getWorld().getQueue().size() == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void changePauseState() {
