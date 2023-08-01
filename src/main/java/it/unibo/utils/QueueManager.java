@@ -18,7 +18,7 @@ public class QueueManager {
     private int steps;
 
     /**
-     * Constructs a QueueManager with the specified parameters.
+     * Constructs a new QueueManager with the specified parameters.
      *
      * @param nBalls The number of balls in the list
      * @param steps The number of times the balls will be moved forward.
