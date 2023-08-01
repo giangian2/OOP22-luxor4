@@ -26,10 +26,10 @@ public class GameOverPanel extends JPanel {
         JLabel gameOverLabel = new JLabel("Gioco finito!");
         gameOverLabel.setFont(new Font("Arial", Font.BOLD, 25));
 
-        JLabel pointsLabel = new JLabel("Pointss: " + gameState.getScore());
+        JLabel pointsLabel = new JLabel("Points: " + gameState.getScore());
         pointsLabel.setFont(new Font("Arial", Font.BOLD, 25));
 
         add(gameOverLabel);
         add(pointsLabel);
     }
-}
+}  

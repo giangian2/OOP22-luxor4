@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
 import java.awt.Color;
@@ -39,6 +40,7 @@ public class SceneImpl implements Scene {
     private BallGraphicsComponent ballGraphicsComponent;
     private BoardGraphicComponent boardGraphics;
     private CannonGraphicsComponent cannonGraphicsComponent;
+    private JLabel pointsLabel;
 
     public SceneImpl(GameState gameState, KeyboardInputController controller, String backgroundSrc, String cannonSrc) {
         this.gameState = gameState;
@@ -70,7 +72,22 @@ public class SceneImpl implements Scene {
         this.layeredPane.add(menuButton, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(menuButton, JLayeredPane.PALETTE_LAYER);
         menuButton.setBounds(boardGraphics.getBackgorundImg().getWidth(null) - 100,
-                this.boardGraphics.getBackgorundImg().getHeight(null) - 30, 80, 30);
+        this.boardGraphics.getBackgorundImg().getHeight(null) - 30, 80, 30);
+        
+        //label dei punti        
+                
+                pointsLabel = new JLabel("Punti: " + gameState.getScore());
+                this.layeredPane.add(pointsLabel, JLayeredPane.PALETTE_LAYER);
+                this.layeredPane.setLayer(pointsLabel, JLayeredPane.PALETTE_LAYER);
+                
+                // Imposta la posizione dell'etichetta in basso a sinistra
+                int labelX = 10; // La coordinata X dell'angolo sinistro
+                int labelY = this.boardGraphics.getBackgorundImg().getHeight(null) - 30; // La coordinata Y dell'angolo in basso
+                int labelWidth = 100; // Larghezza dell'etichetta
+                int labelHeight = 20; // Altezza dell'etichetta
+                pointsLabel.setBounds(labelX, labelY, labelWidth, labelHeight);
+                pointsLabel.setForeground(Color.WHITE); // Imposta il colore del testo a bianco
+
 
         // Set the action listener for the button
         menuButton.addActionListener(new ActionListener() {
@@ -105,6 +122,8 @@ public class SceneImpl implements Scene {
             if (g != null) {
                 try {
                     frame.repaint();
+                    // Aggiorniamo il testo della label dei punti con il punteggio corrente
+                    pointsLabel.setText("Punti: " + gameState.getScore());
                     var cannon = gameState.getWorld().getCannon();
                     if (cannon != null) {
                         // CannonGraphicsComponent cannonGraphicsComponent = new
