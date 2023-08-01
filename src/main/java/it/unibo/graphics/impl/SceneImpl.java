@@ -51,7 +51,6 @@ public class SceneImpl implements Scene {
         frame.setResizable(false);
         this.cannonGraphicsComponent = new CannonGraphicsComponent(cannonSrc);
 
-
         // questo
         this.panel = new ScenePanel();
         this.panel.setPreferredSize(new Dimension(this.boardGraphics.getBackgorundImg().getWidth(null),
@@ -108,7 +107,8 @@ public class SceneImpl implements Scene {
                     frame.repaint();
                     var cannon = gameState.getWorld().getCannon();
                     if (cannon != null) {
-                        //CannonGraphicsComponent cannonGraphicsComponent = new CannonGraphicsComponent(cannonGraphicsComponent.getCannonPath());
+                        // CannonGraphicsComponent cannonGraphicsComponent = new
+                        // CannonGraphicsComponent(cannonGraphicsComponent.getCannonPath());
                         cannonGraphicsComponent.update(cannon, (java.awt.Graphics2D) g);
                     }
                 } catch (Exception ex) {
@@ -121,7 +121,12 @@ public class SceneImpl implements Scene {
     @Override
     public void renderGameOver() {
         try {
-            frame.repaint();
+            gameState.getWorld().stopMusic();
+            MenuGame menuGame = new MenuGame();
+            menuGame.showGameOver(gameState);
+            menuGame.setVisible(true); // Make the MenuGame frame visible
+
+            frame.dispose();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
