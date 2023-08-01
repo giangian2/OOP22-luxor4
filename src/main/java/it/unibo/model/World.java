@@ -18,11 +18,15 @@ public class World {
     private QueueManager qm;
     public static RectBoundingBox mainBBox;
     private WorldEventListener evListener;
-    private SoundPlayer soundPlayer = new SoundPlayer();
+    private SoundPlayer soundPlayer;
 
     public World(RectBoundingBox bbox, int nBalls, int steps, String xmlSrc) {
         qm = new QueueManager(nBalls, steps, xmlSrc);
         mainBBox = bbox;
+        List<String> strings = new ArrayList<String>();
+        strings.add("/sounds/Background.wav");
+        strings.add("/sounds/BallCollision.wav");
+        soundPlayer = new SoundPlayer(new ArrayList<>(strings));
 
     }
 

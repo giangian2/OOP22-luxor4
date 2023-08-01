@@ -1,11 +1,15 @@
 package it.unibo.utils;
 
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+/**
+ * The SoundPlayer provides 
+ */
 public class SoundPlayer {
     private Clip[] clips;
 	URL soundURL[]=new URL[2];
@@ -14,9 +18,10 @@ public class SoundPlayer {
     public static final int BALL_COLLISION=1;
 
 	
-	public SoundPlayer(){
-		soundURL[0]=getClass().getResource("/sounds/Background.wav");
-        soundURL[1]=getClass().getResource("/sounds/BallCollision.wav");
+	public SoundPlayer(ArrayList<String> soundsPath){
+		for(int i=0;i<soundsPath.size();i++){
+			soundURL[i]=getClass().getResource(soundsPath.get(i));
+		}
 
 		clips = new Clip[soundURL.length];
 	}
