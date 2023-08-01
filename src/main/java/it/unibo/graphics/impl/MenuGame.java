@@ -28,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Represents the menu of the Luxor game, allowing players to start the game,
@@ -42,9 +43,11 @@ public class MenuGame extends JFrame {
      * Constructs the initial menu of the game.
      */
     public MenuGame() {
+        final int width = 800;
+        final int height = 600;
 
         setTitle("Luxor");
-        setSize(800, 600);
+        setSize(width, height);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -67,7 +70,7 @@ public class MenuGame extends JFrame {
      *                       pressed.
      * @return The created JButton.
      */
-    private JButton createButton(String text, ActionListener actionListener) {
+    private JButton createButton(final String text, final ActionListener actionListener) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.PLAIN, 16));
         button.addActionListener(actionListener);
@@ -100,29 +103,29 @@ public class MenuGame extends JFrame {
         /**
          * Load text from file.
          */
-        try {
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(
-                            ClassLoader.getSystemResourceAsStream(
-                                    "help" + System.getProperty("file.separator") + "help.txt")));
-            String line;
-            StringBuilder content = new StringBuilder();
-            while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
-            }
-            reader.close();
-            textArea.setText(content.toString());
-        } catch (FileNotFoundException e) {
-            /**
-             * Exception thrown when the file is not found.
-             */
-            e.printStackTrace();
-        } catch (IOException e) {
-            /**
-             * General I/O exception.
-             */
-            e.printStackTrace();
+        try (BufferedReader reader = new BufferedReader(
+            new InputStreamReader(
+                ClassLoader.getSystemResourceAsStream(
+                    "help" + System.getProperty("file.separator") + "help.txt"),
+                StandardCharsets.UTF_8))) {
+
+        String line;
+        StringBuilder content = new StringBuilder();
+        while ((line = reader.readLine()) != null) {
+            content.append(line).append("\n");
         }
+        textArea.setText(content.toString());
+    } catch (FileNotFoundException e) {
+        /**
+         * Exception thrown when the file is not found.
+         */
+        e.printStackTrace();
+    } catch (IOException e) {
+        /**
+         * General I/O exception.
+         */
+        e.printStackTrace();
+    }
 
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -139,6 +142,8 @@ public class MenuGame extends JFrame {
      * select levels, and access help information.
      */
     public void showMainMenu() {
+        final int fontSize = 25;
+
         mainPanel.removeAll();
         mainPanel.revalidate();
         mainPanel.repaint();
@@ -147,7 +152,7 @@ public class MenuGame extends JFrame {
         mainPanel.add(labelPanel);
 
         JLabel label = new JLabel("Welcome to the game Luxor!");
-        label.setFont(new Font("Arial", Font.BOLD, 25));
+        label.setFont(new Font("Arial", Font.BOLD, fontSize));
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -157,7 +162,12 @@ public class MenuGame extends JFrame {
         this.renderButtonPanel();
     }
 
-    public void showGameOver(GameState gameState) {
+    /**
+     * Shows the game over screen when the player loses the game.
+     *
+     * @param gameState The GameState object representing the current state of the game.
+     */
+    public final void showGameOver(final GameState gameState) {
         mainPanel.removeAll();
         mainPanel.revalidate();
 
@@ -169,7 +179,12 @@ public class MenuGame extends JFrame {
         this.renderButtonPanel();
     }
 
-    public void showWin(GameState gameState) {
+    /**
+     * Shows the win screen when the player completes the game successfully.
+     *
+     * @param gameState The GameState object representing the current state of the game.
+     */
+    public void showWin(final GameState gameState) {
         mainPanel.removeAll();
         mainPanel.revalidate();
 
@@ -196,7 +211,7 @@ public class MenuGame extends JFrame {
         mainPanel.add(buttonPanel);
 
         JButton help = createButton("Help", new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 showHelpMenu();
             }
         });
@@ -205,7 +220,7 @@ public class MenuGame extends JFrame {
 
         JButton startGame = createButton("Start Game", new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 final Thread thread = new Thread() {
                     @Override
                     public void run() {
@@ -220,7 +235,7 @@ public class MenuGame extends JFrame {
         buttonPanel.add(startGame);
 
         JButton levelsButton = createButton("Levels", new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 Object[] options = Levels.values();
                 Levels selected = (Levels) JOptionPane.showInputDialog(
                         MenuGame.this, // Parent frame
