@@ -37,12 +37,12 @@ public class Cannon extends GameObject {
      * @param graph   The graphics component responsible for rendering the cannon.
      */
     public Cannon(final P2d pos, final V2d vel, final PlayerInputComponent input, final BoundingBox bbox,
-            final PhysicsComponent physics, final CannonGraphicsComponent graph) {
+        final PhysicsComponent physics, final CannonGraphicsComponent graph) {
         super(Type.CANNON, pos, vel, input, null, graph, physics);
         this.cannonBalls = new ArrayList<>();
         this.cannonBalls = Collections.synchronizedList(this.cannonBalls);
         this.stationaryBall = createStationaryBall();
-    }
+}
 
     /**
      * Creates a stationary ball with a random color.
