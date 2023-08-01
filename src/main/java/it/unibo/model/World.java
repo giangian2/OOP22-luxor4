@@ -18,19 +18,18 @@ import it.unibo.utils.*;
  * The World class represents the game space in which all the GameObjects
  * will be present and through which you can interact with them
  */
-@SuppressFBWarnings(value = { "EI_EXPOSE_REP",
-        "EI_EXPOSE_REP2" }, justification = "I prefer to suppress these FindBugs warnings")
 
 public class World {
+    /**
+     * World instance
+     * this property was set to PRIVATE and STATIC in order to simplify
+     * the access of the bounding box for the Graphics and Physics packages with no
+     * need of passing any World object to them, but only getting it with the method
+     * "getInstance"
+     */
     private static World instance;
     private Cannon cannon;
     private QueueManager qm;
-    /**
-     * World bounfing box
-     * this property was set to PUBLIC and STATIC in order to simplify
-     * the access of the bounding box for the Graphics and Physics packages with no
-     * need of passing any World object to them
-     */
     private RectBoundingBox mainBBox;
     private WorldEventListener evListener;
     private SoundPlayer soundPlayer;
@@ -43,6 +42,7 @@ public class World {
      *               frame
      * @param xmlSrc path of the XML file that contains the path of the queue
      */
+
     public World(RectBoundingBox bbox, int nBalls, int steps, String xmlSrc) {
         /**
          * Instatiate the queue manager with the specifics given in the constructor
@@ -54,13 +54,31 @@ public class World {
         strings.add("/sounds/Background.wav");
         strings.add("/sounds/BallCollision.wav");
         soundPlayer = new SoundPlayer(new ArrayList<>(strings));
-        World.instance = this;
-
+        setCurrentInstance(this);
     }
 
+    private static void setCurrentInstance(World w) {
+        World.instance = w;
+    }
+
+    /**
+     * Gets the bounding box
+     * 
+     * @return RectBoundingBox
+     */
     public RectBoundingBox getBBox() {
         return this.mainBBox;
     }
+
+    /**
+     * Gets the current instance of World class (used only by gra;hics and physics
+     * packegs in order to access BBox properties)
+     * 
+     * @return Wrold
+     * 
+     */
+    @SuppressFBWarnings(value = {
+            "EI_EXPOSE_REP" }, justification = "This warning does not represent a security threat beacuse the Input package will update the World")
 
     public static World getInstance() {
         return instance;
@@ -87,7 +105,7 @@ public class World {
      * @param cannon Sets the cannon object
      */
     public void setCannon(Cannon cannon) {
-        this.cannon = cannon;
+        this.cannon = GameObjectsFactory.getInstance().createCannon(cannon.getCurrentPos());
     }
 
     /**
