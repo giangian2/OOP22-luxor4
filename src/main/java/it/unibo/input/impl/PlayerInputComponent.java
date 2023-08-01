@@ -19,7 +19,7 @@ public class PlayerInputComponent implements InputComponent {
 			if (pos.x > 0)
 				pos = pos.sum(new V2d(-PlayerInputComponent.SPEED, 0));
 		} else if (ctrl.isMoveRight()) {
-			if (pos.x < World.mainBBox.getBRCorner().x - PlayerInputComponent.ADJUST_RIGHT_BORDER_LIMIT)
+			if (pos.x < World.getInstance().getBBox().getBRCorner().x - PlayerInputComponent.ADJUST_RIGHT_BORDER_LIMIT)
 				pos = pos.sum(new V2d(PlayerInputComponent.SPEED, 0));
 		}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.events.api.WorldEventListener;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.physics.impl.BoundaryCollision;
@@ -17,7 +18,11 @@ import it.unibo.utils.*;
  * The World class represents the game space in which all the GameObjects
  * will be present and through which you can interact with them
  */
+@SuppressFBWarnings(value = { "EI_EXPOSE_REP",
+        "EI_EXPOSE_REP2" }, justification = "I prefer to suppress these FindBugs warnings")
+
 public class World {
+    private static World instance;
     private Cannon cannon;
     private QueueManager qm;
     /**
@@ -26,7 +31,7 @@ public class World {
      * the access of the bounding box for the Graphics and Physics packages with no
      * need of passing any World object to them
      */
-    public static RectBoundingBox mainBBox;
+    private RectBoundingBox mainBBox;
     private WorldEventListener evListener;
     private SoundPlayer soundPlayer;
 
@@ -49,7 +54,16 @@ public class World {
         strings.add("/sounds/Background.wav");
         strings.add("/sounds/BallCollision.wav");
         soundPlayer = new SoundPlayer(new ArrayList<>(strings));
+        World.instance = this;
 
+    }
+
+    public RectBoundingBox getBBox() {
+        return this.mainBBox;
+    }
+
+    public static World getInstance() {
+        return instance;
     }
 
     /**

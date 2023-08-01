@@ -2,11 +2,13 @@ package it.unibo.model;
 
 import it.unibo.utils.Path;
 import it.unibo.utils.QueueManager;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.core.api.Level;
 import it.unibo.enums.Direction;
 import it.unibo.events.api.WorldEventListener;
 import it.unibo.input.impl.KeyboardInputController;
 
+@SuppressFBWarnings(value = { "EI_EXPOSE_REP" }, justification = "I prefer to suppress these FindBugs warnings")
 public class GameState {
 
     private int score;
