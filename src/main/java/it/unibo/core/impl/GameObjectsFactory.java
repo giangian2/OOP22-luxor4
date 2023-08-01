@@ -3,8 +3,8 @@ package it.unibo.core.impl;
 import it.unibo.enums.BallColor;
 import it.unibo.graphics.impl.BallGraphicsComponent;
 import it.unibo.graphics.impl.CannonGraphicsComponent;
-import it.unibo.input.NullInputComponent;
-import it.unibo.input.PlayerInputComponent;
+import it.unibo.input.impl.NullInputComponent;
+import it.unibo.input.impl.PlayerInputComponent;
 import it.unibo.model.Ball;
 import it.unibo.model.Cannon;
 import it.unibo.model.GameObject.Type;
@@ -42,7 +42,7 @@ public class GameObjectsFactory {
                 new PlayerInputComponent(), // in input
                 new RectBoundingBox(pos, pos), // in input
                 new CannonPhysicsComponent(),
-                new CannonGraphicsComponent(path)); // in physics
+                new CannonGraphicsComponent()); // in physics
     }
 
     public Ball createCannonBall(P2d pos, V2d vel, BallColor color) {

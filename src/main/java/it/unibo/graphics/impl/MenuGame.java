@@ -2,6 +2,7 @@ package it.unibo.graphics.impl;
 
 import it.unibo.core.impl.GameEngineImpl;
 import it.unibo.enums.Levels;
+import it.unibo.model.GameState;
 
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
@@ -29,7 +30,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Represents the menu of the Luxor game, allowing players to start the game, select levels, and access help information.
+ * Represents the menu of the Luxor game, allowing players to start the game,
+ * select levels, and access help information.
  */
 public class MenuGame extends JFrame {
 
@@ -61,7 +63,8 @@ public class MenuGame extends JFrame {
      * Creates a button with the given text and an associated action listener.
      *
      * @param text           The text to be displayed on the button.
-     * @param actionListener The action listener to be triggered when the button is pressed.
+     * @param actionListener The action listener to be triggered when the button is
+     *                       pressed.
      * @return The created JButton.
      */
     private JButton createButton(String text, ActionListener actionListener) {
@@ -124,11 +127,7 @@ public class MenuGame extends JFrame {
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 16));
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
-        back.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                showMainMenu();
-            }
-        });
+        back.addActionListener(ev -> showMainMenu());
 
         helpPanel.add(Box.createVerticalGlue());
         helpPanel.add(back);
@@ -136,7 +135,8 @@ public class MenuGame extends JFrame {
     }
 
     /**
-     * Displays the main menu of the game, allowing the player to start the game, select levels, and access help information.
+     * Displays the main menu of the game, allowing the player to start the game,
+     * select levels, and access help information.
      */
     public void showMainMenu() {
         mainPanel.removeAll();
@@ -157,12 +157,8 @@ public class MenuGame extends JFrame {
         JPanel buttonPanel = new JPanel();
         mainPanel.add(buttonPanel);
 
-        JButton help = createButton("Help", new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                showHelpMenu();
-            }
-        });
-        
+        JButton help = createButton("Help", (ev) -> showHelpMenu());
+
         buttonPanel.add(help);
 
         JButton startGame = createButton("Start Game", new ActionListener() {
@@ -201,15 +197,74 @@ public class MenuGame extends JFrame {
             }
         });
 
-
         buttonPanel.add(levelsButton);
-
-
-        GameOverPanel gameOverPanel = new GameOverPanel(this);
-        mainPanel.add(gameOverPanel);
 
         help.setAlignmentX(Component.CENTER_ALIGNMENT);
         startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
+    }
+
+    public void showGameOver(GameState gameState) {
+        mainPanel.removeAll();
+        mainPanel.revalidate();
+
+        mainPanel.removeAll();
+        mainPanel.revalidate();
+        mainPanel.repaint();
+
+        mainPanel.add(new GameOverPanel(gameState));
+
+        JPanel buttonPanel = new JPanel();
+        mainPanel.add(buttonPanel);
+
+        JButton help = createButton("Help", new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showHelpMenu();
+            }
+        });
+
+        buttonPanel.add(help);
+
+        JButton startGame = createButton("Start Game", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                final Thread thread = new Thread() {
+                    @Override
+                    public void run() {
+                        new GameEngineImpl(selectedLevel).initGame();
+                    }
+                };
+                thread.start();
+                System.out.println("Game started!");
+                dispose();
+            }
+        });
+        buttonPanel.add(startGame);
+
+        JButton levelsButton = createButton("Levels", new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Object[] options = Levels.values();
+                Levels selected = (Levels) JOptionPane.showInputDialog(
+                        MenuGame.this, // Parent frame
+                        "Select a level", // Message text
+                        "Level Selection", // Dialog title
+                        JOptionPane.PLAIN_MESSAGE, // Message type
+                        null, // Custom icon (null for default icon)
+                        options, // Options to show in the list
+                        options[0] // Pre-selected option (in this case, the first enum constant)
+                );
+
+                if (selected != null) {
+                    selectedLevel = selected;
+                    System.out.println("Selected level: " + selectedLevel.getLevelName());
+                }
+            }
+        });
+
+        buttonPanel.add(levelsButton);
+
+        help.setAlignmentX(Component.CENTER_ALIGNMENT);
+        startGame.setAlignmentX(Component.CENTER_ALIGNMENT);
+
     }
 
     /**

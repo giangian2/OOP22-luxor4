@@ -25,7 +25,7 @@ import java.net.URL;
 
 import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
-import it.unibo.input.KeyboardInputController;
+import it.unibo.input.impl.KeyboardInputController;
 import it.unibo.model.Ball;
 import it.unibo.model.GameState;
 
@@ -49,11 +49,10 @@ public class SceneImpl implements Scene {
         frame.setMinimumSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
                 boardGraphics.getBackgorundImg().getHeight(null)));
         frame.setResizable(false);
-        this.cannonGraphicsComponent = new CannonGraphicsComponent(cannonSrc);
-
+        this.cannonGraphicsComponent = new CannonGraphicsComponent();
 
         // questo
-        this.panel = new ScenePanel();
+        this.panel = new GamePanel();
         this.panel.setPreferredSize(new Dimension(this.boardGraphics.getBackgorundImg().getWidth(null),
                 this.boardGraphics.getBackgorundImg().getHeight(null)));
         // Use JLayeredPane to layer the components
@@ -108,7 +107,8 @@ public class SceneImpl implements Scene {
                     frame.repaint();
                     var cannon = gameState.getWorld().getCannon();
                     if (cannon != null) {
-                        //CannonGraphicsComponent cannonGraphicsComponent = new CannonGraphicsComponent(cannonGraphicsComponent.getCannonPath());
+                        // CannonGraphicsComponent cannonGraphicsComponent = new
+                        // CannonGraphicsComponent(cannonGraphicsComponent.getCannonPath());
                         cannonGraphicsComponent.update(cannon, (java.awt.Graphics2D) g);
                     }
                 } catch (Exception ex) {
@@ -121,7 +121,12 @@ public class SceneImpl implements Scene {
     @Override
     public void renderGameOver() {
         try {
-            frame.repaint();
+            gameState.getWorld().stopMusic();
+            MenuGame menuGame = new MenuGame();
+            menuGame.showGameOver(gameState);
+            menuGame.setVisible(true); // Make the MenuGame frame visible
+
+            frame.dispose();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -136,9 +141,9 @@ public class SceneImpl implements Scene {
         throw new UnsupportedOperationException("Unimplemented method 'renderMenu'");
     }
 
-    public class ScenePanel extends JPanel implements KeyListener {
+    public class GamePanel extends JPanel implements KeyListener {
 
-        public ScenePanel() {
+        public GamePanel() {
             this.addKeyListener(this);
             setFocusable(true);
             setFocusTraversalKeysEnabled(false);
@@ -169,39 +174,27 @@ public class SceneImpl implements Scene {
             g2.setColor(Color.WHITE);
 
             boardGraphics.update(null, g2);
-
-            var cannon = gameState.getWorld().getCannon();
-
-            // caricai il cannone
-            if (cannon != null) {
-                Image image = null;
-                try {
-                    URL imageUrl = getClass().getResource("/images/cannone.png");
-                    if (imageUrl != null) {
-                        image = ImageIO.read(imageUrl);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                if (image != null) {
-                    g2.drawImage(image, (int) cannon.getCurrentPos().x, (int) cannon.getCurrentPos().y, null);
-                }
-            }
-
-            final var entities = gameState.getWorld().getQueue();
-            // carico le palline
-            for (int i = 0; i < entities.size(); i++) {
-                Ball ball = entities.get(i);
-                ballGraphicsComponent.update(ball, g2);
-            }
-            var cannonBalls = gameState.getWorld().getCannon().getFiredBalls();
-            cannonBalls.add(gameState.getWorld().getCannon().getStationaryBall());
-
-            for (int i = 0; i < cannonBalls.size(); i++) {
-                Ball ball = cannonBalls.get(i);
-                ballGraphicsComponent.update(ball, g2);
-            }
+            /*
+             * var cannon = gameState.getWorld().getCannon();
+             * cannon.updateGraphics(g2);
+             * 
+             * final var entities = gameState.getWorld().getQueue();
+             * // carico le palline
+             * for (int i = 0; i < entities.size(); i++) {
+             * Ball ball = entities.get(i);
+             * ball.updateGraphics(g2);
+             * }
+             * var cannonBalls = gameState.getWorld().getCannon().getFiredBalls();
+             * cannonBalls.add(gameState.getWorld().getCannon().getStationaryBall());
+             * 
+             * for (int i = 0; i < cannonBalls.size(); i++) {
+             * Ball ball = cannonBalls.get(i);
+             * ball.updateGraphics(g2);
+             * }
+             */
+            gameState.getWorld()
+                    .getSceneEntities()
+                    .forEach(gameObj -> gameObj.updateGraphics(g2));
         }
 
         @Override

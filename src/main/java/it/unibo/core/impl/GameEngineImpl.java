@@ -9,8 +9,10 @@ import it.unibo.events.impl.HitBallEvent;
 import it.unibo.events.impl.HitBorderEvent;
 import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
+import it.unibo.graphics.impl.GameOverPanel;
+import it.unibo.graphics.impl.MenuGame;
 import it.unibo.graphics.impl.SceneImpl;
-import it.unibo.input.KeyboardInputController;
+import it.unibo.input.impl.KeyboardInputController;
 import it.unibo.model.Ball;
 import it.unibo.model.GameState;
 import it.unibo.model.World;
@@ -47,7 +49,8 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     }
 
     private void renderGameOver() {
-        System.out.println("Game Over");
+
+        view.renderGameOver();
     }
 
     @Override
@@ -64,17 +67,19 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                     w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470), "images/cannone.png"));
                     return w;
                 });
-                this.view = new SceneImpl(this.gameState, this.controller, "images/background.jpg", "images/cannone.png");
+                this.view = new SceneImpl(this.gameState, this.controller, "images/background.jpg",
+                        "images/cannone.png");
                 break;
 
             case L2:
                 this.gameState = new GameState(this, () -> {
-                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 5, 1,
+                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 5, 8,
                             "levels/2/Path.xml");
                     w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470), "images/cannone.png"));
                     return w;
                 });
-                this.view = new SceneImpl(this.gameState, this.controller, "images/background2.jpg", "images/cannone.png");
+                this.view = new SceneImpl(this.gameState, this.controller, "images/background2.jpg",
+                        "images/cannone.png");
                 break;
         }
 

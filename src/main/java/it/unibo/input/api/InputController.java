@@ -1,4 +1,4 @@
-package it.unibo.input;
+package it.unibo.input.api;
 
 public interface InputController {
     boolean isMoveLeft();

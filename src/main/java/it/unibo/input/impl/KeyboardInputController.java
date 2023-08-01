@@ -1,4 +1,6 @@
-package it.unibo.input;
+package it.unibo.input.impl;
+
+import it.unibo.input.api.InputController;
 
 public class KeyboardInputController implements InputController {
 

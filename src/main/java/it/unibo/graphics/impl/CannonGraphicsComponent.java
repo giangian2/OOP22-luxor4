@@ -13,23 +13,18 @@ import javax.imageio.ImageIO;
 
 public class CannonGraphicsComponent implements MyGraphicsComponent {
 
-    
-    private static final int CANNON_WIDTH = 40;
-    private static final int CANNON_HEIGHT = 20;
-    private String cannonPath;
-    private Image img;
+    private Image icon;
 
-    public CannonGraphicsComponent(String backgorundPath) {
+    public CannonGraphicsComponent() {
         super();
-        this.cannonPath = backgorundPath;
         this.loadImage();
     }
 
     private void loadImage() {
         Image image = null;
         try {
-            image = ImageIO.read(ClassLoader.getSystemResource(this.cannonPath));
-            this.img = image;
+            image = ImageIO.read(ClassLoader.getSystemResource("images/cannone.png"));
+            this.icon = image;
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -37,33 +32,13 @@ public class CannonGraphicsComponent implements MyGraphicsComponent {
     }
 
     @Override
-    public void update(GameObject obj, java.awt.Graphics2D g){
+    public void update(GameObject obj, java.awt.Graphics2D g) {
         if (!(obj instanceof Cannon)) {
             throw new IllegalArgumentException("GameObject is not a Cannon");
         }
         Cannon cannon = (Cannon) obj;
 
-        // Disegna il cannone
-        P2d pos = cannon.getCurrentPos();
-        
-        // Disegna la pallina stazionaria del cannone
-        Ball stationaryBall = cannon.getStationaryBall();
-        BallColor ballColor = stationaryBall.getColor();
-        g.setColor(ballColor.getBallColor());
-        
-
-        // Disegna le palline sparate dal cannone
-        for (Ball ball : cannon.getFiredBalls()) {
-            P2d ballPos = ball.getCurrentPos();
-            g.setColor(ballColor.getBallColor());
-           
-        }
+        g.drawImage(this.icon, (int) cannon.getCurrentPos().x, (int) cannon.getCurrentPos().y, null);
     }
 
-
-   
 }
-
-
-
- 

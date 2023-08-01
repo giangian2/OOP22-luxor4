@@ -1,6 +1,7 @@
 package it.unibo.model;
 
 import it.unibo.input.*;
+import it.unibo.input.impl.PlayerInputComponent;
 import it.unibo.model.api.BoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.core.impl.GameObjectsFactory;
@@ -26,12 +27,13 @@ public class Cannon extends GameObject {
     /**
      * Constructs a Cannon object with the specified parameters.
      *
-     * @param pos      The initial position of the cannon.
-     * @param vel      The initial velocity of the cannon.
-     * @param input    The input component responsible for controlling the cannon.
-     * @param bbox     The bounding box defining the collision area of the cannon.
-     * @param physics  The physics component responsible for handling physics interactions.
-     * @param graph    The graphics component responsible for rendering the cannon.
+     * @param pos     The initial position of the cannon.
+     * @param vel     The initial velocity of the cannon.
+     * @param input   The input component responsible for controlling the cannon.
+     * @param bbox    The bounding box defining the collision area of the cannon.
+     * @param physics The physics component responsible for handling physics
+     *                interactions.
+     * @param graph   The graphics component responsible for rendering the cannon.
      */
     public Cannon(P2d pos, V2d vel, PlayerInputComponent input, BoundingBox bbox,
             PhysicsComponent physics, CannonGraphicsComponent graph) {
@@ -98,7 +100,8 @@ public class Cannon extends GameObject {
     }
 
     /**
-     * Calculates the position of the stationary ball relative to the cannon's position.
+     * Calculates the position of the stationary ball relative to the cannon's
+     * position.
      *
      * @return The position of the stationary ball.
      */
