@@ -52,8 +52,10 @@ public class GameState {
 
     public void changePauseState() {
         if (pause) {
+            getWorld().unpauseBackgroundSound();
             pause = false;
         } else {
+            getWorld().pauseBackgroundSound();
             pause = true;
         }
     }

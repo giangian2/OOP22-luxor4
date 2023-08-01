@@ -313,7 +313,7 @@ public class World {
      * Play the background music
      */
     public void playBackgroundMusic() {
-        soundPlayer.play(SoundPlayer.BACKGROUND_MUSIC);
+        soundPlayer.playFromStart(SoundPlayer.BACKGROUND_MUSIC);
         soundPlayer.loop(SoundPlayer.BACKGROUND_MUSIC);
     }
 
@@ -324,9 +324,14 @@ public class World {
         soundPlayer.play(SoundPlayer.BALL_COLLISION);
     }
 
-    /*
-     * Stops the music
-     */
+    public void pauseBackgroundSound() {
+        soundPlayer.pause(SoundPlayer.BACKGROUND_MUSIC);
+    }
+
+    public void unpauseBackgroundSound() {
+        soundPlayer.play(SoundPlayer.BACKGROUND_MUSIC);
+    }
+
     public void stopMusic() {
         soundPlayer.stopAll();
     }

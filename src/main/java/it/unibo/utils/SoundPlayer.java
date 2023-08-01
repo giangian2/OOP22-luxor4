@@ -29,9 +29,16 @@ public class SoundPlayer {
 		}catch(Exception e){}
 	}
 
+	public void playFromStart(int soundIndex){
+		if (soundIndex >= 0 && soundIndex < clips.length) {
+			    setFile(soundIndex);
+				clips[soundIndex].setFramePosition(0); // Vai all'inizio
+				clips[soundIndex].start(); // Avvia il suono dall'inizio
+		}
+	}
+
 	public void play(int soundIndex){
 		if (soundIndex >= 0 && soundIndex < clips.length) {
-			setFile(soundIndex);
             clips[soundIndex].start();
         }
 	}
@@ -40,6 +47,14 @@ public class SoundPlayer {
 		if (soundIndex >= 0 && soundIndex < clips.length) {
             clips[soundIndex].loop(Clip.LOOP_CONTINUOUSLY);
         }
+	}
+
+	public void pause(int soundIndex){
+		if (soundIndex >= 0 && soundIndex < clips.length) {
+			if (clips[soundIndex].isRunning()) {
+				clips[soundIndex].stop(); // Metti in pausa il suono
+			}
+		}
 	}
 
 	public void stopAll(){
