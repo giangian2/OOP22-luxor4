@@ -141,7 +141,7 @@ public class MenuGame extends JFrame {
      * Displays the main menu of the game, allowing the player to start the game,
      * select levels, and access help information.
      */
-    public void showMainMenu() {
+    public final void showMainMenu() {
         final int fontSize = 25;
 
         mainPanel.removeAll();

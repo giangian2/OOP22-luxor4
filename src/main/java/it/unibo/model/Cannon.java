@@ -67,13 +67,15 @@ public class Cannon extends GameObject {
     }
 
     /**
-     * Retrieves a list of fired balls.
+     * Retrieves a copy of the list of fired balls.
      *
-     * @return A list of fired balls.
+     * @return A copy of the list of fired balls.
      */
     public List<Ball> getFiredBalls() {
-        return this.cannonBalls;
+        return new ArrayList<>(this.cannonBalls);
     }
+
+    
 
     /**
      * Removes a fired ball from the list of cannon balls.
@@ -106,7 +108,7 @@ public class Cannon extends GameObject {
      *
      * @return The position of the stationary ball.
      */
-    public P2d getStationaryBallPos() {
+    public final P2d getStationaryBallPos() {
         return new P2d(getCurrentPos().x + ADJUST_STATIONARY_XPOS, getCurrentPos().y + ADJUST_STATIONARY_YPOS);
     }
 }
