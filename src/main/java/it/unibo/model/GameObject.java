@@ -48,7 +48,7 @@ public class GameObject {
         return this.vel;
     }
 
-    public P2d getCurrentPos() {
+    public final P2d getCurrentPos() {
         return this.pos;
     }
 
