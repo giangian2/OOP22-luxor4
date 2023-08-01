@@ -4,6 +4,14 @@ import it.unibo.model.GameObject;
 import it.unibo.model.World;
 import it.unibo.physics.api.PhysicsComponent;
 
+/**
+ * A PhysicsComponent implementation that updates the position of a given GameObject
+ * to match the position of a stationary ball in the World. The update is performed based
+ * on the time elapsed since the last update (dt).
+ *
+ * This component ensures that the given GameObject represents the color of the stationary ball,
+ * which will be shot by the cannon.
+ */
 public class StationaryBallPhysicsComponent extends PhysicsComponent {
 
     /**
@@ -15,12 +23,11 @@ public class StationaryBallPhysicsComponent extends PhysicsComponent {
      * @param w   The World containing the GameObjects and other entities.
      */
     @Override
-    public void update(long dt, GameObject obj, World w) {
+    public void update(final long dt, final GameObject obj, final World w) {
         /**
          * Get the position of the stationary ball from the World.
          */
         var pos = w.getCannon().getStationaryBallPos();
-        
         /** 
          * Update the position of the given GameObject to the position of the stationary ball.
         */

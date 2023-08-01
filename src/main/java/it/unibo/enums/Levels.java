@@ -18,7 +18,7 @@ public enum Levels {
      *
      * @param levelName The name of the level.
      */
-    private Levels(String levelName) {
+    Levels(final String levelName) {
         this.levelName = levelName;
     }
 

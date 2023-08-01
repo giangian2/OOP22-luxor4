@@ -24,13 +24,12 @@ public class CannonBallPhysicsComponent extends BallPhysicsComponent {
      * @param w   The World in which the ball exists.
      */
     @Override
-    public void update(long dt, GameObject obj, World w) {
+    public void update(final long dt, final GameObject obj, final World w) {
 
         /**
          * Call the update method of the parent class to handle generic ball physics.
          */
         super.update(dt, obj, w);
-        
         /**
          * Get the bounding box of the cannon ball.
          */

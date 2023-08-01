@@ -12,7 +12,6 @@ import it.unibo.model.impl.CircleBoundingBox;
 import it.unibo.model.impl.RectBoundingBox;
 import it.unibo.physics.impl.BallPhysicsComponent;
 import it.unibo.physics.impl.CannonBallPhysicsComponent;
-import it.unibo.physics.impl.CannonPhysicsComponent;
 import it.unibo.physics.impl.StationaryBallPhysicsComponent;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
@@ -41,7 +40,7 @@ public class GameObjectsFactory {
         return new Cannon(pos, new V2d(pos, pos),
                 new PlayerInputComponent(), // in input
                 new RectBoundingBox(pos, pos), // in input
-                new CannonPhysicsComponent(),
+                null,
                 new CannonGraphicsComponent()); // in physics
     }
 
