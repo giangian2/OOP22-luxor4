@@ -3,10 +3,11 @@ package it.unibo.model;
 import it.unibo.input.impl.PlayerInputComponent;
 import it.unibo.model.api.BoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
+import it.unibo.utils.P2d;
+import it.unibo.utils.V2d;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.enums.BallColor;
 import it.unibo.graphics.impl.CannonGraphicsComponent;
-import it.unibo.utils.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,9 +20,10 @@ public class Cannon extends GameObject {
 
     private List<Ball> cannonBalls;
     private Ball stationaryBall;
-    final private int ADJUST_FIRED_BALL_POS = 37;
-    final private int ADJUST_STATIONARY_X_POS = 37;
-    final private int ADJUST_STATIONARY_Y_POS = 50;
+    private static final int ADJUST_FIRED_BALL_POS = 37;
+    private static final int ADJUST_STATIONARY_XPOS = 37;
+    private static final int BALL_SPEED_Y = -10;
+    private static final int ADJUST_STATIONARY_YPOS = 50;
 
     /**
      * Constructs a Cannon object with the specified parameters.
@@ -34,8 +36,8 @@ public class Cannon extends GameObject {
      *                interactions.
      * @param graph   The graphics component responsible for rendering the cannon.
      */
-    public Cannon(P2d pos, V2d vel, PlayerInputComponent input, BoundingBox bbox,
-            PhysicsComponent physics, CannonGraphicsComponent graph) {
+    public Cannon(final P2d pos, final V2d vel, final PlayerInputComponent input, final BoundingBox bbox,
+            final PhysicsComponent physics, final CannonGraphicsComponent graph) {
         super(Type.CANNON, pos, vel, input, null, graph, physics);
         this.cannonBalls = new ArrayList<>();
         this.cannonBalls = Collections.synchronizedList(this.cannonBalls);
@@ -78,7 +80,7 @@ public class Cannon extends GameObject {
      *
      * @param b The ball to be removed.
      */
-    public void removeFiredBall(Ball b) {
+    public void removeFiredBall(final Ball b) {
         this.cannonBalls.remove(b);
     }
 
@@ -91,7 +93,7 @@ public class Cannon extends GameObject {
         P2d ballPos = new P2d(getCurrentPos().x + ADJUST_FIRED_BALL_POS, getCurrentPos().y);
 
         BallColor projectileColor = stationaryBall.getColor();
-        Ball ball = GameObjectsFactory.getInstance().createCannonBall(ballPos, new V2d(0, -10), projectileColor);
+        Ball ball = GameObjectsFactory.getInstance().createCannonBall(ballPos, new V2d(0, BALL_SPEED_Y), projectileColor);
 
         this.cannonBalls.add(ball);
 
@@ -105,6 +107,6 @@ public class Cannon extends GameObject {
      * @return The position of the stationary ball.
      */
     public P2d getStationaryBallPos() {
-        return new P2d(getCurrentPos().x + ADJUST_STATIONARY_X_POS, getCurrentPos().y + ADJUST_STATIONARY_Y_POS);
+        return new P2d(getCurrentPos().x + ADJUST_STATIONARY_XPOS, getCurrentPos().y + ADJUST_STATIONARY_YPOS);
     }
 }
