@@ -12,7 +12,7 @@ import it.unibo.graphics.api.Scene;
 import it.unibo.graphics.impl.GameOverPanel;
 import it.unibo.graphics.impl.MenuGame;
 import it.unibo.graphics.impl.SceneImpl;
-import it.unibo.input.KeyboardInputController;
+import it.unibo.input.impl.KeyboardInputController;
 import it.unibo.model.Ball;
 import it.unibo.model.GameState;
 import it.unibo.model.World;

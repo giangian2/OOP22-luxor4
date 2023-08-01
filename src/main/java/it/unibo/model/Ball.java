@@ -2,7 +2,7 @@ package it.unibo.model;
 
 import it.unibo.enums.BallColor;
 import it.unibo.graphics.impl.BallGraphicsComponent;
-import it.unibo.input.*;
+import it.unibo.input.api.InputComponent;
 import it.unibo.model.api.BoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.utils.*;

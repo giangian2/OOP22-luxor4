@@ -127,11 +127,7 @@ public class MenuGame extends JFrame {
         JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 16));
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
-        back.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                showMainMenu();
-            }
-        });
+        back.addActionListener(ev -> showMainMenu());
 
         helpPanel.add(Box.createVerticalGlue());
         helpPanel.add(back);
@@ -161,11 +157,7 @@ public class MenuGame extends JFrame {
         JPanel buttonPanel = new JPanel();
         mainPanel.add(buttonPanel);
 
-        JButton help = createButton("Help", new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                showHelpMenu();
-            }
-        });
+        JButton help = createButton("Help", (ev) -> showHelpMenu());
 
         buttonPanel.add(help);
 

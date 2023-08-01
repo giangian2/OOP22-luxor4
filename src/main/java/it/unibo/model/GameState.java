@@ -5,7 +5,7 @@ import it.unibo.utils.QueueManager;
 import it.unibo.core.api.Level;
 import it.unibo.enums.Direction;
 import it.unibo.events.api.WorldEventListener;
-import it.unibo.input.KeyboardInputController;
+import it.unibo.input.impl.KeyboardInputController;
 
 public class GameState {
 

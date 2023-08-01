@@ -1,7 +1,9 @@
-package it.unibo.input;
+package it.unibo.input.impl;
 
 import it.unibo.utils.V2d;
 import it.unibo.utils.P2d;
+import it.unibo.input.api.InputComponent;
+import it.unibo.input.api.InputController;
 import it.unibo.model.*;
 
 public class PlayerInputComponent implements InputComponent {
