@@ -18,6 +18,9 @@ import it.unibo.utils.*;
  * The World class represents the game space in which all the GameObjects
  * will be present and through which you can interact with them
  */
+@SuppressFBWarnings(value = {
+        "EI_EXPOSE_REP",
+        "EI_EXPOSE_REP2" }, justification = "This warning does not represent a security threat beacuse the Input package will update the World")
 
 public class World {
     /**
@@ -27,7 +30,7 @@ public class World {
      * need of passing any World object to them, but only getting it with the method
      * "getInstance"
      */
-    private static World instance;
+    public static World instance;
     private Cannon cannon;
     private QueueManager qm;
     private RectBoundingBox mainBBox;
@@ -68,20 +71,6 @@ public class World {
      */
     public RectBoundingBox getBBox() {
         return this.mainBBox;
-    }
-
-    /**
-     * Gets the current instance of World class (used only by gra;hics and physics
-     * packegs in order to access BBox properties)
-     * 
-     * @return Wrold
-     * 
-     */
-    @SuppressFBWarnings(value = {
-            "EI_EXPOSE_REP" }, justification = "This warning does not represent a security threat beacuse the Input package will update the World")
-
-    public static World getInstance() {
-        return instance;
     }
 
     /**
