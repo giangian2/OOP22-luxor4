@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Represents a Cannon object in the game.
  */
@@ -37,12 +39,12 @@ public class Cannon extends GameObject {
      * @param graph   The graphics component responsible for rendering the cannon.
      */
     public Cannon(final P2d pos, final V2d vel, final PlayerInputComponent input, final BoundingBox bbox,
-        final PhysicsComponent physics, final CannonGraphicsComponent graph) {
+            final PhysicsComponent physics, final CannonGraphicsComponent graph) {
         super(Type.CANNON, pos, vel, input, null, graph, physics);
         this.cannonBalls = new ArrayList<>();
         this.cannonBalls = Collections.synchronizedList(this.cannonBalls);
         this.stationaryBall = createStationaryBall();
-}
+    }
 
     /**
      * Creates a stationary ball with a random color.
@@ -62,6 +64,9 @@ public class Cannon extends GameObject {
      *
      * @return The stationary ball.
      */
+    @SuppressFBWarnings(value = {
+            "EI_EXPOSE_REP",
+            "EI_EXPOSE_REP2" }, justification = "This warning does not represent a security threat beacuse the Stationary Ball needs to be accessed and updated by the Physic Component")
     public Ball getStationaryBall() {
         return this.stationaryBall;
     }
@@ -74,8 +79,6 @@ public class Cannon extends GameObject {
     public List<Ball> getFiredBalls() {
         return new ArrayList<>(this.cannonBalls);
     }
-
-    
 
     /**
      * Removes a fired ball from the list of cannon balls.
@@ -95,7 +98,8 @@ public class Cannon extends GameObject {
         P2d ballPos = new P2d(getCurrentPos().x + ADJUST_FIRED_BALL_POS, getCurrentPos().y);
 
         BallColor projectileColor = stationaryBall.getColor();
-        Ball ball = GameObjectsFactory.getInstance().createCannonBall(ballPos, new V2d(0, BALL_SPEED_Y), projectileColor);
+        Ball ball = GameObjectsFactory.getInstance().createCannonBall(ballPos, new V2d(0, BALL_SPEED_Y),
+                projectileColor);
 
         this.cannonBalls.add(ball);
 

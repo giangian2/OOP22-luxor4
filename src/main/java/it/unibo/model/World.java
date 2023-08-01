@@ -30,10 +30,9 @@ public class World {
      * need of passing any World object to them, but only getting it with the method
      * "getInstance"
      */
-    public static World instance;
     private Cannon cannon;
     private QueueManager qm;
-    private RectBoundingBox mainBBox;
+    private static RectBoundingBox mainBBox;
     private WorldEventListener evListener;
     private SoundPlayer soundPlayer;
 
@@ -46,22 +45,24 @@ public class World {
      * @param xmlSrc path of the XML file that contains the path of the queue
      */
 
-    public World(RectBoundingBox bbox, int nBalls, int steps, String xmlSrc) {
+    public World(RectBoundingBox bbox, int nBalls, int steps, String xmlSrc, WorldEventListener eventListener,
+            Cannon cannon) {
         /**
          * Instatiate the queue manager with the specifics given in the constructor
          * method
          */
+        this.cannon = cannon;
+        this.evListener = eventListener;
         qm = new QueueManager(nBalls, steps, xmlSrc);
-        mainBBox = bbox;
         List<String> strings = new ArrayList<String>();
         strings.add("/sounds/Background.wav");
         strings.add("/sounds/BallCollision.wav");
         soundPlayer = new SoundPlayer(new ArrayList<>(strings));
-        setCurrentInstance(this);
+        World.setBBox(bbox);
     }
 
-    private static void setCurrentInstance(World w) {
-        World.instance = w;
+    private static void setBBox(RectBoundingBox bbox) {
+        World.mainBBox = bbox;
     }
 
     /**
@@ -69,8 +70,8 @@ public class World {
      * 
      * @return RectBoundingBox
      */
-    public RectBoundingBox getBBox() {
-        return this.mainBBox;
+    public static RectBoundingBox getBBox() {
+        return mainBBox;
     }
 
     /**

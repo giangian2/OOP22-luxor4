@@ -96,9 +96,10 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                  * development process for the creation of new levels
                  */
                 this.gameState = new GameState(this, () -> {
-                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 10, 2,
-                            "levels/1/Path.xml");
-                    w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
+                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 10, 1,
+                            "levels/1/Path.xml", this,
+                            GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
+
                     return w;
                 });
                 // Render the view passing the correct background related to the selected level
@@ -107,9 +108,9 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
             case L2:
                 this.gameState = new GameState(this, () -> {
-                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 5, 8,
-                            "levels/2/Path.xml");
-                    w.setCannon(GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
+                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 5, 2,
+                            "levels/2/Path.xml", this,
+                            GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
                     return w;
                 });
                 this.view = new SceneImpl(this.gameState, this.controller, "images/background2.jpg");
