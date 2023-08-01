@@ -1,7 +1,6 @@
 package it.unibo.model;
 
 import it.unibo.graphics.impl.MyGraphicsComponent;
-import it.unibo.input.*;
 import it.unibo.input.api.InputComponent;
 import it.unibo.input.api.InputController;
 import it.unibo.model.api.BoundingBox;

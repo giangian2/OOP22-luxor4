@@ -1,6 +1,5 @@
 package it.unibo.model;
 
-import it.unibo.input.*;
 import it.unibo.input.impl.PlayerInputComponent;
 import it.unibo.model.api.BoundingBox;
 import it.unibo.physics.api.PhysicsComponent;

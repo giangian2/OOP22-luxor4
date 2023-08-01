@@ -174,27 +174,24 @@ public class SceneImpl implements Scene {
             g2.setColor(Color.WHITE);
 
             boardGraphics.update(null, g2);
-            /*
-             * var cannon = gameState.getWorld().getCannon();
-             * cannon.updateGraphics(g2);
-             * 
-             * final var entities = gameState.getWorld().getQueue();
-             * // carico le palline
-             * for (int i = 0; i < entities.size(); i++) {
-             * Ball ball = entities.get(i);
-             * ball.updateGraphics(g2);
-             * }
-             * var cannonBalls = gameState.getWorld().getCannon().getFiredBalls();
-             * cannonBalls.add(gameState.getWorld().getCannon().getStationaryBall());
-             * 
-             * for (int i = 0; i < cannonBalls.size(); i++) {
-             * Ball ball = cannonBalls.get(i);
-             * ball.updateGraphics(g2);
-             * }
-             */
-            gameState.getWorld()
-                    .getSceneEntities()
-                    .forEach(gameObj -> gameObj.updateGraphics(g2));
+
+            var cannon = gameState.getWorld().getCannon();
+            cannon.updateGraphics(g2);
+
+            final var entities = gameState.getWorld().getQueue();
+            // carico le palline
+            for (int i = 0; i < entities.size(); i++) {
+                Ball ball = entities.get(i);
+                ball.updateGraphics(g2);
+            }
+            var cannonBalls = gameState.getWorld().getCannon().getFiredBalls();
+            cannonBalls.add(gameState.getWorld().getCannon().getStationaryBall());
+
+            for (int i = 0; i < cannonBalls.size(); i++) {
+                Ball ball = cannonBalls.get(i);
+                ball.updateGraphics(g2);
+            }
+
         }
 
         @Override
