@@ -12,15 +12,19 @@ import it.unibo.enums.Direction;
 import it.unibo.events.api.WorldEvent;
 import it.unibo.model.impl.CircleBoundingBox;
 import it.unibo.model.impl.RectBoundingBox;
-import it.unibo.utils.*;
+import it.unibo.utils.QueueManager;
+import it.unibo.utils.P2d;
+import it.unibo.utils.V2d;
+import it.unibo.utils.SoundPlayer;
 
 /**
  * The World class represents the game space in which all the GameObjects
- * will be present and through which you can interact with them
+ * will be present and through which you can interact with them.
  */
 @SuppressFBWarnings(value = {
         "EI_EXPOSE_REP",
-        "EI_EXPOSE_REP2" }, justification = "This warning does not represent a security threat beacuse the Input package will update the World")
+        "EI_EXPOSE_REP2" },
+        justification = "This warning does not represent a security threat beacuse the Input package will update the World")
 
 public class World {
     /**
@@ -28,7 +32,7 @@ public class World {
      * this property was set to PRIVATE and STATIC in order to simplify
      * the access of the bounding box for the Graphics and Physics packages with no
      * need of passing any World object to them, but only getting it with the method
-     * "getInstance"
+     * "getInstance".
      */
     private Cannon cannon;
     private QueueManager qm;
@@ -38,18 +42,20 @@ public class World {
 
     /**
      * 
-     * @param bbox   represents the bounding box of the game area
-     * @param nBalls number of balls that needs to be instatiated
-     * @param steps  steps that are performed by each ball in the queue at each
+     * @param bbox   Represents the bounding box of the game area
+     * @param nBalls Number of balls that needs to be instatiated
+     * @param steps  Steps that are performed by each ball in the queue at each
      *               frame
-     * @param xmlSrc path of the XML file that contains the path of the queue
+     * @param xmlSrc Path of the XML file that contains the path of the queue
+     * @param eventListener Event listener for events
+     * @param cannon Cannon object
      */
 
-    public World(RectBoundingBox bbox, int nBalls, int steps, String xmlSrc, WorldEventListener eventListener,
-            Cannon cannon) {
+    public World(final RectBoundingBox bbox, final int nBalls, final int steps, final String xmlSrc,
+                final WorldEventListener eventListener, final Cannon cannon) {
         /**
          * Instatiate the queue manager with the specifics given in the constructor
-         * method
+         * method.
          */
         this.cannon = cannon;
         this.evListener = eventListener;
@@ -61,12 +67,17 @@ public class World {
         World.setBBox(bbox);
     }
 
-    private static void setBBox(RectBoundingBox bbox) {
+    /**
+     * Sets the bounding box.
+     * 
+     * @param bbox Bounding box to set.
+     */
+    private static void setBBox(final RectBoundingBox bbox) {
         World.mainBBox = bbox;
     }
 
     /**
-     * Gets the bounding box
+     * Gets the bounding box.
      * 
      * @return RectBoundingBox
      */
@@ -75,60 +86,61 @@ public class World {
     }
 
     /**
-     * @param l event listener
+     * Sets the world event listener.
+     * @param l Event listener
      */
-    public void setEventListener(WorldEventListener l) {
+    public void setEventListener(final WorldEventListener l) {
         evListener = l;
     }
 
     /**
-     * 
+     * Creates a new istance of a cannon.
      * @param pos
      * @return Cannon
      */
-    public Cannon createCannon(P2d pos) {
+    public Cannon createCannon(final P2d pos) {
         return GameObjectsFactory.getInstance().createCannon(pos);
     }
 
     /**
-     * 
+     * Creates a new istance of a cannon containinig the current cannon position.
      * @param cannon Sets the cannon object
      */
-    public void setCannon(Cannon cannon) {
+    public void setCannon(final Cannon cannon) {
         this.cannon = GameObjectsFactory.getInstance().createCannon(cannon.getCurrentPos());
     }
 
     /**
-     * 
-     * @return Cannon returns the cannon object
+     * Gets the current cannon object.
+     * @return The cannon object
      */
     public Cannon getCannon() {
         return this.cannon;
     }
 
     /**
-     * Notify an events to the WorldEventsListener
+     * Notify an events to the WorldEventsListener.
      * 
      * @param ev
      */
-    public void notifyWorldEvent(WorldEvent ev) {
+    public void notifyWorldEvent(final WorldEvent ev) {
         this.evListener.notifyEvent(ev);
     }
 
     /**
      * Passing a ball, it allows you to obtain its position at the next frame via
      * the queue manager, if you reach the end of the path the direction returned
-     * will be "NONE" and consequently the Game Over will have to be rendered
+     * will be "NONE" and consequently the Game Over will have to be rendered.
      * 
      * @param queueBall Ball
      * @return Direction
      */
-    public Direction moveSingleBall(Ball queueBall) {
+    public Direction moveSingleBall(final Ball queueBall) {
         return qm.getMove(queueBall);
     }
 
     /**
-     * Shifts all the balls by as many steps as specified in the constructor
+     * Shifts all the balls by as many steps as specified in the constructor.
      */
     public void shiftBalls() {
         qm.shiftBalls(0);
@@ -140,16 +152,17 @@ public class World {
      * with the tail, inside the thing itself.
      * Passing as input the ball of the cannon that generated the collision and the
      * ball of the queue with which it occurred, update the queue via the queue
-     * manager
+     * manager.
      * 
      * @param cannonBall Ball
      * @param queueBall  Ball
      */
-    public void insertCollisionBall(Ball cannonBall, Ball queueBall) {
+    public void insertCollisionBall(final Ball cannonBall, final Ball queueBall) {
         // Get the index of the queue ball
         int index = this.qm.getBalls().indexOf(queueBall);
-        if (index == -1)
+        if (index == -1) {
             throw new IllegalStateException("Queue Ball Not Found!", null);
+        }
 
         var cannonBallPos = cannonBall.getCurrentPos();
         var queueBallPos = queueBall.getCurrentPos();
@@ -157,12 +170,12 @@ public class World {
         /**
          * if the collision with the tail ball occurred in the third quadrant or along
          * the axes, the cannon ball is placed ahead of the tail ball
-         * otherwise it is put behind
+         * otherwise it is put behind.
          */
         if (cannonBallPos.x <= queueBallPos.x && cannonBallPos.y >= queueBallPos.y) {
             /**
              * if the tail ball was moving in the directions : DOWN and LEFT, then the shot
-             * ball is inserted between the hit tail ball and the respective next ball
+             * ball is inserted between the hit tail ball and the respective next ball.
              */
             if (qm.getMove(queueBall) == Direction.LEFT
                     || qm.getMove(queueBall) == Direction.DOWN) {
@@ -170,16 +183,17 @@ public class World {
                 this.qm.getBalls().add(index + 1,
                         GameObjectsFactory.getInstance().createBall(queueBallPos, null,
                                 cannonBall.getColor()));
-                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++) {
                     qm.shiftBalls(index + 1);
-
+                }
             } else {
                 /**
                  * if the ball from the tail was moving in the directions : UP and RIGHT, then
-                 * the shot ball is inserted in place of the hit bal
+                 * the shot ball is inserted in place of the hit ball.
                  */
-                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++) {
                     qm.shiftBalls(index);
+                }
                 this.qm.getBalls().add(index,
                         GameObjectsFactory.getInstance().createBall(queueBallPos, null,
                                 cannonBall.getColor()));
@@ -188,7 +202,7 @@ public class World {
             /**
              * if the collision with the tail ball occurred in the second quadrant, the
              * cannon ball is placed ahead of the tail ball
-             * otherwise it is put behind
+             * otherwise it is put behind.
              */
             if (qm.getMove(queueBall) == Direction.LEFT
                     || qm.getMove(queueBall) == Direction.UP) {
@@ -196,12 +210,13 @@ public class World {
                  * 
                  * if the collision occurred in the second quadrant and the ball of the queue
                  * with which the collision occurred is moving in the directions: LEFT, UP; then
-                 * the cannonball is inserted in place of the queue ball
+                 * the cannonball is inserted in place of the queue ball.
                  */
                 if (index - 1 > 0) {
 
-                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++) {
                         qm.shiftBalls(index);
+                    }
                     this.qm.getBalls().add(index,
                             GameObjectsFactory.getInstance().createBall(queueBallPos, null,
                                     cannonBall.getColor()));
@@ -209,26 +224,28 @@ public class World {
                 } else {
                     /**
                      * If the fired ball was fired behind the last queue ball, it's inserted in the
-                     * position 0 of the queue
+                     * position 0 of the queue.
                      */
                     this.qm.getBalls().add(0,
                             GameObjectsFactory.getInstance().createBall(queueBallPos, null,
                                     cannonBall.getColor()));
-                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                    for (int i = 0; i < Ball.IMAGE_DIAMETER; i++) {
                         qm.shiftBalls(1);
+                    }
+
 
                 }
             } else {
                 /**
                  * if the tail ball was moving in the directions : DOWN and RIGHT, then the shot
-                 * ball is inserted between the hit tail ball and the respective next ball
+                 * ball is inserted between the hit tail ball and the respective next ball.
                  */
                 this.qm.getBalls().add(index + 1,
                         GameObjectsFactory.getInstance().createBall(queueBallPos, null,
                                 cannonBall.getColor()));
-                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++)
+                for (int i = 0; i < Ball.IMAGE_DIAMETER; i++) {
                     qm.shiftBalls(index + 1);
-
+                }
             }
         }
 
@@ -236,7 +253,7 @@ public class World {
 
     /**
      * Returns the list of all triplets (or more) of neighboring balls having the
-     * same color
+     * same color.
      * 
      * @return List<Ball>
      */
@@ -246,7 +263,7 @@ public class World {
 
     /**
      * Returns all the game objects present in the World so that they can be used
-     * for graphic rendering within the Scene
+     * for graphic rendering within the Scene.
      * 
      * @return List<GameObject>
      */
@@ -259,7 +276,7 @@ public class World {
     }
 
     /**
-     * Return the balls in the queue via the QueueManager
+     * Return the balls in the queue via the QueueManager.
      * 
      * @return List<Ball>
      */
@@ -269,13 +286,15 @@ public class World {
 
     /**
      * Update the state of the World every frame:
-     * - the balls of the tail are scrolled
-     * - the physics of each ball fired from the cannon is updated
-     * - stationary cannon ball is updated
+     * <ul>
+     *     <li>The balls of the tail are scrolled.</li>
+     *     <li>The physics of each ball fired from the cannon is updated.</li>
+     *     <li>Stationary cannon ball is updated.</li>
+     * </ul>
      * 
-     * @param dt
+     * @param dt The elapsed time since the last update.
      */
-    public void updateState(long dt) {
+    public void updateState(final long dt) {
 
         qm.shiftBallsStepsTime();
         this.cannon.getFiredBalls().forEach((b) -> b.updatePhysics(dt, this));
@@ -283,18 +302,15 @@ public class World {
     }
 
     /**
+     * Checks if there is a collision between a ball passed in input and the
+     * balls in the queue and and returns the ball from 
+     * the tail with which the collision occurred.
      * 
-     * checks if there is a collision between a ball passed in input and the
-     * balls
-     * in the queue and and returns the ball from the tail with which the
-     * collision
-     * occurred
-     * 
-     * @param pos
-     * @param box
+     * @param pos Ball's position
+     * @param box Ball's bounding box
      * @return Optional<GameObject>
      */
-    public Optional<GameObject> checkCollisionWithBalls(P2d pos, CircleBoundingBox box) {
+    public Optional<GameObject> checkCollisionWithBalls(final P2d pos, final CircleBoundingBox box) {
         double radius = box.getRadius();
         for (Ball obj : this.getQueue()) {
             if (new V2d(obj.getCurrentPos(), pos).module() <= 2 * radius) {
@@ -306,15 +322,14 @@ public class World {
     }
 
     /**
-     *
-     * checks if there are collisions between an element passed as input and the
-     * bounding box of the World
+     * Checks if there are collisions between an element passed as input and the
+     * bounding box of the World.
      * 
-     * @param pos
-     * @param box
+     * @param pos Ball's position
+     * @param box Ball's bounding box
      * @return Optional<BoundaryCollision>
      */
-    public Optional<BoundaryCollision> checkCollisionWithBoundaries(P2d pos, CircleBoundingBox box) {
+    public Optional<BoundaryCollision> checkCollisionWithBoundaries(final P2d pos, final CircleBoundingBox box) {
         P2d ul = mainBBox.getULCorner();
         P2d br = mainBBox.getBRCorner();
         double r = box.getRadius();
@@ -331,23 +346,42 @@ public class World {
         }
     }
 
+    /**
+     * This method starts playing the background music from the beginning
+     * and continuously loops it.
+     */
     public void playBackgroundMusic() {
         soundPlayer.playFromStart(SoundPlayer.BACKGROUND_MUSIC);
         soundPlayer.loop(SoundPlayer.BACKGROUND_MUSIC);
     }
 
+    /**
+     * Plays the collision sound effect.
+     */
     public void playCollisionSound() {
         soundPlayer.play(SoundPlayer.BALL_COLLISION);
     }
 
+    /**
+     * This method pauses the currently playing background music,
+     * allowing to pause the game's audio.
+     */
     public void pauseBackgroundSound() {
         soundPlayer.pause(SoundPlayer.BACKGROUND_MUSIC);
     }
 
+    /**
+     * Unpauses the background music.
+     * This method resumes playing the background music after it has been paused.
+     */
     public void unpauseBackgroundSound() {
         soundPlayer.play(SoundPlayer.BACKGROUND_MUSIC);
     }
 
+    /**
+     * This method stops all sounds and music currently playing in the game,
+     * bringing the audio playback to a complete stop.
+     */
     public void stopMusic() {
         soundPlayer.stopAll();
     }
