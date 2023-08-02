@@ -66,7 +66,9 @@ public class Cannon extends GameObject {
      */
     @SuppressFBWarnings(value = {
             "EI_EXPOSE_REP",
-            "EI_EXPOSE_REP2" }, justification = "This warning does not represent a security threat beacuse the Stationary Ball needs to be accessed and updated by the Physic Component")
+            "EI_EXPOSE_REP2" }, 
+            justification = "This warning does not represent a security threat beacuse the Stationary Ball " +
+            "needs to be accessed and updated by the Physic Component")
     public Ball getStationaryBall() {
         return this.stationaryBall;
     }
