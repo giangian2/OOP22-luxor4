@@ -38,6 +38,7 @@ public class MenuGame extends JFrame {
 
     private Levels selectedLevel;
     private JPanel mainPanel;
+    private String helpText;
 
     /**
      * Constructs the initial menu of the game.
@@ -78,9 +79,18 @@ public class MenuGame extends JFrame {
     }
 
     /**
+     * Returns the help text area.
+     *
+     * @return help text area.
+     */
+    public String getHelpText() {
+        return helpText;
+    }
+
+    /**
      * Displays the help menu, showing information about the game.
      */
-    private void showHelpMenu() {
+    public void showHelpMenu() {
         mainPanel.removeAll();
         mainPanel.revalidate();
         mainPanel.repaint();
@@ -114,7 +124,8 @@ public class MenuGame extends JFrame {
         while ((line = reader.readLine()) != null) {
             content.append(line).append("\n");
         }
-        textArea.setText(content.toString());
+        helpText = content.toString(); // Salva il testo dell'area di aiuto nel campo helpText
+        textArea.setText(helpText);
     } catch (FileNotFoundException e) {
         /**
          * Exception thrown when the file is not found.

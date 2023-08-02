@@ -18,7 +18,6 @@ import java.awt.event.KeyListener;
 import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Timer;
 
 import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
@@ -27,8 +26,7 @@ import it.unibo.model.Ball;
 import it.unibo.model.GameState;
 
 /**
- * An implementation of the Scene interface responsible for rendering the game
- * graphics.
+ * A class representing the game scene.
  */
 public class SceneImpl implements Scene {
 
@@ -41,6 +39,15 @@ public class SceneImpl implements Scene {
     private CannonGraphicsComponent cannonGraphicsComponent;
     private JLabel pointsLabel;
     private VictoryPanel victoryPanel;
+    private static final int MENU_BUTTON_WIDTH = 80;
+    private static final int MENU_BUTTON_HEIGHT = 30;
+    private static final int LABEL_WIDTH = 100;
+    private static final int LABEL_HEIGHT = 20;
+    private static final int KEY_CODE_RIGHT_ARROW = 39;
+    private static final int KEY_CODE_LEFT_ARROW = 37;
+    private static final int KEY_CODE_P = 80;
+    private static final int LABEL_X = 10;
+    private static final int LABEL_Y = 20;
 
     /**
      * Constructs a SceneImpl with the specified GameState, KeyboardInputController,
@@ -49,9 +56,9 @@ public class SceneImpl implements Scene {
      * @param gameState     The current GameState of the game.
      * @param controller    The KeyboardInputController for handling user input.
      * @param backgroundSrc The path to the background image source.
-     * @param cannonSrc     The path to the cannon image source.
      */
-    public SceneImpl(GameState gameState, KeyboardInputController controller, String backgroundSrc) {
+    public SceneImpl(final GameState gameState, final KeyboardInputController controller, final String backgroundSrc) {
+
         this.gameState = gameState;
         this.controller = controller;
         this.frame = new JFrame("Luxor");
@@ -74,26 +81,25 @@ public class SceneImpl implements Scene {
         this.layeredPane.setLayer(panel, JLayeredPane.DEFAULT_LAYER);
 
         JButton menuButton = new JButton("Menu");
-        menuButton.setPreferredSize(new Dimension(80, 30));
+        menuButton.setPreferredSize(new Dimension(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
         this.layeredPane.add(menuButton, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(menuButton, JLayeredPane.PALETTE_LAYER);
-        menuButton.setBounds(boardGraphics.getBackgorundImg().getWidth(null) - 100,
-                this.boardGraphics.getBackgorundImg().getHeight(null) - 30, 80, 30);
+        menuButton.setBounds(boardGraphics.getBackgorundImg().getWidth(null) - MENU_BUTTON_WIDTH,
+                this.boardGraphics.getBackgorundImg().getHeight(null) - MENU_BUTTON_HEIGHT, MENU_BUTTON_WIDTH,
+                MENU_BUTTON_HEIGHT);
 
         pointsLabel = new JLabel("Punti: " + gameState.getScore());
         this.layeredPane.add(pointsLabel, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(pointsLabel, JLayeredPane.PALETTE_LAYER);
 
-        int labelX = 10;
-        int labelY = this.boardGraphics.getBackgorundImg().getHeight(null) - 30;
+        int labelY = this.boardGraphics.getBackgorundImg().getHeight(null) - LABEL_HEIGHT;
         int labelWidth = 100;
-        int labelHeight = 20;
-        pointsLabel.setBounds(labelX, labelY, labelWidth, labelHeight);
+        pointsLabel.setBounds(LABEL_X, LABEL_Y, labelWidth, LABEL_HEIGHT);
         pointsLabel.setForeground(Color.WHITE);
 
         menuButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 gameState.getWorld().stopMusic();
                 MenuGame menuGame = new MenuGame();
                 menuGame.setVisible(true);
@@ -104,12 +110,10 @@ public class SceneImpl implements Scene {
         frame.getContentPane().add(layeredPane);
 
         this.frame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent ev) {
-
+            public void windowClosing(final WindowEvent ev) {
             }
 
-            public void windowClosed(WindowEvent ev) {
-
+            public void windowClosed(final WindowEvent ev) {
             }
         });
         frame.pack();
@@ -126,7 +130,6 @@ public class SceneImpl implements Scene {
             if (g != null) {
                 try {
                     frame.repaint();
-
                     // Update pointsLabel with the current score
                     pointsLabel.setText("Points: " + gameState.getScore());
 
@@ -173,7 +176,6 @@ public class SceneImpl implements Scene {
             frame.dispose();
         } catch (Exception ex) {
             ex.printStackTrace();
-
         }
     }
 
@@ -187,6 +189,9 @@ public class SceneImpl implements Scene {
         throw new UnsupportedOperationException("Unimplemented method 'renderMenu'");
     }
 
+    /**
+     * An inner class representing the panel where the game graphics are drawn.
+     */
     public class GamePanel extends JPanel implements KeyListener {
         /**
          * An inner class representing the panel where the game graphics are drawn.
@@ -212,11 +217,11 @@ public class SceneImpl implements Scene {
          *
          * @param g The Graphics object used for painting.
          */
-        public void paint(Graphics g) {
+        public void paint(final Graphics g) {
             if (g == null) {
                 return;
             }
-            Graphics2D g2 = (Graphics2D) g;
+            Graphics2D g2 = (Graphics2D) g.create(); // Create a copy of the graphics object
 
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
@@ -245,6 +250,7 @@ public class SceneImpl implements Scene {
                 ball.updateGraphics(g2);
             }
 
+            g2.dispose();
         }
 
         /**
@@ -254,14 +260,14 @@ public class SceneImpl implements Scene {
          * @param e The KeyEvent containing the key press information.
          */
         @Override
-        public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == 39) {
+        public void keyPressed(final KeyEvent e) {
+            if (e.getKeyCode() == KEY_CODE_RIGHT_ARROW) {
                 controller.notifyMoveRight();
-            } else if (e.getKeyCode() == 37) {
+            } else if (e.getKeyCode() == KEY_CODE_LEFT_ARROW) {
                 controller.notifyMoveLeft();
-            } else if (e.getKeyCode() == 80) {
+            } else if (e.getKeyCode() == KEY_CODE_P) {
                 gameState.getWorld().notifyWorldEvent(new PauseGameEvent());
-            } else if (e.getKeyCode() == 32) {
+            } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 controller.notifyShoot();
                 System.out.println("Shooting");
             }
@@ -273,7 +279,7 @@ public class SceneImpl implements Scene {
          * @param e The KeyEvent containing the key typed information.
          */
         @Override
-        public void keyTyped(KeyEvent e) {
+        public void keyTyped(final KeyEvent e) {
         }
 
         /**
@@ -283,10 +289,10 @@ public class SceneImpl implements Scene {
          * @param e The KeyEvent containing the key release information.
          */
         @Override
-        public void keyReleased(KeyEvent e) {
-            if (e.getKeyCode() == 39) {
+        public void keyReleased(final KeyEvent e) {
+            if (e.getKeyCode() == KEY_CODE_RIGHT_ARROW) {
                 controller.notifyNoMoreMoveRight();
-            } else if (e.getKeyCode() == 37) {
+            } else if (e.getKeyCode() == KEY_CODE_LEFT_ARROW) {
                 controller.notifyNoMoreMoveLeft();
             }
         }

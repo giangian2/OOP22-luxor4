@@ -4,7 +4,12 @@ package it.unibo.utils;
  * A 2-dimensional vector represented by its x and y components.
  */
 public class V2d implements java.io.Serializable {
-      /**
+
+    /**
+     * The serial version UID.
+     */
+    private static final long serialVersionUID = 1L;
+    /**
      * The component of the vector.
      */
     public double x, y;
@@ -15,7 +20,7 @@ public class V2d implements java.io.Serializable {
      * @param x The x component of the vector.
      * @param y The y component of the vector.
      */
-    public V2d(double x, double y) {
+    public V2d(final double x, final double y) {
         this.x = x;
         this.y = y;
     }
@@ -26,7 +31,7 @@ public class V2d implements java.io.Serializable {
      * @param to   The destination P2d point of the vector.
      * @param from The starting P2d point of the vector.
      */
-    public V2d(P2d to, P2d from) {
+    public V2d(final P2d to, final P2d from) {
         this.x = to.x - from.x;
         this.y = to.y - from.y;
     }
@@ -36,8 +41,17 @@ public class V2d implements java.io.Serializable {
      *
      * @return The x-component of the vector.
      */
-    public double getX(){
+    public double getX() {
         return this.x;
+    }
+
+    /**
+     * Sets the x-component of the vector.
+     *
+     * @param x The new x-component of the vector.
+     */
+    public void setX(final double x) {
+        this.x = x;
     }
 
     /**
@@ -45,37 +59,45 @@ public class V2d implements java.io.Serializable {
      *
      * @return The y-component of the vector.
      */
-    public double getY(){
+    public double getY() {
         return this.y;
     }
 
     /**
-     * Checks if this vector is equal to another object.
+     * Sets the y-component of the vector.
      *
-     * @param obj The object to compare with this vector.
-     * @return true if the objects are equal, false otherwise.
+     * @param y The new y-component of the vector.
      */
-    public V2d sum(V2d v) {
+    public void setY(final double y) {
+        this.y = y;
+    }
+
+    /**
+     * Returns a new V2d vector resulting from the sum of another V2d vector from this vector.
+     * @param v The V2d vector to be sum from this vector.
+     * @return The resulting V2d vector after the sum.
+     */
+    public V2d sum(final V2d v) {
         return new V2d(x + v.x, y + v.y);
     }
 
     /**
-     * Returns a new V2d vector resulting from the subtraction of another V2d vector from this vector.
+     * Returns a new V2d vector resulting from module of this vector.
      *
-     * @param v The V2d vector to be subtracted from this vector.
-     * @return The resulting V2d vector after the subtraction.
+     * 
+     * @return The resulting V2d vector after the module.
      */
     public double module() {
         return (double) Math.sqrt(x * x + y * y);
     }
 
     /**
-     * Returns a new V2d vector resulting from the subtraction of another V2d vector from this vector.
+     * Returns a new V2d vector resulting from the molitiplication of this vector by a factor.
      *
-     * @param v The V2d vector to be subtracted from this vector.
-     * @return The resulting V2d vector after the subtraction.
+     * @param fact The factor to multiply this vector by.
+     * @return The resulting V2d vector after the multiplication.
      */
-    public V2d mul(double fact) {
+    public V2d mul(final double fact) {
         return new V2d(x * fact, y * fact);
     }
 

@@ -18,27 +18,26 @@ public class BallGraphicsComponent implements MyGraphicsComponent {
      * @throws IllegalArgumentException If the given GameObject is not a Ball.
      */
     @Override
-    public void update(GameObject obj, java.awt.Graphics2D g) {
+    public void update(final GameObject obj, final java.awt.Graphics2D g) {
         // Check if the GameObject is a Ball instance.
         if (!(obj instanceof Ball)) {
             throw new IllegalArgumentException("GameObject is not a Ball");
         }
-        Ball ball = (Ball) obj;
         // Cast the GameObject to a Ball object.
-        
-        P2d pos = ball.getCurrentPos();
+        Ball ball = (Ball) obj;
+
         // Get the current position of the ball.
+        P2d pos = ball.getCurrentPos();
 
-        BallColor ballColor = ball.getColor();
         // Get the color of the ball.
+        BallColor ballColor = ball.getColor();
 
-        g.setColor(ballColor.getBallColor());
         // Set the color of the Graphics2D object for drawing the ball.
+        g.setColor(ballColor.getBallColor());
 
-        g.fillOval((int) pos.x, (int) pos.y, Ball.IMAGE_DIAMETER, Ball.IMAGE_DIAMETER);
-         // Draw a filled oval (representing the ball) using the ball's color and dimensions.
+        // Draw a filled oval (representing the ball) using the ball's color and dimensions.
         // The x and y position of the oval are based on the x and y coordinates of the ball from pos.
         // Ball.IMAGE_DIAMETER is likely a constant representing the diameter of the ball.
+        g.fillOval((int) pos.x, (int) pos.y, Ball.IMAGE_DIAMETER, Ball.IMAGE_DIAMETER);
     }
-   
 }

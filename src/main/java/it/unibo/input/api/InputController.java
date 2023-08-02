@@ -4,7 +4,6 @@ package it.unibo.input.api;
  * An interface for defining an input controller that provides input data for the game.
  */
 public interface InputController {
-    
      /**
      * Checks if the "Move Left" input action is currently active.
      *

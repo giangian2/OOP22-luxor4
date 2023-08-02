@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import it.unibo.model.GameObject;
 
@@ -19,10 +20,10 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
     /**
      * Constructs a BoardGraphicComponent with the specified background image path.
      *
-     * @param backgroundPath The path to the background image.
+     * @param backgorundPath The path of the background image.
      */
 
-    public BoardGraphicComponent(String backgorundPath) {
+    public BoardGraphicComponent(final String backgorundPath) {
         super();
         this.backgroundPath = backgorundPath;
         this.loadImage();
@@ -50,7 +51,7 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
      * @param g   The Graphics2D object used for drawing the background image.
      */
     @Override
-    public void update(GameObject obj, java.awt.Graphics2D g) {
+    public void update(final GameObject obj, final java.awt.Graphics2D g) {
         g.drawImage(img, 0, 0, null);
     }
 
@@ -60,7 +61,12 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
      * @return The background image.
      */
     public Image getBackgorundImg() {
-        return this.img;
+        if (this.img != null) {
+            
+            return new ImageIcon(this.img).getImage();
+        } else {
+            return null;
+        }
     }
 
 }
