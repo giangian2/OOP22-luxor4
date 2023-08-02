@@ -18,6 +18,7 @@ import java.awt.event.KeyListener;
 import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Timer;
 
 import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
@@ -38,6 +39,7 @@ public class SceneImpl implements Scene {
     private BoardGraphicComponent boardGraphics;
     private CannonGraphicsComponent cannonGraphicsComponent;
     private JLabel pointsLabel;
+    private VictoryPanel victoryPanel;
 
     /**
      * Constructs a SceneImpl with the specified GameState, KeyboardInputController, background image source, and cannon image source.
@@ -128,7 +130,13 @@ public class SceneImpl implements Scene {
                 try {
                     frame.repaint();
                     
+                    // Update pointsLabel with the current score
                     pointsLabel.setText("Points: " + gameState.getScore());
+    
+                    // Check for the victory condition and display the victory panel
+                    if (gameState.isWin()) {
+                        renderWin();
+                    }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -162,11 +170,12 @@ public class SceneImpl implements Scene {
             gameState.getWorld().stopMusic();
             MenuGame menuGame = new MenuGame();
             menuGame.showWin(gameState);
-            menuGame.setVisible(true); 
+            menuGame.setVisible(true);
 
             frame.dispose();
         } catch (Exception ex) {
             ex.printStackTrace();
+        
         }
     }
 
