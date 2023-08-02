@@ -27,11 +27,12 @@ import it.unibo.utils.SoundPlayer;
 
 public class World {
     /**
-     * World instance
+     * RectBoundingBox
      * this property was set to PRIVATE and STATIC in order to simplify
      * the access of the bounding box for the Graphics and Physics packages with no
-     * need of passing any World object to them, but only getting it with the method
-     * "getInstance".
+     * need of passing any World object to them, but only getting it with the static
+     * method
+     * "getBBox".
      */
     private Cannon cannon;
     private QueueManager qm;

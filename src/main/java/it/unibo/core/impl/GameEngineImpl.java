@@ -34,15 +34,20 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     private final Levels currentLevel; // Selected Level
 
     /**
+     * 
      * Initialize the GameEngineImpl with the given level in order to instatiate the
-     * World properly and render the correct view
+     * World properly and render the correct view.
      * 
      * @param currentLevel
      */
-    public GameEngineImpl(Levels currentLevel) {
+    public GameEngineImpl(final Levels currentLevel) {
         this.currentLevel = currentLevel;
     }
 
+    /**
+     * 
+     * Method used to start the game loop.
+     */
     @Override
     public void mainLoop() {
         long previousCycleStartTime = System.currentTimeMillis();
@@ -71,16 +76,16 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
     /**
      * Implementing the worldEventListener, this method will add the notified event
-     * to the event queue in orther to be processed in the further step
+     * to the event queue in orther to be processed in the further step.
      */
     @Override
-    public void notifyEvent(WorldEvent e) {
+    public void notifyEvent(final WorldEvent e) {
         eventQueue.add(e);
     }
 
     /**
      * Initialize the View and the World based on the selected level throught the
-     * functional interface "Level"
+     * functional interface "Level".
      */
     @Override
     public void initGame() {
@@ -96,12 +101,22 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                  * the game state is instantiated having the GameEngine itself as an event
                  * listener and a lambda function is passed that implements the loadLevel method
                  * of the level interface, in this way there will be a fluid and scalable
-                 * development process for the creation of new levels
+                 * development process for the creation of new levels.
                  */
                 this.gameState = new GameState(this, () -> {
-                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 10, 1,
-                            "levels/1/Path.xml", this,
-                            GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
+                    final int height = 600;
+                    final int width = 800;
+                    final int nballs = 10;
+                    final int steps = 1;
+                    final String xmlpath = "levels" + System.getProperty("file.separator") + "1"
+                            + System.getProperty("file.separator") + "Path.xml";
+                    final int cannonStartXPos = 470;
+                    final int cannonStartYPos = 470;
+
+                    var w = new World(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
+                            xmlpath, this,
+                            GameObjectsFactory.getInstance()
+                                    .createCannon(new P2d(cannonStartXPos, cannonStartYPos)));
 
                     return w;
                 });
@@ -111,13 +126,27 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
             case L2:
                 this.gameState = new GameState(this, () -> {
-                    var w = new World(new RectBoundingBox(new P2d(0, 600), new P2d(800, 0)), 3, 1,
-                            "levels/2/Path.xml", this,
-                            GameObjectsFactory.getInstance().createCannon(new P2d(470, 470)));
+                    final int height = 600;
+                    final int width = 800;
+                    final int nballs = 20;
+                    final int steps = 2;
+                    final String xmlpath = "levels" + System.getProperty("file.separator") + "2"
+                            + System.getProperty("file.separator") + "Path.xml";
+                    final int cannonStartXPos = 470;
+                    final int cannonStartYPos = 470;
+
+                    var w = new World(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
+                            xmlpath, this,
+                            GameObjectsFactory.getInstance()
+                                    .createCannon(new P2d(cannonStartXPos, cannonStartYPos)));
+
                     return w;
                 });
                 this.view = new SceneImpl(this.gameState, this.controller, "images/background2.jpg");
                 break;
+
+            default:
+                throw new IllegalStateException("The level passed cannot be initialized by the gameEngine");
         }
 
         // Start background music and main loop
@@ -140,17 +169,17 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     }
 
     /**
-     * Update the game state at each frame of the game loop
+     * Update the game state at each frame of the game loop.
      * 
      * @param elapsed
      */
-    public void updateGame(long elapsed) {
+    public void updateGame(final long elapsed) {
         gameState.update(elapsed); // update game state
         checkEvents(); // check events generated from input and world
     }
 
     /**
-     * Renders the view at each frame of game loop
+     * Renders the view at each frame of game loop.
      */
     protected void render() {
         view.render();
@@ -158,11 +187,11 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
     /**
      * Waith for the next frame if the game loop cycle has taken less time than the
-     * PERIOD
+     * PERIOD.
      * 
      * @param cycleStartTime
      */
-    protected void waitForNextFrame(long cycleStartTime) {
+    protected void waitForNextFrame(final long cycleStartTime) {
         long dt = System.currentTimeMillis() - cycleStartTime;
         if (dt < GameEngineImpl.PERIOD) {
             try {
@@ -174,45 +203,44 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     }
 
     /**
-     * Processing inputs from the game state
+     * Processing inputs from the game state.
      */
     protected void processInput() {
         gameState.processInput(controller);
     }
 
     /**
-     * Check the events present in the respective queue and manage them one by one
+     * Check the events present in the respective queue and manage them one by one.
      */
     private void checkEvents() {
         eventQueue.stream().forEach(event -> {
-            /**
-             * If the event is of type PauseGameEvent, then the pause state is changed to
-             * gameState
-             */
+
             if (event instanceof PauseGameEvent) {
+                /**
+                 * If the event is of type PauseGameEvent, then the pause state is changed to
+                 * gameState.
+                 */
                 gameState.changePauseState();
 
-            }
-            /**
-             * If the event is of type HitBallEvent, then the ball fired by the cannon is
-             * removed from the respective list of firedBalls and the appropriate
-             * "insertCollsiionBall" method is called which, passing the fired ball and the
-             * ball of the hit queue, modifies the queue to be rendered in the next game
-             * loop and the score is as many points as there are balls in the queue
-             * eliminated
-             */
-            else if (event instanceof HitBallEvent) {
+            } else if (event instanceof HitBallEvent) {
+                /**
+                 * If the event is of type HitBallEvent, then the ball fired by the cannon is
+                 * removed from the respective list of firedBalls and the appropriate
+                 * "insertCollsiionBall" method is called which, passing the fired ball and the
+                 * ball of the hit queue, modifies the queue to be rendered in the next game
+                 * loop and the score is as many points as there are balls in the queue
+                 * eliminated.
+                 */
                 var ev = (HitBallEvent) event;
                 gameState.getWorld().getCannon().removeFiredBall((Ball) ev.getCannnonBall());
                 gameState.getWorld().insertCollisionBall((Ball) ev.getCannnonBall(), (Ball) ev.getQueueBall());
 
-            }
-            /**
-             * If the event is of type HitBoirderEvent, then the ball that generated the
-             * event is eliminated from the firedBalls
-             * and the score is decreased by one point
-             */
-            else if (event instanceof HitBorderEvent) {
+            } else if (event instanceof HitBorderEvent) {
+                /**
+                 * If the event is of type HitBoirderEvent, then the ball that generated the
+                 * event is eliminated from the firedBalls
+                 * and the score is decreased by one point
+                 */
                 var ev = (HitBorderEvent) event;
                 gameState.decScore();
                 gameState.getWorld().getCannon().removeFiredBall((Ball) ev.getCollisionObj());
