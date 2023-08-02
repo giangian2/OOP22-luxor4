@@ -12,7 +12,7 @@ public interface MyGraphicsComponent {
      * Updates the graphical representation of a GameObject on the screen.
      *
      * @param obj The GameObject to be updated.
-     * @param g   The Graphics object used for drawing.
+     * @param c   The Graphics object used for drawing.
      */
-    public void update(GameObject obj, java.awt.Graphics2D c);
+    void update(GameObject obj, java.awt.Graphics2D c);
 }

@@ -18,7 +18,6 @@ import java.awt.event.KeyListener;
 import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Timer;
 
 import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
@@ -40,16 +39,20 @@ public class SceneImpl implements Scene {
     private CannonGraphicsComponent cannonGraphicsComponent;
     private JLabel pointsLabel;
     private VictoryPanel victoryPanel;
+    private static final int MENU_BUTTON_WIDTH = 80;
+    private static final int MENU_BUTTON_HEIGHT = 30;
+    private static final int LABEL_WIDTH = 100;
+    private static final int LABEL_HEIGHT = 20;
 
     /**
-     * Constructs a SceneImpl with the specified GameState, KeyboardInputController, background image source, and cannon image source.
+     * Constructs a SceneImpl with the specified GameState, KeyboardInputController, 
+     * background image source, and cannon image source.
      *
      * @param gameState     The current GameState of the game.
      * @param controller    The KeyboardInputController for handling user input.
      * @param backgroundSrc The path to the background image source.
-     * @param cannonSrc     The path to the cannon image source.
      */
-    public SceneImpl(GameState gameState, KeyboardInputController controller, String backgroundSrc) {
+    public SceneImpl(final GameState gameState, final KeyboardInputController controller, final String backgroundSrc) {
         this.gameState = gameState;
         this.controller = controller;
         this.frame = new JFrame("Luxor");
@@ -59,11 +62,10 @@ public class SceneImpl implements Scene {
         frame.setResizable(false);
         this.cannonGraphicsComponent = new CannonGraphicsComponent();
 
-        
         this.panel = new GamePanel();
         this.panel.setPreferredSize(new Dimension(this.boardGraphics.getBackgorundImg().getWidth(null),
         this.boardGraphics.getBackgorundImg().getHeight(null)));
-        
+
         this.layeredPane = new JLayeredPane();
         this.layeredPane.setPreferredSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
         boardGraphics.getBackgorundImg().getHeight(null)));
@@ -71,32 +73,27 @@ public class SceneImpl implements Scene {
         this.layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
         this.layeredPane.setLayer(panel, JLayeredPane.DEFAULT_LAYER);
 
-        
         JButton menuButton = new JButton("Menu");
-        menuButton.setPreferredSize(new Dimension(80, 30));
+        menuButton.setPreferredSize(new Dimension(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
         this.layeredPane.add(menuButton, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(menuButton, JLayeredPane.PALETTE_LAYER);
-        menuButton.setBounds(boardGraphics.getBackgorundImg().getWidth(null) - 100,
-        this.boardGraphics.getBackgorundImg().getHeight(null) - 30, 80, 30);
-
-        
+        menuButton.setBounds(boardGraphics.getBackgorundImg().getWidth(null) - MENU_BUTTON_WIDTH,
+        this.boardGraphics.getBackgorundImg().getHeight(null) - MENU_BUTTON_HEIGHT, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
 
         pointsLabel = new JLabel("Punti: " + gameState.getScore());
         this.layeredPane.add(pointsLabel, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(pointsLabel, JLayeredPane.PALETTE_LAYER);
 
-        
         int labelX = 10; 
-        int labelY = this.boardGraphics.getBackgorundImg().getHeight(null) - 30;
+        int labelY = this.boardGraphics.getBackgorundImg().getHeight(null) - LABEL_HEIGHT;
         int labelWidth = 100; 
         int labelHeight = 20; 
         pointsLabel.setBounds(labelX, labelY, labelWidth, labelHeight);
-        pointsLabel.setForeground(Color.WHITE); 
+        pointsLabel.setForeground(Color.WHITE);
 
-        
         menuButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 gameState.getWorld().stopMusic();
                 MenuGame menuGame = new MenuGame();
                 menuGame.setVisible(true); 
@@ -107,12 +104,10 @@ public class SceneImpl implements Scene {
         frame.getContentPane().add(layeredPane); 
 
         this.frame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent ev) {
-                
+            public void windowClosing(final WindowEvent ev) {
             }
 
-            public void windowClosed(WindowEvent ev) {
-                
+            public void windowClosed(final WindowEvent ev) {
             }
         });
         frame.pack();
@@ -214,7 +209,7 @@ public class SceneImpl implements Scene {
          *
          * @param g The Graphics object used for painting.
          */
-        public void paint(Graphics g) { 
+        public void paint(final Graphics g) { 
             if (g == null) {
                 return;
             }
@@ -234,7 +229,7 @@ public class SceneImpl implements Scene {
             cannon.updateGraphics(g2);
 
             final var entities = gameState.getWorld().getQueue();
-            
+
             for (int i = 0; i < entities.size(); i++) {
                 Ball ball = entities.get(i);
                 ball.updateGraphics(g2);
@@ -255,7 +250,7 @@ public class SceneImpl implements Scene {
          * @param e The KeyEvent containing the key press information.
          */
         @Override
-        public void keyPressed(KeyEvent e) {
+        public void keyPressed(final KeyEvent e) {
             if (e.getKeyCode() == 39) {
                 controller.notifyMoveRight();
             } else if (e.getKeyCode() == 37) {
@@ -274,7 +269,7 @@ public class SceneImpl implements Scene {
          * @param e The KeyEvent containing the key typed information.
          */
         @Override
-        public void keyTyped(KeyEvent e) {
+        public void keyTyped(final KeyEvent e) {
         }
 
         /**
@@ -283,7 +278,7 @@ public class SceneImpl implements Scene {
          * @param e The KeyEvent containing the key release information.
          */
         @Override
-        public void keyReleased(KeyEvent e) {
+        public void keyReleased(final KeyEvent e) {
             if (e.getKeyCode() == 39) {
                 controller.notifyNoMoreMoveRight();
             } else if (e.getKeyCode() == 37) {

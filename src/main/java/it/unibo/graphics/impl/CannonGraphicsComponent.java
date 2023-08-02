@@ -1,10 +1,7 @@
 package it.unibo.graphics.impl;
 
-import it.unibo.enums.BallColor;
-import it.unibo.model.Ball;
 import it.unibo.model.Cannon;
 import it.unibo.model.GameObject;
-import it.unibo.utils.P2d;
 
 import java.awt.Image;
 import java.io.IOException;
@@ -49,7 +46,7 @@ public class CannonGraphicsComponent implements MyGraphicsComponent {
      * @throws IllegalArgumentException If the given GameObject is not a Cannon.
      */
     @Override
-    public void update(GameObject obj, java.awt.Graphics2D g) {
+    public void update(final GameObject obj, final java.awt.Graphics2D g) {
         if (!(obj instanceof Cannon)) {
             throw new IllegalArgumentException("GameObject is not a Cannon");
         }

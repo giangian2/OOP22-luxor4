@@ -1,17 +1,9 @@
 package it.unibo.graphics.impl;
 
 import java.awt.Font;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import it.unibo.model.GameState;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -23,6 +15,7 @@ import java.awt.GridBagLayout;
 
 public class GameOverPanel extends JPanel {
     private GameState gameState;
+    private static final int LABEL_FONT_SIZE = 25;
 
     /**
      * Constructs a GameOverPanel with the given game state to display game statistics.
@@ -30,7 +23,7 @@ public class GameOverPanel extends JPanel {
      * @param gameState The current GameState containing game information.
      */
 
-    public GameOverPanel(GameState gameState) {
+    public GameOverPanel(final GameState gameState) {
         this.gameState = gameState;
         initComponents();
     }
@@ -48,12 +41,12 @@ public class GameOverPanel extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER; // Center the components horizontally
 
         JLabel gameOverLabel = new JLabel("Game Over!");
-        gameOverLabel.setFont(new Font("Arial", Font.BOLD, 25));
+        gameOverLabel.setFont(new Font("Arial", Font.BOLD, LABEL_FONT_SIZE));
 
         JLabel pointsLabel = new JLabel("Points: " + gameState.getScore());
-        pointsLabel.setFont(new Font("Arial", Font.BOLD, 25));
+        pointsLabel.setFont(new Font("Arial", Font.BOLD, LABEL_FONT_SIZE));
 
         add(gameOverLabel, gbc);
         add(pointsLabel, gbc);
     }
-}  
+}

@@ -22,7 +22,7 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
      * @param backgroundPath The path to the background image.
      */
 
-    public BoardGraphicComponent(String backgorundPath) {
+    public BoardGraphicComponent(final String backgorundPath) {
         super();
         this.backgroundPath = backgorundPath;
         this.loadImage();
@@ -50,7 +50,7 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
      * @param g   The Graphics2D object used for drawing the background image.
      */
     @Override
-    public void update(GameObject obj, java.awt.Graphics2D g) {
+    public void update(final GameObject obj, final java.awt.Graphics2D g) {
         g.drawImage(img, 0, 0, null);
     }
 
