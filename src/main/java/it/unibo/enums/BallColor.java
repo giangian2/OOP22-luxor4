@@ -6,7 +6,7 @@ import java.util.Random;
  * Enum that represents all possible colors of a ball,
  * it uses Color class.
  * 
- * @see java.awt.Color
+ * @see Color
  */
 public enum BallColor {
 
@@ -33,8 +33,9 @@ public enum BallColor {
     private Color color;
 
     /**
-     * Private constructor of BallColor.
-     * @param color Color representation
+     * Constructs a new BallColor enum element with the specified Color value.
+     * 
+     * @param color The Color value representing the ball's color.
      */
     BallColor(final Color color) {
         this.color = color;
@@ -50,7 +51,7 @@ public enum BallColor {
 
     /**
      * Get a random element of the enum.
-     * @return Random ballColor.
+     * @return Random BallColor.
      */
     public static BallColor getRandomColor() {
         BallColor[] colors = BallColor.values();
