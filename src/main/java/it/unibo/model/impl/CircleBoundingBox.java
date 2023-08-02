@@ -4,20 +4,43 @@ import it.unibo.model.api.BoundingBox;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
 
+/**
+ * 
+ * Class that models a circular bounding box, identified by its center and
+ * radius.
+ */
 public class CircleBoundingBox implements BoundingBox {
 
-    private P2d center;
-    private double radius;
+    private final P2d center;
+    private final double radius;
 
-    public CircleBoundingBox(P2d center, double radius) {
+    /**
+     * Constructor.
+     * 
+     * @param center
+     * @param radius
+     */
+    public CircleBoundingBox(final P2d center, final double radius) {
         this.center = center;
         this.radius = radius;
     }
 
+    /**
+     * @Getter
+     * @return double
+     */
     public double getRadius() {
         return radius;
     }
 
+    /**
+     * Allows you to check if there is a collision between the current instance of
+     * the CIrcleBoundingBox class and a circle identified by its center and radius.
+     * 
+     * @param p
+     * @param radius
+     * @return boolean
+     */
     public boolean isCollidingWith(P2d p, double radius) {
         return new V2d(p, center).module() <= radius + this.radius;
     }
