@@ -26,7 +26,7 @@ public class GameObjectsFactory {
      *
      * @return The GameObjectsFactory instance.
      */
-    static public GameObjectsFactory getInstance() {
+    synchronized static public GameObjectsFactory getInstance() {
         if (instance == null) {
             instance = new GameObjectsFactory();
         }

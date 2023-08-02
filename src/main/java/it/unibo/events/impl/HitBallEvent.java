@@ -15,7 +15,7 @@ import it.unibo.model.GameObject;
 public class HitBallEvent implements WorldEvent {
 
     private GameObject queueBall; // ball of the tail with which the collision occurred
-    private GameObject cannonBall;
+    private GameObject cannonBall; // fired ball that raised the collision
 
     public HitBallEvent(GameObject queueBall, GameObject cannonBall) {
         this.queueBall = queueBall;

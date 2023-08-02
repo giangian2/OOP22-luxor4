@@ -23,16 +23,16 @@ import it.unibo.utils.SoundPlayer;
  */
 @SuppressFBWarnings(value = {
         "EI_EXPOSE_REP",
-        "EI_EXPOSE_REP2" },
-        justification = "This warning does not represent a security threat beacuse the Input package will update the World")
+        "EI_EXPOSE_REP2" }, justification = "This warning does not represent a security threat beacuse the Input package will update the World")
 
 public class World {
     /**
-     * World instance
+     * RectBoundingBox
      * this property was set to PRIVATE and STATIC in order to simplify
      * the access of the bounding box for the Graphics and Physics packages with no
-     * need of passing any World object to them, but only getting it with the method
-     * "getInstance".
+     * need of passing any World object to them, but only getting it with the static
+     * method
+     * "getBBox".
      */
     private Cannon cannon;
     private QueueManager qm;
@@ -42,17 +42,18 @@ public class World {
 
     /**
      * 
-     * @param bbox   Represents the bounding box of the game area
-     * @param nBalls Number of balls that needs to be instatiated
-     * @param steps  Steps that are performed by each ball in the queue at each
-     *               frame
-     * @param xmlSrc Path of the XML file that contains the path of the queue
+     * @param bbox          Represents the bounding box of the game area
+     * @param nBalls        Number of balls that needs to be instatiated
+     * @param steps         Steps that are performed by each ball in the queue at
+     *                      each
+     *                      frame
+     * @param xmlSrc        Path of the XML file that contains the path of the queue
      * @param eventListener Event listener for events
-     * @param cannon Cannon object
+     * @param cannon        Cannon object
      */
 
     public World(final RectBoundingBox bbox, final int nBalls, final int steps, final String xmlSrc,
-                final WorldEventListener eventListener, final Cannon cannon) {
+            final WorldEventListener eventListener, final Cannon cannon) {
         /**
          * Instatiate the queue manager with the specifics given in the constructor
          * method.
@@ -87,6 +88,7 @@ public class World {
 
     /**
      * Sets the world event listener.
+     * 
      * @param l Event listener
      */
     public void setEventListener(final WorldEventListener l) {
@@ -95,6 +97,7 @@ public class World {
 
     /**
      * Creates a new istance of a cannon.
+     * 
      * @param pos
      * @return Cannon
      */
@@ -104,6 +107,7 @@ public class World {
 
     /**
      * Creates a new istance of a cannon containinig the current cannon position.
+     * 
      * @param cannon Sets the cannon object
      */
     public void setCannon(final Cannon cannon) {
@@ -112,6 +116,7 @@ public class World {
 
     /**
      * Gets the current cannon object.
+     * 
      * @return The cannon object
      */
     public Cannon getCannon() {
@@ -233,7 +238,6 @@ public class World {
                         qm.shiftBalls(1);
                     }
 
-
                 }
             } else {
                 /**
@@ -257,7 +261,7 @@ public class World {
      * 
      * @return List<Ball>
      */
-    public List<Ball> getCLoseByThree() {
+    public List<Ball> getCloseByThree() {
         return this.qm.checkCloseByThree();
     }
 
@@ -287,9 +291,9 @@ public class World {
     /**
      * Update the state of the World every frame:
      * <ul>
-     *     <li>The balls of the tail are scrolled.</li>
-     *     <li>The physics of each ball fired from the cannon is updated.</li>
-     *     <li>Stationary cannon ball is updated.</li>
+     * <li>The balls of the tail are scrolled.</li>
+     * <li>The physics of each ball fired from the cannon is updated.</li>
+     * <li>Stationary cannon ball is updated.</li>
      * </ul>
      * 
      * @param dt The elapsed time since the last update.
@@ -303,7 +307,7 @@ public class World {
 
     /**
      * Checks if there is a collision between a ball passed in input and the
-     * balls in the queue and and returns the ball from 
+     * balls in the queue and and returns the ball from
      * the tail with which the collision occurred.
      * 
      * @param pos Ball's position
