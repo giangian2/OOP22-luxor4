@@ -218,7 +218,7 @@ public class SceneImpl implements Scene {
             if (g == null) {
                 return;
             }
-            Graphics2D g2 = (Graphics2D) g;
+            Graphics2D g2 = (Graphics2D) g.create(); // Create a copy of the graphics object
 
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
@@ -247,6 +247,7 @@ public class SceneImpl implements Scene {
                 ball.updateGraphics(g2);
             }
 
+            g2.dispose();
         }
 
         /**

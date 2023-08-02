@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import it.unibo.model.GameObject;
 
@@ -60,7 +61,12 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
      * @return The background image.
      */
     public Image getBackgorundImg() {
-        return this.img;
+        if (this.img != null) {
+            
+            return new ImageIcon(this.img).getImage();
+        } else {
+            return null;
+        }
     }
 
 }

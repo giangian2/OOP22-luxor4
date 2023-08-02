@@ -70,7 +70,7 @@ public class GameObject {
     public GameObject(final Type type, final P2d pos, final V2d vel, final InputComponent input, final BoundingBox bbox,
             final MyGraphicsComponent graph, final PhysicsComponent physics) {
         this.pos = pos;
-        this.vel = vel;
+        this.vel = new V2d(vel.getX(), vel.getY()); // defensive copy
         this.input = input;
         this.bbox = bbox;
         this.type = type;
@@ -176,7 +176,7 @@ public class GameObject {
      * @param vel The new velocity to set for the game object.
      */
     public void setVel(final V2d vel) {
-        this.vel = vel;
+        this.vel = new V2d(vel.getX(), vel.getY());
     }
 
     /**
@@ -184,8 +184,8 @@ public class GameObject {
      *  @param vel The velocity of the game object.
      * @return The velocity of the game object.
      */
-    public V2d getVel(final V2d vel) {
-        return this.vel;
+    public V2d getVel() {
+        return new V2d(vel.getX(), vel.getY());
     }
 
     /**
@@ -204,7 +204,7 @@ public class GameObject {
      * @return The current velocity of the game object.
      */
     public V2d getCurrentVel() {
-        return this.vel;
+        return new V2d(vel.getX(), vel.getY());
     }
 
     /**

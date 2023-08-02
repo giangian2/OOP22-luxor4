@@ -1,9 +1,16 @@
 package it.unibo.utils;
 
+import java.util.Objects;
+
 /**
  * A 2-dimensional point represented by its x and y coordinates.
  */
 public class P2d implements java.io.Serializable {
+
+    /**
+     * The serial version UID.
+     */
+    private static final long serialVersionUID = 1L;
 
     /**
      * The coordinate of the point.
@@ -27,6 +34,7 @@ public class P2d implements java.io.Serializable {
      * @param obj The object to compare with this point.
      * @return true if the objects are equal, false otherwise.
      */
+    @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
@@ -38,13 +46,23 @@ public class P2d implements java.io.Serializable {
             return false;
         }
         P2d other = (P2d) obj;
-        if (x != other.x) {
+        if (Double.compare(x, other.x) != 0) {
             return false;
         }
-        if (y != other.y) {
+        if (Double.compare(y, other.y) != 0) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns the hash code of this point.
+     *
+     * @return The hash code of this point.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 
     /**
@@ -93,14 +111,14 @@ public class P2d implements java.io.Serializable {
      * @return true if this point is between p1 and p2 on the same axis, false otherwise.
      */
     public boolean isBetween(final P2d p1, final P2d p2) {
-
-        if (this.x == p1.x && this.x == p2.x) {
+        final double epsilon = 1e-9; // Soglia di tolleranza
+        if (Math.abs(this.x - p1.x) < epsilon && Math.abs(this.x - p2.x) < epsilon) {
             if ((this.y > p1.y && this.y < p2.y) || (this.y < p1.y && this.y > p2.y)) {
                 return true;
             }
         }
 
-        if (this.y == p1.y && this.y == p2.y) {
+        if (Math.abs(this.y - p1.y) < epsilon && Math.abs(this.y - p2.y) < epsilon) {
             if ((this.x > p1.x && this.x < p2.x) || (this.x < p1.x && this.x > p2.x)) {
                 return true;
             }

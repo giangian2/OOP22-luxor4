@@ -14,7 +14,7 @@ import java.awt.GridBagLayout;
  */
 
 public class GameOverPanel extends JPanel {
-    private GameState gameState;
+    private transient GameState gameState;
     private static final int LABEL_FONT_SIZE = 25;
 
     /**

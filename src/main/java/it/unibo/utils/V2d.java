@@ -4,7 +4,12 @@ package it.unibo.utils;
  * A 2-dimensional vector represented by its x and y components.
  */
 public class V2d implements java.io.Serializable {
-      /**
+
+    /**
+     * The serial version UID.
+     */
+    private static final long serialVersionUID = 1L;
+    /**
      * The component of the vector.
      */
     public double x, y;
