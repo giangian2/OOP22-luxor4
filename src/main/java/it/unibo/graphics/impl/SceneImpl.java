@@ -27,7 +27,8 @@ import it.unibo.model.Ball;
 import it.unibo.model.GameState;
 
 /**
- * An implementation of the Scene interface responsible for rendering the game graphics.
+ * An implementation of the Scene interface responsible for rendering the game
+ * graphics.
  */
 public class SceneImpl implements Scene {
 
@@ -42,7 +43,8 @@ public class SceneImpl implements Scene {
     private VictoryPanel victoryPanel;
 
     /**
-     * Constructs a SceneImpl with the specified GameState, KeyboardInputController, background image source, and cannon image source.
+     * Constructs a SceneImpl with the specified GameState, KeyboardInputController,
+     * background image source, and cannon image source.
      *
      * @param gameState     The current GameState of the game.
      * @param controller    The KeyboardInputController for handling user input.
@@ -53,66 +55,61 @@ public class SceneImpl implements Scene {
         this.gameState = gameState;
         this.controller = controller;
         this.frame = new JFrame("Luxor");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.boardGraphics = new BoardGraphicComponent(backgroundSrc);
         frame.setMinimumSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
-        boardGraphics.getBackgorundImg().getHeight(null)));
+                boardGraphics.getBackgorundImg().getHeight(null)));
         frame.setResizable(false);
         this.cannonGraphicsComponent = new CannonGraphicsComponent();
 
-        
         this.panel = new GamePanel();
         this.panel.setPreferredSize(new Dimension(this.boardGraphics.getBackgorundImg().getWidth(null),
-        this.boardGraphics.getBackgorundImg().getHeight(null)));
-        
+                this.boardGraphics.getBackgorundImg().getHeight(null)));
+
         this.layeredPane = new JLayeredPane();
         this.layeredPane.setPreferredSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
-        boardGraphics.getBackgorundImg().getHeight(null)));
+                boardGraphics.getBackgorundImg().getHeight(null)));
 
         this.layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
         this.layeredPane.setLayer(panel, JLayeredPane.DEFAULT_LAYER);
 
-        
         JButton menuButton = new JButton("Menu");
         menuButton.setPreferredSize(new Dimension(80, 30));
         this.layeredPane.add(menuButton, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(menuButton, JLayeredPane.PALETTE_LAYER);
         menuButton.setBounds(boardGraphics.getBackgorundImg().getWidth(null) - 100,
-        this.boardGraphics.getBackgorundImg().getHeight(null) - 30, 80, 30);
-
-        
+                this.boardGraphics.getBackgorundImg().getHeight(null) - 30, 80, 30);
 
         pointsLabel = new JLabel("Punti: " + gameState.getScore());
         this.layeredPane.add(pointsLabel, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(pointsLabel, JLayeredPane.PALETTE_LAYER);
 
-        
-        int labelX = 10; 
+        int labelX = 10;
         int labelY = this.boardGraphics.getBackgorundImg().getHeight(null) - 30;
-        int labelWidth = 100; 
-        int labelHeight = 20; 
+        int labelWidth = 100;
+        int labelHeight = 20;
         pointsLabel.setBounds(labelX, labelY, labelWidth, labelHeight);
-        pointsLabel.setForeground(Color.WHITE); 
+        pointsLabel.setForeground(Color.WHITE);
 
-        
         menuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gameState.getWorld().stopMusic();
                 MenuGame menuGame = new MenuGame();
-                menuGame.setVisible(true); 
+                menuGame.setVisible(true);
                 frame.dispose();
             }
         });
 
-        frame.getContentPane().add(layeredPane); 
+        frame.getContentPane().add(layeredPane);
 
         this.frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent ev) {
-                
+
             }
 
             public void windowClosed(WindowEvent ev) {
-                
+
             }
         });
         frame.pack();
@@ -124,24 +121,24 @@ public class SceneImpl implements Scene {
      */
     @Override
     public void render() {
-         if (panel.isVisible()) {
-        Graphics g = panel.getGraphics();
-        if (g != null) {
-            try {
-                frame.repaint();
-                
-                // Update pointsLabel with the current score
-                pointsLabel.setText("Points: " + gameState.getScore());
+        if (panel.isVisible()) {
+            Graphics g = panel.getGraphics();
+            if (g != null) {
+                try {
+                    frame.repaint();
 
-                // Check for the victory condition and display the victory panel
-                if (gameState.isWin()) {
-                    renderWin();
+                    // Update pointsLabel with the current score
+                    pointsLabel.setText("Points: " + gameState.getScore());
+
+                    // Check for the victory condition and display the victory panel
+                    if (gameState.isWin()) {
+                        renderWin();
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
             }
         }
-    }
     }
 
     /**
@@ -161,6 +158,7 @@ public class SceneImpl implements Scene {
         }
 
     }
+
     /**
      * Renders the win screen and transitions to the win menu.
      */
@@ -175,7 +173,7 @@ public class SceneImpl implements Scene {
             frame.dispose();
         } catch (Exception ex) {
             ex.printStackTrace();
-        
+
         }
     }
 
@@ -191,8 +189,8 @@ public class SceneImpl implements Scene {
 
     public class GamePanel extends JPanel implements KeyListener {
         /**
-        * An inner class representing the panel where the game graphics are drawn.
-        */
+         * An inner class representing the panel where the game graphics are drawn.
+         */
         public GamePanel() {
             this.addKeyListener(this);
             setFocusable(true);
@@ -214,7 +212,7 @@ public class SceneImpl implements Scene {
          *
          * @param g The Graphics object used for painting.
          */
-        public void paint(Graphics g) { 
+        public void paint(Graphics g) {
             if (g == null) {
                 return;
             }
@@ -234,7 +232,7 @@ public class SceneImpl implements Scene {
             cannon.updateGraphics(g2);
 
             final var entities = gameState.getWorld().getQueue();
-            
+
             for (int i = 0; i < entities.size(); i++) {
                 Ball ball = entities.get(i);
                 ball.updateGraphics(g2);
@@ -250,7 +248,8 @@ public class SceneImpl implements Scene {
         }
 
         /**
-         * Handles the key presses from the user and notifies the KeyboardInputController accordingly.
+         * Handles the key presses from the user and notifies the
+         * KeyboardInputController accordingly.
          *
          * @param e The KeyEvent containing the key press information.
          */
@@ -278,7 +277,8 @@ public class SceneImpl implements Scene {
         }
 
         /**
-         * Handles the key releases from the user and notifies the KeyboardInputController accordingly.
+         * Handles the key releases from the user and notifies the
+         * KeyboardInputController accordingly.
          *
          * @param e The KeyEvent containing the key release information.
          */
