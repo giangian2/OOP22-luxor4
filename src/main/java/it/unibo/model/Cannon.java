@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Represents a Cannon object in the game.
  */
@@ -62,6 +64,11 @@ public class Cannon extends GameObject {
      *
      * @return The stationary ball.
      */
+    @SuppressFBWarnings(value = {
+            "EI_EXPOSE_REP",
+            "EI_EXPOSE_REP2" }, justification = "This warning does not represent a security threat beacuse the Stationary Ball "
+                    +
+                    "needs to be accessed and updated by the Physic Component")
     public Ball getStationaryBall() {
         return GameObjectsFactory.getInstance().createStationaryBall(getStationaryBallPos(), getCurrentVel(),
                 this.stationaryBall.getColor());

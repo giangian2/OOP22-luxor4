@@ -192,8 +192,7 @@ public class MenuGame extends JFrame {
         mainPanel.revalidate();
         mainPanel.repaint();
 
-        // QUI DOVRAI PASSARGLI IL WINPANEL
-        mainPanel.add(new GameOverPanel(gameState));
+        mainPanel.add(new VictoryPanel(gameState));
         this.renderButtonPanel();
     }
 

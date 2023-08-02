@@ -1,11 +1,14 @@
 package it.unibo.utils;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * The SoundPlayer provides methods for playing different sounds.
@@ -47,7 +50,9 @@ public class SoundPlayer {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[soundIndex]);
 			clips[soundIndex] = AudioSystem.getClip();
 			clips[soundIndex].open(ais);
-		} catch (Exception e) { }
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

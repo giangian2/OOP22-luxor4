@@ -59,11 +59,12 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
         }
 
         // If win state is reached, render the respective view
-        if (gameState.isGameOver())
-            renderGameOver();
+        
         // If game over state is reached, render the respective view
-        if (gameState.isWin())
-            renderWin();
+        if (gameState.isWin()){
+            renderWin();}
+        else if (gameState.isGameOver()){
+        renderGameOver();}
 
     }
 

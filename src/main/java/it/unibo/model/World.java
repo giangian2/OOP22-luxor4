@@ -260,8 +260,13 @@ public class World {
      * 
      * @return List<Ball>
      */
+<<<<<<< HEAD
     public List<Ball> getBallsToRemove() {
         return this.qm.getCloseByThree();
+=======
+    public List<Ball> getCLoseByThree() {
+        return this.qm.checkCloseByThree();
+>>>>>>> a65d4407e4518d1b8853721fb7f8c6db1215cb19
     }
 
     /**

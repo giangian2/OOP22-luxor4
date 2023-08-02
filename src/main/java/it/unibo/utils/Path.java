@@ -51,17 +51,19 @@ public class Path {
         }
         if (nextCorner != null) {
 
-            if (position.x == nextCorner.x && position.y > nextCorner.y) {
+            double epsilon = 1e-6;
+
+            if (Math.abs(position.x - nextCorner.x) < epsilon && position.y > nextCorner.y) {
                 return Direction.UP;
             }
-            if (position.x == nextCorner.x && position.y < nextCorner.y) {
+            if (Math.abs(position.x - nextCorner.x) < epsilon && position.y < nextCorner.y) {
                 return Direction.DOWN;
             }
-            if (position.y == nextCorner.y && position.x > nextCorner.x) {
+            if (Math.abs(position.y - nextCorner.y) < epsilon && position.x > nextCorner.x) {
 
                 return Direction.LEFT;
             }
-            if (position.y == nextCorner.y && position.x < nextCorner.x) {
+            if (Math.abs(position.y - nextCorner.y) < epsilon && position.x < nextCorner.x) {
                 return Direction.RIGHT;
             }
         }
