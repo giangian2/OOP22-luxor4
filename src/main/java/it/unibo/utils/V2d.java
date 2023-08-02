@@ -41,12 +41,30 @@ public class V2d implements java.io.Serializable {
     }
 
     /**
+     * Sets the x-component of the vector.
+     *
+     * @param x The new x-component of the vector.
+     */
+    public void setX(final double x) {
+        this.x = x;
+    }
+
+    /**
      * Returns the y-component of the vector.
      *
      * @return The y-component of the vector.
      */
     public double getY() {
         return this.y;
+    }
+
+    /**
+     * Sets the y-component of the vector.
+     *
+     * @param y The new y-component of the vector.
+     */
+    public void setY(final double y) {
+        this.y = y;
     }
 
     /**

@@ -3,7 +3,7 @@ package it.unibo.graphics.impl;
 import java.awt.Color;
 import java.awt.Image;
 
-import it.unibo.model.*;
+import it.unibo.model.GameObject;
 
 /**
  * A graphics interface for rendering images and shapes on the screen.

@@ -16,7 +16,7 @@ public class P2d implements java.io.Serializable {
      * @param x The x coordinate of the point.
      * @param y The y coordinate of the point.
      */ 
-    public P2d(double x, double y) {
+    public P2d(final double x, final double y) {
         this.x = x;
         this.y = y;
     }
@@ -27,18 +27,23 @@ public class P2d implements java.io.Serializable {
      * @param obj The object to compare with this point.
      * @return true if the objects are equal, false otherwise.
      */
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         P2d other = (P2d) obj;
-        if (x != other.x)
+        if (x != other.x) {
             return false;
-        if (y != other.y)
+        }
+        if (y != other.y) {
             return false;
+        }
         return true;
     }
 
@@ -48,7 +53,7 @@ public class P2d implements java.io.Serializable {
      * @param v The V2d vector to be added to this point.
      * @return The resulting P2d point after the addition.
      */
-    public P2d sum(V2d v) {
+    public P2d sum(final V2d v) {
         return new P2d(x + v.x, y + v.y);
     }
 
@@ -58,7 +63,7 @@ public class P2d implements java.io.Serializable {
      * @param v The P2d point to be subtracted from this point.
      * @return The resulting V2d vector after the subtraction.
      */
-    public V2d sub(P2d v) {
+    public V2d sub(final P2d v) {
         return new V2d(x - v.x, y - v.y);
     }
 
@@ -87,22 +92,19 @@ public class P2d implements java.io.Serializable {
      * @param p2 The second P2d point defining the axis.
      * @return true if this point is between p1 and p2 on the same axis, false otherwise.
      */
-    public boolean isBetween(P2d p1, P2d p2) {
-        
+    public boolean isBetween(final P2d p1, final P2d p2) {
+
         if (this.x == p1.x && this.x == p2.x) {
             if ((this.y > p1.y && this.y < p2.y) || (this.y < p1.y && this.y > p2.y)) {
                 return true;
             }
         }
 
-       
         if (this.y == p1.y && this.y == p2.y) {
             if ((this.x > p1.x && this.x < p2.x) || (this.x < p1.x && this.x > p2.x)) {
                 return true;
             }
         }
-
-        
         return false;
     }
 
@@ -111,10 +113,8 @@ public class P2d implements java.io.Serializable {
      *
      * @return The sum of the x and y coordinates of this point.
      */
-    public double sumOfAxis(){
-        return x+y;
+    public double sumOfAxis() {
+        return x + y;
     }
-
-    
-
 }
+

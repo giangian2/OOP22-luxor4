@@ -1,6 +1,6 @@
 package it.unibo.graphics.impl;
 
-import it.unibo.model.*;
+import it.unibo.model.GameObject;
 
 /**
  * An interface for defining a graphics component that can update the graphical representation of a GameObject.

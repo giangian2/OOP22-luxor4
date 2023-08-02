@@ -19,7 +19,7 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
     /**
      * Constructs a BoardGraphicComponent with the specified background image path.
      *
-     * @param backgroundPath The path to the background image.
+     * @param backgorundPath The path of the background image.
      */
 
     public BoardGraphicComponent(final String backgorundPath) {

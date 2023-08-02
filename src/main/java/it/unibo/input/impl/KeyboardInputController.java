@@ -7,9 +7,9 @@ import it.unibo.input.api.InputController;
  */
 public class KeyboardInputController implements InputController {
 
-    boolean isMoveLeft;
-    boolean isMoveRight;
-    boolean isShoot;
+    private boolean isMoveLeft;
+    private boolean isMoveRight;
+    private boolean isShoot;
 
     /**
      * Checks if the "Move Left" input action is currently active.
@@ -67,7 +67,6 @@ public class KeyboardInputController implements InputController {
     @Override
     public boolean isShoot() {
         // TODO Auto-generated method stub
-        
         return isShoot;
     }
 
@@ -93,7 +92,7 @@ public class KeyboardInputController implements InputController {
      *
      * @param playerInputComponent The input component to be set for the input controller.
      */
-    public void setInputComponent(PlayerInputComponent playerInputComponent) {
+    public void setInputComponent(final PlayerInputComponent playerInputComponent) {
     }
 
 }

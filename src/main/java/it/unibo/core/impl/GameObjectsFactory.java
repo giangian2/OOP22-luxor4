@@ -22,22 +22,21 @@ import it.unibo.utils.V2d;
 public class GameObjectsFactory {
 
     /**
+     * The instance of the GameObjectsFactory.
+     */
+    private static GameObjectsFactory instance;
+
+    /**
      * Gets the singleton instance of the GameObjectsFactory.
      *
      * @return The GameObjectsFactory instance.
      */
-    synchronized static public GameObjectsFactory getInstance() {
+    public static synchronized GameObjectsFactory getInstance() {
         if (instance == null) {
             instance = new GameObjectsFactory();
         }
         return instance;
     }
-
-    /**
-     * The instance of the GameObjectsFactory.
-     */
-    static private GameObjectsFactory instance;
-
     /**
      * Creates a new Ball game object.
      *
