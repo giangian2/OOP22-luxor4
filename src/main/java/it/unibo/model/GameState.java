@@ -122,8 +122,7 @@ public class GameState {
         if (!pause) {
             world.updateState(dt);
 
-            this.getWorld().getBallsToRemove().forEach((el) -> {
-                System.out.println(this.getScore());
+            this.getWorld().getCloseByThree().forEach((el) -> {
                 this.incScore();
                 this.getWorld().getQueue().remove(el);
             });

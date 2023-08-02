@@ -59,12 +59,13 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
         }
 
         // If win state is reached, render the respective view
-        
+
         // If game over state is reached, render the respective view
-        if (gameState.isWin()){
-            renderWin();}
-        else if (gameState.isGameOver()){
-        renderGameOver();}
+        if (gameState.isWin()) {
+            renderWin();
+        } else if (gameState.isGameOver()) {
+            renderGameOver();
+        }
 
     }
 
@@ -197,7 +198,8 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
              * removed from the respective list of firedBalls and the appropriate
              * "insertCollsiionBall" method is called which, passing the fired ball and the
              * ball of the hit queue, modifies the queue to be rendered in the next game
-             * loop
+             * loop and the score is as many points as there are balls in the queue
+             * eliminated
              */
             else if (event instanceof HitBallEvent) {
                 var ev = (HitBallEvent) event;
@@ -208,9 +210,11 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
             /**
              * If the event is of type HitBoirderEvent, then the ball that generated the
              * event is eliminated from the firedBalls
+             * and the score is decreased by one point
              */
             else if (event instanceof HitBorderEvent) {
                 var ev = (HitBorderEvent) event;
+                gameState.decScore();
                 gameState.getWorld().getCannon().removeFiredBall((Ball) ev.getCollisionObj());
             }
         });
