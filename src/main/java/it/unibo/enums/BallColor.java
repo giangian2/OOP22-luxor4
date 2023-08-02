@@ -31,6 +31,7 @@ public enum BallColor {
     YELLOW(Color.YELLOW);
 
     private Color color;
+    private static Random rand = new Random();
 
     /**
      * Constructs a new BallColor enum element with the specified Color value.
@@ -55,7 +56,6 @@ public enum BallColor {
      */
     public static BallColor getRandomColor() {
         BallColor[] colors = BallColor.values();
-        Random rand = new Random();
         return colors[rand.nextInt(colors.length)];
     }
 }

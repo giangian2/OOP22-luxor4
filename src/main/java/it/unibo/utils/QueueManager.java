@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.enums.BallColor;
 import it.unibo.enums.Direction;
@@ -37,6 +38,10 @@ public class QueueManager {
      *
      * @return A list containing the balls present in the current instance.
      */
+    @SuppressFBWarnings(value = {
+        "EI_EXPOSE_REP",
+        "EI_EXPOSE_REP2"},
+        justification = "Exposing internal representation of balls list for specific use case.")
     public List<Ball> getBalls() {
         return this.balls;
     }
@@ -151,7 +156,7 @@ public class QueueManager {
      * Search if there are sub-lists of at least three adjacent balls with the same color in the ball list.
      * @return The sum of the sub-lists founded.
      */
-    public List<Ball> getCloseByThree() {
+    public List<Ball> checkCloseByThree() {
         var ballList = this.balls;
         List<Ball> returnList = new ArrayList<Ball>();
 

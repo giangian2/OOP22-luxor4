@@ -258,7 +258,7 @@ public class World {
      * @return List<Ball>
      */
     public List<Ball> getCLoseByThree() {
-        return this.qm.getCloseByThree();
+        return this.qm.checkCloseByThree();
     }
 
     /**
