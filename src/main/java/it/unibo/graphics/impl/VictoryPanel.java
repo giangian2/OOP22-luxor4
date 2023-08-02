@@ -22,7 +22,7 @@ public class VictoryPanel extends JPanel {
      * @param score The final score earned by the player.
      */
     public VictoryPanel(GameState gameState) {
-        
+        this.gameState = gameState;
         //this.score = score;
         initComponents();
     }

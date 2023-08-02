@@ -124,24 +124,24 @@ public class SceneImpl implements Scene {
      */
     @Override
     public void render() {
-        if (panel.isVisible()) {
-            Graphics g = panel.getGraphics();
-            if (g != null) {
-                try {
-                    frame.repaint();
-                    
-                    // Update pointsLabel with the current score
-                    pointsLabel.setText("Points: " + gameState.getScore());
-    
-                    // Check for the victory condition and display the victory panel
-                    if (gameState.isWin()) {
-                        renderWin();
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+         if (panel.isVisible()) {
+        Graphics g = panel.getGraphics();
+        if (g != null) {
+            try {
+                frame.repaint();
+                
+                // Update pointsLabel with the current score
+                pointsLabel.setText("Points: " + gameState.getScore());
+
+                // Check for the victory condition and display the victory panel
+                if (gameState.isWin()) {
+                    renderWin();
                 }
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
+    }
     }
 
     /**
@@ -234,7 +234,7 @@ public class SceneImpl implements Scene {
             cannon.updateGraphics(g2);
 
             final var entities = gameState.getWorld().getQueue();
-            // carico le palline
+            
             for (int i = 0; i < entities.size(); i++) {
                 Ball ball = entities.get(i);
                 ball.updateGraphics(g2);
