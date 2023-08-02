@@ -1,6 +1,5 @@
 package it.unibo.model;
 
-
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.core.api.Level;
 import it.unibo.enums.Direction;
@@ -8,8 +7,10 @@ import it.unibo.events.api.WorldEventListener;
 import it.unibo.input.impl.KeyboardInputController;
 
 /**
- * Represents the state of the game, including the score, world, pause state, and level.
- * This class manages the game state and provides methods for updating the state based on game events.
+ * Represents the state of the game, including the score, world, pause state,
+ * and level.
+ * This class manages the game state and provides methods for updating the state
+ * based on game events.
  */
 @SuppressFBWarnings(value = { "EI_EXPOSE_REP" }, justification = "I prefer to suppress these FindBugs warnings")
 public class GameState {
@@ -20,9 +21,10 @@ public class GameState {
     private Level level;
 
     /**
-     * Constructs a new GameState object with the specified event listener and level.
+     * Constructs a new GameState object with the specified event listener and
+     * level.
      *
-     * @param l The WorldEventListener to handle game events.
+     * @param l     The WorldEventListener to handle game events.
      * @param level The Level object representing the current game level.
      */
     public GameState(final WorldEventListener l, final Level level) {
@@ -79,9 +81,13 @@ public class GameState {
      * @return true if the game is over, false otherwise.
      */
     public boolean isGameOver() {
-        var res = this.getWorld().moveSingleBall(this.getWorld().getQueue().get(this.getWorld().getQueue().size() - 1));
-        return res == Direction.NONE;
-
+        System.out.println("Queue size: " + this.getWorld().getQueue().size());
+        if (this.getWorld().getQueue().size() > 0) {
+            var res = this.getWorld()
+                    .moveSingleBall(this.getWorld().getQueue().get(this.getWorld().getQueue().size() - 1));
+            return res == Direction.NONE;
+        }
+        return false;
     }
 
     /**
@@ -116,7 +122,7 @@ public class GameState {
         if (!pause) {
             world.updateState(dt);
 
-            this.getWorld().getCLoseByThree().forEach((el) -> {
+            this.getWorld().getBallsToRemove().forEach((el) -> {
                 System.out.println(this.getScore());
                 this.incScore();
                 this.getWorld().getQueue().remove(el);
