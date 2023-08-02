@@ -11,6 +11,11 @@ import it.unibo.model.GameState;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+
 
 /**
  * A custom JPanel representing the game over screen with game statistics.
@@ -35,15 +40,20 @@ public class GameOverPanel extends JPanel {
      */
 
     private void initComponents() {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.weightx = 1.0; // Expand horizontally to fill the available space
+        gbc.anchor = GridBagConstraints.CENTER; // Center the components horizontally
 
-        JLabel gameOverLabel = new JLabel("Gioco finito!");
+        JLabel gameOverLabel = new JLabel("Game Over!");
         gameOverLabel.setFont(new Font("Arial", Font.BOLD, 25));
 
         JLabel pointsLabel = new JLabel("Points: " + gameState.getScore());
         pointsLabel.setFont(new Font("Arial", Font.BOLD, 25));
 
-        add(gameOverLabel);
-        add(pointsLabel);
+        add(gameOverLabel, gbc);
+        add(pointsLabel, gbc);
     }
 }  
