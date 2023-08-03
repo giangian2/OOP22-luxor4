@@ -8,8 +8,8 @@ import it.unibo.input.impl.PlayerInputComponent;
 import it.unibo.model.Ball;
 import it.unibo.model.Cannon;
 import it.unibo.model.GameObject.Type;
-import it.unibo.model.impl.CircleBoundingBox;
-import it.unibo.model.impl.RectBoundingBox;
+import it.unibo.model.collisions.impl.CircleBoundingBox;
+import it.unibo.model.collisions.impl.RectBoundingBox;
 import it.unibo.physics.impl.BallPhysicsComponent;
 import it.unibo.physics.impl.CannonBallPhysicsComponent;
 import it.unibo.physics.impl.StationaryBallPhysicsComponent;
@@ -37,6 +37,7 @@ public class GameObjectsFactory {
         }
         return instance;
     }
+
     /**
      * Creates a new Ball game object.
      *
@@ -57,7 +58,7 @@ public class GameObjectsFactory {
     /**
      * Creates a new Cannon game object.
      *
-     * @param pos  The initial position of the Cannon.
+     * @param pos The initial position of the Cannon.
      * @return The created Cannon game object.
      */
     public Cannon createCannon(final P2d pos) {

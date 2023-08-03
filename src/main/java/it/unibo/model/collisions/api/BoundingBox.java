@@ -1,4 +1,4 @@
-package it.unibo.model.api;
+package it.unibo.model.collisions.api;
 
 import it.unibo.utils.P2d;
 

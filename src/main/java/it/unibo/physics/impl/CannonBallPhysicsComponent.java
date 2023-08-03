@@ -7,17 +7,19 @@ import it.unibo.events.impl.HitBorderEvent;
 import it.unibo.model.Ball;
 import it.unibo.model.GameObject;
 import it.unibo.model.World;
-import it.unibo.model.impl.CircleBoundingBox;
+import it.unibo.model.collisions.impl.CircleBoundingBox;
 
 /**
  * This class represents the physics component for a cannon ball in the game.
- * It extends the BallPhysicsComponent class and provides additional functionality
+ * It extends the BallPhysicsComponent class and provides additional
+ * functionality
  * specific to the cannon ball.
  */
 public class CannonBallPhysicsComponent extends BallPhysicsComponent {
 
     /**
-     * This method updates the position and behavior of the cannon ball in the world.
+     * This method updates the position and behavior of the cannon ball in the
+     * world.
      *
      * @param dt  The time elapsed since the last update.
      * @param obj The GameObject representing the cannon ball.

@@ -3,7 +3,7 @@ package it.unibo.model;
 import it.unibo.enums.BallColor;
 import it.unibo.graphics.impl.BallGraphicsComponent;
 import it.unibo.input.api.InputComponent;
-import it.unibo.model.api.BoundingBox;
+import it.unibo.model.collisions.api.BoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
@@ -71,9 +71,9 @@ public class Ball extends GameObject {
         return Math.abs(this.getCurrentPos().sumOfAxis() - a.getCurrentPos().sumOfAxis()) < (IMAGE_DIAMETER + 2);
     }
 
-
     /**
      * Calculates the hash code for this object.
+     * 
      * @return Hashcode.
      */
     @Override
@@ -86,6 +86,7 @@ public class Ball extends GameObject {
 
     /**
      * Checks if this Ball is considerable equal to another object.
+     * 
      * @return true if this Ball is equal to the argument, false otherwise.
      */
     @Override

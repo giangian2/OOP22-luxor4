@@ -14,7 +14,7 @@ import it.unibo.events.api.WorldEvent;
 public class GameEngineTest {
 
     /**
-     * Initialize a new instace of GameEngineImpl
+     * Initialize a new instace of GameEngineImpl.
      * 
      * @return GameEngineImpl
      */
@@ -28,6 +28,11 @@ public class GameEngineTest {
      */
     @Test
     public void testMainLoop() {
+        // CHECKSTYLE: MagicNumber OFF
+        /*
+         * it would be redundant and useless use constants
+         * to indicates those arbitraty "magic numbers".
+         */
         assertDoesNotThrow(() -> {
             // initialize a new instance of GameEngineImpl
             var engine = this.initialize();
@@ -36,14 +41,14 @@ public class GameEngineTest {
 
             }, "Game thread thread");
 
-            mainLoopThread.start();// Start the mainloop thread
+            mainLoopThread.start(); // Start the mainloop thread
 
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            mainLoopThread.interrupt();// Kill the mainloop thread
+            mainLoopThread.interrupt(); // Kill the mainloop thread
         });
     }
 
@@ -53,6 +58,11 @@ public class GameEngineTest {
      */
     @Test
     public void testEventListener() {
+        // CHECKSTYLE: MagicNumber OFF
+        /*
+         * it would be redundant and useless use constants
+         * to indicates those arbitraty "magic numbers".
+         */
         // initialize a new instance of GameEngineImpl
         var engine = this.initialize();
 

@@ -1,6 +1,6 @@
-package it.unibo.model.impl;
+package it.unibo.model.collisions.impl;
 
-import it.unibo.model.api.BoundingBox;
+import it.unibo.model.collisions.api.BoundingBox;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
 

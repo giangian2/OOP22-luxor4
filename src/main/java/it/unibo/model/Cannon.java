@@ -1,7 +1,7 @@
 package it.unibo.model;
 
 import it.unibo.input.impl.PlayerInputComponent;
-import it.unibo.model.api.BoundingBox;
+import it.unibo.model.collisions.api.BoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
@@ -116,6 +116,7 @@ public class Cannon extends GameObject {
      * @return The position of the stationary ball.
      */
     public final P2d getStationaryBallPos() {
-        return new P2d(getCurrentPos().getX() + ADJUST_STATIONARY_XPOS, getCurrentPos().getY() + ADJUST_STATIONARY_YPOS);
+        return new P2d(getCurrentPos().getX() + ADJUST_STATIONARY_XPOS,
+                getCurrentPos().getY() + ADJUST_STATIONARY_YPOS);
     }
 }

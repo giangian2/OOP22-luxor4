@@ -11,8 +11,8 @@ import it.unibo.physics.impl.BoundaryCollision;
 import it.unibo.enums.Direction;
 import it.unibo.events.api.WorldEvent;
 import it.unibo.model.GameObject.Type;
-import it.unibo.model.impl.CircleBoundingBox;
-import it.unibo.model.impl.RectBoundingBox;
+import it.unibo.model.collisions.impl.CircleBoundingBox;
+import it.unibo.model.collisions.impl.RectBoundingBox;
 import it.unibo.utils.QueueManager;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
@@ -344,13 +344,17 @@ public class World {
         P2d br = mainBBox.getBRCorner();
         double r = box.getRadius();
         if (pos.getY() + r > ul.getY()) {
-            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.TOP, new P2d(pos.getX(), ul.getY())));
+            return Optional
+                    .of(new BoundaryCollision(BoundaryCollision.CollisionEdge.TOP, new P2d(pos.getX(), ul.getY())));
         } else if (pos.getY() - r < br.getY()) {
-            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.BOTTOM, new P2d(pos.getX(), br.getY())));
+            return Optional
+                    .of(new BoundaryCollision(BoundaryCollision.CollisionEdge.BOTTOM, new P2d(pos.getX(), br.getY())));
         } else if (pos.getX() + r > br.getX()) {
-            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.RIGHT, new P2d(br.getX(), pos.getY())));
+            return Optional
+                    .of(new BoundaryCollision(BoundaryCollision.CollisionEdge.RIGHT, new P2d(br.getX(), pos.getY())));
         } else if (pos.getX() - r < ul.getX()) {
-            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.LEFT, new P2d(ul.getX(), pos.getY())));
+            return Optional
+                    .of(new BoundaryCollision(BoundaryCollision.CollisionEdge.LEFT, new P2d(ul.getX(), pos.getY())));
         } else {
             return Optional.empty();
         }

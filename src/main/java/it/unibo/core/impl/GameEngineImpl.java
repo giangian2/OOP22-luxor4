@@ -15,7 +15,7 @@ import it.unibo.input.impl.KeyboardInputController;
 import it.unibo.model.Ball;
 import it.unibo.model.GameState;
 import it.unibo.model.World;
-import it.unibo.model.impl.RectBoundingBox;
+import it.unibo.model.collisions.impl.RectBoundingBox;
 import it.unibo.utils.P2d;
 
 /**

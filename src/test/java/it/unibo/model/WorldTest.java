@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 import it.unibo.core.impl.GameObjectsFactory;
-import it.unibo.model.impl.RectBoundingBox;
+import it.unibo.model.collisions.impl.RectBoundingBox;
 import it.unibo.utils.P2d;
 
 public class WorldTest {

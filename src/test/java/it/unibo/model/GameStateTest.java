@@ -2,20 +2,26 @@ package it.unibo.model;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
-
 import it.unibo.core.impl.GameEngineImpl;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.enums.Levels;
 import it.unibo.events.api.WorldEventListener;
-import it.unibo.model.impl.RectBoundingBox;
+import it.unibo.model.collisions.impl.RectBoundingBox;
 import it.unibo.utils.P2d;
 
+/**
+ * Class to test the correct functioning of the GameState class.
+ */
 public class GameStateTest {
 
+    /**
+     * Initialize a GameState instance based on level 1.
+     * 
+     * @return GameState
+     */
     GameState initialize() {
-        WorldEventListener gameEngine = new GameEngineImpl(Levels.L1);
+        WorldEventListener gameEngine = new GameEngineImpl(Levels.L1); // Initialize thew world event listener
         return new GameState(gameEngine, () -> {
             final int height = 600;
             final int width = 800;
@@ -35,6 +41,9 @@ public class GameStateTest {
         });
     }
 
+    /**
+     * Tests the correct creation of the game state object with a given level.
+     */
     @Test
     public void testInitializationWithLevels() {
 
@@ -44,6 +53,10 @@ public class GameStateTest {
 
     }
 
+    /**
+     * 
+     * Tests the correct functioning of the basic scoring operations.
+     */
     @Test
     public void testScoreHandling() {
         var gameState = this.initialize();
@@ -58,6 +71,9 @@ public class GameStateTest {
 
     }
 
+    /**
+     * Tests the correct detection of the game over status.
+     */
     @Test
     public void testGameOver() {
         var gameState = this.initialize();
@@ -68,11 +84,13 @@ public class GameStateTest {
         assertTrue(gameState.isGameOver());
     }
 
+    /**
+     * Tests the correct detection of the win status.
+     */
     @Test
     public void testWin() {
         var gameState = this.initialize();
         gameState.getWorld().getQueue().removeAll(gameState.getWorld().getQueue());
         assertTrue(gameState.isWin());
     }
-
 }

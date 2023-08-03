@@ -3,14 +3,15 @@ package it.unibo.model;
 import it.unibo.graphics.impl.MyGraphicsComponent;
 import it.unibo.input.api.InputComponent;
 import it.unibo.input.api.InputController;
-import it.unibo.model.api.BoundingBox;
+import it.unibo.model.collisions.api.BoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
 
 /**
  * A class representing a generic GameObject in the game.
- *  This class provides methods to manage the position, velocity, input, physics, graphics, and bounding box of the game object.
+ * This class provides methods to manage the position, velocity, input, physics,
+ * graphics, and bounding box of the game object.
  */
 public class GameObject {
 
@@ -24,6 +25,7 @@ public class GameObject {
          */
         BALL, CANNON, CANNON_BALL, STATIONARY_BALL
     }
+
     /**
      * The type of the game object.
      */
@@ -56,15 +58,16 @@ public class GameObject {
     private BoundingBox bbox;
 
     /**
-     * Creates a new GameObject with the specified type, position, velocity, input component, 
+     * Creates a new GameObject with the specified type, position, velocity, input
+     * component,
      * bounding box, graphics component, and physics component.
      *
-     * @param type The type of the GameObject.
-     * @param pos The initial position of the GameObject.
-     * @param vel The initial velocity of the GameObject.
-     * @param input The input component of the GameObject.
-     * @param bbox The bounding box of the GameObject.
-     * @param graph The graphics component of the GameObject.
+     * @param type    The type of the GameObject.
+     * @param pos     The initial position of the GameObject.
+     * @param vel     The initial velocity of the GameObject.
+     * @param input   The input component of the GameObject.
+     * @param bbox    The bounding box of the GameObject.
+     * @param graph   The graphics component of the GameObject.
      * @param physics The physics component of the GameObject.
      */
     public GameObject(final Type type, final P2d pos, final V2d vel, final InputComponent input, final BoundingBox bbox,
@@ -83,7 +86,7 @@ public class GameObject {
      *
      * @return The input component of the game object.
      */
-    public InputComponent getInput() { 
+    public InputComponent getInput() {
         return input;
     }
 
@@ -92,7 +95,7 @@ public class GameObject {
      *
      * @param input The new input component to set for the game object.
      */
-    public void setInput(final InputComponent input) { 
+    public void setInput(final InputComponent input) {
         this.input = input;
     }
 
@@ -101,7 +104,7 @@ public class GameObject {
      *
      * @return The physics component of the game object.
      */
-    public PhysicsComponent getPhysics() { 
+    public PhysicsComponent getPhysics() {
         return physics;
     }
 
@@ -111,7 +114,7 @@ public class GameObject {
      * @param physics The new physics component to set for the game object.
      */
 
-    public void setPhysics(final PhysicsComponent physics) { 
+    public void setPhysics(final PhysicsComponent physics) {
         this.physics = physics;
     }
 
@@ -120,7 +123,7 @@ public class GameObject {
      *
      * @return The graphics component of the game object.
      */
-    public MyGraphicsComponent getGraph() { 
+    public MyGraphicsComponent getGraph() {
         return graph;
     }
 
@@ -130,15 +133,16 @@ public class GameObject {
      * @param graph The new graphics component to set for the game object.
      */
 
-    public void setGraph(final MyGraphicsComponent graph) { 
+    public void setGraph(final MyGraphicsComponent graph) {
         this.graph = graph;
     }
+
     /**
      * Sets the bounding box of the game object.
      * 
      * @return The bounding box of the game object.
      */
-    public BoundingBox getBbox() { 
+    public BoundingBox getBbox() {
         return bbox;
     }
 
@@ -148,24 +152,25 @@ public class GameObject {
      * @param bbox The new bounding box to set for the game object.
      */
 
-    public void setBbox(final BoundingBox bbox) { 
+    public void setBbox(final BoundingBox bbox) {
         this.bbox = bbox;
     }
 
     /**
      * Gets the type of the game object.
      *
-     * @return The type of the game object (e.g., BALL, CANNON, CANNON_BALL, or STATIONARY_BALL).
+     * @return The type of the game object (e.g., BALL, CANNON, CANNON_BALL, or
+     *         STATIONARY_BALL).
      */
     public Type getType() {
         return type;
     }
 
     /**
-    * Sets the position of the game object in 2D space.
-    *
-    * @param pos The new position to set for the game object.
-    */
+     * Sets the position of the game object in 2D space.
+     *
+     * @param pos The new position to set for the game object.
+     */
     public void setPos(final P2d pos) {
         this.pos = pos;
     }
@@ -210,13 +215,14 @@ public class GameObject {
      * Flips the vertical velocity of the game object.
      *
      */
-    public void flipVelOnY() { 
+    public void flipVelOnY() {
         this.vel = new V2d(vel.getX(), -vel.getY());
     }
 
     /**
      * Flips the horizontal velocity of the game object.
-     * This method is used to change the direction of the game object in the horizontal axis.
+     * This method is used to change the direction of the game object in the
+     * horizontal axis.
      */
     public void flipVelOnX() {
         this.vel = new V2d(-vel.getX(), vel.getY());
@@ -227,7 +233,7 @@ public class GameObject {
      *
      * @return The input component of the game object.
      */
-    public BoundingBox getBBox() { 
+    public BoundingBox getBBox() {
         return bbox;
     }
 
@@ -244,7 +250,8 @@ public class GameObject {
     /**
      * Updates the input of the game object.
      *
-     * @param c The InputController providing input data for updating the game object.
+     * @param c The InputController providing input data for updating the game
+     *          object.
      */
     public void updateInput(final InputController c) {
         input.update(this, c);
@@ -253,7 +260,8 @@ public class GameObject {
     /**
      * Updates the graphics of the game object.
      *
-     * @param c The Graphics2D object used to update the graphics of the game object.
+     * @param c The Graphics2D object used to update the graphics of the game
+     *          object.
      */
     public void updateGraphics(final java.awt.Graphics2D c) {
         graph.update(this, c);
