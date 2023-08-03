@@ -23,7 +23,8 @@ import it.unibo.utils.SoundPlayer;
  */
 @SuppressFBWarnings(value = {
         "EI_EXPOSE_REP",
-        "EI_EXPOSE_REP2" }, justification = "This warning does not represent a security threat beacuse the Input package will update the World")
+        "EI_EXPOSE_REP2" }, justification = "This warning does not represent a security threat"
+                + "beacuse the Input package will update the World")
 
 public class World {
     /**

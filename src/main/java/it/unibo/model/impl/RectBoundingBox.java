@@ -46,7 +46,7 @@ public class RectBoundingBox implements BoundingBox {
      * @return boolean
      */
     @Override
-    public boolean isCollidingWith(P2d p, double radius) {
+    public boolean isCollidingWith(final P2d p, final double radius) {
         return false;
     }
 
