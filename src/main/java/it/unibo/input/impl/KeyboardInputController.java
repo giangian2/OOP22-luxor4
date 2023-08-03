@@ -95,13 +95,4 @@ public class KeyboardInputController implements InputController {
     public void setInputComponent(final PlayerInputComponent playerInputComponent) {
     }
 
-    /**
-     * Creates a copy of the input controller.
-     *
-     * @return A copy of the input controller.
-     */
-    public KeyboardInputController copy() {
-        return new KeyboardInputController();
-    }
-
 }
