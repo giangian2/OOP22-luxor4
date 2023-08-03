@@ -53,17 +53,17 @@ public class Path {
 
             double epsilon = 1e-6;
 
-            if (Math.abs(position.x - nextCorner.x) < epsilon && position.y > nextCorner.y) {
+            if (Math.abs(position.getX() - nextCorner.getX()) < epsilon && position.getY() > nextCorner.getY()) {
                 return Direction.UP;
             }
-            if (Math.abs(position.x - nextCorner.x) < epsilon && position.y < nextCorner.y) {
+            if (Math.abs(position.getX() - nextCorner.getX()) < epsilon && position.getY() < nextCorner.getY()) {
                 return Direction.DOWN;
             }
-            if (Math.abs(position.y - nextCorner.y) < epsilon && position.x > nextCorner.x) {
+            if (Math.abs(position.getY() - nextCorner.getY()) < epsilon && position.getX() > nextCorner.getX()) {
 
                 return Direction.LEFT;
             }
-            if (Math.abs(position.y - nextCorner.y) < epsilon && position.x < nextCorner.x) {
+            if (Math.abs(position.getY() - nextCorner.getY()) < epsilon && position.getX() < nextCorner.getX()) {
                 return Direction.RIGHT;
             }
         }

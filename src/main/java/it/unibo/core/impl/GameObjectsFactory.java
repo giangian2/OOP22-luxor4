@@ -48,7 +48,7 @@ public class GameObjectsFactory {
     public Ball createBall(final P2d pos, final V2d vel, final BallColor color) {
         return new Ball(Type.BALL, pos, color, new V2d(10, 10),
                 new NullInputComponent(),
-                new CircleBoundingBox(new P2d(pos.x, pos.y), 10), // in input
+                new CircleBoundingBox(new P2d(pos.getX(), pos.getY()), 10), // in input
                 new BallPhysicsComponent(),
                 new BallGraphicsComponent()); // in physics
 
@@ -80,7 +80,7 @@ public class GameObjectsFactory {
         final int initialVelocity = -10;
         return new Ball(Type.CANNON_BALL, pos, color, new V2d(0, initialVelocity),
                 new NullInputComponent(),
-                new CircleBoundingBox(new P2d(pos.x, pos.y), 10), // in input
+                new CircleBoundingBox(new P2d(pos.getX(), pos.getY()), 10), // in input
                 new CannonBallPhysicsComponent(),
                 new BallGraphicsComponent()); // in physics
 
@@ -97,7 +97,7 @@ public class GameObjectsFactory {
     public Ball createStationaryBall(final P2d cannonPos, final V2d vel, final BallColor color) {
         return new Ball(Type.STATIONARY_BALL, cannonPos, color, new V2d(0, 0),
                 new NullInputComponent(),
-                new CircleBoundingBox(new P2d(cannonPos.x, cannonPos.y), 10), // in input
+                new CircleBoundingBox(new P2d(cannonPos.getX(), cannonPos.getY()), 10), // in input
                 new StationaryBallPhysicsComponent(),
                 new BallGraphicsComponent()); // in physics
     }

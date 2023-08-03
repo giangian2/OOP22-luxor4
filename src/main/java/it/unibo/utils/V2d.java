@@ -12,7 +12,7 @@ public class V2d implements java.io.Serializable {
     /**
      * The component of the vector.
      */
-    public double x, y;
+    private double x, y;
 
     /**
      * Creates a new V2d object.
@@ -32,8 +32,8 @@ public class V2d implements java.io.Serializable {
      * @param from The starting P2d point of the vector.
      */
     public V2d(final P2d to, final P2d from) {
-        this.x = to.x - from.x;
-        this.y = to.y - from.y;
+        this.x = to.getX() - from.getX();
+        this.y = to.getY() - from.getY();
     }
 
     /**

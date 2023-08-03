@@ -65,14 +65,11 @@ public class SceneImpl implements Scene {
         frame.setMinimumSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
                 boardGraphics.getBackgorundImg().getHeight(null)));
         frame.setResizable(false);
-        
 
         this.panel = new GamePanel();
         ((GamePanel) this.panel).initKeyListener();
         this.panel.setPreferredSize(new Dimension(this.boardGraphics.getBackgorundImg().getWidth(null),
                 this.boardGraphics.getBackgorundImg().getHeight(null)));
-        
-        
 
         this.layeredPane = new JLayeredPane();
         this.layeredPane.setPreferredSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
@@ -203,8 +200,6 @@ public class SceneImpl implements Scene {
             //this.addKeyListener(this);
             setFocusable(true);
             setFocusTraversalKeysEnabled(false);
-            
-
             Dimension size = new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
                     boardGraphics.getBackgorundImg().getHeight(null));
             setPreferredSize(size);
@@ -215,9 +210,11 @@ public class SceneImpl implements Scene {
 
         }
 
+        /**
+         * Initializes the key listener for the panel.
+         */
         public void initKeyListener() {
             addKeyListener(this);
-            
         }
 
         /**
@@ -304,7 +301,5 @@ public class SceneImpl implements Scene {
                 controller.notifyNoMoreMoveLeft();
             }
         }
-
     }
-
 }

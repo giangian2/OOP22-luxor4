@@ -79,8 +79,8 @@ public class QueueManager {
         for (int i = 0; i < balls.size(); i++) {
             balls.get(i).setPos(pos);
             direction = path.getMove(pos);
-            pos = new P2d(pos.x + direction.getVelocity().getX() * Ball.IMAGE_DIAMETER,
-                    pos.y + direction.getVelocity().getY() * Ball.IMAGE_DIAMETER);
+            pos = new P2d(pos.getX() + direction.getVelocity().getX() * Ball.IMAGE_DIAMETER,
+                    pos.getY() + direction.getVelocity().getY() * Ball.IMAGE_DIAMETER);
         }
 
     }
@@ -110,8 +110,8 @@ public class QueueManager {
                 var currentPos = this.balls.get(i).getCurrentPos();
 
                 if (i > 0 && !firstShifting) {
-                    if (Math.abs(this.balls.get(i - 1).getCurrentPos().x - currentPos.x) > Ball.IMAGE_DIAMETER
-                            || Math.abs(this.balls.get(i - 1).getCurrentPos().y - currentPos.y) > Ball.IMAGE_DIAMETER) {
+                    if (Math.abs(this.balls.get(i - 1).getCurrentPos().getX() - currentPos.getX()) > Ball.IMAGE_DIAMETER
+                            || Math.abs(this.balls.get(i - 1).getCurrentPos().getY() - currentPos.getY()) > Ball.IMAGE_DIAMETER) {
 
                         break;
                     }
@@ -120,19 +120,19 @@ public class QueueManager {
 
                 switch (nextMove) {
                     case UP:
-                        this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y - 1));
+                        this.balls.get(i).setPos(new P2d(currentPos.getX(), currentPos.getY() - 1));
                         break;
 
                     case DOWN:
-                        this.balls.get(i).setPos(new P2d(currentPos.x, currentPos.y + 1));
+                        this.balls.get(i).setPos(new P2d(currentPos.getX(), currentPos.getY() + 1));
                         break;
 
                     case LEFT:
-                        this.balls.get(i).setPos(new P2d(currentPos.x - 1, currentPos.y));
+                        this.balls.get(i).setPos(new P2d(currentPos.getX() - 1, currentPos.getY()));
                         break;
 
                     case RIGHT:
-                        this.balls.get(i).setPos(new P2d(currentPos.x + 1, currentPos.y));
+                        this.balls.get(i).setPos(new P2d(currentPos.getX() + 1, currentPos.getY()));
                         break;
                     default:
                         break;
