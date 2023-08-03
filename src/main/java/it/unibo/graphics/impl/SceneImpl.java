@@ -1,6 +1,9 @@
 package it.unibo.graphics.impl;
 
 import javax.swing.JPanel;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -55,6 +58,10 @@ public class SceneImpl implements Scene {
      * @param controller    The KeyboardInputController for handling user input.
      * @param backgroundSrc The path to the background image source.
      */
+    @SuppressFBWarnings(value = {
+        "EI_EXPOSE_REP" },
+        justification = "This warning does not represent a security threat"
+                + "beacuse the KeyboardInpuController has to be mutable")
     public SceneImpl(final GameState gameState, final KeyboardInputController controller, final String backgroundSrc) {
 
         this.gameState = gameState;
