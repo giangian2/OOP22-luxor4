@@ -38,6 +38,6 @@ public class BallGraphicsComponent implements MyGraphicsComponent {
         // Draw a filled oval (representing the ball) using the ball's color and dimensions.
         // The x and y position of the oval are based on the x and y coordinates of the ball from pos.
         // Ball.IMAGE_DIAMETER is likely a constant representing the diameter of the ball.
-        g.fillOval((int) pos.x, (int) pos.y, Ball.IMAGE_DIAMETER, Ball.IMAGE_DIAMETER);
+        g.fillOval((int) pos.getX(), (int) pos.getY(), Ball.IMAGE_DIAMETER, Ball.IMAGE_DIAMETER);
     }
 }

@@ -183,7 +183,7 @@ public class World {
          * the axes, the cannon ball is placed ahead of the tail ball
          * otherwise it is put behind.
          */
-        if (cannonBallPos.x <= queueBallPos.x && cannonBallPos.y >= queueBallPos.y) {
+        if (cannonBallPos.getX() <= queueBallPos.getX() && cannonBallPos.getY() >= queueBallPos.getY()) {
             /**
              * if the tail ball was moving in the directions : DOWN and LEFT, then the shot
              * ball is inserted between the hit tail ball and the respective next ball.
@@ -209,7 +209,7 @@ public class World {
                         GameObjectsFactory.getInstance().createBall(queueBallPos, null,
                                 cannonBall.getColor()));
             }
-        } else if (cannonBallPos.x >= queueBallPos.x && cannonBallPos.y >= queueBallPos.y) {
+        } else if (cannonBallPos.getX() >= queueBallPos.getX() && cannonBallPos.getY() >= queueBallPos.getY()) {
             /**
              * if the collision with the tail ball occurred in the second quadrant, the
              * cannon ball is placed ahead of the tail ball
@@ -343,14 +343,14 @@ public class World {
         P2d ul = mainBBox.getULCorner();
         P2d br = mainBBox.getBRCorner();
         double r = box.getRadius();
-        if (pos.y + r > ul.y) {
-            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.TOP, new P2d(pos.x, ul.y)));
-        } else if (pos.y - r < br.y) {
-            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.BOTTOM, new P2d(pos.x, br.y)));
-        } else if (pos.x + r > br.x) {
-            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.RIGHT, new P2d(br.x, pos.y)));
-        } else if (pos.x - r < ul.x) {
-            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.LEFT, new P2d(ul.x, pos.y)));
+        if (pos.getY() + r > ul.getY()) {
+            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.TOP, new P2d(pos.getX(), ul.getY())));
+        } else if (pos.getY() - r < br.getY()) {
+            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.BOTTOM, new P2d(pos.getX(), br.getY())));
+        } else if (pos.getX() + r > br.getX()) {
+            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.RIGHT, new P2d(br.getX(), pos.getY())));
+        } else if (pos.getX() - r < ul.getX()) {
+            return Optional.of(new BoundaryCollision(BoundaryCollision.CollisionEdge.LEFT, new P2d(ul.getX(), pos.getY())));
         } else {
             return Optional.empty();
         }

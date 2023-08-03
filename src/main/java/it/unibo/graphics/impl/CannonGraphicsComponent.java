@@ -53,7 +53,7 @@ public class CannonGraphicsComponent implements MyGraphicsComponent {
         Cannon cannon = (Cannon) obj;
         // Cast the GameObject to a Cannon object.
 
-        g.drawImage(this.icon, (int) cannon.getCurrentPos().x, (int) cannon.getCurrentPos().y, null);
+        g.drawImage(this.icon, (int) cannon.getCurrentPos().getX(), (int) cannon.getCurrentPos().getY(), null);
         // Draw the cannon icon at the current position of the Cannon object.
     }
 

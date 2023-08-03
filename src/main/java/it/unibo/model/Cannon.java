@@ -98,7 +98,7 @@ public class Cannon extends GameObject {
      * The color of the stationary ball is then updated to a random color.
      */
     public void fireProjectile() {
-        P2d ballPos = new P2d(getCurrentPos().x + ADJUST_FIRED_BALL_POS, getCurrentPos().y);
+        P2d ballPos = new P2d(getCurrentPos().getX() + ADJUST_FIRED_BALL_POS, getCurrentPos().getY());
 
         BallColor projectileColor = stationaryBall.getColor();
         Ball ball = GameObjectsFactory.getInstance().createCannonBall(ballPos, new V2d(0, BALL_SPEED_Y),
@@ -116,6 +116,6 @@ public class Cannon extends GameObject {
      * @return The position of the stationary ball.
      */
     public final P2d getStationaryBallPos() {
-        return new P2d(getCurrentPos().x + ADJUST_STATIONARY_XPOS, getCurrentPos().y + ADJUST_STATIONARY_YPOS);
+        return new P2d(getCurrentPos().getX() + ADJUST_STATIONARY_XPOS, getCurrentPos().getY() + ADJUST_STATIONARY_YPOS);
     }
 }

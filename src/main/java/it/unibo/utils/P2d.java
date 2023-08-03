@@ -15,17 +15,38 @@ public class P2d implements java.io.Serializable {
     /**
      * The coordinate of the point.
      */
-    public double x, y;
+    private double x;
+
+    private double y;
 
     /**
      * Creates a new P2d object.
      *
      * @param x The x coordinate of the point.
      * @param y The y coordinate of the point.
-     */ 
+     */
     public P2d(final double x, final double y) {
         this.x = x;
         this.y = y;
+    }
+
+    /**
+     * Returns the x coordinate of this point.
+     *
+     * @return The x coordinate of this point.
+     */
+    public double getX() {
+        return x;
+    }
+
+    /**
+     * Returns the y coordinate of this point.
+     *
+     * @return The y coordinate of this point.
+     */
+
+    public double getY() {
+        return y;
     }
 
     /**
@@ -66,17 +87,19 @@ public class P2d implements java.io.Serializable {
     }
 
     /**
-     * Returns a new P2d object resulting from the vector sum of this point and a V2d vector.
+     * Returns a new P2d object resulting from the vector sum of this point and a
+     * V2d vector.
      *
      * @param v The V2d vector to be added to this point.
      * @return The resulting P2d point after the addition.
      */
     public P2d sum(final V2d v) {
-        return new P2d(x + v.x, y + v.y);
+        return new P2d(x + v.getX(), y + v.getY());
     }
 
     /**
-     * Returns a new V2d vector resulting from the subtraction of another P2d point from this point.
+     * Returns a new V2d vector resulting from the subtraction of another P2d point
+     * from this point.
      *
      * @param v The P2d point to be subtracted from this point.
      * @return The resulting V2d vector after the subtraction.
@@ -108,7 +131,8 @@ public class P2d implements java.io.Serializable {
      *
      * @param p1 The first P2d point defining the axis.
      * @param p2 The second P2d point defining the axis.
-     * @return true if this point is between p1 and p2 on the same axis, false otherwise.
+     * @return true if this point is between p1 and p2 on the same axis, false
+     *         otherwise.
      */
     public boolean isBetween(final P2d p1, final P2d p2) {
         final double epsilon = 1e-9; // Soglia di tolleranza
@@ -126,7 +150,7 @@ public class P2d implements java.io.Serializable {
         return false;
     }
 
-     /**
+    /**
      * Calculates the sum of the x and y coordinates of this point.
      *
      * @return The sum of the x and y coordinates of this point.
@@ -135,4 +159,3 @@ public class P2d implements java.io.Serializable {
         return x + y;
     }
 }
-

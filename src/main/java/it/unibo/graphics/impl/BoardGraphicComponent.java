@@ -62,8 +62,7 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
      */
     public Image getBackgorundImg() {
         if (this.img != null) {
-            
-            return new ImageIcon(this.img).getImage();
+          return new ImageIcon(this.img).getImage();
         } else {
             return null;
         }
