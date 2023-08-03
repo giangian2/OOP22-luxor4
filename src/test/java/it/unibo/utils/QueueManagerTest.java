@@ -13,7 +13,7 @@ import it.unibo.model.Ball;
 import org.junit.jupiter.api.Test;
 
 /**
- * This test class tests QueueManager methods
+ * This test class tests QueueManager methods.
  */
 public class QueueManagerTest {
     @Test
@@ -33,11 +33,10 @@ public class QueueManagerTest {
     @Test
     @SuppressWarnings("magicnumber")
     void testCheckCloseByThree() {
-        
 
         var qm = new QueueManager(0, 1, "levels/1/Path.xml");
         var gof = GameObjectsFactory.getInstance();
-        
+
         // CHECKSTYLE: MagicNumber OFF
         /*
          * it would be redundant and useless use constants
@@ -66,7 +65,7 @@ public class QueueManagerTest {
         outputList.remove(0);
 
         // CHECKSTYLE: MagicNumber ON
-        
+
         var founded = qm.checkCloseByThree();
         assertTrue(outputList.equals(founded));
     }

@@ -50,6 +50,6 @@ public enum Direction {
      * @return Vector represented by enum element.
      */
     public V2d getVelocity() {
-        return this.velocity;
+        return new V2d(this.velocity.getX(), this.velocity.getY());
     }
 }

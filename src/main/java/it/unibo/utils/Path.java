@@ -27,7 +27,7 @@ public class Path {
     }
 
     public List<P2d> getPositions() {
-        return this.points;
+        return new ArrayList<>(this.points);
     }
 
     public P2d getFirst() {
