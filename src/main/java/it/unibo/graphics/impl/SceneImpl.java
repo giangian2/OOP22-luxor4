@@ -68,6 +68,7 @@ public class SceneImpl implements Scene {
         
 
         this.panel = new GamePanel();
+        ((GamePanel) this.panel).initKeyListener();
         this.panel.setPreferredSize(new Dimension(this.boardGraphics.getBackgorundImg().getWidth(null),
                 this.boardGraphics.getBackgorundImg().getHeight(null)));
         
@@ -199,7 +200,7 @@ public class SceneImpl implements Scene {
          * An inner class representing the panel where the game graphics are drawn.
          */
         public GamePanel() {
-            this.addKeyListener(this);
+            //this.addKeyListener(this);
             setFocusable(true);
             setFocusTraversalKeysEnabled(false);
             
@@ -214,7 +215,10 @@ public class SceneImpl implements Scene {
 
         }
 
-        
+        public void initKeyListener() {
+            addKeyListener(this);
+            
+        }
 
         /**
          * Paints the graphics on the panel.
