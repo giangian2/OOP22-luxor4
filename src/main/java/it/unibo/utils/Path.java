@@ -2,10 +2,13 @@ package it.unibo.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import javax.xml.parsers.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -16,29 +19,56 @@ import it.unibo.enums.Direction;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
-public class Path {
+/**
+ * This class is the representation of a path with straight roads, 
+ * consequently only having the vertexes that connect the pieces of the path .
+ */
+public final class Path {
     private List<P2d> points;
+    /*
+     * This EPSILON represents the maximum approximation 
+     * for a double precision operation.
+     */
+    private static final double EPSILON = 1e-6;
 
     /**
-     * Proprs + methods
+     * Private constructor for a path.
+     * @param builder Path builder.
      */
-    private Path(PathBuilder builder) {
+    private Path(final PathBuilder builder) {
         this.points = builder.points;
     }
 
+    /**
+     * Get all the vertex of the path.
+     * @return A list of vertexes
+     */
     public List<P2d> getPositions() {
         return new ArrayList<>(this.points);
     }
 
+    /**
+     * Get the first vertex of the path.
+     * @return The first vertex.
+     */
     public P2d getFirst() {
         return this.points.get(0);
     }
-
+    /**
+     * Get the last vertex of the path.
+     * @return The last vertex.
+     */
     public P2d getLast() {
         return this.points.get(points.size() - 1);
     }
 
-    public Direction getMove(P2d position) {
+    /**
+     * Given a position, it returns the direction where you have
+     * to move in order to going forward in the parh.
+     * @param position The position to check.
+     * @return The direction to take.
+     */
+    public Direction getMove(final P2d position) {
         P2d nextCorner = null;
         if (points.contains(position) && (points.size() > (points.indexOf(position) + 1))) {
             nextCorner = points.get(points.indexOf(position) + 1);
@@ -51,19 +81,17 @@ public class Path {
         }
         if (nextCorner != null) {
 
-            double epsilon = 1e-6;
-
-            if (Math.abs(position.getX() - nextCorner.getX()) < epsilon && position.getY() > nextCorner.getY()) {
+            if (Math.abs(position.getX() - nextCorner.getX()) < EPSILON && position.getY() > nextCorner.getY()) {
                 return Direction.UP;
             }
-            if (Math.abs(position.getX() - nextCorner.getX()) < epsilon && position.getY() < nextCorner.getY()) {
+            if (Math.abs(position.getX() - nextCorner.getX()) < EPSILON && position.getY() < nextCorner.getY()) {
                 return Direction.DOWN;
             }
-            if (Math.abs(position.getY() - nextCorner.getY()) < epsilon && position.getX() > nextCorner.getX()) {
+            if (Math.abs(position.getY() - nextCorner.getY()) < EPSILON && position.getX() > nextCorner.getX()) {
 
                 return Direction.LEFT;
             }
-            if (Math.abs(position.getY() - nextCorner.getY()) < epsilon && position.getX() < nextCorner.getX()) {
+            if (Math.abs(position.getY() - nextCorner.getY()) < EPSILON && position.getX() < nextCorner.getX()) {
                 return Direction.RIGHT;
             }
         }
@@ -71,10 +99,17 @@ public class Path {
         return Direction.NONE;
     }
 
+    /**
+     * Class that represents a builder for build a Path object.
+     */
     public static class PathBuilder {
         private List<P2d> points;
 
-        public PathBuilder(String xmlPathSrc) {
+        /**
+         * Constructor for a PathBuilder.
+         * @param xmlPathSrc source path of the xml file containing vertex.
+         */
+        public PathBuilder(final String xmlPathSrc) {
             try {
                 final InputStream in = Objects.requireNonNull(
                         ClassLoader.getSystemResourceAsStream(xmlPathSrc));
@@ -115,6 +150,10 @@ public class Path {
             }
         }
 
+        /**
+         * Builds a path.
+         * @return Path builded.
+         */
         public Path build() {
             return new Path(this);
         }
