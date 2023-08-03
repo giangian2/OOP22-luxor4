@@ -22,33 +22,37 @@ public class Ball extends GameObject {
 
     /**
      * Constructor for an istance of Ball.
-     * @param type Specified type of game object.
-     * @param pos Position (coordinates)
-     * @param color Color
-     * @param vel Velocity vector
-     * @param input Input component 
-     * @param bbox Bounding box
+     * 
+     * @param type    Specified type of game object.
+     * @param pos     Position (coordinates)
+     * @param color   Color
+     * @param vel     Velocity vector
+     * @param input   Input component
+     * @param bbox    Bounding box
      * @param physics Physics component
-     * @param graph Graphic component
+     * @param graph   Graphic component
      */
     public Ball(final Type type, final P2d pos, final BallColor color,
-                final V2d vel, final InputComponent input, final BoundingBox bbox,
-                final PhysicsComponent physics, final BallGraphicsComponent graph) {
+            final V2d vel, final InputComponent input, final BoundingBox bbox,
+            final PhysicsComponent physics, final BallGraphicsComponent graph) {
 
-        super(Type.BALL, pos, vel, input, bbox, graph, physics);
+        super(type, pos, vel, input, bbox, graph, physics);
         this.color = color;
     }
 
     /**
      * Set the color of the ball.
+     * 
      * @param color Color to set
      * @see BallColor
      */
     public void setColor(final BallColor color) {
         this.color = color;
     }
+
     /**
      * Get the color of the ball.
+     * 
      * @see BallColor
      * @return The color of the ball
      */
@@ -60,8 +64,8 @@ public class Ball extends GameObject {
      * Method that return if a ball(a) if the distance beetween a and this ball
      * is less than its diameter + a little approximation).
      * 
-     * @param a Ball to check if is near 
-     * @return True if the ball is near else false 
+     * @param a Ball to check if is near
+     * @return True if the ball is near else false
      */
     public boolean isNear(final Ball a) {
         return Math.abs(this.getCurrentPos().sumOfAxis() - a.getCurrentPos().sumOfAxis()) < (IMAGE_DIAMETER + 2);

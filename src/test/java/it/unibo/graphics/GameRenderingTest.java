@@ -1,4 +1,4 @@
-package it.unibo.utils;
+package it.unibo.graphics;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Test;
 import it.unibo.graphics.impl.MenuGame;
 
 /**
- * The GameRenderingTest class contains test methods to verify the rendering of the MenuGame.
+ * The GameRenderingTest class contains test methods to verify the rendering of
+ * the MenuGame.
  * It uses JUnit 5 for testing.
  */
 public class GameRenderingTest {
@@ -27,7 +28,8 @@ public class GameRenderingTest {
 
     /**
      * Test the rendering of the main menu in MenuGame.
-     * Verifies that calling showMainMenu() does not throw any exceptions and that the main menu panel is present.
+     * Verifies that calling showMainMenu() does not throw any exceptions and that
+     * the main menu panel is present.
      */
     @Test
     public void testMainMenuRendering() {
@@ -40,15 +42,18 @@ public class GameRenderingTest {
 
     /**
      * Test the rendering of the help menu in MenuGame.
-     * Verifies that calling showHelpMenu() does not throw any exceptions and that the help menu panel is present.
-     * Also simulates clicking on the help button to show the help menu and checks that the help text is present.
+     * Verifies that calling showHelpMenu() does not throw any exceptions and that
+     * the help menu panel is present.
+     * Also simulates clicking on the help button to show the help menu and checks
+     * that the help text is present.
      */
     @Test
     public void testHelpMenuRendering() {
         // Verifica che la chiamata a showHelpMenu() non lanci eccezioni
         assertDoesNotThrow(() -> menuGame.showHelpMenu());
 
-        // Simula l'azione di clic sul pulsante di aiuto per visualizzare il menu di aiuto
+        // Simula l'azione di clic sul pulsante di aiuto per visualizzare il menu di
+        // aiuto
         menuGame.showHelpMenu();
 
         // Verifica che sia presente un pannello di aiuto nel menu

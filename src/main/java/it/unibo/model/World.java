@@ -10,6 +10,7 @@ import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.physics.impl.BoundaryCollision;
 import it.unibo.enums.Direction;
 import it.unibo.events.api.WorldEvent;
+import it.unibo.model.GameObject.Type;
 import it.unibo.model.impl.CircleBoundingBox;
 import it.unibo.model.impl.RectBoundingBox;
 import it.unibo.utils.QueueManager;
@@ -168,6 +169,10 @@ public class World {
         int index = this.qm.getBalls().indexOf(queueBall);
         if (index == -1) {
             throw new IllegalStateException("Queue Ball Not Found!", null);
+        }
+
+        if (cannonBall.getType() != Type.CANNON_BALL) {
+            throw new IllegalStateException("The first argument wasn't a cannon ball!", null);
         }
 
         var cannonBallPos = cannonBall.getCurrentPos();
