@@ -1,7 +1,6 @@
 package it.unibo.utils;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,15 +8,27 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.graphics.impl.MenuGame;
 
+/**
+ * The GameRenderingTest class contains test methods to verify the rendering of the MenuGame.
+ * It uses JUnit 5 for testing.
+ */
 public class GameRenderingTest {
 
     private MenuGame menuGame;
 
+    /**
+     * Set up the test environment before each test method.
+     * Create a new instance of MenuGame for each test.
+     */
     @BeforeEach
     public void setup() {
         menuGame = new MenuGame();
     }
 
+    /**
+     * Test the rendering of the main menu in MenuGame.
+     * Verifies that calling showMainMenu() does not throw any exceptions and that the main menu panel is present.
+     */
     @Test
     public void testMainMenuRendering() {
         // Verifica che la chiamata a showMainMenu() non lanci eccezioni
@@ -27,6 +38,11 @@ public class GameRenderingTest {
         assertNotNull(menuGame.getContentPane());
     }
 
+    /**
+     * Test the rendering of the help menu in MenuGame.
+     * Verifies that calling showHelpMenu() does not throw any exceptions and that the help menu panel is present.
+     * Also simulates clicking on the help button to show the help menu and checks that the help text is present.
+     */
     @Test
     public void testHelpMenuRendering() {
         // Verifica che la chiamata a showHelpMenu() non lanci eccezioni
