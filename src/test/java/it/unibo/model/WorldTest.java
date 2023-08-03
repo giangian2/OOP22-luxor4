@@ -12,16 +12,17 @@ import it.unibo.model.impl.RectBoundingBox;
 import it.unibo.utils.P2d;
 
 public class WorldTest {
-    final int height = 600;
-    final int width = 800;
-    final int nballs = 10;
-    final int steps = 1;
-    final String xmlpath = "levels" + System.getProperty("file.separator") + "1"
-            + System.getProperty("file.separator") + "Path.xml";
-    final int cannonStartXPos = 470;
-    final int cannonStartYPos = 470;
+    static final int steps = 1;
 
     private World initialize() {
+        final int height = 600;
+        final int width = 800;
+        final int nballs = 10;
+
+        final String xmlpath = "levels" + System.getProperty("file.separator") + "1"
+                + System.getProperty("file.separator") + "Path.xml";
+        final int cannonStartXPos = 470;
+        final int cannonStartYPos = 470;
         return new World(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
                 xmlpath, (ev) -> {
                     System.out.println(ev.toString());
@@ -50,10 +51,10 @@ public class WorldTest {
 
         for (int i = 0; i < initialQueue.size(); i++) {
             assertTrue(
-                    Math.abs(finalQueue.get(i).getCurrentPos().x - initialQueue.get(i).getCurrentPos().x) == this.steps
+                    Math.abs(finalQueue.get(i).getCurrentPos().x - initialQueue.get(i).getCurrentPos().x) == steps
                             || Math.abs(
                                     finalQueue.get(i).getCurrentPos().y
-                                            - initialQueue.get(i).getCurrentPos().y) == this.steps);
+                                            - initialQueue.get(i).getCurrentPos().y) == steps);
         }
     }
 

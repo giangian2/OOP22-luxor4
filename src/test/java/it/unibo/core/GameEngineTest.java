@@ -6,62 +6,82 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.core.impl.GameEngineImpl;
 import it.unibo.enums.Levels;
-import it.unibo.events.impl.PauseGameEvent;
+import it.unibo.events.api.WorldEvent;
 
+/**
+ * Test class used to test fundamental aspects of the game engine.
+ */
 public class GameEngineTest {
 
+    /**
+     * Initialize a new instace of GameEngineImpl
+     * 
+     * @return GameEngineImpl
+     */
     private GameEngineImpl initialize() {
         return new GameEngineImpl(Levels.L1);
     }
 
+    /**
+     * Verify the correct functioning of the main loop, if there are no exceptions
+     * the main loop thread is killed and the test is successful.
+     */
     @Test
     public void testMainLoop() {
         assertDoesNotThrow(() -> {
+            // initialize a new instance of GameEngineImpl
             var engine = this.initialize();
-            Thread t2 = new Thread(() -> {
+            Thread mainLoopThread = new Thread(() -> {
                 engine.initGame();
 
             }, "Game thread thread");
 
-            t2.start();
+            mainLoopThread.start();// Start the mainloop thread
 
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            t2.interrupt();
+            mainLoopThread.interrupt();// Kill the mainloop thread
         });
     }
 
+    /**
+     * Verify the correct functioning of the method used to process the events that
+     * are pushed into the appropriate queue.
+     */
     @Test
     public void testEventListener() {
+        // initialize a new instance of GameEngineImpl
         var engine = this.initialize();
+
         assertDoesNotThrow(() -> {
-            Thread t = new Thread(() -> {
+            Thread eventThread = new Thread(() -> {
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-                engine.notifyEvent(new PauseGameEvent());
+                // Notify a new PauseEvent to the GameEngine
+                engine.notifyEvent(new WorldEvent() {
+                });
             }, "Events thread");
 
-            Thread t2 = new Thread(() -> {
+            Thread mainLoopThread = new Thread(() -> {
                 engine.initGame();
+            }, "Game thread");
 
-            }, "Game thread thread");
-
-            t2.start();
-            t.start();
+            mainLoopThread.start(); // start the mian loop thread
+            eventThread.start(); // start the events thread
 
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            t2.interrupt();
+
+            mainLoopThread.interrupt(); // kills the main loop thread
         });
 
     }

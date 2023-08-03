@@ -1,15 +1,8 @@
 package it.unibo.utils;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
 public class PathTest {
 
@@ -43,6 +36,8 @@ public class PathTest {
 
                     case RIGHT:
                         first = new P2d(first.x + 1, first.y);
+                        break;
+                    default:
                         break;
                 }
 
