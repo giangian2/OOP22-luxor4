@@ -36,9 +36,7 @@ public class SceneImpl implements Scene {
     private JLayeredPane layeredPane;
     private KeyboardInputController controller;
     private BoardGraphicComponent boardGraphics;
-    private CannonGraphicsComponent cannonGraphicsComponent;
     private JLabel pointsLabel;
-    private VictoryPanel victoryPanel;
     private static final int MENU_BUTTON_WIDTH = 80;
     private static final int MENU_BUTTON_HEIGHT = 30;
     private static final int LABEL_WIDTH = 100;
@@ -67,11 +65,13 @@ public class SceneImpl implements Scene {
         frame.setMinimumSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
                 boardGraphics.getBackgorundImg().getHeight(null)));
         frame.setResizable(false);
-        this.cannonGraphicsComponent = new CannonGraphicsComponent();
+        
 
         this.panel = new GamePanel();
         this.panel.setPreferredSize(new Dimension(this.boardGraphics.getBackgorundImg().getWidth(null),
                 this.boardGraphics.getBackgorundImg().getHeight(null)));
+        
+        
 
         this.layeredPane = new JLayeredPane();
         this.layeredPane.setPreferredSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
@@ -92,7 +92,7 @@ public class SceneImpl implements Scene {
         this.layeredPane.add(pointsLabel, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(pointsLabel, JLayeredPane.PALETTE_LAYER);
 
-        int labelY = this.boardGraphics.getBackgorundImg().getHeight(null) - LABEL_HEIGHT;
+
         int labelWidth = 100;
         pointsLabel.setBounds(LABEL_X, LABEL_Y, labelWidth, LABEL_HEIGHT);
         pointsLabel.setForeground(Color.WHITE);
@@ -118,6 +118,8 @@ public class SceneImpl implements Scene {
         });
         frame.pack();
         frame.setVisible(true);
+
+        panel.requestFocusInWindow();
     }
 
     /**
@@ -200,7 +202,7 @@ public class SceneImpl implements Scene {
             this.addKeyListener(this);
             setFocusable(true);
             setFocusTraversalKeysEnabled(false);
-            requestFocusInWindow();
+            
 
             Dimension size = new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
                     boardGraphics.getBackgorundImg().getHeight(null));
@@ -211,6 +213,8 @@ public class SceneImpl implements Scene {
             setLayout(new GridLayout());
 
         }
+
+        
 
         /**
          * Paints the graphics on the panel.
