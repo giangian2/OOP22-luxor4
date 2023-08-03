@@ -51,10 +51,11 @@ public class WorldTest {
 
         for (int i = 0; i < initialQueue.size(); i++) {
             assertTrue(
-                    Math.abs(finalQueue.get(i).getCurrentPos().x - initialQueue.get(i).getCurrentPos().x) == steps
+                    Math.abs(finalQueue.get(i).getCurrentPos().getX()
+                            - initialQueue.get(i).getCurrentPos().getX()) == steps
                             || Math.abs(
-                                    finalQueue.get(i).getCurrentPos().y
-                                            - initialQueue.get(i).getCurrentPos().y) == steps);
+                                    finalQueue.get(i).getCurrentPos().getY()
+                                            - initialQueue.get(i).getCurrentPos().getY()) == steps);
         }
     }
 
@@ -66,7 +67,8 @@ public class WorldTest {
         int startSize = w.getQueue().size();
 
         var cannonBall = GameObjectsFactory.getInstance()
-                .createCannonBall(new P2d(firstBall.getCurrentPos().x - 5, firstBall.getCurrentPos().y + 5), null,
+                .createCannonBall(new P2d(firstBall.getCurrentPos().getX() - 5, firstBall.getCurrentPos().getY() + 5),
+                        null,
                         null);
 
         w.insertCollisionBall(cannonBall, firstBall);
@@ -81,7 +83,7 @@ public class WorldTest {
         var firstBall = w.getQueue().get(0);
 
         var cannonBall = GameObjectsFactory.getInstance()
-                .createBall(new P2d(firstBall.getCurrentPos().x - 5, firstBall.getCurrentPos().y + 5), null,
+                .createBall(new P2d(firstBall.getCurrentPos().getX() - 5, firstBall.getCurrentPos().getY() + 5), null,
                         null);
 
         assertThrows(IllegalStateException.class, () -> {

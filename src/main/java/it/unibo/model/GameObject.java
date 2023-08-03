@@ -181,7 +181,7 @@ public class GameObject {
 
     /**
      * Gets the velocity of the game object in 2D space.
-     *  @param vel The velocity of the game object.
+     * 
      * @return The velocity of the game object.
      */
     public V2d getVel() {
@@ -197,7 +197,6 @@ public class GameObject {
         return this.pos;
     }
 
-    
     /**
      * Gets the current velocity of the game object in 2D space.
      *
@@ -212,7 +211,7 @@ public class GameObject {
      *
      */
     public void flipVelOnY() { 
-        this.vel = new V2d(vel.x, -vel.y);
+        this.vel = new V2d(vel.getX(), -vel.getY());
     }
 
     /**
@@ -220,7 +219,7 @@ public class GameObject {
      * This method is used to change the direction of the game object in the horizontal axis.
      */
     public void flipVelOnX() {
-        this.vel = new V2d(-vel.x, vel.y);
+        this.vel = new V2d(-vel.getX(), vel.getY());
     }
 
     /**

@@ -81,7 +81,6 @@ public class GameState {
      * @return true if the game is over, false otherwise.
      */
     public boolean isGameOver() {
-        System.out.println("Queue size: " + this.getWorld().getQueue().size());
         if (this.getWorld().getQueue().size() > 0) {
             var res = this.getWorld()
                     .moveSingleBall(this.getWorld().getQueue().get(this.getWorld().getQueue().size() - 1));

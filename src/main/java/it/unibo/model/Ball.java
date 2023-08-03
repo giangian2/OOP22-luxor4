@@ -71,6 +71,11 @@ public class Ball extends GameObject {
         return Math.abs(this.getCurrentPos().sumOfAxis() - a.getCurrentPos().sumOfAxis()) < (IMAGE_DIAMETER + 2);
     }
 
+
+    /**
+     * Calculates the hash code for this object.
+     * @return Hashcode.
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -79,19 +84,28 @@ public class Ball extends GameObject {
         return result;
     }
 
+    /**
+     * Checks if this Ball is considerable equal to another object.
+     * @return true if this Ball is equal to the argument, false otherwise.
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Ball other = (Ball) obj;
-        if (color != other.color)
+        if (color != other.color) {
             return false;
-        if (!getCurrentPos().equals(other.getCurrentPos()))
+        }
+        if (!getCurrentPos().equals(other.getCurrentPos())) {
             return false;
+        }
         return true;
     }
 

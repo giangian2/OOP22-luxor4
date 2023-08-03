@@ -23,19 +23,19 @@ public class PathTest {
 
                 switch (dir) {
                     case UP:
-                        first = new P2d(first.x, first.y - 1);
+                        first = new P2d(first.getX(), first.getY() - 1);
                         break;
 
                     case DOWN:
-                        first = new P2d(first.x, first.y + 1);
+                        first = new P2d(first.getX(), first.getY() + 1);
                         break;
 
                     case LEFT:
-                        first = new P2d(first.x - 1, first.y);
+                        first = new P2d(first.getX() - 1, first.getY());
                         break;
 
                     case RIGHT:
-                        first = new P2d(first.x + 1, first.y);
+                        first = new P2d(first.getX() + 1, first.getY());
                         break;
                     default:
                         break;

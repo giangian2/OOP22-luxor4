@@ -1,6 +1,9 @@
 package it.unibo.graphics.impl;
 
 import javax.swing.JPanel;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -36,9 +39,7 @@ public class SceneImpl implements Scene {
     private JLayeredPane layeredPane;
     private KeyboardInputController controller;
     private BoardGraphicComponent boardGraphics;
-    private CannonGraphicsComponent cannonGraphicsComponent;
     private JLabel pointsLabel;
-    private VictoryPanel victoryPanel;
     private static final int MENU_BUTTON_WIDTH = 80;
     private static final int MENU_BUTTON_HEIGHT = 30;
     private static final int LABEL_WIDTH = 100;
@@ -57,6 +58,10 @@ public class SceneImpl implements Scene {
      * @param controller    The KeyboardInputController for handling user input.
      * @param backgroundSrc The path to the background image source.
      */
+    @SuppressFBWarnings(value = {
+        "EI_EXPOSE_REP" },
+        justification = "This warning does not represent a security threat"
+                + "beacuse the KeyboardInpuController has to be mutable")
     public SceneImpl(final GameState gameState, final KeyboardInputController controller, final String backgroundSrc) {
 
         this.gameState = gameState;
@@ -67,9 +72,9 @@ public class SceneImpl implements Scene {
         frame.setMinimumSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
                 boardGraphics.getBackgorundImg().getHeight(null)));
         frame.setResizable(false);
-        this.cannonGraphicsComponent = new CannonGraphicsComponent();
 
         this.panel = new GamePanel();
+        ((GamePanel) this.panel).initKeyListener();
         this.panel.setPreferredSize(new Dimension(this.boardGraphics.getBackgorundImg().getWidth(null),
                 this.boardGraphics.getBackgorundImg().getHeight(null)));
 
@@ -92,7 +97,7 @@ public class SceneImpl implements Scene {
         this.layeredPane.add(pointsLabel, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(pointsLabel, JLayeredPane.PALETTE_LAYER);
 
-        int labelY = this.boardGraphics.getBackgorundImg().getHeight(null) - LABEL_HEIGHT;
+
         int labelWidth = 100;
         pointsLabel.setBounds(LABEL_X, LABEL_Y, labelWidth, LABEL_HEIGHT);
         pointsLabel.setForeground(Color.WHITE);
@@ -118,6 +123,8 @@ public class SceneImpl implements Scene {
         });
         frame.pack();
         frame.setVisible(true);
+
+        panel.requestFocusInWindow();
     }
 
     /**
@@ -197,11 +204,9 @@ public class SceneImpl implements Scene {
          * An inner class representing the panel where the game graphics are drawn.
          */
         public GamePanel() {
-            this.addKeyListener(this);
+            //this.addKeyListener(this);
             setFocusable(true);
             setFocusTraversalKeysEnabled(false);
-            requestFocusInWindow();
-
             Dimension size = new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
                     boardGraphics.getBackgorundImg().getHeight(null));
             setPreferredSize(size);
@@ -210,6 +215,13 @@ public class SceneImpl implements Scene {
             setSize(size);
             setLayout(new GridLayout());
 
+        }
+
+        /**
+         * Initializes the key listener for the panel.
+         */
+        public void initKeyListener() {
+            addKeyListener(this);
         }
 
         /**
@@ -296,7 +308,5 @@ public class SceneImpl implements Scene {
                 controller.notifyNoMoreMoveLeft();
             }
         }
-
     }
-
 }
