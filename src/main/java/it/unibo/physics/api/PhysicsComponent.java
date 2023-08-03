@@ -16,7 +16,7 @@ public abstract class PhysicsComponent {
      * @param obj The GameObject to update.
      * @param w   The World in which the GameObject resides.
      */
-    public void update(long dt, GameObject obj, World w) {
+    public void update(final long dt, final GameObject obj, final World w) {
         // Get the current position and velocity of the GameObject
         var pos = obj.getCurrentPos();
         var vel = obj.getCurrentVel();

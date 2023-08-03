@@ -12,10 +12,10 @@ public class BoundaryCollision {
      * Enum representing the edge of the boundary where the collision occurred.
      */
     public enum CollisionEdge {
-        TOP,    // Collision occurred at the top boundary
-        BOTTOM, // Collision occurred at the bottom boundary
-        LEFT,   // Collision occurred at the left boundary
-        RIGHT   // Collision occurred at the right boundary
+        /**
+         * Collision at the top, bottom, left and right boundary.
+         */
+        TOP, BOTTOM, LEFT, RIGHT
     }
 
     private CollisionEdge edge; // The edge of the boundary where the collision occurred
@@ -27,7 +27,7 @@ public class BoundaryCollision {
      * @param edge  The CollisionEdge representing the edge of the boundary where the collision occurred.
      * @param where The P2d representing the collision position in 2D coordinates.
      */
-    public BoundaryCollision(CollisionEdge edge, P2d where) {
+    public BoundaryCollision(final CollisionEdge edge, final P2d where) {
         this.edge = edge;
         this.where = where;
     }

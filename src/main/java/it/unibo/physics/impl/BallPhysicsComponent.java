@@ -18,14 +18,8 @@ public class BallPhysicsComponent extends PhysicsComponent {
      * @param w   The World in which the ball GameObject resides.
      */
     @Override
-    public void update(long dt, GameObject obj, World w) {
+    public void update(final long dt, final GameObject obj, final World w) {
         // Call the update method of the parent class to update the position of the ball
         super.update(dt, obj, w);
-
-        /*CircleBoundingBox cbbox = (CircleBoundingBox) obj.getBBox();
-        Optional<GameObject> ball = w.checkCollisionWithBalls(obj.getCurrentPos(), cbbox);
-        if (ball.isPresent()) {
-            w.notifyWorldEvent(new HitBallEvent(ball.get()));
-        }*/
     }
 }
