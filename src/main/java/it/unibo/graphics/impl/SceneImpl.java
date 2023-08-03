@@ -47,7 +47,7 @@ public class SceneImpl implements Scene {
     private static final int KEY_CODE_LEFT_ARROW = 37;
     private static final int KEY_CODE_P = 80;
     private static final int LABEL_X = 10;
-    private static final int LABEL_Y = 20;
+    private static final int LABEL_Y = 580;
 
     /**
      * Constructs a SceneImpl with the specified GameState, KeyboardInputController,
