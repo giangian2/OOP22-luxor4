@@ -67,4 +67,28 @@ public class Ball extends GameObject {
         return Math.abs(this.getCurrentPos().sumOfAxis() - a.getCurrentPos().sumOfAxis()) < (IMAGE_DIAMETER + 2);
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((color == null) ? 0 : color.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Ball other = (Ball) obj;
+        if (color != other.color)
+            return false;
+        if (!getCurrentPos().equals(other.getCurrentPos()))
+            return false;
+        return true;
+    }
+
 }
