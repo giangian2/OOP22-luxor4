@@ -22,7 +22,7 @@ public class GameRenderingTest {
      * Create a new instance of MenuGame for each test.
      */
     @BeforeEach
-    public void setup() {
+    public void setUp() {
         menuGame = new MenuGame();
     }
 
