@@ -41,28 +41,13 @@ public class CannonBallPhysicsComponent extends BallPhysicsComponent {
          * Check for collisions with the boundaries of the world.
          */
         final Optional<BoundaryCollision> binfo = w.checkCollisionWithBoundaries(obj.getCurrentPos(), bbox);
-        if (binfo.isPresent()) {
-
-            /**
-             * If there is a collision with a boundary, and the object is a ball,
-             * notify the world about the event.
-             */
-            if (obj instanceof Ball) {
-                final var ball = (Ball) obj;
-                w.notifyWorldEvent(new HitBorderEvent(ball));
-            }
-        }
-
-        /**
-         * Check for collisions with other balls in the world.
-         */
         final CircleBoundingBox cbbox = (CircleBoundingBox) obj.getBBox();
         final Optional<GameObject> ball = w.checkCollisionWithBalls(obj.getCurrentPos(), cbbox);
-        if (ball.isPresent()) {
 
-            /**
-             * If there is a collision with another ball, notify the world about the event.
-             */
+        if (binfo.isPresent() && obj instanceof Ball) {
+            final var ballObject = (Ball) obj;
+            w.notifyWorldEvent(new HitBorderEvent(ballObject));
+        } else if (ball.isPresent()) {
             w.notifyWorldEvent(new HitBallEvent(ball.get(), (Ball) obj));
         }
     }

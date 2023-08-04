@@ -16,6 +16,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
@@ -25,7 +28,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -34,7 +36,7 @@ import java.nio.charset.StandardCharsets;
  * Represents the menu of the Luxor game, allowing players to start the game,
  * select levels, and access help information.
  */
-public class MenuGame extends JFrame {
+public class MenuGame extends JFrame{
 
     /** 
      * The selected level of the game. 
@@ -50,6 +52,11 @@ public class MenuGame extends JFrame {
      * The help text displayed in the menu. 
      */
     private String helpText;
+
+    /**
+     * Variable for the font of the characters.
+     */
+    final static String FONT = "Arial";
 
     /**
      * Constructs the initial menu of the game.
@@ -84,7 +91,7 @@ public class MenuGame extends JFrame {
      */
     private JButton createButton(final String text, final ActionListener actionListener) {
         final JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.PLAIN, 16));
+        button.setFont(new Font(FONT, Font.PLAIN, 16));
         button.addActionListener(actionListener);
         return button;
     }
@@ -111,7 +118,7 @@ public class MenuGame extends JFrame {
 
         final JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
-        textArea.setFont(new Font("Arial", Font.PLAIN, 16));
+        textArea.setFont(new Font(FONT, Font.PLAIN, 16));
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         textArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -132,25 +139,22 @@ public class MenuGame extends JFrame {
 
         String line;
         final StringBuilder content = new StringBuilder();
-        while ((line = reader.readLine()) != null) {
-            content.append(line).append("\n");
+        line = reader.readLine();
+        while (line != null) {
+            content.append(line).append('\n');
+            line = reader.readLine();
         }
         helpText = content.toString(); // Salva il testo dell'area di aiuto nel campo helpText
         textArea.setText(helpText);
-    } catch (FileNotFoundException e) {
-        /**
-         * Exception thrown when the file is not found.
-         */
-        e.printStackTrace();
-    } catch (IOException e) {
+    }catch (IOException e) {
         /**
          * General I/O exception.
          */
-        e.printStackTrace();
+        Logger.getGlobal().log(Level.WARNING, null, e);
     }
 
         final JButton back = new JButton("Back");
-        back.setFont(new Font("Arial", Font.PLAIN, 16));
+        back.setFont(new Font(FONT, Font.PLAIN, 16));
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.addActionListener(ev -> showMainMenu());
 
@@ -174,7 +178,7 @@ public class MenuGame extends JFrame {
         mainPanel.add(labelPanel);
 
         final JLabel label = new JLabel("Welcome to the game Luxor!");
-        label.setFont(new Font("Arial", Font.BOLD, fontSize));
+        label.setFont(new Font(FONT, Font.BOLD, fontSize));
         final GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -240,6 +244,8 @@ public class MenuGame extends JFrame {
 
         buttonPanel.add(help);
 
+        final Logger logger = Logger.getLogger(MenuGame.class.getName());
+
         final JButton startGame = createButton("Start Game", new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -250,7 +256,7 @@ public class MenuGame extends JFrame {
                     }
                 };
                 thread.start();
-                System.out.println("Game started!");
+                logger.log(Level.INFO, "Game started!");
                 dispose();
             }
         });
@@ -272,7 +278,7 @@ public class MenuGame extends JFrame {
 
                 if (selected != null) {
                     selectedLevel = selected;
-                    System.out.println("Selected level: " + selectedLevel.getLevelName());
+                    logger.log(Level.INFO, "Selected level: " + selectedLevel.getLevelName());
                 }
             }
         });

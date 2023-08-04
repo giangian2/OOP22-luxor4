@@ -9,7 +9,6 @@ import it.unibo.model.Ball;
 import it.unibo.model.Cannon;
 import it.unibo.model.GameObject.Type;
 import it.unibo.model.collisions.impl.CircleBoundingBox;
-import it.unibo.model.collisions.impl.RectBoundingBox;
 import it.unibo.physics.impl.BallPhysicsComponent;
 import it.unibo.physics.impl.CannonBallPhysicsComponent;
 import it.unibo.physics.impl.StationaryBallPhysicsComponent;
@@ -64,7 +63,6 @@ public class GameObjectsFactory {
     public Cannon createCannon(final P2d pos) {
         return new Cannon(pos, new V2d(pos, pos),
                 new PlayerInputComponent(), // in input
-                new RectBoundingBox(pos, pos), // in input
                 null,
                 new CannonGraphicsComponent()); // in physics
     }

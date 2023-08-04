@@ -7,6 +7,7 @@ import it.unibo.model.World;
  * The PhysicsComponent class represents an abstract component responsible for updating the physics of a GameObject in the World.
  * It provides a method to update the position of the GameObject based on its current velocity.
  */
+@SuppressWarnings("abstractClassWithoutAbstractMethods")
 public abstract class PhysicsComponent {
 
     /**

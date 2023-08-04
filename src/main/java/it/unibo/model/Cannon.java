@@ -1,7 +1,6 @@
 package it.unibo.model;
 
 import it.unibo.input.impl.PlayerInputComponent;
-import it.unibo.model.collisions.api.BoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
@@ -10,7 +9,6 @@ import it.unibo.enums.BallColor;
 import it.unibo.graphics.impl.CannonGraphicsComponent;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -20,7 +18,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  */
 public class Cannon extends GameObject {
 
-    private List<Ball> cannonBalls;
+    private final List<Ball> cannonBalls;
     private final Ball stationaryBall;
     private static final int ADJUST_FIRED_BALL_POS = 37;
     private static final int ADJUST_STATIONARY_XPOS = 37;
@@ -38,13 +36,13 @@ public class Cannon extends GameObject {
      *                interactions.
      * @param graph   The graphics component responsible for rendering the cannon.
      */
-    public Cannon(final P2d pos, final V2d vel, final PlayerInputComponent input, final BoundingBox bbox,
-            final PhysicsComponent physics, final CannonGraphicsComponent graph) {
-        super(Type.CANNON, pos, vel, input, null, graph, physics);
-        this.cannonBalls = new ArrayList<>();
-        this.cannonBalls = Collections.synchronizedList(this.cannonBalls);
-        this.stationaryBall = createStationaryBall();
-    }
+    public Cannon(final P2d pos, final V2d vel, final PlayerInputComponent input,
+              final PhysicsComponent physics, final CannonGraphicsComponent graph) {
+    super(Type.CANNON, pos, vel, input, null, graph, physics);
+    this.cannonBalls = new ArrayList<>();
+    this.stationaryBall = createStationaryBall();
+}
+
 
     /**
      * Creates a stationary ball with a random color.
@@ -53,12 +51,11 @@ public class Cannon extends GameObject {
      */
     private Ball createStationaryBall() {
         final BallColor randomColor = BallColor.getRandomColor();
-        final Ball stationaryBall = GameObjectsFactory.getInstance().createStationaryBall(getStationaryBallPos(),
+        return GameObjectsFactory.getInstance().createStationaryBall(getStationaryBallPos(),
                 new V2d(0, 0),
                 randomColor);
-        return stationaryBall;
     }
-
+    
     /**
      * Retrieves the stationary ball.
      *
@@ -101,7 +98,7 @@ public class Cannon extends GameObject {
         final P2d ballPos = new P2d(getCurrentPos().getX() + ADJUST_FIRED_BALL_POS, getCurrentPos().getY());
 
         final BallColor projectileColor = stationaryBall.getColor();
-        Ball ball = GameObjectsFactory.getInstance().createCannonBall(ballPos, new V2d(0, BALL_SPEED_Y),
+        final Ball ball = GameObjectsFactory.getInstance().createCannonBall(ballPos, new V2d(0, BALL_SPEED_Y),
                 projectileColor);
 
         this.cannonBalls.add(ball);
