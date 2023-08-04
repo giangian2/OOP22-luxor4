@@ -23,7 +23,14 @@ public class GameObject {
         /**
          * The type of the game object.
          */
-        BALL, CANNON, CANNON_BALL, STATIONARY_BALL
+        /** standard ball. */
+        BALL,
+        /** cannon. */
+        CANNON,
+        /** ball fired by the cannon. */
+        CANNON_BALL,
+        /** ball displayedon thecannon object. */
+        STATIONARY_BALL
     }
 
     /**

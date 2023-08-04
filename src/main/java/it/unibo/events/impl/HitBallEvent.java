@@ -21,8 +21,8 @@ public class HitBallEvent implements WorldEvent {
     /**
      * Constructor.
      * 
-     * @param queueBall
-     * @param cannonBall
+     * @param queueBall  ball of the queue
+     * @param cannonBall fired ball that collided with the queueBall
      */
     public HitBallEvent(final GameObject queueBall, final GameObject cannonBall) {
         this.queueBall = queueBall;
@@ -30,7 +30,7 @@ public class HitBallEvent implements WorldEvent {
     }
 
     /**
-     * @Getter
+     * 
      * @return GameObject
      */
     public GameObject getQueueBall() {
@@ -38,7 +38,7 @@ public class HitBallEvent implements WorldEvent {
     }
 
     /**
-     * @Getter
+     * 
      * @return GameObject
      */
     public GameObject getCannnonBall() {

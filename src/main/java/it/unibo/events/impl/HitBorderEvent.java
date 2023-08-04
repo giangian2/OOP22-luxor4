@@ -19,14 +19,13 @@ public class HitBorderEvent implements WorldEvent {
     /**
      * Constructor.
      * 
-     * @param obj
+     * @param obj game object that hits the border
      */
     public HitBorderEvent(final GameObject obj) {
         this.obj = obj;
     }
 
     /**
-     * @Getter
      * @return GameObject
      */
     public GameObject getCollisionObj() {

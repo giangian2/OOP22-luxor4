@@ -100,7 +100,7 @@ public class World {
     /**
      * Creates a new istance of a cannon.
      * 
-     * @param pos
+     * @param pos starting position of the cannon
      * @return Cannon
      */
     public Cannon createCannon(final P2d pos) {
@@ -128,7 +128,7 @@ public class World {
     /**
      * Notify an events to the WorldEventsListener.
      * 
-     * @param ev
+     * @param ev world event to be notified
      */
     public void notifyWorldEvent(final WorldEvent ev) {
         this.evListener.notifyEvent(ev);
@@ -265,7 +265,7 @@ public class World {
      * Returns the list of all triplets (or more) of neighboring balls having the
      * same color.
      * 
-     * @return List<Ball>
+     * @return Lis of balls to remove from queue
      */
     public List<Ball> getCloseByThree() {
         return this.qm.checkCloseByThree();
@@ -275,7 +275,7 @@ public class World {
      * Returns all the game objects present in the World so that they can be used
      * for graphic rendering within the Scene.
      * 
-     * @return List<GameObject>
+     * @return List of all wolrd's game objects
      */
     public List<GameObject> getSceneEntities() {
         final var entities = new ArrayList<GameObject>();
@@ -288,7 +288,7 @@ public class World {
     /**
      * Return the balls in the queue via the QueueManager.
      * 
-     * @return List<Ball>
+     * @return List of all queue balls
      */
     public List<Ball> getQueue() {
         return this.qm.getBalls();
@@ -318,7 +318,7 @@ public class World {
      * 
      * @param pos Ball's position
      * @param box Ball's bounding box
-     * @return Optional<GameObject>
+     * @return GameObject -> the queue ball with the given bbox collided with
      */
     public Optional<GameObject> checkCollisionWithBalls(final P2d pos, final CircleBoundingBox box) {
         final double radius = box.getRadius();
@@ -337,7 +337,7 @@ public class World {
      * 
      * @param pos Ball's position
      * @param box Ball's bounding box
-     * @return Optional<BoundaryCollision>
+     * @return BoundaryCollision
      */
     public Optional<BoundaryCollision> checkCollisionWithBoundaries(final P2d pos, final CircleBoundingBox box) {
         final P2d ul = mainBBox.getULCorner();

@@ -7,8 +7,6 @@ import it.unibo.model.GameState;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-
-
 /**
  * A custom JPanel representing the game over screen with game statistics.
  */
@@ -18,7 +16,8 @@ public class GameOverPanel extends JPanel {
     private static final int LABEL_FONT_SIZE = 25;
 
     /**
-     * Constructs a GameOverPanel with the given game state to display game statistics.
+     * Constructs a GameOverPanel with the given game state to display game
+     * statistics.
      *
      * @param gameState The current GameState containing game information.
      */
@@ -28,8 +27,9 @@ public class GameOverPanel extends JPanel {
         initComponents();
     }
 
-     /**
-     * Initializes the components of the GameOverPanel, including labels to display game over message and points earned.
+    /**
+     * Initializes the components of the GameOverPanel, including labels to display
+     * game over message and points earned.
      */
 
     private void initComponents() {

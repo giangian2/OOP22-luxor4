@@ -23,7 +23,6 @@ public class RectBoundingBox implements BoundingBox {
     }
 
     /**
-     * @Getter
      * @return P2d
      */
     public P2d getULCorner() {
@@ -31,7 +30,6 @@ public class RectBoundingBox implements BoundingBox {
     }
 
     /**
-     * @Getter
      * @return P2d
      */
     public P2d getBRCorner() {
@@ -43,6 +41,8 @@ public class RectBoundingBox implements BoundingBox {
      * implemented as in the game it is not necessary to detect collisions between
      * rectangular bounding boxes and circular bounding boxes.
      * 
+     * @param p      center
+     * @param radius radius
      * @return boolean
      */
     @Override

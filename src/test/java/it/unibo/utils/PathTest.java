@@ -4,22 +4,27 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.Test;
 
-public class PathTest {
+/**
+ * 
+ * class to test the correct functioning of the path builder.
+ */
+class PathTest {
 
+    /**
+     * Verify the correct functioning of the builder and ensure that there are no
+     * errors during the entire movement path.
+     */
     @Test
     void testPathBuilder() {
 
         assertDoesNotThrow(() -> {
-            var path = new Path.PathBuilder("levels/1/Path.xml").build();
-            var ietrable = path.getPositions();
-            System.out.println(ietrable);
-
+            final var path = new Path.PathBuilder("levels/1/Path.xml").build();
             var first = path.getFirst();
-            var end = path.getLast();
+            final var end = path.getLast();
 
             while (!first.equals(end)) {
 
-                var dir = path.getMove(first);
+                final var dir = path.getMove(first);
 
                 switch (dir) {
                     case UP:

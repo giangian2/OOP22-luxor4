@@ -15,9 +15,7 @@ public class P2d implements java.io.Serializable {
     /**
      * The coordinate of the point.
      */
-    private double x;
-
-    private double y;
+    private double x, y;
 
     /**
      * Creates a new P2d object.

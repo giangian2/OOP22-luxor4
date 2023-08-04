@@ -21,8 +21,8 @@ public class QueueManager {
     /**
      * Constructs a new QueueManager with the specified parameters.
      *
-     * @param nBalls The number of balls in the list
-     * @param steps The number of times the balls will be moved forward.
+     * @param nBalls     The number of balls in the list
+     * @param steps      The number of times the balls will be moved forward.
      * @param xmlPathSrc The path of the xml file containing the Path.
      */
     public QueueManager(final int nBalls, final int steps, final String xmlPathSrc) {
@@ -39,9 +39,8 @@ public class QueueManager {
      * @return A list containing the balls present in the current instance.
      */
     @SuppressFBWarnings(value = {
-        "EI_EXPOSE_REP",
-        "EI_EXPOSE_REP2"},
-        justification = "Exposing internal representation of balls list for specific use case.")
+            "EI_EXPOSE_REP",
+            "EI_EXPOSE_REP2" }, justification = "Exposing internal representation of balls list for specific use case.")
     public List<Ball> getBalls() {
         return this.balls;
     }
@@ -49,11 +48,13 @@ public class QueueManager {
     /**
      * Instatiate a list of n Ball with the following properties.
      * <ul>
-     *     <li>The list does not contain more than two adjacent balls of the same color</li>
-     *     <li>The positions of the balls will follow the Path vertex</li>
+     * <li>The list does not contain more than two adjacent balls of the same
+     * color</li>
+     * <li>The positions of the balls will follow the Path vertex</li>
      * </ul>
+     * 
      * @param n The number of balls in the list.
-    */
+     */
     private void instatiate(final int n) {
         var factory = GameObjectsFactory.getInstance();
         var pos = path.getFirst();
@@ -96,7 +97,9 @@ public class QueueManager {
     }
 
     /**
-     * Move balls contained in the list by one pixel starting from a specified index.
+     * Move balls contained in the list by one pixel starting from a specified
+     * index.
+     * 
      * @param startIndex The index from which the shift must start.
      */
     public void shiftBalls(final int startIndex) {
@@ -111,7 +114,8 @@ public class QueueManager {
 
                 if (i > 0 && !firstShifting) {
                     if (Math.abs(this.balls.get(i - 1).getCurrentPos().getX() - currentPos.getX()) > Ball.IMAGE_DIAMETER
-                            || Math.abs(this.balls.get(i - 1).getCurrentPos().getY() - currentPos.getY()) > Ball.IMAGE_DIAMETER) {
+                            || Math.abs(this.balls.get(i - 1).getCurrentPos().getY()
+                                    - currentPos.getY()) > Ball.IMAGE_DIAMETER) {
 
                         break;
                     }
@@ -144,7 +148,7 @@ public class QueueManager {
     }
 
     /**
-     * Call steps-time the method {@link #shiftBalls()}.
+     * Call steps-time the method.
      */
     public void shiftBallsStepsTime() {
         for (int i = 0; i < steps; i++) {
@@ -153,7 +157,9 @@ public class QueueManager {
     }
 
     /**
-     * Search if there are sub-lists of at least three adjacent balls with the same color in the ball list.
+     * Search if there are sub-lists of at least three adjacent balls with the same
+     * color in the ball list.
+     * 
      * @return The sum of the sub-lists founded.
      */
     public List<Ball> checkCloseByThree() {

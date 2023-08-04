@@ -41,7 +41,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
      * Initialize the GameEngineImpl with the given level in order to instatiate the
      * World properly and render the correct view.
      * 
-     * @param currentLevel
+     * @param currentLevel selected level
      */
     public GameEngineImpl(final Levels currentLevel) {
         this.currentLevel = currentLevel;
@@ -173,7 +173,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     /**
      * Update the game state at each frame of the game loop.
      * 
-     * @param elapsed
+     * @param elapsed time elapsed from the previous cycle
      */
     public void updateGame(final long elapsed) {
         gameState.update(elapsed); // update game state
@@ -191,7 +191,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
      * Waith for the next frame if the game loop cycle has taken less time than the
      * PERIOD.
      * 
-     * @param cycleStartTime
+     * @param cycleStartTime time when current cycle has sterted
      */
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
 

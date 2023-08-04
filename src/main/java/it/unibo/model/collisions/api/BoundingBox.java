@@ -11,8 +11,8 @@ public interface BoundingBox {
      * instance collides with an object having the point "p" as its center and
      * "radius" as its radius.
      * 
-     * @param p
-     * @param radius
+     * @param p      center
+     * @param radius radius
      * @return boolean
      */
     boolean isCollidingWith(P2d p, double radius);

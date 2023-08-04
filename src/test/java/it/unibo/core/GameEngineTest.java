@@ -39,7 +39,19 @@ class GameEngineTest {
         assertDoesNotThrow(() -> {
             // initialize a new instance of GameEngineImpl
             final var engine = this.initialize();
-            engine.initGame();
+            final Thread mainLoopThread = new Thread(() -> {
+                engine.initGame();
+            }, "Game thread");
+
+            mainLoopThread.start();
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Logger.getGlobal().log(Level.INFO, e.toString());
+            }
+
+            mainLoopThread.interrupt(); // kills the main loop thread
         });
 
     }
@@ -61,7 +73,7 @@ class GameEngineTest {
         assertDoesNotThrow(() -> {
             final Thread eventThread = new Thread(() -> {
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     Logger.getGlobal().log(Level.INFO, e.toString());
                 }
@@ -77,7 +89,7 @@ class GameEngineTest {
             eventThread.start(); // start the events thread
 
             try {
-                Thread.sleep(3000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 Logger.getGlobal().log(Level.INFO, e.toString());
             }

@@ -17,8 +17,8 @@ public class CircleBoundingBox implements BoundingBox {
     /**
      * Constructor.
      * 
-     * @param center
-     * @param radius
+     * @param center center of the bbox
+     * @param radius radius of the bbox
      */
     public CircleBoundingBox(final P2d center, final double radius) {
         this.center = center;
@@ -26,7 +26,6 @@ public class CircleBoundingBox implements BoundingBox {
     }
 
     /**
-     * @Getter
      * @return double
      */
     public double getRadius() {
@@ -37,8 +36,8 @@ public class CircleBoundingBox implements BoundingBox {
      * Allows you to check if there is a collision between the current instance of
      * the CIrcleBoundingBox class and a circle identified by its center and radius.
      * 
-     * @param p
-     * @param radius
+     * @param p      center
+     * @param radius radius
      * @return boolean
      */
     @Override
