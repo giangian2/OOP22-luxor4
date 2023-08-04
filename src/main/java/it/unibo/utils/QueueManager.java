@@ -75,7 +75,7 @@ public class QueueManager {
         /**
          * Set the positions of the balls following the Path
          */
-        for(final var b : balls){
+        for (final var b : balls) {
             b.setPos(pos);
             direction = path.getMove(pos);
             pos = new P2d(pos.getX() + direction.getVelocity().getX() * Ball.IMAGE_DIAMETER,

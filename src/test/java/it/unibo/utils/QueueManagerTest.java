@@ -67,7 +67,7 @@ class QueueManagerTest {
         // CHECKSTYLE: MagicNumber ON
 
         final var founded = qm.checkCloseByThree();
-        assertEquals(outputList,founded);
+        assertEquals(outputList, founded);
     }
 
     @Test
@@ -93,6 +93,6 @@ class QueueManagerTest {
 
         // CHECKSTYLE: MagicNumber ON
 
-        assertEquals(outputList,qm.getBalls());
+        assertEquals(outputList, qm.getBalls());
     }
 }

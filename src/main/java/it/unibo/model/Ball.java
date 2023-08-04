@@ -105,7 +105,7 @@ public class Ball extends GameObject {
             return false;
         }
         return getCurrentPos().equals(other.getCurrentPos());
-        
+
     }
 
 }
