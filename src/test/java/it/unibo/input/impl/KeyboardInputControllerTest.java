@@ -1,26 +1,15 @@
-package it.unibo.input.impl; 
+package it.unibo.input.impl;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 
 /**
  * JUnit test for {@link KeyboardInputController}.
  */
 public class KeyboardInputControllerTest {
 
-
-    private KeyboardInputController inputController;
-
-    /**
-     * Sets up the test fixture.
-     * (Called before every test case method.)
-     */
-    @BeforeEach
-    void setUp() {
-        inputController = new KeyboardInputController();
-    }
+    private KeyboardInputController inputController = new KeyboardInputController();
 
     /**
      * Tears down the test fixture.
@@ -33,7 +22,7 @@ public class KeyboardInputControllerTest {
         inputController.notifyNoMoreMoveLeft();
         assertFalse(inputController.isMoveLeft(), "Move Left should not be active");
     }
-    
+
     @Test
     void testMoveRight() {
         inputController.notifyMoveRight();
@@ -50,4 +39,3 @@ public class KeyboardInputControllerTest {
         assertFalse(inputController.isShoot(), "Shoot should not be active");
     }
 }
-

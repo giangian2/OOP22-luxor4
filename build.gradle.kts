@@ -15,6 +15,10 @@ plugins {
     id("org.danilopianini.gradle-java-qa") version "1.10.0"
 }
 
+configurations {
+    create("prodConf")
+}
+
 repositories { // Where to search for dependencies
     mavenCentral()
 }

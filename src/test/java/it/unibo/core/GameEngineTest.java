@@ -45,12 +45,6 @@ class GameEngineTest {
 
             mainLoopThread.start();
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                Logger.getGlobal().log(Level.INFO, e.toString());
-            }
-
             mainLoopThread.interrupt(); // kills the main loop thread
         });
 
@@ -72,12 +66,6 @@ class GameEngineTest {
 
         assertDoesNotThrow(() -> {
             final Thread eventThread = new Thread(() -> {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    Logger.getGlobal().log(Level.INFO, e.toString());
-                }
-                // Notify a new PauseEvent to the GameEngine
                 engine.notifyEvent(new PauseGameEvent());
             }, "Events thread");
 
@@ -87,12 +75,6 @@ class GameEngineTest {
 
             mainLoopThread.start(); // start the mian loop thread
             eventThread.start(); // start the events thread
-
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                Logger.getGlobal().log(Level.INFO, e.toString());
-            }
 
             mainLoopThread.interrupt(); // kills the main loop thread
         });
