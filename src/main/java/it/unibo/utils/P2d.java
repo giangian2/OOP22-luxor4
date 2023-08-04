@@ -15,7 +15,7 @@ public class P2d implements java.io.Serializable {
     /**
      * The coordinate of the point.
      */
-    private double x, y;
+    private final double x, y;
 
     /**
      * Creates a new P2d object.
@@ -64,14 +64,11 @@ public class P2d implements java.io.Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        P2d other = (P2d) obj;
+        final P2d other = (P2d) obj;
         if (Double.compare(x, other.x) != 0) {
             return false;
         }
-        if (Double.compare(y, other.y) != 0) {
-            return false;
-        }
-        return true;
+        return Double.compare(y, other.y) == 0;
     }
 
     /**
@@ -111,6 +108,7 @@ public class P2d implements java.io.Serializable {
      *
      * @return The string representation of this point.
      */
+    @Override
     public String toString() {
         return "P2d(" + x + "," + y + ")";
     }
@@ -134,18 +132,13 @@ public class P2d implements java.io.Serializable {
      */
     public boolean isBetween(final P2d p1, final P2d p2) {
         final double epsilon = 1e-9; // Soglia di tolleranza
-        if (Math.abs(this.x - p1.x) < epsilon && Math.abs(this.x - p2.x) < epsilon) {
-            if ((this.y > p1.y && this.y < p2.y) || (this.y < p1.y && this.y > p2.y)) {
-                return true;
-            }
+        if (Math.abs(this.x - p1.x) < epsilon && Math.abs(this.x - p2.x) < epsilon
+            && (this.y > p1.y && this.y < p2.y || this.y < p1.y && this.y > p2.y)) { 
+            return true;
         }
 
-        if (Math.abs(this.y - p1.y) < epsilon && Math.abs(this.y - p2.y) < epsilon) {
-            if ((this.x > p1.x && this.x < p2.x) || (this.x < p1.x && this.x > p2.x)) {
-                return true;
-            }
-        }
-        return false;
+        return Math.abs(this.y - p1.y) < epsilon && Math.abs(this.y - p2.y) < epsilon
+            && (this.x > p1.x && this.x < p2.x || this.x < p1.x && this.x > p2.x);
     }
 
     /**

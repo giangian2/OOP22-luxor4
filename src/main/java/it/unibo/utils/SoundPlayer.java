@@ -2,7 +2,9 @@ package it.unibo.utils;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -31,7 +33,7 @@ public class SoundPlayer {
      * Construct a new SoundPlayer.
      * @param soundsPath list of paths to sounds
      */
-    public SoundPlayer(final ArrayList<String> soundsPath) {
+    public SoundPlayer(final List<String> soundsPath) {
         for (int i = 0; i < soundsPath.size(); i++) {
             soundURL[i] = getClass().getResource(soundsPath.get(i));
         }
@@ -47,11 +49,11 @@ public class SoundPlayer {
      */
     private void setFile(final int soundIndex) {
         try {
-            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[soundIndex]);
+            final AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[soundIndex]);
             clips[soundIndex] = AudioSystem.getClip();
             clips[soundIndex].open(ais);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
+            Logger.getGlobal().log(Level.WARNING, null, e);
         }
     }
 
@@ -105,10 +107,10 @@ public class SoundPlayer {
      *                   Must be one of the constants defined in the SoundPlayer class.
      */
     public void pause(final int soundIndex) {
-        if (soundIndex >= 0 && soundIndex < clips.length) {
-            if (clips[soundIndex].isRunning()) {
-                clips[soundIndex].stop(); // Metti in pausa il suono
-            }
+        if (soundIndex >= 0 && soundIndex < clips.length
+            && clips[soundIndex].isRunning()) {
+
+            clips[soundIndex].stop();
         }
     }
 
@@ -117,7 +119,7 @@ public class SoundPlayer {
      * Any sounds that are paused will also be stopped and reset.
      */
     public void stopAll() {
-        for (Clip clip : clips) {
+        for (final Clip clip : clips) {
             if (clip != null && clip.isRunning()) {
                 clip.stop();
                 clip.setFramePosition(0); // Rewind to the beginning

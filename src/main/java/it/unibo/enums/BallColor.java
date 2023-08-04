@@ -55,7 +55,7 @@ public enum BallColor {
      * @return Random BallColor.
      */
     public static BallColor getRandomColor() {
-        BallColor[] colors = BallColor.values();
+        final BallColor[] colors = BallColor.values();
         return colors[rand.nextInt(colors.length)];
     }
 }

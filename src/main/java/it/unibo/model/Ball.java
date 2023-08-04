@@ -100,14 +100,12 @@ public class Ball extends GameObject {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Ball other = (Ball) obj;
+        final Ball other = (Ball) obj;
         if (color != other.color) {
             return false;
         }
-        if (!getCurrentPos().equals(other.getCurrentPos())) {
-            return false;
-        }
-        return true;
+        return getCurrentPos().equals(other.getCurrentPos());
+        
     }
 
 }

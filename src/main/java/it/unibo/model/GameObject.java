@@ -36,7 +36,7 @@ public class GameObject {
     /**
      * The type of the game object.
      */
-    private Type type;
+    private final Type type;
 
     /**
      * The position of the game object in 2D space.
