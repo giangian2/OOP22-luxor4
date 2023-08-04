@@ -41,6 +41,7 @@ public class CircleBoundingBox implements BoundingBox {
      * @param radius
      * @return boolean
      */
+    @Override
     public boolean isCollidingWith(final P2d p, final double radius) {
         return new V2d(p, center).module() <= radius + this.radius;
     }

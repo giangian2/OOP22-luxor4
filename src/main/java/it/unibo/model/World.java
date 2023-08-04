@@ -37,10 +37,10 @@ public class World {
      * "getBBox".
      */
     private Cannon cannon;
-    private QueueManager qm;
+    private final QueueManager qm;
     private static RectBoundingBox mainBBox;
     private WorldEventListener evListener;
-    private SoundPlayer soundPlayer;
+    private final SoundPlayer soundPlayer;
 
     /**
      * 
@@ -63,7 +63,7 @@ public class World {
         this.cannon = cannon;
         this.evListener = eventListener;
         qm = new QueueManager(nBalls, steps, xmlSrc);
-        List<String> strings = new ArrayList<String>();
+        final var strings = new ArrayList<String>();
         strings.add("/sounds/Background.wav");
         strings.add("/sounds/BallCollision.wav");
         soundPlayer = new SoundPlayer(new ArrayList<>(strings));
@@ -166,7 +166,7 @@ public class World {
      */
     public void insertCollisionBall(final Ball cannonBall, final Ball queueBall) {
         // Get the index of the queue ball
-        int index = this.qm.getBalls().indexOf(queueBall);
+        final int index = this.qm.getBalls().indexOf(queueBall);
         if (index == -1) {
             throw new IllegalStateException("Queue Ball Not Found!", null);
         }
@@ -175,8 +175,8 @@ public class World {
             throw new IllegalStateException("The first argument wasn't a cannon ball!", null);
         }
 
-        var cannonBallPos = cannonBall.getCurrentPos();
-        var queueBallPos = queueBall.getCurrentPos();
+        final var cannonBallPos = cannonBall.getCurrentPos();
+        final var queueBallPos = queueBall.getCurrentPos();
 
         /**
          * if the collision with the tail ball occurred in the third quadrant or along
@@ -278,7 +278,7 @@ public class World {
      * @return List<GameObject>
      */
     public List<GameObject> getSceneEntities() {
-        List<GameObject> entities = new ArrayList<GameObject>();
+        final var entities = new ArrayList<GameObject>();
         entities.addAll(this.qm.getBalls());
         entities.addAll(this.cannon.getFiredBalls());
         entities.add(this.cannon);
@@ -321,8 +321,8 @@ public class World {
      * @return Optional<GameObject>
      */
     public Optional<GameObject> checkCollisionWithBalls(final P2d pos, final CircleBoundingBox box) {
-        double radius = box.getRadius();
-        for (Ball obj : this.getQueue()) {
+        final double radius = box.getRadius();
+        for (final Ball obj : this.getQueue()) {
             if (new V2d(obj.getCurrentPos(), pos).module() <= 2 * radius) {
                 playCollisionSound();
                 return Optional.of(obj);
@@ -340,9 +340,9 @@ public class World {
      * @return Optional<BoundaryCollision>
      */
     public Optional<BoundaryCollision> checkCollisionWithBoundaries(final P2d pos, final CircleBoundingBox box) {
-        P2d ul = mainBBox.getULCorner();
-        P2d br = mainBBox.getBRCorner();
-        double r = box.getRadius();
+        final P2d ul = mainBBox.getULCorner();
+        final P2d br = mainBBox.getBRCorner();
+        final double r = box.getRadius();
         if (pos.getY() + r > ul.getY()) {
             return Optional
                     .of(new BoundaryCollision(BoundaryCollision.CollisionEdge.TOP, new P2d(pos.getX(), ul.getY())));

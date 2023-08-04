@@ -1,6 +1,9 @@
 package it.unibo.core.impl;
 
 import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.unibo.core.api.GameEngine;
 import it.unibo.enums.Levels;
@@ -28,7 +31,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
 
     private static final int PERIOD = 30; // Period of rendering
     private GameState gameState;
-    private LinkedList<WorldEvent> eventQueue; // EVent queue used to process any event
+    private List<WorldEvent> eventQueue; // EVent queue used to process any event
     private Scene view; // View
     private KeyboardInputController controller; // Controller
     private final Levels currentLevel; // Selected Level
@@ -54,8 +57,8 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
         // Main loop, process input -> updateGame -> render utile game over or win state
         // is reached
         while (!gameState.isWin() && !gameState.isGameOver()) {
-            long currentCycleStartTime = System.currentTimeMillis();
-            long elapsed = currentCycleStartTime - previousCycleStartTime;
+            final long currentCycleStartTime = System.currentTimeMillis();
+            final long elapsed = currentCycleStartTime - previousCycleStartTime;
             processInput();
             updateGame(elapsed);
             render();
@@ -91,7 +94,8 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
     public void initGame() {
 
         // Initialize event queue and controller
-        this.eventQueue = new LinkedList<WorldEvent>();
+        final String separator = System.getProperty("file.separator");
+        this.eventQueue = new LinkedList<>();
         controller = new KeyboardInputController();
 
         switch (this.currentLevel) {
@@ -108,20 +112,19 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                     final int width = 800;
                     final int nballs = 10;
                     final int steps = 1;
-                    final String xmlpath = "levels" + System.getProperty("file.separator") + "1"
-                            + System.getProperty("file.separator") + "Path.xml";
+                    final String xmlpath = "levels" + separator + "1"
+                            + separator + "Path.xml";
                     final int cannonStartXPos = 470;
                     final int cannonStartYPos = 470;
 
-                    var w = new World(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
+                    return new World(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
                             xmlpath, this,
                             GameObjectsFactory.getInstance()
                                     .createCannon(new P2d(cannonStartXPos, cannonStartYPos)));
-
-                    return w;
                 });
                 // Render the view passing the correct background related to the selected level
-                this.view = new SceneImpl(this.gameState, this.controller, "images/background.jpg");
+                this.view = new SceneImpl(this.gameState, this.controller,
+                        "images" + separator + "background.jpg");
                 break;
 
             case L2:
@@ -130,19 +133,18 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                     final int width = 800;
                     final int nballs = 20;
                     final int steps = 2;
-                    final String xmlpath = "levels" + System.getProperty("file.separator") + "2"
-                            + System.getProperty("file.separator") + "Path.xml";
+                    final String xmlpath = "levels" + separator + "2"
+                            + separator + "Path.xml";
                     final int cannonStartXPos = 470;
                     final int cannonStartYPos = 470;
 
-                    var w = new World(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
+                    return new World(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
                             xmlpath, this,
                             GameObjectsFactory.getInstance()
                                     .createCannon(new P2d(cannonStartXPos, cannonStartYPos)));
-
-                    return w;
                 });
-                this.view = new SceneImpl(this.gameState, this.controller, "images/background2.jpg");
+                this.view = new SceneImpl(this.gameState, this.controller,
+                        "images" + separator + "background2.jpg");
                 break;
 
             default:
@@ -191,15 +193,18 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
      * 
      * @param cycleStartTime
      */
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
+
     protected void waitForNextFrame(final long cycleStartTime) {
-        long dt = System.currentTimeMillis() - cycleStartTime;
+        final long dt = System.currentTimeMillis() - cycleStartTime;
         if (dt < GameEngineImpl.PERIOD) {
             try {
                 Thread.sleep(GameEngineImpl.PERIOD - dt);
-            } catch (Exception ex) {
-                ex.printStackTrace(System.out);
+            } catch (Exception e) {
+                Logger.getGlobal().log(Level.WARNING, null, e);
             }
         }
+
     }
 
     /**
@@ -231,7 +236,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                  * loop and the score is as many points as there are balls in the queue
                  * eliminated.
                  */
-                var ev = (HitBallEvent) event;
+                final var ev = (HitBallEvent) event;
                 gameState.getWorld().getCannon().removeFiredBall((Ball) ev.getCannnonBall());
                 gameState.getWorld().insertCollisionBall((Ball) ev.getCannnonBall(), (Ball) ev.getQueueBall());
 
@@ -241,7 +246,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                  * event is eliminated from the firedBalls
                  * and the score is decreased by one point
                  */
-                var ev = (HitBorderEvent) event;
+                final var ev = (HitBorderEvent) event;
                 gameState.decScore();
                 gameState.getWorld().getCannon().removeFiredBall((Ball) ev.getCollisionObj());
             }

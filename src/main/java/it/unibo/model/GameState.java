@@ -18,7 +18,7 @@ public class GameState {
     private int score;
     private World world;
     private boolean pause;
-    private Level level;
+    private final Level level;
 
     /**
      * Constructs a new GameState object with the specified event listener and
@@ -82,7 +82,7 @@ public class GameState {
      */
     public boolean isGameOver() {
         if (this.getWorld().getQueue().size() > 0) {
-            var res = this.getWorld()
+            final var res = this.getWorld()
                     .moveSingleBall(this.getWorld().getQueue().get(this.getWorld().getQueue().size() - 1));
             return res == Direction.NONE;
         }

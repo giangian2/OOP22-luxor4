@@ -1,6 +1,7 @@
 package it.unibo.model;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import it.unibo.core.impl.GameEngineImpl;
@@ -13,7 +14,7 @@ import it.unibo.utils.P2d;
 /**
  * Class to test the correct functioning of the GameState class.
  */
-public class GameStateTest {
+class GameStateTest {
 
     /**
      * Initialize a GameState instance based on level 1.
@@ -21,7 +22,7 @@ public class GameStateTest {
      * @return GameState
      */
     GameState initialize() {
-        WorldEventListener gameEngine = new GameEngineImpl(Levels.L1); // Initialize thew world event listener
+        final WorldEventListener gameEngine = new GameEngineImpl(Levels.L1); // Initialize thew world event listener
         return new GameState(gameEngine, () -> {
             final int height = 600;
             final int width = 800;
@@ -32,12 +33,10 @@ public class GameStateTest {
             final int cannonStartXPos = 470;
             final int cannonStartYPos = 470;
 
-            var w = new World(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
+            return new World(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
                     xmlpath, null,
                     GameObjectsFactory.getInstance()
                             .createCannon(new P2d(cannonStartXPos, cannonStartYPos)));
-
-            return w;
         });
     }
 
@@ -45,12 +44,11 @@ public class GameStateTest {
      * Tests the correct creation of the game state object with a given level.
      */
     @Test
-    public void testInitializationWithLevels() {
+    void testInitializationWithLevels() {
 
         assertDoesNotThrow(() -> {
             this.initialize();
         });
-
     }
 
     /**
@@ -58,16 +56,16 @@ public class GameStateTest {
      * Tests the correct functioning of the basic scoring operations.
      */
     @Test
-    public void testScoreHandling() {
-        var gameState = this.initialize();
+    void testScoreHandling() {
+        final var gameState = this.initialize();
 
-        int initialScore = gameState.getScore();
+        final int initialScore = gameState.getScore();
         gameState.incScore();
 
-        assertTrue(gameState.getScore() == initialScore + 1);
+        assertEquals(gameState.getScore(), initialScore + 1);
 
         gameState.decScore();
-        assertTrue(gameState.getScore() == initialScore);
+        assertEquals(gameState.getScore(), initialScore);
 
     }
 
@@ -75,8 +73,8 @@ public class GameStateTest {
      * Tests the correct detection of the game over status.
      */
     @Test
-    public void testGameOver() {
-        var gameState = this.initialize();
+    void testGameOver() {
+        final var gameState = this.initialize();
         while (!gameState.isGameOver()) {
             gameState.getWorld().shiftBalls();
         }
@@ -88,8 +86,8 @@ public class GameStateTest {
      * Tests the correct detection of the win status.
      */
     @Test
-    public void testWin() {
-        var gameState = this.initialize();
+    void testWin() {
+        final var gameState = this.initialize();
         gameState.getWorld().getQueue().removeAll(gameState.getWorld().getQueue());
         assertTrue(gameState.isWin());
     }

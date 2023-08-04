@@ -2,16 +2,19 @@ package it.unibo.core;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.jupiter.api.Test;
 
 import it.unibo.core.impl.GameEngineImpl;
 import it.unibo.enums.Levels;
-import it.unibo.events.api.WorldEvent;
+import it.unibo.events.impl.PauseGameEvent;
 
 /**
  * Test class used to test fundamental aspects of the game engine.
  */
-public class GameEngineTest {
+class GameEngineTest {
 
     /**
      * Initialize a new instace of GameEngineImpl.
@@ -27,7 +30,7 @@ public class GameEngineTest {
      * the main loop thread is killed and the test is successful.
      */
     @Test
-    public void testMainLoop() {
+    void testMainLoop() {
         // CHECKSTYLE: MagicNumber OFF
         /*
          * it would be redundant and useless use constants
@@ -35,21 +38,10 @@ public class GameEngineTest {
          */
         assertDoesNotThrow(() -> {
             // initialize a new instance of GameEngineImpl
-            var engine = this.initialize();
-            Thread mainLoopThread = new Thread(() -> {
-                engine.initGame();
-
-            }, "Game thread thread");
-
-            mainLoopThread.start(); // Start the mainloop thread
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            mainLoopThread.interrupt(); // Kill the mainloop thread
+            final var engine = this.initialize();
+            engine.initGame();
         });
+
     }
 
     /**
@@ -57,28 +49,27 @@ public class GameEngineTest {
      * are pushed into the appropriate queue.
      */
     @Test
-    public void testEventListener() {
+    void testEventListener() {
         // CHECKSTYLE: MagicNumber OFF
         /*
          * it would be redundant and useless use constants
          * to indicates those arbitraty "magic numbers".
          */
         // initialize a new instance of GameEngineImpl
-        var engine = this.initialize();
+        final var engine = this.initialize();
 
         assertDoesNotThrow(() -> {
-            Thread eventThread = new Thread(() -> {
+            final Thread eventThread = new Thread(() -> {
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Logger.getGlobal().log(Level.INFO, e.toString());
                 }
                 // Notify a new PauseEvent to the GameEngine
-                engine.notifyEvent(new WorldEvent() {
-                });
+                engine.notifyEvent(new PauseGameEvent());
             }, "Events thread");
 
-            Thread mainLoopThread = new Thread(() -> {
+            final Thread mainLoopThread = new Thread(() -> {
                 engine.initGame();
             }, "Game thread");
 
@@ -88,7 +79,7 @@ public class GameEngineTest {
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Logger.getGlobal().log(Level.INFO, e.toString());
             }
 
             mainLoopThread.interrupt(); // kills the main loop thread
