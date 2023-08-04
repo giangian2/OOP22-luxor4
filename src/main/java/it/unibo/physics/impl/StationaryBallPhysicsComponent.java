@@ -27,7 +27,7 @@ public class StationaryBallPhysicsComponent extends PhysicsComponent {
         /**
          * Get the position of the stationary ball from the World.
          */
-        var pos = w.getCannon().getStationaryBallPos();
+        final var pos = w.getCannon().getStationaryBallPos();
         /** 
          * Update the position of the given GameObject to the position of the stationary ball.
         */

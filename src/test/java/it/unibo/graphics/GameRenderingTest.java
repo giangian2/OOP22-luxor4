@@ -60,7 +60,7 @@ public class GameRenderingTest {
         assertNotNull(menuGame.getContentPane());
 
         // Verifica che ci sia un'area di testo con il testo di aiuto
-        String helpText = menuGame.getHelpText();
+        final String helpText = menuGame.getHelpText();
         assertNotNull(helpText);
         assertTrue(helpText.trim().length() > 0);
     }

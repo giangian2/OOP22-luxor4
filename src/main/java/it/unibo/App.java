@@ -23,7 +23,7 @@ public final class App {
       /**
        * Create and show the main menu frame.
        */
-        MenuGame mainFrame = new MenuGame();
+        final MenuGame mainFrame = new MenuGame();
         mainFrame.setVisible(true);
     }
 }

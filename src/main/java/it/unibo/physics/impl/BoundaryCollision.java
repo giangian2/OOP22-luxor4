@@ -13,13 +13,25 @@ public class BoundaryCollision {
      */
     public enum CollisionEdge {
         /**
-         * Collision at the top, bottom, left and right boundary.
+         * Collision at the top boundary.
          */
-        TOP, BOTTOM, LEFT, RIGHT
+        TOP, 
+        /**
+         * Collision at the botton boundary.
+         */
+        BOTTOM, 
+        /**
+         * Collision at the left boundary.
+         */
+        LEFT, 
+        /**
+         * Collision at the right boundary.
+         */
+        RIGHT
     }
 
-    private CollisionEdge edge; // The edge of the boundary where the collision occurred
-    private P2d where;         // The collision position in 2D coordinates (P2d is likely a 2D point class)
+    private final CollisionEdge edge; // The edge of the boundary where the collision occurred
+    private final P2d where;         // The collision position in 2D coordinates (P2d is likely a 2D point class)
 
     /**
      * Constructs a BoundaryCollision object with the specified collision edge and position.

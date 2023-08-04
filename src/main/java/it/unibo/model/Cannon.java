@@ -21,7 +21,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 public class Cannon extends GameObject {
 
     private List<Ball> cannonBalls;
-    private Ball stationaryBall;
+    private final Ball stationaryBall;
     private static final int ADJUST_FIRED_BALL_POS = 37;
     private static final int ADJUST_STATIONARY_XPOS = 37;
     private static final int BALL_SPEED_Y = -10;
@@ -52,8 +52,8 @@ public class Cannon extends GameObject {
      * @return The stationary ball.
      */
     private Ball createStationaryBall() {
-        BallColor randomColor = BallColor.getRandomColor();
-        Ball stationaryBall = GameObjectsFactory.getInstance().createStationaryBall(getStationaryBallPos(),
+        final BallColor randomColor = BallColor.getRandomColor();
+        final Ball stationaryBall = GameObjectsFactory.getInstance().createStationaryBall(getStationaryBallPos(),
                 new V2d(0, 0),
                 randomColor);
         return stationaryBall;
@@ -98,9 +98,9 @@ public class Cannon extends GameObject {
      * The color of the stationary ball is then updated to a random color.
      */
     public void fireProjectile() {
-        P2d ballPos = new P2d(getCurrentPos().getX() + ADJUST_FIRED_BALL_POS, getCurrentPos().getY());
+        final P2d ballPos = new P2d(getCurrentPos().getX() + ADJUST_FIRED_BALL_POS, getCurrentPos().getY());
 
-        BallColor projectileColor = stationaryBall.getColor();
+        final BallColor projectileColor = stationaryBall.getColor();
         Ball ball = GameObjectsFactory.getInstance().createCannonBall(ballPos, new V2d(0, BALL_SPEED_Y),
                 projectileColor);
 

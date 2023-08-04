@@ -18,8 +18,8 @@ public abstract class PhysicsComponent {
      */
     public void update(final long dt, final GameObject obj, final World w) {
         // Get the current position and velocity of the GameObject
-        var pos = obj.getCurrentPos();
-        var vel = obj.getCurrentVel();
+        final var pos = obj.getCurrentPos();
+        final var vel = obj.getCurrentVel();
 
         // Update the position of the GameObject based on its current velocity
         obj.setPos(pos.sum(vel));
