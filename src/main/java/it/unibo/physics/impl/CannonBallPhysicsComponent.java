@@ -35,12 +35,12 @@ public class CannonBallPhysicsComponent extends BallPhysicsComponent {
         /**
          * Get the bounding box of the cannon ball.
          */
-        CircleBoundingBox bbox = (CircleBoundingBox) obj.getBBox();
+        final CircleBoundingBox bbox = (CircleBoundingBox) obj.getBBox();
 
         /**
          * Check for collisions with the boundaries of the world.
          */
-        Optional<BoundaryCollision> binfo = w.checkCollisionWithBoundaries(obj.getCurrentPos(), bbox);
+        final Optional<BoundaryCollision> binfo = w.checkCollisionWithBoundaries(obj.getCurrentPos(), bbox);
         if (binfo.isPresent()) {
 
             /**
@@ -48,7 +48,7 @@ public class CannonBallPhysicsComponent extends BallPhysicsComponent {
              * notify the world about the event.
              */
             if (obj instanceof Ball) {
-                var ball = (Ball) obj;
+                final var ball = (Ball) obj;
                 w.notifyWorldEvent(new HitBorderEvent(ball));
             }
         }
@@ -56,8 +56,8 @@ public class CannonBallPhysicsComponent extends BallPhysicsComponent {
         /**
          * Check for collisions with other balls in the world.
          */
-        CircleBoundingBox cbbox = (CircleBoundingBox) obj.getBBox();
-        Optional<GameObject> ball = w.checkCollisionWithBalls(obj.getCurrentPos(), cbbox);
+        final CircleBoundingBox cbbox = (CircleBoundingBox) obj.getBBox();
+        final Optional<GameObject> ball = w.checkCollisionWithBalls(obj.getCurrentPos(), cbbox);
         if (ball.isPresent()) {
 
             /**

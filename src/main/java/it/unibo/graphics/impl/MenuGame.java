@@ -36,8 +36,19 @@ import java.nio.charset.StandardCharsets;
  */
 public class MenuGame extends JFrame {
 
+    /** 
+     * The selected level of the game. 
+     */
     private Levels selectedLevel;
-    private JPanel mainPanel;
+
+    /** 
+     * The main panel that contains the components of the menu.
+     */
+    private final JPanel mainPanel;
+
+    /** 
+     * The help text displayed in the menu. 
+     */
     private String helpText;
 
     /**
@@ -72,7 +83,7 @@ public class MenuGame extends JFrame {
      * @return The created JButton.
      */
     private JButton createButton(final String text, final ActionListener actionListener) {
-        JButton button = new JButton(text);
+        final JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.PLAIN, 16));
         button.addActionListener(actionListener);
         return button;
@@ -95,17 +106,17 @@ public class MenuGame extends JFrame {
         mainPanel.revalidate();
         mainPanel.repaint();
 
-        JPanel helpPanel = new JPanel();
+        final JPanel helpPanel = new JPanel();
         helpPanel.setLayout(new BoxLayout(helpPanel, BoxLayout.Y_AXIS));
 
-        JTextArea textArea = new JTextArea();
+        final JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.setFont(new Font("Arial", Font.PLAIN, 16));
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         textArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        JScrollPane scrollPane = new JScrollPane(textArea);
+        final JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         mainPanel.add(scrollPane, BorderLayout.CENTER);
@@ -120,7 +131,7 @@ public class MenuGame extends JFrame {
                 StandardCharsets.UTF_8))) {
 
         String line;
-        StringBuilder content = new StringBuilder();
+        final StringBuilder content = new StringBuilder();
         while ((line = reader.readLine()) != null) {
             content.append(line).append("\n");
         }
@@ -138,7 +149,7 @@ public class MenuGame extends JFrame {
         e.printStackTrace();
     }
 
-        JButton back = new JButton("Back");
+        final JButton back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 16));
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.addActionListener(ev -> showMainMenu());
@@ -159,12 +170,12 @@ public class MenuGame extends JFrame {
         mainPanel.revalidate();
         mainPanel.repaint();
 
-        JPanel labelPanel = new JPanel(new GridBagLayout());
+        final JPanel labelPanel = new JPanel(new GridBagLayout());
         mainPanel.add(labelPanel);
 
-        JLabel label = new JLabel("Welcome to the game Luxor!");
+        final JLabel label = new JLabel("Welcome to the game Luxor!");
         label.setFont(new Font("Arial", Font.BOLD, fontSize));
-        GridBagConstraints constraints = new GridBagConstraints();
+        final GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.CENTER;
@@ -217,10 +228,11 @@ public class MenuGame extends JFrame {
     }
 
     private void renderButtonPanel() {
-        JPanel buttonPanel = new JPanel();
+        final JPanel buttonPanel = new JPanel();
         mainPanel.add(buttonPanel);
 
-        JButton help = createButton("Help", new ActionListener() {
+        final JButton help = createButton("Help", new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
                 showHelpMenu();
             }
@@ -228,7 +240,7 @@ public class MenuGame extends JFrame {
 
         buttonPanel.add(help);
 
-        JButton startGame = createButton("Start Game", new ActionListener() {
+        final JButton startGame = createButton("Start Game", new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 final Thread thread = new Thread() {
@@ -244,10 +256,11 @@ public class MenuGame extends JFrame {
         });
         buttonPanel.add(startGame);
 
-        JButton levelsButton = createButton("Levels", new ActionListener() {
+        final JButton levelsButton = createButton("Levels", new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
-                Object[] options = Levels.values();
-                Levels selected = (Levels) JOptionPane.showInputDialog(
+                final Object[] options = Levels.values();
+                final Levels selected = (Levels) JOptionPane.showInputDialog(
                         MenuGame.this, // Parent frame
                         "Select a level", // Message text
                         "Level Selection", // Dialog title
