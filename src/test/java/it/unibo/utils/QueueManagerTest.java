@@ -1,7 +1,7 @@
 package it.unibo.utils;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 /**
  * This test class tests QueueManager methods.
  */
-public class QueueManagerTest {
+class QueueManagerTest {
     @Test
     void testInitializationWithLevel1() {
         assertDoesNotThrow(() -> {
@@ -34,8 +34,8 @@ public class QueueManagerTest {
     @SuppressWarnings("magicnumber")
     void testCheckCloseByThree() {
 
-        var qm = new QueueManager(0, 1, "levels/1/Path.xml");
-        var gof = GameObjectsFactory.getInstance();
+        final var qm = new QueueManager(0, 1, "levels/1/Path.xml");
+        final var gof = GameObjectsFactory.getInstance();
 
         // CHECKSTYLE: MagicNumber OFF
         /*
@@ -58,7 +58,7 @@ public class QueueManagerTest {
         qm.getBalls().add(gof.createBall(new P2d(225, 125), new V2d(0, 0), BallColor.RED));
         qm.getBalls().add(gof.createBall(new P2d(250, 125), new V2d(0, 0), BallColor.RED));
 
-        List<Ball> outputList = new ArrayList<>(qm.getBalls());
+        final List<Ball> outputList = new ArrayList<>(qm.getBalls());
         outputList.remove(10);
         outputList.remove(9);
         outputList.remove(4);
@@ -66,15 +66,15 @@ public class QueueManagerTest {
 
         // CHECKSTYLE: MagicNumber ON
 
-        var founded = qm.checkCloseByThree();
-        assertTrue(outputList.equals(founded));
+        final var founded = qm.checkCloseByThree();
+        assertEquals(outputList,founded);
     }
 
     @Test
     void testShiftBalls() {
-        var qm = new QueueManager(0, 1, "levels/1/Path.xml");
-        var gof = GameObjectsFactory.getInstance();
-        List<Ball> outputList = new ArrayList<>();
+        final var qm = new QueueManager(0, 1, "levels/1/Path.xml");
+        final var gof = GameObjectsFactory.getInstance();
+        final List<Ball> outputList = new ArrayList<>();
 
         // CHECKSTYLE: MagicNumber OFF
         /*
@@ -93,6 +93,6 @@ public class QueueManagerTest {
 
         // CHECKSTYLE: MagicNumber ON
 
-        assertTrue(outputList.equals(qm.getBalls()));
+        assertEquals(outputList,qm.getBalls());
     }
 }
