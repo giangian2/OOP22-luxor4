@@ -18,7 +18,7 @@ class GameRenderingTest {
     private MenuGame menuGame;
 
     @BeforeEach
-    public void setup() {
+    public void setUp() {
         menuGame = new MenuGame();
     }
 
