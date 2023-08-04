@@ -1,5 +1,6 @@
 package it.unibo.physics.api;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.model.GameObject;
 import it.unibo.model.World;
 
@@ -7,7 +8,11 @@ import it.unibo.model.World;
  * The PhysicsComponent class represents an abstract component responsible for updating the physics of a GameObject in the World.
  * It provides a method to update the position of the GameObject based on its current velocity.
  */
-@SuppressWarnings("abstractClassWithoutAbstractMethods")
+@SuppressFBWarnings(value = {
+    "EI_EXPOSE_REP",
+    "EI_EXPOSE_REP2"}, justification = "This warning does not rapresent a security threat because"
+    +
+    "the class needs to be abstract for the pattern but it does not need other methods")
 public abstract class PhysicsComponent {
 
     /**

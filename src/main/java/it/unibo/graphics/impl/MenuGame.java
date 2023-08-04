@@ -36,7 +36,9 @@ import java.nio.charset.StandardCharsets;
  * Represents the menu of the Luxor game, allowing players to start the game,
  * select levels, and access help information.
  */
-public class MenuGame extends JFrame{
+public class MenuGame extends JFrame {
+
+    private static final long serialVersionUID = 1L;
 
     /** 
      * The selected level of the game. 
@@ -56,7 +58,7 @@ public class MenuGame extends JFrame{
     /**
      * Variable for the font of the characters.
      */
-    final static String FONT = "Arial";
+    static final String FONT = "Arial";
 
     /**
      * Constructs the initial menu of the game.
@@ -146,7 +148,7 @@ public class MenuGame extends JFrame{
         }
         helpText = content.toString(); // Salva il testo dell'area di aiuto nel campo helpText
         textArea.setText(helpText);
-    }catch (IOException e) {
+    } catch (IOException e) {
         /**
          * General I/O exception.
          */

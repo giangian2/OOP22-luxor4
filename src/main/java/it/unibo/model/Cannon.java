@@ -31,7 +31,6 @@ public class Cannon extends GameObject {
      * @param pos     The initial position of the cannon.
      * @param vel     The initial velocity of the cannon.
      * @param input   The input component responsible for controlling the cannon.
-     * @param bbox    The bounding box defining the collision area of the cannon.
      * @param physics The physics component responsible for handling physics
      *                interactions.
      * @param graph   The graphics component responsible for rendering the cannon.
@@ -55,12 +54,12 @@ public class Cannon extends GameObject {
                 new V2d(0, 0),
                 randomColor);
     }
-    
+
     /**
-     * Retrieves the stationary ball.
-     *
-     * @return The stationary ball.
-     */
+    * Retrieves the stationary ball.
+    *
+    * @return The stationary ball.
+    */
     @SuppressFBWarnings(value = {
             "EI_EXPOSE_REP",
             "EI_EXPOSE_REP2" }, justification = "This warning does not represent a security threat beacuse the Stationary Ball "
