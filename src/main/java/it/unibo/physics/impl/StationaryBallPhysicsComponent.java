@@ -12,7 +12,7 @@ import it.unibo.physics.api.PhysicsComponent;
  * This component ensures that the given GameObject represents the color of the stationary ball,
  * which will be shot by the cannon.
  */
-public class StationaryBallPhysicsComponent extends PhysicsComponent {
+public class StationaryBallPhysicsComponent implements PhysicsComponent {
 
     /**
      * This method updates the position of the given GameObject based on the position of the stationary ball in the World.
