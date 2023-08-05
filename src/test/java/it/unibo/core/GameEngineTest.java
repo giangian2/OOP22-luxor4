@@ -2,9 +2,6 @@ package it.unibo.core;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.junit.jupiter.api.Test;
 
 import it.unibo.core.impl.GameEngineImpl;
