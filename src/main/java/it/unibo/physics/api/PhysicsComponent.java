@@ -1,11 +1,13 @@
 package it.unibo.physics.api;
 
-import it.unibo.model.GameObject;
-import it.unibo.model.World;
+import it.unibo.model.impl.GameObject;
+import it.unibo.model.impl.World;
 
 /**
- * The PhysicsComponent interface represents a component responsible for updating the physics of a GameObject in the World.
- * It provides a method to update the position of the GameObject based on its current velocity.
+ * The PhysicsComponent interface represents a component responsible for
+ * updating the physics of a GameObject in the World.
+ * It provides a method to update the position of the GameObject based on its
+ * current velocity.
  */
 public interface PhysicsComponent {
 

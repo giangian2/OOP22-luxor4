@@ -15,10 +15,11 @@ import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
 import it.unibo.graphics.impl.SceneImpl;
 import it.unibo.input.impl.KeyboardInputController;
-import it.unibo.model.Ball;
-import it.unibo.model.GameState;
-import it.unibo.model.World;
+import it.unibo.model.api.GameState;
 import it.unibo.model.collisions.impl.RectBoundingBox;
+import it.unibo.model.impl.Ball;
+import it.unibo.model.impl.GameStateImpl;
+import it.unibo.model.impl.World;
 import it.unibo.utils.P2d;
 
 /**
@@ -107,7 +108,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                  * of the level interface, in this way there will be a fluid and scalable
                  * development process for the creation of new levels.
                  */
-                this.gameState = new GameState(this, () -> {
+                this.gameState = new GameStateImpl(this, () -> {
                     final int height = 600;
                     final int width = 800;
                     final int nballs = 10;
@@ -128,7 +129,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                 break;
 
             case L2:
-                this.gameState = new GameState(this, () -> {
+                this.gameState = new GameStateImpl(this, () -> {
                     final int height = 600;
                     final int width = 800;
                     final int nballs = 20;

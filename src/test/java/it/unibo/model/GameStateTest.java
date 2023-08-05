@@ -9,6 +9,8 @@ import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.enums.Levels;
 import it.unibo.events.api.WorldEventListener;
 import it.unibo.model.collisions.impl.RectBoundingBox;
+import it.unibo.model.impl.GameStateImpl;
+import it.unibo.model.impl.World;
 import it.unibo.utils.P2d;
 
 /**
@@ -21,9 +23,9 @@ class GameStateTest {
      * 
      * @return GameState
      */
-    GameState initialize() {
+    GameStateImpl initialize() {
         final WorldEventListener gameEngine = new GameEngineImpl(Levels.L1); // Initialize thew world event listener
-        return new GameState(gameEngine, () -> {
+        return new GameStateImpl(gameEngine, () -> {
             final int height = 600;
             final int width = 800;
             final int nballs = 10;

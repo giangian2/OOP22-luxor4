@@ -1,11 +1,12 @@
 package it.unibo.physics.impl;
 
-import it.unibo.model.GameObject;
+import it.unibo.model.impl.GameObject;
+import it.unibo.model.impl.World;
 import it.unibo.physics.api.PhysicsComponent;
-import it.unibo.model.World;
 
 /**
- * The BallPhysicsComponent class represents a specific implementation of the PhysicsComponent
+ * The BallPhysicsComponent class represents a specific implementation of the
+ * PhysicsComponent
  * for updating the physics of a ball GameObject in the World.
  */
 public class BallPhysicsComponent implements PhysicsComponent {

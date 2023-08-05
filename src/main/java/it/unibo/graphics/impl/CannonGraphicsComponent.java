@@ -1,7 +1,7 @@
 package it.unibo.graphics.impl;
 
-import it.unibo.model.Cannon;
-import it.unibo.model.GameObject;
+import it.unibo.model.impl.Cannon;
+import it.unibo.model.impl.GameObject;
 
 import java.awt.Image;
 import java.io.IOException;
@@ -9,11 +9,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * A graphics component responsible for rendering the Cannon GameObject on the screen.
+ * A graphics component responsible for rendering the Cannon GameObject on the
+ * screen.
  */
 public class CannonGraphicsComponent implements MyGraphicsComponent {
 
     private Image icon;
+
     /**
      * Constructs a CannonGraphicsComponent and loads the cannon icon image.
      */

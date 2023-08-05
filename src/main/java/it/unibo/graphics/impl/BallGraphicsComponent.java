@@ -1,12 +1,13 @@
 package it.unibo.graphics.impl;
 
 import it.unibo.enums.BallColor;
-import it.unibo.model.Ball;
-import it.unibo.model.GameObject;
+import it.unibo.model.impl.Ball;
+import it.unibo.model.impl.GameObject;
 import it.unibo.utils.P2d;
 
 /**
- * A graphics component responsible for rendering a Ball GameObject on the screen.
+ * A graphics component responsible for rendering a Ball GameObject on the
+ * screen.
  */
 public class BallGraphicsComponent implements MyGraphicsComponent {
 
@@ -35,9 +36,12 @@ public class BallGraphicsComponent implements MyGraphicsComponent {
         // Set the color of the Graphics2D object for drawing the ball.
         g.setColor(ballColor.getBallColor());
 
-        // Draw a filled oval (representing the ball) using the ball's color and dimensions.
-        // The x and y position of the oval are based on the x and y coordinates of the ball from pos.
-        // Ball.IMAGE_DIAMETER is likely a constant representing the diameter of the ball.
+        // Draw a filled oval (representing the ball) using the ball's color and
+        // dimensions.
+        // The x and y position of the oval are based on the x and y coordinates of the
+        // ball from pos.
+        // Ball.IMAGE_DIAMETER is likely a constant representing the diameter of the
+        // ball.
         g.fillOval((int) pos.getX(), (int) pos.getY(), Ball.IMAGE_DIAMETER, Ball.IMAGE_DIAMETER);
     }
 }

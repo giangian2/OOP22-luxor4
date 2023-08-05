@@ -4,7 +4,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import it.unibo.model.GameState;
+import it.unibo.model.api.GameState;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,7 +13,7 @@ import java.awt.GridBagLayout;
  * A custom JPanel representing the victory screen with game statistics.
  */
 public class VictoryPanel extends JPanel {
-    //private int score;
+    // private int score;
     private transient GameState gameState;
     private static final int VICTORY_LABEL_FONT_SIZE = 25;
     private static final int POINTS_LABEL_FONT_SIZE = 25;
@@ -25,12 +25,13 @@ public class VictoryPanel extends JPanel {
      */
     public VictoryPanel(final GameState gameState) {
         this.gameState = gameState;
-        //this.score = score;
+        // this.score = score;
         initComponents();
     }
 
     /**
-     * Initializes the components of the VictoryPanel, including labels to display the victory message and points earned.
+     * Initializes the components of the VictoryPanel, including labels to display
+     * the victory message and points earned.
      */
     private void initComponents() {
         setLayout(new GridBagLayout());

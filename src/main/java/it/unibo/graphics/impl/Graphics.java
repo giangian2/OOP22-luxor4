@@ -3,7 +3,7 @@ package it.unibo.graphics.impl;
 import java.awt.Color;
 import java.awt.Image;
 
-import it.unibo.model.GameObject;
+import it.unibo.model.impl.GameObject;
 
 /**
  * A graphics interface for rendering images and shapes on the screen.
@@ -21,6 +21,7 @@ public interface Graphics {
      */
 
     void drawImage(Image image, int x, int y, int width, int height);
+
     /**
      * Updates the graphical representation of a GameObject on the screen.
      *
@@ -29,18 +30,20 @@ public interface Graphics {
      */
     void update(GameObject obj, Graphics c);
 
-     /**
+    /**
      * Sets the color to be used for drawing a Ball.
      *
      * @param colorForBall The color to be used for drawing a Ball.
      */
     void setColor(Color colorForBall);
 
-     /**
+    /**
      * Draws a filled oval on the screen.
      *
-     * @param i The x-coordinate of the upper left corner of the bounding rectangle of the oval.
-     * @param j The y-coordinate of the upper left corner of the bounding rectangle of the oval.
+     * @param i The x-coordinate of the upper left corner of the bounding rectangle
+     *          of the oval.
+     * @param j The y-coordinate of the upper left corner of the bounding rectangle
+     *          of the oval.
      * @param k The width of the oval.
      * @param l The height of the oval.
      */

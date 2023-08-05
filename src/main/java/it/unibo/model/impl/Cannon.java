@@ -1,6 +1,7 @@
-package it.unibo.model;
+package it.unibo.model.impl;
 
 import it.unibo.input.impl.PlayerInputComponent;
+import it.unibo.model.impl.GameObject.Type;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
@@ -36,12 +37,11 @@ public class Cannon extends GameObject {
      * @param graph   The graphics component responsible for rendering the cannon.
      */
     public Cannon(final P2d pos, final V2d vel, final PlayerInputComponent input,
-              final PhysicsComponent physics, final CannonGraphicsComponent graph) {
-    super(Type.CANNON, pos, vel, input, null, graph, physics);
-    this.cannonBalls = new ArrayList<>();
-    this.stationaryBall = createStationaryBall();
-}
-
+            final PhysicsComponent physics, final CannonGraphicsComponent graph) {
+        super(Type.CANNON, pos, vel, input, null, graph, physics);
+        this.cannonBalls = new ArrayList<>();
+        this.stationaryBall = createStationaryBall();
+    }
 
     /**
      * Creates a stationary ball with a random color.
@@ -56,10 +56,10 @@ public class Cannon extends GameObject {
     }
 
     /**
-    * Retrieves the stationary ball.
-    *
-    * @return The stationary ball.
-    */
+     * Retrieves the stationary ball.
+     *
+     * @return The stationary ball.
+     */
     @SuppressFBWarnings(value = {
             "EI_EXPOSE_REP",
             "EI_EXPOSE_REP2" }, justification = "This warning does not represent a security threat beacuse the Stationary Ball "
@@ -103,8 +103,6 @@ public class Cannon extends GameObject {
         this.cannonBalls.add(ball);
 
         stationaryBall.setColor(BallColor.getRandomColor());
-
-        
     }
 
     /**

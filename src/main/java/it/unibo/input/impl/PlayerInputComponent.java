@@ -4,9 +4,9 @@ import it.unibo.utils.V2d;
 import it.unibo.utils.P2d;
 import it.unibo.input.api.InputComponent;
 import it.unibo.input.api.InputController;
-import it.unibo.model.Cannon;
-import it.unibo.model.GameObject;
-import it.unibo.model.World;
+import it.unibo.model.impl.Cannon;
+import it.unibo.model.impl.GameObject;
+import it.unibo.model.impl.World;
 
 /**
  * A concrete implementation of the InputComponent interface that handles input

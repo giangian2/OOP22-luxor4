@@ -25,9 +25,8 @@ import java.awt.event.WindowEvent;
 import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
 import it.unibo.input.impl.KeyboardInputController;
-import it.unibo.model.Ball;
-import it.unibo.model.GameState;
-
+import it.unibo.model.api.GameState;
+import it.unibo.model.impl.Ball;
 /**
  * A class representing the game scene.
  */
@@ -59,9 +58,8 @@ public class SceneImpl implements Scene {
      * @param backgroundSrc The path to the background image source.
      */
     @SuppressFBWarnings(value = {
-        "EI_EXPOSE_REP" },
-        justification = "This warning does not represent a security threat"
-                + "beacuse the KeyboardInpuController has to be mutable")
+            "EI_EXPOSE_REP" }, justification = "This warning does not represent a security threat"
+                    + "beacuse the KeyboardInpuController has to be mutable")
     public SceneImpl(final GameState gameState, final KeyboardInputController controller, final String backgroundSrc) {
 
         this.gameState = gameState;
@@ -96,7 +94,6 @@ public class SceneImpl implements Scene {
         pointsLabel = new JLabel("Punti: " + gameState.getScore());
         this.layeredPane.add(pointsLabel, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(pointsLabel, JLayeredPane.PALETTE_LAYER);
-
 
         int labelWidth = 100;
         pointsLabel.setBounds(LABEL_X, LABEL_Y, labelWidth, LABEL_HEIGHT);
@@ -204,7 +201,7 @@ public class SceneImpl implements Scene {
          * An inner class representing the panel where the game graphics are drawn.
          */
         public GamePanel() {
-            //this.addKeyListener(this);
+            // this.addKeyListener(this);
             setFocusable(true);
             setFocusTraversalKeysEnabled(false);
             Dimension size = new Dimension(boardGraphics.getBackgorundImg().getWidth(null),

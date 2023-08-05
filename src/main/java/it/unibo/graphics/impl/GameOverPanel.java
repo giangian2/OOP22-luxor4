@@ -3,7 +3,9 @@ package it.unibo.graphics.impl;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import it.unibo.model.GameState;
+
+import it.unibo.model.api.GameState;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 

@@ -1,4 +1,4 @@
-package it.unibo.model;
+package it.unibo.model.impl;
 
 import it.unibo.graphics.impl.MyGraphicsComponent;
 import it.unibo.input.api.InputComponent;

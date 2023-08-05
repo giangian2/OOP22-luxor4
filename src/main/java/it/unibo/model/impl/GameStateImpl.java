@@ -1,19 +1,19 @@
-package it.unibo.model;
+package it.unibo.model.impl;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.core.api.Level;
 import it.unibo.enums.Direction;
 import it.unibo.events.api.WorldEventListener;
-import it.unibo.input.impl.KeyboardInputController;
+import it.unibo.input.api.InputController;
+import it.unibo.model.api.GameState;
 
 /**
- * Represents the state of the game, including the score, world, pause state,
- * and level.
+ * 
  * This class manages the game state and provides methods for updating the state
  * based on game events.
  */
 @SuppressFBWarnings(value = { "EI_EXPOSE_REP" }, justification = "I prefer to suppress these FindBugs warnings")
-public class GameState {
+public class GameStateImpl implements GameState {
 
     private int score;
     private World world;
@@ -27,7 +27,7 @@ public class GameState {
      * @param l     The WorldEventListener to handle game events.
      * @param level The Level object representing the current game level.
      */
-    public GameState(final WorldEventListener l, final Level level) {
+    public GameStateImpl(final WorldEventListener l, final Level level) {
         score = 0;
         pause = false;
         this.level = level;
@@ -40,6 +40,7 @@ public class GameState {
      *
      * @return The World.
      */
+    @Override
     public World getWorld() {
         return world;
     }
@@ -47,6 +48,7 @@ public class GameState {
     /**
      * Increases the current score by 1.
      */
+    @Override
     public void incScore() {
         score++;
     }
@@ -54,6 +56,7 @@ public class GameState {
     /**
      * Decreases the current score by 1.
      */
+    @Override
     public void decScore() {
         score--;
     }
@@ -63,6 +66,7 @@ public class GameState {
      *
      * @return The current score.
      */
+    @Override
     public int getScore() {
         return score;
     }
@@ -80,6 +84,7 @@ public class GameState {
      *
      * @return true if the game is over, false otherwise.
      */
+    @Override
     public boolean isGameOver() {
         if (this.getWorld().getQueue().size() > 0) {
             final var res = this.getWorld()
@@ -94,6 +99,7 @@ public class GameState {
      *
      * @return true if the player has won, false otherwise.
      */
+    @Override
     public boolean isWin() {
         return this.getWorld().getQueue().size() == 0;
     }
@@ -102,6 +108,7 @@ public class GameState {
      * Toggles the pause state of the game.
      * If the game is paused, it will be resumed, and vice versa.
      */
+    @Override
     public void changePauseState() {
         if (pause) {
             getWorld().unpauseBackgroundSound();
@@ -117,6 +124,7 @@ public class GameState {
      *
      * @param dt The elapsed time since the last update.
      */
+    @Override
     public void update(final long dt) {
         if (!pause) {
             world.updateState(dt);
@@ -134,7 +142,8 @@ public class GameState {
      *
      * @param controller The KeyboardInputController to handle user input.
      */
-    public void processInput(final KeyboardInputController controller) {
+    @Override
+    public void processInput(final InputController controller) {
         if (!pause) {
             world.getCannon().updateInput(controller);
         }

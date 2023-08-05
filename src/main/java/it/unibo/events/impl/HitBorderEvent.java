@@ -2,7 +2,7 @@ package it.unibo.events.impl;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.events.api.WorldEvent;
-import it.unibo.model.GameObject;
+import it.unibo.model.impl.GameObject;
 
 /**
  * 

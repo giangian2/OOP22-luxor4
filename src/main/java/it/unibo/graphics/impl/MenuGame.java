@@ -2,7 +2,7 @@ package it.unibo.graphics.impl;
 
 import it.unibo.core.impl.GameEngineImpl;
 import it.unibo.enums.Levels;
-import it.unibo.model.GameState;
+import it.unibo.model.api.GameState;
 
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
@@ -40,18 +40,18 @@ public class MenuGame extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    /** 
-     * The selected level of the game. 
+    /**
+     * The selected level of the game.
      */
     private Levels selectedLevel;
 
-    /** 
+    /**
      * The main panel that contains the components of the menu.
      */
     private final JPanel mainPanel;
 
-    /** 
-     * The help text displayed in the menu. 
+    /**
+     * The help text displayed in the menu.
      */
     private String helpText;
 
@@ -134,26 +134,26 @@ public class MenuGame extends JFrame {
          * Load text from file.
          */
         try (BufferedReader reader = new BufferedReader(
-            new InputStreamReader(
-                ClassLoader.getSystemResourceAsStream(
-                    "help" + System.getProperty("file.separator") + "help.txt"),
-                StandardCharsets.UTF_8))) {
+                new InputStreamReader(
+                        ClassLoader.getSystemResourceAsStream(
+                                "help" + System.getProperty("file.separator") + "help.txt"),
+                        StandardCharsets.UTF_8))) {
 
-        String line;
-        final StringBuilder content = new StringBuilder();
-        line = reader.readLine();
-        while (line != null) {
-            content.append(line).append('\n');
+            String line;
+            final StringBuilder content = new StringBuilder();
             line = reader.readLine();
+            while (line != null) {
+                content.append(line).append('\n');
+                line = reader.readLine();
+            }
+            helpText = content.toString(); // Salva il testo dell'area di aiuto nel campo helpText
+            textArea.setText(helpText);
+        } catch (IOException e) {
+            /**
+             * General I/O exception.
+             */
+            Logger.getGlobal().log(Level.WARNING, null, e);
         }
-        helpText = content.toString(); // Salva il testo dell'area di aiuto nel campo helpText
-        textArea.setText(helpText);
-    } catch (IOException e) {
-        /**
-         * General I/O exception.
-         */
-        Logger.getGlobal().log(Level.WARNING, null, e);
-    }
 
         final JButton back = new JButton("Back");
         back.setFont(new Font(FONT, Font.PLAIN, 16));
@@ -193,7 +193,8 @@ public class MenuGame extends JFrame {
     /**
      * Shows the game over screen when the player loses the game.
      *
-     * @param gameState The GameState object representing the current state of the game.
+     * @param gameState The GameState object representing the current state of the
+     *                  game.
      */
     public final void showGameOver(final GameState gameState) {
         mainPanel.removeAll();
@@ -210,7 +211,8 @@ public class MenuGame extends JFrame {
     /**
      * Shows the win screen when the player completes the game successfully.
      *
-     * @param gameState The GameState object representing the current state of the game.
+     * @param gameState The GameState object representing the current state of the
+     *                  game.
      */
     public void showWin(final GameState gameState) {
         mainPanel.removeAll();

@@ -7,7 +7,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.enums.BallColor;
 import it.unibo.enums.Direction;
-import it.unibo.model.Ball;
+import it.unibo.model.impl.Ball;
 
 /**
  * The QueueManager manages a list of Ball objects associated with a Path.
@@ -64,8 +64,8 @@ public class QueueManager {
         for (int i = 0; i < n; i++) {
             this.balls.add(factory.createBall(new P2d(0, 0), new V2d(0, 0), BallColor.getRandomColor()));
             if (i > 2
-                && balls.get(balls.size() - 1).getColor() == balls.get(balls.size() - 2).getColor()
-                && balls.get(balls.size() - 2).getColor() == balls.get(balls.size() - 3).getColor()) {
+                    && balls.get(balls.size() - 1).getColor() == balls.get(balls.size() - 2).getColor()
+                    && balls.get(balls.size() - 2).getColor() == balls.get(balls.size() - 3).getColor()) {
 
                 balls.remove(balls.size() - 1);
                 i--;
@@ -79,7 +79,7 @@ public class QueueManager {
             b.setPos(pos);
             direction = path.getMove(pos);
             pos = new P2d(pos.getX() + direction.getVelocity().getX() * Ball.IMAGE_DIAMETER,
-            pos.getY() + direction.getVelocity().getY() * Ball.IMAGE_DIAMETER);
+                    pos.getY() + direction.getVelocity().getY() * Ball.IMAGE_DIAMETER);
         }
     }
 
@@ -110,8 +110,10 @@ public class QueueManager {
                 final var currentPos = this.balls.get(i).getCurrentPos();
 
                 if (i > 0 && !firstShifting
-                    && (Math.abs(this.balls.get(i - 1).getCurrentPos().getX() - currentPos.getX()) > Ball.IMAGE_DIAMETER
-                    || Math.abs(this.balls.get(i - 1).getCurrentPos().getY() - currentPos.getY()) > Ball.IMAGE_DIAMETER)) {
+                        && (Math.abs(
+                                this.balls.get(i - 1).getCurrentPos().getX() - currentPos.getX()) > Ball.IMAGE_DIAMETER
+                                || Math.abs(this.balls.get(i - 1).getCurrentPos().getY()
+                                        - currentPos.getY()) > Ball.IMAGE_DIAMETER)) {
 
                     break;
 

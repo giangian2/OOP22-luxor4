@@ -1,4 +1,4 @@
-package it.unibo.model;
+package it.unibo.model.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.physics.impl.BoundaryCollision;
 import it.unibo.enums.Direction;
 import it.unibo.events.api.WorldEvent;
-import it.unibo.model.GameObject.Type;
 import it.unibo.model.collisions.impl.CircleBoundingBox;
 import it.unibo.model.collisions.impl.RectBoundingBox;
+import it.unibo.model.impl.GameObject.Type;
 import it.unibo.utils.QueueManager;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;

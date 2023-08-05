@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.model.collisions.impl.RectBoundingBox;
+import it.unibo.model.impl.Ball;
+import it.unibo.model.impl.World;
 import it.unibo.utils.P2d;
 
 /**

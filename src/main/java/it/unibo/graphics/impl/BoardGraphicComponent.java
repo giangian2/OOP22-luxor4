@@ -6,10 +6,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import it.unibo.model.GameObject;
+import it.unibo.model.impl.GameObject;
 
 /**
- * A graphics component responsible for rendering the background image of the game board.
+ * A graphics component responsible for rendering the background image of the
+ * game board.
  */
 
 public class BoardGraphicComponent implements MyGraphicsComponent {
@@ -30,7 +31,8 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
     }
 
     /**
-     * Loads the background image from the specified path and stores it in the 'img' variable.
+     * Loads the background image from the specified path and stores it in the 'img'
+     * variable.
      * If the image loading fails, an IOException is caught and printed.
      */
     private void loadImage() {
@@ -45,7 +47,8 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
     }
 
     /**
-     * Renders the background image on the game board using the Graphics2D object provided.
+     * Renders the background image on the game board using the Graphics2D object
+     * provided.
      *
      * @param obj The GameObject to be updated (not used in this context).
      * @param g   The Graphics2D object used for drawing the background image.
@@ -62,7 +65,7 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
      */
     public Image getBackgorundImg() {
         if (this.img != null) {
-          return new ImageIcon(this.img).getImage();
+            return new ImageIcon(this.img).getImage();
         } else {
             return null;
         }

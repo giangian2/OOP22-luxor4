@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import it.unibo.input.api.InputController;
 import it.unibo.input.impl.KeyboardInputController;
 import it.unibo.input.impl.PlayerInputComponent;
-import it.unibo.model.Cannon;
-import it.unibo.model.GameObject;
+import it.unibo.model.impl.Cannon;
+import it.unibo.model.impl.GameObject;
 import it.unibo.utils.P2d;
 
 /**
@@ -82,17 +82,18 @@ public class PlayerInputComponentTest {
     @Test
     void testShoot() {
         // Notify the input controller of the shoot action and perform the update
-    ((KeyboardInputController) inputController).notifyShoot();
-    playerInputComponent.update(gameObject, inputController);
+        ((KeyboardInputController) inputController).notifyShoot();
+        playerInputComponent.update(gameObject, inputController);
 
-    // Ensure that the GameObject fires a projectile if it's a Cannon and isShoot() returns true
-    assertTrue(inputController.isShoot());
+        // Ensure that the GameObject fires a projectile if it's a Cannon and isShoot()
+        // returns true
+        assertTrue(inputController.isShoot());
 
-    // Stop shooting and perform another update
-    ((KeyboardInputController) inputController).stopShooting();
-    playerInputComponent.update(gameObject, inputController);
+        // Stop shooting and perform another update
+        ((KeyboardInputController) inputController).stopShooting();
+        playerInputComponent.update(gameObject, inputController);
 
-    // Ensure that the GameObject stops shooting
-    assertFalse(inputController.isShoot());
+        // Ensure that the GameObject stops shooting
+        assertFalse(inputController.isShoot());
     }
 }
