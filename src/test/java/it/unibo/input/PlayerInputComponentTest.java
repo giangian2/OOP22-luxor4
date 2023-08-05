@@ -16,7 +16,7 @@ import it.unibo.utils.P2d;
 /**
  * JUnit test for {@link PlayerInputComponent}.
  */
-public class PlayerInputComponentTest {
+class PlayerInputComponentTest {
 
     private PlayerInputComponent playerInputComponent;
     private InputController inputController;
@@ -40,7 +40,7 @@ public class PlayerInputComponentTest {
     @Test
     void testMoveLeft() {
         // Set up initial position for the GameObject
-        P2d initialPos = new P2d(INITIAL_X_POS, INITIAL_Y_POS);
+        final P2d initialPos = new P2d(INITIAL_X_POS, INITIAL_Y_POS);
         gameObject.setPos(initialPos);
 
         // Notify the input controller of the left movement and perform the update
@@ -61,7 +61,7 @@ public class PlayerInputComponentTest {
     @Test
     void testMoveRight() {
         // Set up initial position for the GameObject
-        P2d initialPos = new P2d(INITIAL_X_POS_GO, INITIAL_Y_POS);
+        final P2d initialPos = new P2d(INITIAL_X_POS_GO, INITIAL_Y_POS);
         gameObject.setPos(initialPos);
 
         // Notify the input controller of the right movement and perform the update

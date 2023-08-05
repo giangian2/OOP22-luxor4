@@ -21,6 +21,8 @@ import java.awt.event.KeyListener;
 import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.unibo.events.impl.PauseGameEvent;
 import it.unibo.graphics.api.Scene;
@@ -39,12 +41,10 @@ public class SceneImpl implements Scene {
     private final KeyboardInputController controller;
     private final BoardGraphicComponent boardGraphics;
     private final JLabel pointsLabel;
+    private static final Logger logger = Logger.getLogger(SceneImpl.class.getName());
     private static final int MENU_BUTTON_WIDTH = 80;
     private static final int MENU_BUTTON_HEIGHT = 30;
     private static final int LABEL_HEIGHT = 20;
-    private static final int KEY_CODE_RIGHT_ARROW = 39;
-    private static final int KEY_CODE_LEFT_ARROW = 37;
-    private static final int KEY_CODE_P = 80;
     private static final int LABEL_X = 10;
     private static final int LABEL_Y = 580;
 
@@ -142,8 +142,8 @@ public class SceneImpl implements Scene {
                     if (gameState.isWin()) {
                         renderWin();
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch(RuntimeException ex){
+                    Logger.getGlobal().log(Level.WARNING, ex.toString());
                 }
             }
         }
@@ -274,11 +274,11 @@ public class SceneImpl implements Scene {
          */
         @Override
         public void keyPressed(final KeyEvent e) {
-            if (e.getKeyCode() == KEY_CODE_RIGHT_ARROW) {
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 controller.notifyMoveRight();
-            } else if (e.getKeyCode() == KEY_CODE_LEFT_ARROW) {
+            } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 controller.notifyMoveLeft();
-            } else if (e.getKeyCode() == KEY_CODE_P) {
+            } else if (e.getKeyCode() == KeyEvent.VK_P) {
                 gameState.getWorld().notifyWorldEvent(new PauseGameEvent());
             } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 controller.notifyShoot();
@@ -302,9 +302,9 @@ public class SceneImpl implements Scene {
          */
         @Override
         public void keyReleased(final KeyEvent e) {
-            if (e.getKeyCode() == KEY_CODE_RIGHT_ARROW) {
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 controller.notifyNoMoreMoveRight();
-            } else if (e.getKeyCode() == KEY_CODE_LEFT_ARROW) {
+            } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 controller.notifyNoMoreMoveLeft();
             }
         }

@@ -15,6 +15,7 @@ public class NullInputComponent implements InputComponent {
      * @param ctrl The InputController providing input data for updating the
      *             GameObject.
      */
+    @Override
     public void update(final GameObject obj, final InputController ctrl) {
 
     }

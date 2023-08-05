@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test for {@link KeyboardInputController}.
  */
-public class KeyboardInputControllerTest {
+class KeyboardInputControllerTest {
 
-    private KeyboardInputController inputController = new KeyboardInputController();
+    private final KeyboardInputController inputController = new KeyboardInputController();
 
     /**
      * Tears down the test fixture.
