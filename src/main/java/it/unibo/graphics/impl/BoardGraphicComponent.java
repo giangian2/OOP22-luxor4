@@ -6,6 +6,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import it.unibo.model.impl.GameObject;
 
 /**
@@ -15,8 +18,10 @@ import it.unibo.model.impl.GameObject;
 
 public class BoardGraphicComponent implements MyGraphicsComponent {
 
-    private String backgroundPath;
+    private final String backgroundPath;
     private Image img;
+    private static final Logger LOGGER = Logger.getLogger(BoardGraphicComponent.class.getName());
+
 
     /**
      * Constructs a BoardGraphicComponent with the specified background image path.
@@ -36,13 +41,12 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
      * If the image loading fails, an IOException is caught and printed.
      */
     private void loadImage() {
-        Image image = null;
+        Image image;
         try {
             image = ImageIO.read(ClassLoader.getSystemResource(this.backgroundPath));
             this.img = image;
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "An error occurred while loading the background image", e);
         }
     }
 

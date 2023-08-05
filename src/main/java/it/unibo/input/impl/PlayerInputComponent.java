@@ -30,21 +30,23 @@ public class PlayerInputComponent implements InputComponent {
      * @param ctrl       The InputController providing input data for updating the
      *                   GameObject.
      */
+    @Override
     public void update(final GameObject gameObject, final InputController ctrl) {
 
+        
         // Get the current position of the GameObject
         P2d pos = gameObject.getCurrentPos();
 
         // Update the position of the GameObject based on the input
+        int moveSpeedX = 0;
         if (ctrl.isMoveLeft()) {
-            if (pos.getX() > 0) {
-                pos = pos.sum(new V2d(-PlayerInputComponent.SPEED, 0));
-            }
+            moveSpeedX = -PlayerInputComponent.SPEED;
         } else if (ctrl.isMoveRight()) {
             if (pos.getX() < World.getBBox().getBRCorner().getX() - PlayerInputComponent.ADJUST_RIGHT_BORDER_LIMIT) {
-                pos = pos.sum(new V2d(PlayerInputComponent.SPEED, 0));
+                moveSpeedX = PlayerInputComponent.SPEED;
             }
         }
+        pos = pos.sum(new V2d(moveSpeedX, 0));
 
         // Set the new position of the GameObject
         gameObject.setPos(pos);
@@ -52,7 +54,7 @@ public class PlayerInputComponent implements InputComponent {
         // If the GameObject is a Cannon and the "Shoot" input action is active, fire a
         // projectile
         if (gameObject instanceof Cannon) {
-            Cannon cannon = (Cannon) gameObject;
+            final Cannon cannon = (Cannon) gameObject;
             if (ctrl.isShoot()) {
                 ctrl.stopShooting();
                 cannon.fireProjectile();
@@ -62,3 +64,5 @@ public class PlayerInputComponent implements InputComponent {
     }
 
 }
+
+

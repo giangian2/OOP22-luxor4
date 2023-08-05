@@ -25,13 +25,13 @@ public class BallGraphicsComponent implements MyGraphicsComponent {
             throw new IllegalArgumentException("GameObject is not a Ball");
         }
         // Cast the GameObject to a Ball object.
-        Ball ball = (Ball) obj;
+        final Ball ball = (Ball) obj;
 
         // Get the current position of the ball.
-        P2d pos = ball.getCurrentPos();
+        final P2d pos = ball.getCurrentPos();
 
         // Get the color of the ball.
-        BallColor ballColor = ball.getColor();
+        final BallColor ballColor = ball.getColor();
 
         // Set the color of the Graphics2D object for drawing the ball.
         g.setColor(ballColor.getBallColor());

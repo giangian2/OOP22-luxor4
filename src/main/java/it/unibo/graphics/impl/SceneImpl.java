@@ -32,16 +32,15 @@ import it.unibo.model.impl.Ball;
  */
 public class SceneImpl implements Scene {
 
-    private JFrame frame;
-    private JPanel panel;
-    private GameState gameState;
-    private JLayeredPane layeredPane;
-    private KeyboardInputController controller;
-    private BoardGraphicComponent boardGraphics;
-    private JLabel pointsLabel;
+    private final JFrame frame;
+    private final JPanel panel;
+    private final GameState gameState;
+    private final JLayeredPane layeredPane;
+    private final KeyboardInputController controller;
+    private final BoardGraphicComponent boardGraphics;
+    private final JLabel pointsLabel;
     private static final int MENU_BUTTON_WIDTH = 80;
     private static final int MENU_BUTTON_HEIGHT = 30;
-    private static final int LABEL_WIDTH = 100;
     private static final int LABEL_HEIGHT = 20;
     private static final int KEY_CODE_RIGHT_ARROW = 39;
     private static final int KEY_CODE_LEFT_ARROW = 37;
@@ -83,7 +82,7 @@ public class SceneImpl implements Scene {
         this.layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
         this.layeredPane.setLayer(panel, JLayeredPane.DEFAULT_LAYER);
 
-        JButton menuButton = new JButton("Menu");
+        final JButton menuButton = new JButton("Menu");
         menuButton.setPreferredSize(new Dimension(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
         this.layeredPane.add(menuButton, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(menuButton, JLayeredPane.PALETTE_LAYER);
@@ -95,7 +94,7 @@ public class SceneImpl implements Scene {
         this.layeredPane.add(pointsLabel, JLayeredPane.PALETTE_LAYER);
         this.layeredPane.setLayer(pointsLabel, JLayeredPane.PALETTE_LAYER);
 
-        int labelWidth = 100;
+        final int labelWidth = 100;
         pointsLabel.setBounds(LABEL_X, LABEL_Y, labelWidth, LABEL_HEIGHT);
         pointsLabel.setForeground(Color.WHITE);
 
@@ -103,7 +102,7 @@ public class SceneImpl implements Scene {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 gameState.getWorld().stopMusic();
-                MenuGame menuGame = new MenuGame();
+                final MenuGame menuGame = new MenuGame();
                 menuGame.setVisible(true);
                 frame.dispose();
             }
@@ -112,9 +111,11 @@ public class SceneImpl implements Scene {
         frame.getContentPane().add(layeredPane);
 
         this.frame.addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(final WindowEvent ev) {
             }
 
+            @Override
             public void windowClosed(final WindowEvent ev) {
             }
         });
@@ -130,7 +131,7 @@ public class SceneImpl implements Scene {
     @Override
     public void render() {
         if (panel.isVisible()) {
-            Graphics g = panel.getGraphics();
+            final Graphics g = panel.getGraphics();
             if (g != null) {
                 try {
                     frame.repaint();
@@ -155,7 +156,7 @@ public class SceneImpl implements Scene {
     public void renderGameOver() {
         try {
             gameState.getWorld().stopMusic();
-            MenuGame menuGame = new MenuGame();
+            final MenuGame menuGame = new MenuGame();
             menuGame.showGameOver(gameState);
             menuGame.setVisible(true);
 
@@ -173,7 +174,7 @@ public class SceneImpl implements Scene {
     public void renderWin() {
         try {
             gameState.getWorld().stopMusic();
-            MenuGame menuGame = new MenuGame();
+            final MenuGame menuGame = new MenuGame();
             menuGame.showWin(gameState);
             menuGame.setVisible(true);
 
@@ -197,6 +198,8 @@ public class SceneImpl implements Scene {
      * An inner class representing the panel where the game graphics are drawn.
      */
     public class GamePanel extends JPanel implements KeyListener {
+
+        private static final long serialVersionUID = 1L;
         /**
          * An inner class representing the panel where the game graphics are drawn.
          */
@@ -204,7 +207,7 @@ public class SceneImpl implements Scene {
             // this.addKeyListener(this);
             setFocusable(true);
             setFocusTraversalKeysEnabled(false);
-            Dimension size = new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
+            final Dimension size = new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
                     boardGraphics.getBackgorundImg().getHeight(null));
             setPreferredSize(size);
             setMinimumSize(size);
@@ -226,11 +229,12 @@ public class SceneImpl implements Scene {
          *
          * @param g The Graphics object used for painting.
          */
+        @Override
         public void paint(final Graphics g) {
             if (g == null) {
                 return;
             }
-            Graphics2D g2 = (Graphics2D) g.create(); // Create a copy of the graphics object
+            final Graphics2D g2 = (Graphics2D) g.create(); // Create a copy of the graphics object
 
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
@@ -242,20 +246,20 @@ public class SceneImpl implements Scene {
 
             boardGraphics.update(null, g2);
 
-            var cannon = gameState.getWorld().getCannon();
+            final var cannon = gameState.getWorld().getCannon();
             cannon.updateGraphics(g2);
 
             final var entities = gameState.getWorld().getQueue();
 
             for (int i = 0; i < entities.size(); i++) {
-                Ball ball = entities.get(i);
+                final Ball ball = entities.get(i);
                 ball.updateGraphics(g2);
             }
-            var cannonBalls = gameState.getWorld().getCannon().getFiredBalls();
+            final var cannonBalls = gameState.getWorld().getCannon().getFiredBalls();
             cannonBalls.add(gameState.getWorld().getCannon().getStationaryBall());
 
             for (int i = 0; i < cannonBalls.size(); i++) {
-                Ball ball = cannonBalls.get(i);
+                final Ball ball = cannonBalls.get(i);
                 ball.updateGraphics(g2);
             }
 
@@ -278,7 +282,6 @@ public class SceneImpl implements Scene {
                 gameState.getWorld().notifyWorldEvent(new PauseGameEvent());
             } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 controller.notifyShoot();
-                System.out.println("Shooting");
             }
         }
 

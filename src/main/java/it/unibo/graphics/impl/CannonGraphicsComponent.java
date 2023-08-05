@@ -6,6 +6,9 @@ import it.unibo.model.impl.GameObject;
 import java.awt.Image;
 import java.io.IOException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -15,6 +18,7 @@ import javax.imageio.ImageIO;
 public class CannonGraphicsComponent implements MyGraphicsComponent {
 
     private Image icon;
+    private static final Logger LOGGER = Logger.getLogger(CannonGraphicsComponent.class.getName());
 
     /**
      * Constructs a CannonGraphicsComponent and loads the cannon icon image.
@@ -30,13 +34,12 @@ public class CannonGraphicsComponent implements MyGraphicsComponent {
      * If the image loading fails, an IOException is caught and printed.
      */
     private void loadImage() {
-        Image image = null;
+        Image image;
         try {
             image = ImageIO.read(ClassLoader.getSystemResource("images/cannone.png"));
             this.icon = image;
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "An error occurred while loading the cannon icon image", e);
         }
     }
 
@@ -52,7 +55,7 @@ public class CannonGraphicsComponent implements MyGraphicsComponent {
         if (!(obj instanceof Cannon)) {
             throw new IllegalArgumentException("GameObject is not a Cannon");
         }
-        Cannon cannon = (Cannon) obj;
+        final Cannon cannon = (Cannon) obj;
         // Cast the GameObject to a Cannon object.
 
         g.drawImage(this.icon, (int) cannon.getCurrentPos().getX(), (int) cannon.getCurrentPos().getY(), null);
