@@ -103,6 +103,8 @@ public class Cannon extends GameObject {
         this.cannonBalls.add(ball);
 
         stationaryBall.setColor(BallColor.getRandomColor());
+
+        
     }
 
     /**
