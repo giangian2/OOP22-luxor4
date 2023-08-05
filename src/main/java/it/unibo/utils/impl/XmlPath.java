@@ -1,4 +1,4 @@
-package it.unibo.utils;
+package it.unibo.utils.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +17,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import it.unibo.enums.Direction;
+import it.unibo.utils.P2d;
+import it.unibo.utils.api.Path;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
@@ -25,7 +27,7 @@ import org.w3c.dom.Element;
  * This class is the representation of a path with straight roads,
  * consequently only having the vertexes that connect the pieces of the path .
  */
-public final class Path {
+public final class XmlPath implements Path{
     private final List<P2d> points;
     /*
      * This EPSILON represents the maximum approximation
@@ -38,7 +40,7 @@ public final class Path {
      * 
      * @param builder Path builder.
      */
-    private Path(final PathBuilder builder) {
+    private XmlPath(final XmlPathBuilder builder) {
         this.points = builder.points;
     }
 
@@ -110,7 +112,7 @@ public final class Path {
     /**
      * Class that represents a builder for build a Path object.
      */
-    public static class PathBuilder {
+    public static class XmlPathBuilder {
         private List<P2d> points;
 
         /**
@@ -118,7 +120,7 @@ public final class Path {
          * 
          * @param xmlPathSrc source path of the xml file containing vertex.
          */
-        public PathBuilder(final String xmlPathSrc) {
+        public XmlPathBuilder(final String xmlPathSrc) {
             try {
                 final InputStream in = Objects.requireNonNull(
                         ClassLoader.getSystemResourceAsStream(xmlPathSrc));
@@ -157,8 +159,8 @@ public final class Path {
          * 
          * @return Path builded.
          */
-        public Path build() {
-            return new Path(this);
+        public XmlPath build() {
+            return new XmlPath(this);
         }
     }
 }

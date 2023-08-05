@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.Test;
 
+import it.unibo.utils.impl.XmlPath;
+
 /**
  * 
  * class to test the correct functioning of the path builder.
@@ -18,7 +20,7 @@ class PathTest {
     void testPathBuilder() {
 
         assertDoesNotThrow(() -> {
-            final var path = new Path.PathBuilder("levels/1/Path.xml").build();
+            final var path = new XmlPath.XmlPathBuilder("levels/1/Path.xml").build();
             var first = path.getFirst();
             final var end = path.getLast();
 

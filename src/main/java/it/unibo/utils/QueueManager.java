@@ -8,12 +8,13 @@ import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.enums.BallColor;
 import it.unibo.enums.Direction;
 import it.unibo.model.impl.Ball;
+import it.unibo.utils.impl.XmlPath;
 
 /**
  * The QueueManager manages a list of Ball objects associated with a Path.
  */
 public class QueueManager {
-    private final Path path;
+    private final XmlPath path;
     private final List<Ball> balls;
     private final int steps;
 
@@ -25,7 +26,7 @@ public class QueueManager {
      * @param xmlPathSrc The path of the xml file containing the Path.
      */
     public QueueManager(final int nBalls, final int steps, final String xmlPathSrc) {
-        path = new Path.PathBuilder(xmlPathSrc).build();
+        path = new XmlPath.XmlPathBuilder(xmlPathSrc).build();
         this.balls = new ArrayList<>();
         this.instatiate(nBalls);
         this.steps = steps;
