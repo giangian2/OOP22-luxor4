@@ -119,7 +119,7 @@ public class P2d implements java.io.Serializable {
      * @return The module of the vector.
      */
     public double module() {
-        return (double) Math.sqrt(x * x + y * y);
+        return Math.sqrt(x * x + y * y);
     }
 
     /**

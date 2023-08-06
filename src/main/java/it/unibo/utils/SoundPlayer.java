@@ -2,6 +2,7 @@ package it.unibo.utils;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,12 +120,12 @@ public class SoundPlayer {
      * Any sounds that are paused will also be stopped and reset.
      */
     public void stopAll() {
-        for (final Clip clip : clips) {
+        Arrays.stream(clips).forEach(clip -> {
             if (clip != null && clip.isRunning()) {
                 clip.stop();
                 clip.setFramePosition(0); // Rewind to the beginning
             }
-        }
+        });
     }
 
 
