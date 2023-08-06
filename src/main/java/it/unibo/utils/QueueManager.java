@@ -182,6 +182,9 @@ public class QueueManager {
             i += count;
         }
 
+        if (returnList.isEmpty()) {
+            return Optional.empty();
+        }
         return Optional.of(returnList);
     }
 }

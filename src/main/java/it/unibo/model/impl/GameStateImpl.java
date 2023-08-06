@@ -1,5 +1,8 @@
 package it.unibo.model.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.core.api.Level;
 import it.unibo.enums.Direction;
@@ -129,10 +132,13 @@ public class GameStateImpl implements GameState {
         if (!pause) {
             world.updateState(dt);
 
-            this.getWorld().getCloseByThree().get().forEach((el) -> {
+            Optional<List<Ball>> toEliminateList = this.getWorld().getCloseByThree();
+            if (toEliminateList.isPresent()) {
+                toEliminateList.get().forEach((el) -> {
                 this.incScore();
                 this.getWorld().getQueue().remove(el);
             });
+            }
         }
     }
 
