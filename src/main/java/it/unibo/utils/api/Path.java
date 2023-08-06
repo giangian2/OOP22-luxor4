@@ -5,6 +5,10 @@ import java.util.List;
 import it.unibo.enums.Direction;
 import it.unibo.utils.P2d;
 
+/**
+ * This interface is the representation of a path with straight roads,
+ * consequently only having the vertexes that connect the pieces of the path.
+ */
 public interface Path {
     /**
      * Get all the vertex of the path.
@@ -34,6 +38,6 @@ public interface Path {
      * @param position The position to check.
      * @return The direction to take.
      */
-    Direction getMove(final P2d position);
-    
+    Direction getMove(P2d position);
+
 }

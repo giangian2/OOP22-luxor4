@@ -31,7 +31,6 @@ class QueueManagerTest {
     }
 
     @Test
-    @SuppressWarnings("magicnumber")
     void testCheckCloseByThree() {
 
         final var qm = new QueueManager(0, 1, "levels/1/Path.xml");
@@ -67,7 +66,7 @@ class QueueManagerTest {
         // CHECKSTYLE: MagicNumber ON
 
         final var founded = qm.checkCloseByThree();
-        assertEquals(outputList, founded);
+        assertEquals(outputList, founded.get());
     }
 
     @Test

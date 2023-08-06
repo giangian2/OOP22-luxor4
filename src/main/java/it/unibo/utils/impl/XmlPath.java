@@ -24,10 +24,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 /**
- * This class is the representation of a path with straight roads,
- * consequently only having the vertexes that connect the pieces of the path .
+ * This class represents a Path that use a file xml.
  */
-public final class XmlPath implements Path{
+public final class XmlPath implements Path {
     private final List<P2d> points;
     /*
      * This EPSILON represents the maximum approximation
@@ -49,6 +48,7 @@ public final class XmlPath implements Path{
      * 
      * @return A list of vertexes
      */
+    @Override
     public List<P2d> getPositions() {
         return new ArrayList<>(this.points);
     }
@@ -58,6 +58,7 @@ public final class XmlPath implements Path{
      * 
      * @return The first vertex.
      */
+    @Override
     public P2d getFirst() {
         return this.points.get(0);
     }
@@ -67,6 +68,7 @@ public final class XmlPath implements Path{
      * 
      * @return The last vertex.
      */
+    @Override
     public P2d getLast() {
         return this.points.get(points.size() - 1);
     }
@@ -78,6 +80,7 @@ public final class XmlPath implements Path{
      * @param position The position to check.
      * @return The direction to take.
      */
+    @Override
     public Direction getMove(final P2d position) {
         P2d nextCorner = null;
         if (points.contains(position) && points.size() > (points.indexOf(position) + 1)) {
@@ -110,7 +113,7 @@ public final class XmlPath implements Path{
     }
 
     /**
-     * Class that represents a builder for build a Path object.
+     * Class that represents a builder for build a Path object from a xml.
      */
     public static class XmlPathBuilder {
         private List<P2d> points;

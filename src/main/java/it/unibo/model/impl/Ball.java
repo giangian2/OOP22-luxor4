@@ -4,7 +4,6 @@ import it.unibo.enums.BallColor;
 import it.unibo.graphics.impl.BallGraphicsComponent;
 import it.unibo.input.api.InputComponent;
 import it.unibo.model.collisions.api.BoundingBox;
-import it.unibo.model.impl.GameObject.Type;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;

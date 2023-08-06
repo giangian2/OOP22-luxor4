@@ -37,11 +37,9 @@ public class SceneImpl implements Scene {
     private final JFrame frame;
     private final JPanel panel;
     private final GameState gameState;
-    private final JLayeredPane layeredPane;
     private final KeyboardInputController controller;
     private final BoardGraphicComponent boardGraphics;
     private final JLabel pointsLabel;
-    private static final Logger logger = Logger.getLogger(SceneImpl.class.getName());
     private static final int MENU_BUTTON_WIDTH = 80;
     private static final int MENU_BUTTON_HEIGHT = 30;
     private static final int LABEL_HEIGHT = 20;
@@ -75,24 +73,24 @@ public class SceneImpl implements Scene {
         this.panel.setPreferredSize(new Dimension(this.boardGraphics.getBackgorundImg().getWidth(null),
                 this.boardGraphics.getBackgorundImg().getHeight(null)));
 
-        this.layeredPane = new JLayeredPane();
-        this.layeredPane.setPreferredSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
+        final JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
                 boardGraphics.getBackgorundImg().getHeight(null)));
 
-        this.layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
-        this.layeredPane.setLayer(panel, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(panel, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.setLayer(panel, JLayeredPane.DEFAULT_LAYER);
 
         final JButton menuButton = new JButton("Menu");
         menuButton.setPreferredSize(new Dimension(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
-        this.layeredPane.add(menuButton, JLayeredPane.PALETTE_LAYER);
-        this.layeredPane.setLayer(menuButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(menuButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.setLayer(menuButton, JLayeredPane.PALETTE_LAYER);
         menuButton.setBounds(boardGraphics.getBackgorundImg().getWidth(null) - MENU_BUTTON_WIDTH,
                 this.boardGraphics.getBackgorundImg().getHeight(null) - MENU_BUTTON_HEIGHT, MENU_BUTTON_WIDTH,
                 MENU_BUTTON_HEIGHT);
 
         pointsLabel = new JLabel("Punti: " + gameState.getScore());
-        this.layeredPane.add(pointsLabel, JLayeredPane.PALETTE_LAYER);
-        this.layeredPane.setLayer(pointsLabel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(pointsLabel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.setLayer(pointsLabel, JLayeredPane.PALETTE_LAYER);
 
         final int labelWidth = 100;
         pointsLabel.setBounds(LABEL_X, LABEL_Y, labelWidth, LABEL_HEIGHT);
@@ -142,7 +140,7 @@ public class SceneImpl implements Scene {
                     if (gameState.isWin()) {
                         renderWin();
                     }
-                } catch(RuntimeException ex){
+                } catch (RuntimeException ex) {
                     Logger.getGlobal().log(Level.WARNING, ex.toString());
                 }
             }
@@ -162,7 +160,7 @@ public class SceneImpl implements Scene {
 
             frame.dispose();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Logger.getGlobal().log(Level.WARNING, ex.toString());
         }
 
     }
@@ -180,7 +178,7 @@ public class SceneImpl implements Scene {
 
             frame.dispose();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Logger.getGlobal().log(Level.WARNING, ex.toString());
         }
     }
 

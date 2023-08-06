@@ -132,7 +132,7 @@ public class GameStateImpl implements GameState {
         if (!pause) {
             world.updateState(dt);
 
-            Optional<List<Ball>> toEliminateList = this.getWorld().getCloseByThree();
+            final Optional<List<Ball>> toEliminateList = this.getWorld().getCloseByThree();
             if (toEliminateList.isPresent()) {
                 toEliminateList.get().forEach((el) -> {
                 this.incScore();
