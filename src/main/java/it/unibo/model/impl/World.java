@@ -267,7 +267,7 @@ public class World {
      * 
      * @return Lis of balls to remove from queue
      */
-    public List<Ball> getCloseByThree() {
+    public Optional<List<Ball>> getCloseByThree() {
         return this.qm.checkCloseByThree();
     }
 

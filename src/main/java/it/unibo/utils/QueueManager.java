@@ -2,19 +2,21 @@ package it.unibo.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.enums.BallColor;
 import it.unibo.enums.Direction;
 import it.unibo.model.impl.Ball;
+import it.unibo.utils.api.Path;
 import it.unibo.utils.impl.XmlPath;
 
 /**
  * The QueueManager manages a list of Ball objects associated with a Path.
  */
 public class QueueManager {
-    private final XmlPath path;
+    private final Path path;
     private final List<Ball> balls;
     private final int steps;
 
@@ -160,7 +162,7 @@ public class QueueManager {
      * 
      * @return The sum of the sub-lists founded.
      */
-    public List<Ball> checkCloseByThree() {
+    public Optional<List<Ball>> checkCloseByThree() {
         final var ballList = this.balls;
         final List<Ball> returnList = new ArrayList<>();
 
@@ -180,6 +182,6 @@ public class QueueManager {
             i += count;
         }
 
-        return returnList;
+        return Optional.of(returnList);
     }
 }

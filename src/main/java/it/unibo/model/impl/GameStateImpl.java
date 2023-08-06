@@ -129,7 +129,7 @@ public class GameStateImpl implements GameState {
         if (!pause) {
             world.updateState(dt);
 
-            this.getWorld().getCloseByThree().forEach((el) -> {
+            this.getWorld().getCloseByThree().get().forEach((el) -> {
                 this.incScore();
                 this.getWorld().getQueue().remove(el);
             });
