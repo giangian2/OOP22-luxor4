@@ -6,7 +6,6 @@ Then you can start the game.
 The goal of the game is to eliminate all the balls before
 they enter in the final hole. 
 To eliminate them, there has to be 3 or more balls of the same color.
-
 You will use a cannon to shot at them (BUTTON SPACE).
 The cannon can move to the right (RIGHT ARROW) and to the left (LEFT ARROW).
 

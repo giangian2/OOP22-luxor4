@@ -19,11 +19,15 @@ public interface PhysicsComponent {
      * @param w   The World in which the GameObject resides.
      */
     default void update(final long dt, final GameObject obj, final World w) {
-        // Get the current position and velocity of the GameObject
+        /**
+         * Get the current position and velocity of the GameObject.
+         */
         final var pos = obj.getCurrentPos();
         final var vel = obj.getCurrentVel();
 
-        // Update the position of the GameObject based on its current velocity
+        /**
+         * Update the position of the GameObject based on its current velocity.
+         */
         obj.setPos(pos.sum(vel));
     }
 }

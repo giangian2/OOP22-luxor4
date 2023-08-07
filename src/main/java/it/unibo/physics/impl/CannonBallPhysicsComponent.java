@@ -12,8 +12,7 @@ import it.unibo.model.impl.World;
 /**
  * This class represents the physics component for a cannon ball in the game.
  * It extends the BallPhysicsComponent class and provides additional
- * functionality
- * specific to the cannon ball.
+ * functionality specific to the cannon ball.
  */
 public class CannonBallPhysicsComponent extends BallPhysicsComponent {
 
@@ -34,7 +33,7 @@ public class CannonBallPhysicsComponent extends BallPhysicsComponent {
         super.update(dt, obj, w);
         /**
          * Get the bounding box of the cannon ball.
-         */
+        */
         final CircleBoundingBox bbox = (CircleBoundingBox) obj.getBBox();
 
         /**

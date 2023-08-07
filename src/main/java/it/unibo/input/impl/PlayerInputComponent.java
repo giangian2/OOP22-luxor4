@@ -53,7 +53,7 @@ public class PlayerInputComponent implements InputComponent {
         if (gameObject instanceof Cannon && ctrl.isShoot()) {
             final Cannon cannon = (Cannon) gameObject;
             ctrl.stopShooting();
-            cannon.fireProjectile();
+            cannon.fireBall();
         }
     }
 

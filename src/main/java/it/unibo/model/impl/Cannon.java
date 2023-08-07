@@ -43,7 +43,7 @@ public class Cannon extends GameObject {
     }
 
     /**
-     * Creates a stationary ball with a random color.
+     * Creates a stationary ball that rappresents the ball which will be shot with a random color.
      *
      * @return The stationary ball.
      */
@@ -88,16 +88,16 @@ public class Cannon extends GameObject {
     }
 
     /**
-     * Fires a projectile from the cannon.
-     * The projectile is created and added to the list of fired balls.
+     * Fires a ball from the cannon.
+     * The ball is created and added to the list of fired balls.
      * The color of the stationary ball is then updated to a random color.
      */
-    public void fireProjectile() {
+    public void fireBall() {
         final P2d ballPos = new P2d(getCurrentPos().getX() + ADJUST_FIRED_BALL_POS, getCurrentPos().getY());
 
-        final BallColor projectileColor = stationaryBall.getColor();
+        final BallColor bColor = stationaryBall.getColor();
         final Ball ball = GameObjectsFactory.getInstance().createCannonBall(ballPos, new V2d(0, BALL_SPEED_Y),
-                projectileColor);
+                bColor);
 
         this.cannonBalls.add(ball);
 
