@@ -14,7 +14,7 @@ import java.awt.GridBagLayout;
  */
 public class VictoryPanel extends JPanel {
     // private int score;
-    private transient final GameState gameState;
+    private final transient GameState gameState;
     private static final int VICTORY_LABEL_FONT_SIZE = 25;
     private static final int POINTS_LABEL_FONT_SIZE = 25;
     private static final long serialVersionUID = 1L;

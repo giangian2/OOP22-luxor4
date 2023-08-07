@@ -1,7 +1,6 @@
 package it.unibo.model.impl;
 
 import it.unibo.input.impl.PlayerInputComponent;
-import it.unibo.model.impl.GameObject.Type;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.utils.P2d;
 import it.unibo.utils.V2d;
