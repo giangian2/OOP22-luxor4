@@ -29,6 +29,7 @@ import it.unibo.graphics.api.Scene;
 import it.unibo.input.impl.KeyboardInputController;
 import it.unibo.model.api.GameState;
 import it.unibo.model.impl.Ball;
+
 /**
  * A class representing the game scene.
  */
@@ -57,6 +58,7 @@ public class SceneImpl implements Scene {
     @SuppressFBWarnings(value = {
             "EI_EXPOSE_REP" }, justification = "This warning does not represent a security threat"
                     + "beacuse the KeyboardInpuController has to be mutable")
+
     public SceneImpl(final GameState gameState, final KeyboardInputController controller, final String backgroundSrc) {
 
         this.gameState = gameState;
@@ -127,6 +129,7 @@ public class SceneImpl implements Scene {
      * Renders the game graphics on the panel.
      */
     @Override
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public void render() {
         if (panel.isVisible()) {
             final Graphics g = panel.getGraphics();
@@ -151,6 +154,7 @@ public class SceneImpl implements Scene {
      * Renders the game over screen and transitions to the game over menu.
      */
     @Override
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public void renderGameOver() {
         try {
             gameState.getWorld().stopMusic();
@@ -159,7 +163,7 @@ public class SceneImpl implements Scene {
             menuGame.setVisible(true);
 
             frame.dispose();
-        } catch (Exception ex) {
+        } catch (RuntimeException ex) {
             Logger.getGlobal().log(Level.WARNING, ex.toString());
         }
 
@@ -169,6 +173,7 @@ public class SceneImpl implements Scene {
      * Renders the win screen and transitions to the win menu.
      */
     @Override
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public void renderWin() {
         try {
             gameState.getWorld().stopMusic();
@@ -177,7 +182,7 @@ public class SceneImpl implements Scene {
             menuGame.setVisible(true);
 
             frame.dispose();
-        } catch (Exception ex) {
+        } catch (RuntimeException ex) {
             Logger.getGlobal().log(Level.WARNING, ex.toString());
         }
     }
@@ -198,6 +203,7 @@ public class SceneImpl implements Scene {
     public class GamePanel extends JPanel implements KeyListener {
 
         private static final long serialVersionUID = 1L;
+
         /**
          * An inner class representing the panel where the game graphics are drawn.
          */
