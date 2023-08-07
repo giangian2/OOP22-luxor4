@@ -67,7 +67,7 @@ public class MenuGame extends JFrame {
         final int width = 800;
         final int height = 600;
 
-        setTitle("Luxor");
+        setTitle("LXR4");
         setSize(width, height);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

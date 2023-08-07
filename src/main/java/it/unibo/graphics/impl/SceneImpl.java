@@ -63,7 +63,7 @@ public class SceneImpl implements Scene {
 
         this.gameState = gameState;
         this.controller = controller;
-        this.frame = new JFrame("Luxor");
+        this.frame = new JFrame("LXR4");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.boardGraphics = new BoardGraphicComponent(backgroundSrc);
         frame.setMinimumSize(new Dimension(boardGraphics.getBackgorundImg().getWidth(null),
