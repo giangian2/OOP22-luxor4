@@ -37,7 +37,7 @@ public class PlayerInputComponent implements InputComponent {
 
         // Update the position of the GameObject based on the input
         int moveSpeedX = 0;
-        if (ctrl.isMoveLeft()) {
+        if (ctrl.isMoveLeft() && pos.getX() > World.getBBox().getULCorner().getX()) {
             moveSpeedX = -PlayerInputComponent.SPEED;
         } else if (ctrl.isMoveRight() && pos.getX() < World.getBBox().getBRCorner().getX() 
                    - PlayerInputComponent.ADJUST_RIGHT_BORDER_LIMIT) {
