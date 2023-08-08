@@ -1,6 +1,6 @@
 package it.unibo.core.api;
 
-import it.unibo.model.impl.World;
+import it.unibo.model.api.World;
 
 /**
  * The Level interface represents a functional contract for loading a game

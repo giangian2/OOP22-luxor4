@@ -10,7 +10,7 @@ import it.unibo.enums.Levels;
 import it.unibo.events.api.WorldEventListener;
 import it.unibo.model.collisions.impl.RectBoundingBox;
 import it.unibo.model.impl.GameStateImpl;
-import it.unibo.model.impl.World;
+import it.unibo.model.impl.WorldImpl;
 import it.unibo.utils.P2d;
 
 /**
@@ -35,7 +35,7 @@ class GameStateTest {
             final int cannonStartXPos = 470;
             final int cannonStartYPos = 470;
 
-            return new World(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
+            return new WorldImpl(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
                     xmlpath, null,
                     GameObjectsFactory.getInstance()
                             .createCannon(new P2d(cannonStartXPos, cannonStartYPos)));

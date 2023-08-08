@@ -7,7 +7,7 @@ import it.unibo.events.impl.HitBorderEvent;
 import it.unibo.model.collisions.impl.CircleBoundingBox;
 import it.unibo.model.impl.Ball;
 import it.unibo.model.impl.GameObject;
-import it.unibo.model.impl.World;
+import it.unibo.model.api.World;
 
 /**
  * This class represents the physics component for a cannon ball in the game.

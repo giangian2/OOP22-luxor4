@@ -1,7 +1,6 @@
 package it.unibo.model.api;
 
 import it.unibo.input.api.InputController;
-import it.unibo.model.impl.World;
 
 /**
  * Represents the state of the game, including the score, world, pause state,

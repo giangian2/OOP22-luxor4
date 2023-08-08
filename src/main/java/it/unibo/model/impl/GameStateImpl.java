@@ -9,6 +9,7 @@ import it.unibo.enums.Direction;
 import it.unibo.events.api.WorldEventListener;
 import it.unibo.input.api.InputController;
 import it.unibo.model.api.GameState;
+import it.unibo.model.api.World;
 
 /**
  * 
@@ -135,9 +136,9 @@ public class GameStateImpl implements GameState {
             final Optional<List<Ball>> toEliminateList = this.getWorld().getCloseByThree();
             if (toEliminateList.isPresent()) {
                 toEliminateList.get().forEach((el) -> {
-                this.incScore();
-                this.getWorld().getQueue().remove(el);
-            });
+                    this.incScore();
+                    this.getWorld().getQueue().remove(el);
+                });
             }
         }
     }

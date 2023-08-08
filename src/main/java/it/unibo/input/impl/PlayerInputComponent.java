@@ -6,7 +6,7 @@ import it.unibo.input.api.InputComponent;
 import it.unibo.input.api.InputController;
 import it.unibo.model.impl.Cannon;
 import it.unibo.model.impl.GameObject;
-import it.unibo.model.impl.World;
+import it.unibo.model.impl.WorldImpl;
 
 /**
  * A concrete implementation of the InputComponent interface that handles input
@@ -39,8 +39,8 @@ public class PlayerInputComponent implements InputComponent {
         int moveSpeedX = 0;
         if (ctrl.isMoveLeft()) {
             moveSpeedX = -PlayerInputComponent.SPEED;
-        } else if (ctrl.isMoveRight() && pos.getX() < World.getBBox().getBRCorner().getX() 
-                   - PlayerInputComponent.ADJUST_RIGHT_BORDER_LIMIT) {
+        } else if (ctrl.isMoveRight() && pos.getX() < WorldImpl.getBBox().getBRCorner().getX()
+                - PlayerInputComponent.ADJUST_RIGHT_BORDER_LIMIT) {
             moveSpeedX = PlayerInputComponent.SPEED;
         }
 
@@ -49,7 +49,8 @@ public class PlayerInputComponent implements InputComponent {
         // Set the new position of the GameObject
         gameObject.setPos(pos);
 
-        // If the GameObject is a Cannon and the "Shoot" input action is active, fire a projectile
+        // If the GameObject is a Cannon and the "Shoot" input action is active, fire a
+        // projectile
         if (gameObject instanceof Cannon && ctrl.isShoot()) {
             final Cannon cannon = (Cannon) gameObject;
             ctrl.stopShooting();
@@ -58,5 +59,3 @@ public class PlayerInputComponent implements InputComponent {
     }
 
 }
-
-

@@ -1,8 +1,9 @@
 package it.unibo.model.impl;
 
-import it.unibo.graphics.impl.MyGraphicsComponent;
+import it.unibo.graphics.api.MyGraphicsComponent;
 import it.unibo.input.api.InputComponent;
 import it.unibo.input.api.InputController;
+import it.unibo.model.api.World;
 import it.unibo.model.collisions.api.BoundingBox;
 import it.unibo.physics.api.PhysicsComponent;
 import it.unibo.utils.P2d;
@@ -189,15 +190,6 @@ public class GameObject {
      */
     public void setVel(final V2d vel) {
         this.vel = new V2d(vel.getX(), vel.getY());
-    }
-
-    /**
-     * Gets the velocity of the game object in 2D space.
-     * 
-     * @return The velocity of the game object.
-     */
-    public V2d getVel() {
-        return new V2d(vel.getX(), vel.getY());
     }
 
     /**

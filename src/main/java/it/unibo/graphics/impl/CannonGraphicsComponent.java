@@ -1,5 +1,6 @@
 package it.unibo.graphics.impl;
 
+import it.unibo.graphics.api.MyGraphicsComponent;
 import it.unibo.model.impl.Cannon;
 import it.unibo.model.impl.GameObject;
 

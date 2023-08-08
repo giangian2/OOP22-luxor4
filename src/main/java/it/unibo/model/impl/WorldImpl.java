@@ -10,6 +10,7 @@ import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.physics.impl.BoundaryCollision;
 import it.unibo.enums.Direction;
 import it.unibo.events.api.WorldEvent;
+import it.unibo.model.api.World;
 import it.unibo.model.collisions.impl.CircleBoundingBox;
 import it.unibo.model.collisions.impl.RectBoundingBox;
 import it.unibo.model.impl.GameObject.Type;
@@ -19,7 +20,7 @@ import it.unibo.utils.V2d;
 import it.unibo.utils.SoundPlayer;
 
 /**
- * The World class represents the game space in which all the GameObjects
+ * The WorldImpl class represents the game space in which all the GameObjects
  * will be present and through which you can interact with them.
  */
 @SuppressFBWarnings(value = {
@@ -27,7 +28,7 @@ import it.unibo.utils.SoundPlayer;
         "EI_EXPOSE_REP2" }, justification = "This warning does not represent a security threat"
                 + "beacuse the Input package will update the World")
 
-public class World {
+public class WorldImpl implements World {
     /**
      * RectBoundingBox
      * this property was set to PRIVATE and STATIC in order to simplify
@@ -54,7 +55,7 @@ public class World {
      * @param cannon        Cannon object
      */
 
-    public World(final RectBoundingBox bbox, final int nBalls, final int steps, final String xmlSrc,
+    public WorldImpl(final RectBoundingBox bbox, final int nBalls, final int steps, final String xmlSrc,
             final WorldEventListener eventListener, final Cannon cannon) {
         /**
          * Instatiate the queue manager with the specifics given in the constructor
@@ -67,7 +68,7 @@ public class World {
         strings.add("/sounds/Background.wav");
         strings.add("/sounds/BallCollision.wav");
         soundPlayer = new SoundPlayer(new ArrayList<>(strings));
-        World.setBBox(bbox);
+        WorldImpl.setBBox(bbox);
     }
 
     /**
@@ -76,7 +77,7 @@ public class World {
      * @param bbox Bounding box to set.
      */
     private static void setBBox(final RectBoundingBox bbox) {
-        World.mainBBox = bbox;
+        WorldImpl.mainBBox = bbox;
     }
 
     /**
@@ -95,25 +96,6 @@ public class World {
      */
     public void setEventListener(final WorldEventListener l) {
         evListener = l;
-    }
-
-    /**
-     * Creates a new istance of a cannon.
-     * 
-     * @param pos starting position of the cannon
-     * @return Cannon
-     */
-    public Cannon createCannon(final P2d pos) {
-        return GameObjectsFactory.getInstance().createCannon(pos);
-    }
-
-    /**
-     * Creates a new istance of a cannon containinig the current cannon position.
-     * 
-     * @param cannon Sets the cannon object
-     */
-    public void setCannon(final Cannon cannon) {
-        this.cannon = GameObjectsFactory.getInstance().createCannon(cannon.getCurrentPos());
     }
 
     /**

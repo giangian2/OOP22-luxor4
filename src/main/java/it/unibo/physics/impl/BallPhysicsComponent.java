@@ -1,7 +1,7 @@
 package it.unibo.physics.impl;
 
 import it.unibo.model.impl.GameObject;
-import it.unibo.model.impl.World;
+import it.unibo.model.api.World;
 import it.unibo.physics.api.PhysicsComponent;
 
 /**

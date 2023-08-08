@@ -1,4 +1,4 @@
-package it.unibo.graphics.impl;
+package it.unibo.graphics.api;
 
 import it.unibo.model.impl.GameObject;
 

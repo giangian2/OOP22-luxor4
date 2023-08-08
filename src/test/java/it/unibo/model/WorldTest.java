@@ -11,7 +11,8 @@ import org.junit.jupiter.api.Test;
 import it.unibo.core.impl.GameObjectsFactory;
 import it.unibo.model.collisions.impl.RectBoundingBox;
 import it.unibo.model.impl.Ball;
-import it.unibo.model.impl.World;
+import it.unibo.model.impl.WorldImpl;
+import it.unibo.model.api.World;
 import it.unibo.utils.P2d;
 
 /**
@@ -41,7 +42,7 @@ class WorldTest {
                 + System.getProperty("file.separator") + "Path.xml";
         final int cannonStartXPos = 470;
         final int cannonStartYPos = 470;
-        return new World(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, STEPS,
+        return new WorldImpl(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, STEPS,
                 xmlpath, (ev) -> {
                 }, GameObjectsFactory.getInstance()
                         .createCannon(new P2d(cannonStartXPos, cannonStartYPos)));
@@ -71,7 +72,8 @@ class WorldTest {
         final var initialQueue = w.getQueue();
         final var finalQueue = new ArrayList<Ball>();
         initialQueue.forEach(ball -> finalQueue.add(
-                GameObjectsFactory.getInstance().createBall(ball.getCurrentPos(), ball.getVel(), ball.getColor())));
+                GameObjectsFactory.getInstance().createBall(ball.getCurrentPos(), ball.getCurrentVel(),
+                        ball.getColor())));
 
         w.updateState(0); // world update
 

@@ -1,6 +1,7 @@
 package it.unibo.graphics.impl;
 
 import it.unibo.enums.BallColor;
+import it.unibo.graphics.api.MyGraphicsComponent;
 import it.unibo.model.impl.Ball;
 import it.unibo.model.impl.GameObject;
 import it.unibo.utils.P2d;

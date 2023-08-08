@@ -1,7 +1,7 @@
 package it.unibo.physics.api;
 
 import it.unibo.model.impl.GameObject;
-import it.unibo.model.impl.World;
+import it.unibo.model.api.World;
 
 /**
  * The PhysicsComponent interface represents a component responsible for

@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import it.unibo.core.api.GameEngine;
 import it.unibo.enums.Levels;
 import it.unibo.events.api.WorldEvent;
-import it.unibo.events.api.WorldEventListener;
 import it.unibo.events.impl.HitBallEvent;
 import it.unibo.events.impl.HitBorderEvent;
 import it.unibo.events.impl.PauseGameEvent;
@@ -19,7 +18,7 @@ import it.unibo.model.api.GameState;
 import it.unibo.model.collisions.impl.RectBoundingBox;
 import it.unibo.model.impl.Ball;
 import it.unibo.model.impl.GameStateImpl;
-import it.unibo.model.impl.World;
+import it.unibo.model.impl.WorldImpl;
 import it.unibo.utils.P2d;
 
 /**
@@ -28,7 +27,7 @@ import it.unibo.utils.P2d;
  * interface in such a way as to be able to directly manage the events related
  * to the World that are triggered during the mainLoop.
  */
-public class GameEngineImpl implements GameEngine, WorldEventListener {
+public class GameEngineImpl implements GameEngine {
 
     private static final int PERIOD = 30; // Period of rendering
     private GameState gameState;
@@ -108,7 +107,7 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                  * of the level interface, in this way there will be a fluid and scalable
                  * development process for the creation of new levels.
                  */
-                this.gameState = new GameStateImpl(this, () -> {
+                this.setGameState(new GameStateImpl(this, () -> {
                     final int height = 600;
                     final int width = 800;
                     final int nballs = 10;
@@ -118,18 +117,18 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                     final int cannonStartXPos = 470;
                     final int cannonStartYPos = 470;
 
-                    return new World(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
+                    return new WorldImpl(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
                             xmlpath, this,
                             GameObjectsFactory.getInstance()
                                     .createCannon(new P2d(cannonStartXPos, cannonStartYPos)));
-                });
+                }));
                 // Render the view passing the correct background related to the selected level
-                this.view = new SceneImpl(this.gameState, this.controller,
-                        "images" + separator + "background.jpg");
+                this.setView(new SceneImpl(this.gameState, this.controller,
+                        "images" + separator + "background.jpg"));
                 break;
 
             case L2:
-                this.gameState = new GameStateImpl(this, () -> {
+                this.setGameState(new GameStateImpl(this, () -> {
                     final int height = 600;
                     final int width = 800;
                     final int nballs = 20;
@@ -139,13 +138,13 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
                     final int cannonStartXPos = 470;
                     final int cannonStartYPos = 470;
 
-                    return new World(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
+                    return new WorldImpl(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, steps,
                             xmlpath, this,
                             GameObjectsFactory.getInstance()
                                     .createCannon(new P2d(cannonStartXPos, cannonStartYPos)));
-                });
-                this.view = new SceneImpl(this.gameState, this.controller,
-                        "images" + separator + "background2.jpg");
+                }));
+                this.setView(new SceneImpl(this.gameState, this.controller,
+                        "images" + separator + "background2.jpg"));
                 break;
 
             default:
@@ -253,6 +252,24 @@ public class GameEngineImpl implements GameEngine, WorldEventListener {
             }
         });
         eventQueue.clear();
+    }
+
+    /**
+     * Method used to set the Game STate that the Engine will use to perform the
+     * update operation at every cycle.
+     */
+    @Override
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+    }
+
+    /**
+     * Method used to set the View that the Engine will use to perform the
+     * rendering operation at every cycle.
+     */
+    @Override
+    public void setView(Scene view) {
+        this.view = view;
     }
 
 }

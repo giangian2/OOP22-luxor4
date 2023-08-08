@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.unibo.graphics.api.MyGraphicsComponent;
 import it.unibo.model.impl.GameObject;
 
 /**
@@ -21,7 +22,6 @@ public class BoardGraphicComponent implements MyGraphicsComponent {
     private final String backgroundPath;
     private Image img;
     private static final Logger LOGGER = Logger.getLogger(BoardGraphicComponent.class.getName());
-
 
     /**
      * Constructs a BoardGraphicComponent with the specified background image path.
