@@ -37,7 +37,7 @@ public class PlayerInputComponent implements InputComponent {
 
         // Update the position of the GameObject based on the input
         int moveSpeedX = 0;
-        if (ctrl.isMoveLeft()) {
+        if (ctrl.isMoveLeft() && pos.getX() > World.getBBox().getULCorner().getX()) {
             moveSpeedX = -PlayerInputComponent.SPEED;
         } else if (ctrl.isMoveRight() && pos.getX() < WorldImpl.getBBox().getBRCorner().getX()
                 - PlayerInputComponent.ADJUST_RIGHT_BORDER_LIMIT) {
@@ -54,7 +54,7 @@ public class PlayerInputComponent implements InputComponent {
         if (gameObject instanceof Cannon && ctrl.isShoot()) {
             final Cannon cannon = (Cannon) gameObject;
             ctrl.stopShooting();
-            cannon.fireProjectile();
+            cannon.fireBall();
         }
     }
 

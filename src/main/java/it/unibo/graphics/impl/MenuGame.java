@@ -27,6 +27,7 @@ import java.awt.GridBagConstraints;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionListener;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -67,7 +68,7 @@ public class MenuGame extends JFrame {
         final int width = 800;
         final int height = 600;
 
-        setTitle("Luxor");
+        setTitle("LXR4");
         setSize(width, height);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -146,7 +147,11 @@ public class MenuGame extends JFrame {
                 content.append(line).append('\n');
                 line = reader.readLine();
             }
-            helpText = content.toString(); // Salva il testo dell'area di aiuto nel campo helpText
+
+            /**
+             * Saves the text in the variable helpText
+             */
+            helpText = content.toString(); 
             textArea.setText(helpText);
         } catch (IOException e) {
             /**

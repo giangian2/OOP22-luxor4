@@ -33,7 +33,6 @@ public final class App {
      * Private constructor to prevent instantiation of the utility class.
      */
     private App() {
-        // Private constructor to prevent instantiation
     }
 
     /**

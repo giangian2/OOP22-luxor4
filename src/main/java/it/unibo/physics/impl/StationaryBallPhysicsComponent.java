@@ -6,9 +6,8 @@ import it.unibo.physics.api.PhysicsComponent;
 
 /**
  * A PhysicsComponent implementation that updates the position of a given
- * GameObject
- * to match the position of a stationary ball in the World. The update is
- * performed based
+ * GameObject to match the position of a stationary ball in the World. 
+ * The update is performed based
  * on the time elapsed since the last update (dt).
  *
  * This component ensures that the given GameObject represents the color of the

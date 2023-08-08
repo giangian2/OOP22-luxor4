@@ -30,8 +30,14 @@ public class BoundaryCollision {
         RIGHT
     }
 
-    private final CollisionEdge edge; // The edge of the boundary where the collision occurred
-    private final P2d where;         // The collision position in 2D coordinates (P2d is likely a 2D point class)
+    /**
+     * The edge of the boundary where the collision occurred.
+     */
+    private final CollisionEdge edge; 
+    /**
+     * The collision position in 2D coordinates (P2d is likely a 2D point class).
+     */
+    private final P2d where; 
 
     /**
      * Constructs a BoundaryCollision object with the specified collision edge and position.
