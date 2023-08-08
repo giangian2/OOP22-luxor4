@@ -23,7 +23,7 @@ public interface GameEngine extends WorldEventListener {
      * Method used to set the Game STate that the Engine will use to perform the
      * update operation at every cycle.
      * 
-     * @param gameState
+     * @param gameState Model
      */
     void setGameState(GameState gameState);
 
@@ -31,7 +31,7 @@ public interface GameEngine extends WorldEventListener {
      * Method used to set the View that the Engine will use to perform the
      * rendering operation at every cycle.
      * 
-     * @param view
+     * @param view View
      */
     void setView(Scene view);
 }

@@ -30,8 +30,7 @@ class GameStateTest {
             final int width = 800;
             final int nballs = 10;
             final int steps = 1;
-            final String xmlpath = "levels" + System.getProperty("file.separator") + "1"
-                    + System.getProperty("file.separator") + "Path.xml";
+            final String xmlpath = "levels/1/Path.xml";
             final int cannonStartXPos = 470;
             final int cannonStartYPos = 470;
 

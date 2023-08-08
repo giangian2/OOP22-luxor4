@@ -94,7 +94,6 @@ public class GameEngineImpl implements GameEngine {
     public void initGame() {
 
         // Initialize event queue and controller
-        final String separator = System.getProperty("file.separator");
         this.eventQueue = new LinkedList<>();
         controller = new KeyboardInputController();
 
@@ -112,8 +111,7 @@ public class GameEngineImpl implements GameEngine {
                     final int width = 800;
                     final int nballs = 10;
                     final int steps = 1;
-                    final String xmlpath = "levels" + separator + "1"
-                            + separator + "Path.xml";
+                    final String xmlpath = "levels/1/Path.xml";
                     final int cannonStartXPos = 470;
                     final int cannonStartYPos = 470;
 
@@ -124,7 +122,7 @@ public class GameEngineImpl implements GameEngine {
                 }));
                 // Render the view passing the correct background related to the selected level
                 this.setView(new SceneImpl(this.gameState, this.controller,
-                        "images" + separator + "background.jpg"));
+                        "images/background.jpg"));
                 break;
 
             case L2:
@@ -133,8 +131,7 @@ public class GameEngineImpl implements GameEngine {
                     final int width = 800;
                     final int nballs = 20;
                     final int steps = 2;
-                    final String xmlpath = "levels" + separator + "2"
-                            + separator + "Path.xml";
+                    final String xmlpath = "levels/2/Path.xml";
                     final int cannonStartXPos = 470;
                     final int cannonStartYPos = 470;
 
@@ -144,7 +141,7 @@ public class GameEngineImpl implements GameEngine {
                                     .createCannon(new P2d(cannonStartXPos, cannonStartYPos)));
                 }));
                 this.setView(new SceneImpl(this.gameState, this.controller,
-                        "images" + separator + "background2.jpg"));
+                        "images/background2.jpg"));
                 break;
 
             default:
@@ -259,7 +256,7 @@ public class GameEngineImpl implements GameEngine {
      * update operation at every cycle.
      */
     @Override
-    public void setGameState(GameState gameState) {
+    public void setGameState(final GameState gameState) {
         this.gameState = gameState;
     }
 
@@ -268,7 +265,7 @@ public class GameEngineImpl implements GameEngine {
      * rendering operation at every cycle.
      */
     @Override
-    public void setView(Scene view) {
+    public void setView(final Scene view) {
         this.view = view;
     }
 

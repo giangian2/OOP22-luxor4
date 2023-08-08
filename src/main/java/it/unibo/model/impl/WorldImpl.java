@@ -37,7 +37,7 @@ public class WorldImpl implements World {
      * method
      * "getBBox".
      */
-    private Cannon cannon;
+    private final Cannon cannon;
     private final QueueManager qm;
     private static RectBoundingBox mainBBox;
     private WorldEventListener evListener;
@@ -94,6 +94,7 @@ public class WorldImpl implements World {
      * 
      * @param l Event listener
      */
+    @Override
     public void setEventListener(final WorldEventListener l) {
         evListener = l;
     }
@@ -103,6 +104,7 @@ public class WorldImpl implements World {
      * 
      * @return The cannon object
      */
+    @Override
     public Cannon getCannon() {
         return this.cannon;
     }
@@ -112,6 +114,7 @@ public class WorldImpl implements World {
      * 
      * @param ev world event to be notified
      */
+    @Override
     public void notifyWorldEvent(final WorldEvent ev) {
         this.evListener.notifyEvent(ev);
     }
@@ -124,6 +127,7 @@ public class WorldImpl implements World {
      * @param queueBall Ball
      * @return Direction
      */
+    @Override
     public Direction moveSingleBall(final Ball queueBall) {
         return qm.getMove(queueBall);
     }
@@ -131,6 +135,7 @@ public class WorldImpl implements World {
     /**
      * Shifts all the balls by as many steps as specified in the constructor.
      */
+    @Override
     public void shiftBalls() {
         qm.shiftBalls(0);
     }
@@ -146,6 +151,7 @@ public class WorldImpl implements World {
      * @param cannonBall Ball
      * @param queueBall  Ball
      */
+    @Override
     public void insertCollisionBall(final Ball cannonBall, final Ball queueBall) {
         // Get the index of the queue ball
         final int index = this.qm.getBalls().indexOf(queueBall);
@@ -249,6 +255,7 @@ public class WorldImpl implements World {
      * 
      * @return Lis of balls to remove from queue
      */
+    @Override
     public Optional<List<Ball>> getCloseByThree() {
         return this.qm.checkCloseByThree();
     }
@@ -259,6 +266,7 @@ public class WorldImpl implements World {
      * 
      * @return List of all wolrd's game objects
      */
+    @Override
     public List<GameObject> getSceneEntities() {
         final var entities = new ArrayList<GameObject>();
         entities.addAll(this.qm.getBalls());
@@ -272,6 +280,7 @@ public class WorldImpl implements World {
      * 
      * @return List of all queue balls
      */
+    @Override
     public List<Ball> getQueue() {
         return this.qm.getBalls();
     }
@@ -286,6 +295,7 @@ public class WorldImpl implements World {
      * 
      * @param dt The elapsed time since the last update.
      */
+    @Override
     public void updateState(final long dt) {
 
         qm.shiftBallsStepsTime();
@@ -302,6 +312,7 @@ public class WorldImpl implements World {
      * @param box Ball's bounding box
      * @return GameObject -> the queue ball with the given bbox collided with
      */
+    @Override
     public Optional<GameObject> checkCollisionWithBalls(final P2d pos, final CircleBoundingBox box) {
         final double radius = box.getRadius();
         for (final Ball obj : this.getQueue()) {
@@ -321,6 +332,7 @@ public class WorldImpl implements World {
      * @param box Ball's bounding box
      * @return BoundaryCollision
      */
+    @Override
     public Optional<BoundaryCollision> checkCollisionWithBoundaries(final P2d pos, final CircleBoundingBox box) {
         final P2d ul = mainBBox.getULCorner();
         final P2d br = mainBBox.getBRCorner();
@@ -346,6 +358,7 @@ public class WorldImpl implements World {
      * This method starts playing the background music from the beginning
      * and continuously loops it.
      */
+    @Override
     public void playBackgroundMusic() {
         soundPlayer.playFromStart(SoundPlayer.BACKGROUND_MUSIC);
         soundPlayer.loop(SoundPlayer.BACKGROUND_MUSIC);
@@ -354,6 +367,7 @@ public class WorldImpl implements World {
     /**
      * Plays the collision sound effect.
      */
+    @Override
     public void playCollisionSound() {
         soundPlayer.play(SoundPlayer.BALL_COLLISION);
     }
@@ -362,6 +376,7 @@ public class WorldImpl implements World {
      * This method pauses the currently playing background music,
      * allowing to pause the game's audio.
      */
+    @Override
     public void pauseBackgroundSound() {
         soundPlayer.pause(SoundPlayer.BACKGROUND_MUSIC);
     }
@@ -370,6 +385,7 @@ public class WorldImpl implements World {
      * Unpauses the background music.
      * This method resumes playing the background music after it has been paused.
      */
+    @Override
     public void unpauseBackgroundSound() {
         soundPlayer.play(SoundPlayer.BACKGROUND_MUSIC);
     }
@@ -378,6 +394,7 @@ public class WorldImpl implements World {
      * This method stops all sounds and music currently playing in the game,
      * bringing the audio playback to a complete stop.
      */
+    @Override
     public void stopMusic() {
         soundPlayer.stopAll();
     }

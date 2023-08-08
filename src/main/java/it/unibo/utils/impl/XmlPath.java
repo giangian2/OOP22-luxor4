@@ -126,7 +126,7 @@ public final class XmlPath implements Path {
         public XmlPathBuilder(final String xmlPathSrc) {
             try {
                 final InputStream in = Objects.requireNonNull(
-                        ClassLoader.getSystemResourceAsStream(xmlPathSrc));
+                        getClass().getClassLoader().getResourceAsStream(xmlPathSrc));
 
                 final DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                 final DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

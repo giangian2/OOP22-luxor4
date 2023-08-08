@@ -38,8 +38,7 @@ class WorldTest {
         final int width = 800;
         final int nballs = 10;
 
-        final String xmlpath = "levels" + System.getProperty("file.separator") + "1"
-                + System.getProperty("file.separator") + "Path.xml";
+        final String xmlpath = "levels/1/Path.xml";
         final int cannonStartXPos = 470;
         final int cannonStartYPos = 470;
         return new WorldImpl(new RectBoundingBox(new P2d(0, height), new P2d(width, 0)), nballs, STEPS,

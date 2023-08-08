@@ -137,7 +137,7 @@ public class MenuGame extends JFrame {
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(
                         ClassLoader.getSystemResourceAsStream(
-                                "help" + System.getProperty("file.separator") + "help.txt"),
+                                "help/help.txt"),
                         StandardCharsets.UTF_8))) {
 
             String line;
@@ -151,7 +151,7 @@ public class MenuGame extends JFrame {
             /**
              * Saves the text in the variable helpText
              */
-            helpText = content.toString(); 
+            helpText = content.toString();
             textArea.setText(helpText);
         } catch (IOException e) {
             /**
